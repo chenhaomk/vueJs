@@ -1,4 +1,4 @@
-、文件目录说明
+文件目录说明
 1、整体项目在Project目录下。地址为：\Project\yingogo\FrameWork\FE\Project
 2、项目文件夹下，每个文件夹代表一个项目文件，例如：Member.Mobile等。
 3、目录结合规则如下图：
