@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='member userinfo has_head'>
+        
+        <section class="head">
+            <a href="/index.html?my=show" class="back"></a>
+            <p>个人信息</p>
+        </section>
+
+        <section class="info" v-clock>
+            <section class="group">
+                <a>
+                    <label>头像</label>
+                    <input type="file" accept="image/*" class="update_photo" @change="updatePhoto($event)">
+                    <p><img :src="user.head_portrait"></p>
+                </a>
+            </section>
+            <section class="group">
+                <a @click="nkShow='show'">
+                    <label>昵称</label>
+                    <p>{{user.nick_name}}</p>
+                </a>
+            </section>
+            <section class="group">
+                <a @click="hasTelShow='show'">
+                    <label>手机号</label>
+                    <p>{{user.mobile}}</p>
+                </a>
+            </section>
+            <section class="group">
+                <a @click="pwdShow='show'">
+                    <label>设置密码</label>
+                </a>
+            </section>
+            <section class="group nobefore">
+                <a>
+                    <label>会员</label>
+                    <p>{{user.business_name == ""?"平台会员":user.business_name}}</p>
+                </a>
+            </section>
+        </section>
+
+        <section class="update_nk nickName" :class="nkShow">
+            <section class="head">
+                <a @click="returnInfo" class="back"></a>
+                <p>昵称</p>
+            </section>
+
+            <section class="form">
+                <form>
+                    <section class="form_group">
+                        <p>
+                            <a class="clear" @click="clearNk"></a>
+                            <input v-model='nickName' placeholder="请输入您的昵称">
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <span>以中文或英文字母开头，限定4-16个字符，一个汉字为两个字符</span>
+                        <p class="submit">
+                            <input type="submit" @click="updateNk($event)" name="submit" value="保存">
+                        </p>
+                    </section>
+                </form>
+            </section>
+        </section>
+
+        <section class="update_nk ut_st hasnum" :class="hasTelShow">
+            <section class="head">
+                <a class="back" @click="hasTelShow = ''"></a>
+                <p>手机号</p>
+            </section>
+            <section class="form">
+                <form>
+                    <section class="phone_number">
+                        <section class="icon"></section>
+                        <p class="num">{{user.mobile}}</p>
+                        <p class="tip">您已绑定以上手机号</p>
+                    </section>
+                    <section class="form_group">
+                        <p class="submit">
+                            <input type="submit" @click="$event.preventDefault();telShow='show'" value="更换">
+                        </p>
+                    </section>
+                </form>
+            </section>
+        </section>
+
+        <section class="update_nk update_tel updatephone" :class="telShow">
+            <section class="head">
+                <a class="back" @click="telShow = ''"></a>
+                <p>更换手机号</p>
+            </section>
+
+            <section class="form">
+                <form>
+                    <section class="form_group">
+                        <p>
+                            <input :value="user.mobile" readonly>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p class="vercode">
+                            <input v-model='vercode' type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="user.mobile" :sms_type="'0004'"></get-vercode>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p>
+                            <input v-model='phone' type="number" placeholder="请输入新的手机号">
+                        </p>
+                    </section>
+                    <section class="form_group nobor">
+                        <p class="vercode">
+                            <input v-model='newVercode' type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="phone" :sms_type="'0004'"></get-vercode>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p class="submit">
+                            <input type="submit" @click="updatePhone($event)" value="确认修改">
+                        </p>
+                    </section>
+                </form>
+            </section>
+        </section>
+
+        <section class="update_nk update_pwd updatephone" :class="pwdShow">
+            <section class="head">
+                <a class="back" @click="pwdShow = ''"></a>
+                <p>修改密码</p>
+            </section>
+
+            <section class="form">
+                <form>
+                    <section class="form_group">
+                        <p>
+                            用户名：<input :value="user.mobile" readonly class="nowid">
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p>
+                            <input v-model='pwd' type="password" v-on:blur="blurTip(pwd,'pwd')" name="pwd" placeholder="请输入密码">
+                        </p>
+                    </section>
+                    <section class="form_group nobor">
+                        <p>
+                            <input v-model='rpwd' type="password" v-on:blur="blurTip(rpwd,'dpwd',pwd)" placeholder="请输入确认密码">
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p class="submit">
+                            <input type="submit" @click="updatePwd($event)" value="确认修改">
+                        </p>
+                    </section>
+                </form>
+            </section>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/user/userinfo.js"></script>
+<html>

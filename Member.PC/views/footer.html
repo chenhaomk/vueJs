@@ -1,0 +1,48 @@
+<div class="foot">
+    <div class="left">
+        <div class="btns">
+            <a href="/views/enter/login.html">商家入驻</a>
+            <a class="applyf last">申请成为商家发展人</a>
+            <a href="" class="last hide">关于我们</a>
+        </div>
+        <div class="contact">
+            <p class="text"><span>联系我们</span>周一至周五 9:00-18:00</p>
+            <p class="tel">028-85193201</p>
+        </div>
+    </div>
+    <div class="ewm">
+        <p class="f"><img src="/assets/images/icon/ewm.png" alt=""><span>下<br>载APP</span></p>
+        <p><img src="/assets/images/icon/gzhewm.jpg" alt=""><span>关注微信公众号</span></p>
+    </div>
+    <p class="bq clear">
+    蜀ICP备17024697号 &nbsp;&nbsp;四川省达观科技有限公司 &nbsp;&nbsp;版权所有
+    <br>
+    Copyright @ 2017-2025 AII Rights Reserved
+    </p>
+</div>
+<script type="text/javascript">
+    window.meInfo = null;
+    if($.fn.getCookie("member_id")){
+        $.fn.getData({
+            url : '/member/getMemberExpanderInfo',
+            data : {
+                member_id : $.fn.getCookie("member_id")
+            },
+            result : function(data){
+                
+                if(data.status == "success"){
+                    meInfo = data.data;
+                    $(".apply,.applyf").click(function(event) {
+                        window.open("/views/personal/myCard.html","_self");
+                    });
+                }else{
+                    $(".apply,.applyf").applyPeople();
+                }
+            }
+        });
+    }else{
+        $(".apply,.applyf").click(function(event) {
+            window.open("/views/user/login.html","_self");
+        });
+    }
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/memberCss/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/payment/payment.css">
+</head>
+
+<body class="availMain">
+    <div id="app">
+        <header>
+            <div class="availcouponsHeader">我的可用优惠券</div>
+        </header>
+        <section>
+            <dis v-for='a of discount' :a='a'></dis>
+            
+            <!-- <div class="linkMore" v-show="isShow">查看更多<span>抵扣券</span>
+                <img src="../../assets/images/payment/ic_more@2x.png" alt="">
+            </div> -->
+        </section>
+        <!-- <footer>
+            <div class="underFunc active">
+                <div>系统自动推荐最优优惠券</div>
+                <div>(我的-设置里可更改)</div>
+            </div>
+        </footer> -->
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/payment/availablecoupons.js "></script>
+
+</html>

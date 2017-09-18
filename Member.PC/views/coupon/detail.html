@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>银个购-优惠券详情</title>
+    
+    <link rel="icon" href="/assets/images/icon/logo.png">
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <div id='head' class="head"></div>
+
+    <div class="coupon_detail con m_con">
+
+        <div class="t_m">
+            <a href="/views/shop/list.html">商铺</a>
+            <img src="/assets/images/icon/icon_tm.png" alt="">
+            <a href="" id="b_d"></a>
+            <img src="/assets/images/icon/icon_tm.png" alt="">
+            优惠券详情
+        </div>
+
+        <div class="main">
+            <div class="top">
+                <img id="tImg" alt="">
+                <div class="text" id="t">
+                    <p class="title"></p>
+                    <p class="explain"></p>
+                    <div class="sd">
+                        <p class="old_price">
+                        </p>
+                    </div>
+                    <a class="buy"></a>
+                </div>
+            </div>
+            <div class="bot fn-clear">
+                <div class="bot_left">
+                    <p>本店使用规则</p>
+                    <table>
+                        <tr>
+                            <td width="110" class="t">使用时间</td>
+                            <td width="470" id="stime"></td>
+                        </tr>
+                        <tr>
+                            <td class="t">使用条件</td>
+                            <td id="tj2"></td>
+                        </tr>
+                        <tr>
+                            <td class="t">使用说明</td>
+                            <td id="introduction"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="bot_rig">
+                    <a class="shop" id="fshop" href="">发券商家</a>
+                    <h3></h3>
+                    <div class="star"></div>
+                    <p class="phone"></p>
+                    <p class="address"></p>
+                    <div id='map' class="map"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        footer
+    </div>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GmgQckUFG1yW7mZGRt8pZgFy"></script>
+    <script src="/controllers/coupon/detail.js"></script>
+<html>

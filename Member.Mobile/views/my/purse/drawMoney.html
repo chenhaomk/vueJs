@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='draw_money has_head'>
+
+        <section class="head">
+            <a class="back"></a>
+            <p>提现</p>
+        </section>
+        
+        <section class="con">
+            <section class="card icbc">
+                <p>中国银行<br><span>尾号5666 储蓄卡</span></p>
+            </section>
+            <section class="money">
+                <p class="text">提取金额<span>可提余额 700.00 元<i @click='showPo'></i></span></p>
+                <p class="info">￥<input type="number" v-on:input='isClick($event)' value="0" autofocus=""></p>
+            </section>
+            <a class="btn_submit submit" :class='readOnly'>两小时到账，确认提现</a>
+            <a class="gz">可提现金额规则</a>
+        </section>
+        
+        <section class="shadow" v-show="isShow"></section>
+        <section class="dm_popup" v-show="isShow">
+            <a class="close" @click="closePo"></a>
+            <p class="title">可提现金额：710.00元</p>
+            <p>消费返利：<span> 10.00 </span>元</p>
+            <p>推荐商家入驻分润：<span> 200.00 </span>元</p>
+            <p>发展商家会员分润：<span> 500.00 </span>元</p>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/purse/drawMoney.js"></script>
+<html>

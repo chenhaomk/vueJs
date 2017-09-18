@@ -1,0 +1,851 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0; padding:0; -webkit-tap-highlight-color:transparent}
+body, h1, h2, h3, h4, h5, h6, hr, p,blockquote,dl, dt, dd, ul, ol, li,pre,form, fieldset, legend, button,input, textarea,th, td,img{border:medium none;margin: 0;padding: 0; outline:none;}
+body,button, input, select, textarea {font: 14px/1.5 "Microsoft YaHei",tahoma, Srial, helvetica, sans-serif; outline:none; color: #1c1c1c}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+em{font-style:normal;}
+ul, ol,li { list-style: none; }
+a { text-decoration: none}
+a:hover{ outline:none;}
+img{ border:0px;}
+table { border-collapse: collapse; border-spacing: 0; }
+html{ height:100%}
+html,body{ color:#1c1c1c; min-height:100%; width:100%; overflow:hidden; overflow-y:auto; max-width:100%; left:0; right:0; position:relative}
+.clear{ clear:both;}
+.fn-clear:after{ content:""; display:block; clear:both}
+.hide{ display:none !important}
+.text-sl{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+/****************************************************************** index ******************************************************************/
+
+body{ display: none; max-width: 750px; margin: auto }
+body.bg{ background: #fafafa }
+body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: url(../images/loading-go.gif) center center no-repeat; background-size: 8rem 8rem }
+.isdou{ position: fixed; opacity: 0; z-index: -1; width: 1rem }
+
+.home{ padding-bottom: 2rem }
+.home .header{ margin: 0 1.5rem ; position: absolute; z-index: 2; margin-top: .8rem; width: calc(100% - 3rem); height: 3rem}
+.home .header section{ float: left; }
+.home .header .address{ width: 5.4rem; height: 3rem; line-height: 3rem; color:white; font-size:1.5rem; position: relative; margin-right: 1.5rem; overflow: hidden;}
+.home .header .address p{ width: 4.5rem }
+.home .header .address input{ position: absolute; z-index: 2; opacity: 0; height: 3rem }
+.home .header .address:after{ content: ""; position: absolute; right: 0; border: 4px solid transparent; border-top: 7px solid white; top: 50%; margin-top: -3px }
+.home .header .search{ width: 23rem; height: 3rem; position: relative;}
+.home .header .search:before{ content: ""; width: 100%; height: 100%; position: absolute; background: white; opacity: .9; border-radius: 25px}
+.home .header .search input{ width: 20rem }
+.home .header .search input,.search_p .top input{ position: relative; z-index: 2; margin-left: 1.3rem; line-height: 3rem; height: 3rem; font-size: 1.4rem; background:url(../images/icon/ic_search_xxh.png) left center no-repeat; background-color: none; padding-left:1.8rem; background-size : 1.3rem auto }
+.home .header .user{ float: right; width: 3rem; height: 3rem; background:url(../images/icon/ic_user_xxh.png) center center no-repeat; background-size: auto 2rem}
+.home .banner{ height: 15rem }
+.home .banner img{ width: 100%; height: 100% }
+.home .banner.swiper-container-horizontal .swiper-slide a{ position: relative; display: block; width: 100%; height: 100%}
+.home .banner.swiper-container-horizontal .swiper-slide a:before{ content: ""; position: absolute; width: 100%; height: 10rem; background:url(../images/index/home_shadow.png) repeat-x; background-size: auto 100%}
+.home .banner.swiper-container-horizontal>.swiper-pagination-bullets{ height: .7rem; top: 13.4rem; line-height: .7rem }
+.home .banner.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{ width: .7rem; height: .7rem; margin: 0 .45rem; background: white; opacity: .5}
+.home .banner.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet-active{ opacity: 1 }
+.home .main{ padding: 0 1.5rem }
+.home .main .title,.shop .shop_detail h3{ margin: 2.5rem 0 1.5rem; font-size: 2rem; line-height: 2rem; color: #1c1c1c }
+.home .main .title .more,.shop .comment_shop .more{ float: right; font-size: 1.4rem; color: #ff6f3d; padding-right: 1.05rem; background:url(../images/icon/ic_arrow_xxh.png) right center no-repeat; background-size: .55rem auto}
+.home .main .shop .hot{ height: 17rem ; position: relative; margin-bottom: 1.5rem; background:url(../images/index/ic_mrpic2_xxh.png) center center no-repeat #f4f7fc; background-size:5.5rem 3.8rem;}
+.home .main .shop .hot img{ box-sizing: border-box; border: 1px solid #dddddd; width: 100%; height: 100% ; border-radius: 3px}
+.home .main .shop .hot:before{ content: ""; position: absolute; height: 6rem; width: 100%; bottom: 0; background:url(../images/index/hot_shadow.png) repeat-x; background-size: auto 100%; z-index: 2}
+.home .main .shop .hot.none{ height: auto; background: none; text-align: center; }
+.home .main .shop .hot.none *{ display: none; }
+.home .main .shop .hot.none:after{ content: "暂时没有相关商家~"; font-size: 1.3rem; display: inline-block; color: #888; background: url(../images/index/hot_none.png) left 1rem no-repeat; height: 1.3rem; line-height: 1; padding: 1rem 0 1rem 2rem; background-size: auto 1.3rem }
+.home .main .shop .hot.none:before{ display: none; }
+.home .main .shop .hot .text{ position: absolute; width: 100%; z-index: 3; margin-top: 13.7rem; top: 0; height: 2.7rem; line-height: 2.7rem; color: white; font-size: 1.6rem}
+.home .main .shop .hot .text img{ float: left; width: 2.7rem; height: 2.7rem; box-sizing: border-box; border-radius: 50%; margin-right: .7rem; margin-left: 1.2rem}
+.home .main .shop .hot .text p{ float: left; width: 24.5rem}
+.home .main .shop .hot .text span{ float: right; font-size: 1.2rem; margin-right: 1.2rem; line-height: 1.2rem; margin-top: 1rem}
+.home .main .shop .swiper-shop,.comment_success .like .swiper-shop{ height: 11.3rem ; overflow: hidden; margin-bottom: 1.5rem; width: calc(100% + 3rem); margin-left: -1.5rem}
+.home .main .shop .shop_list,.comment_success .like .shop_list{ overflow: hidden; width: 12.5rem; position: relative; background:url(../images/index/ic_mrpic2_xxh.png) center center no-repeat #f4f7fc; background-size:3.3rem 2.7rem;}
+.home .main .shop .shop_list:first-child,.comment_success .like .shop_list:first-child{ margin-left: 1.5rem }
+.home .main .shop .shop_list:last-child,.comment_success .like .shop_list:last-child{ margin-right: 1.5rem }
+.home .main .shop .shop_list img,.comment_success .like .shop_list img{ height: 8.9rem; width: 100% }
+.home .main .shop .shop_list span,.comment_success .like .shop_list span{ position: absolute; top: 6.4rem; line-height: 2.7rem; height: 2.5rem; color: white; z-index: 2; font-size: 1.2rem; padding-right: .6rem; text-align: right; box-sizing: border-box; width: 100%; text-shadow: 0 0 6px #000}
+.home .main .shop .shop_list p,.comment_success .like .shop_list p{ position: absolute; bottom: 0; font-size: 1.4rem; color: #1c1c1c; width: 100%; background: white }
+.home .main .discount .filter{ height: 4.5rem; background: #f9f9f9; color: #888; font-size: 1.3rem ; line-height: 4.5rem}
+.home .main .discount .filter .filter_group{ float: left; width: 25%; text-align: center; position: relative;}
+.home .main .discount .filter .filter_group p span{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: calc(100% - .7rem - 6px); display: inline-block; }
+.home .main .discount .filter .filter_group p span:after{ content: ""; display: inline-block; border: 3px solid transparent; border-top: 6px solid #888; margin-left: .7rem; margin-bottom: -2px}
+.home .main .discount .filter .filter_group input{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 2}
+.home .main .discount .list{ position: relative; width: 100%}
+.home .main .discount .list .content{ position: relative; }
+.home .main .discount .list.none:before{ content: "抱歉！暂无优惠，为您推荐些热门优惠券吧~"; display: block; height: 1.3rem; line-height: 1.3rem; font-size: 1.3rem; color: #888; text-indent: 2rem; background: url(../images/index/coupon_none.png) left center no-repeat; background-size: auto 100%; margin: 2.1rem 0 }
+.home .my{ position: fixed; width: 27.8rem; height: 100%; right: -27.8rem; -webkit-transition:all .5s;transition:all .5s; background: white; z-index: 101; top: 0 }
+.home .my.show{ right: 0 }
+.home .my .top{ height: 13.5rem; width: 100%; background: #f1f3fb; padding-top: 3.5rem }
+.home .my .top .set{ position: absolute; right: 0; top: 0; width: 5rem; height: 5rem; background: url(../images/index/icon_set.png) center center no-repeat; background-size: 1.9rem auto }
+.home .my .top .photo{ width: 6.3rem; height: 6.3rem; display: block; margin: 0 auto 1.5rem; border-radius: 50% }
+.home .my .top .btns{ text-align: center; }
+.home .my .top .info{ text-align: center; }
+.home .my .top .btns a{ display: inline-block; position: relative; height: 4rem; line-height: 4rem; color: #ff6f3d; font-size: 1.6rem; padding: 0 3rem }
+.home .my .top .btns a:first-child:before{ content: ""; position: absolute; height: 1.6rem; right: 0; top: 50%; margin-top: -.7rem; border-right: 1px solid #535353 }
+.home .my .menu a{ display: block; margin: 0 1.5rem; height: 5rem; line-height: 5rem; font-size: 1.5rem; text-indent: 2.8rem; border-bottom: 1px solid #e3e3e3; color: #1c1c1c; position: relative; background-repeat: no-repeat; background-position: left center; background-size: 1.8rem auto }
+.home .my .menu a:nth-child(1){ background-image:url(../images/index/index_m_icon1.png) }
+.home .my .menu a:nth-child(2){ background-image:url(../images/index/index_m_icon2.png) }
+.home .my .menu a:nth-child(3){ background-image:url(../images/index/index_m_icon3.png) }
+.home .my .menu a:nth-child(4){ background-image:url(../images/index/index_m_icon4.png) }
+.home .my .menu a:nth-child(5){ background-image:url(../images/index/index_m_icon5.png) }
+.home .my .menu a span{ float: right; color: #888 }
+.home .my .ot{ position: absolute; bottom: .5rem; width: 100% }
+.home .my .ot a{ display: block; margin:0 1.5rem 1.5rem; border: 1px solid #ff6f3d; border-radius: .5rem; height: 4.5rem; line-height: 4.5rem; text-indent: 4.5rem; font-size: 1.4rem; color: #1c1c1c; background: url(../images/index/index_m_icon6.png) 1.5rem center no-repeat; background-size: 1.8rem auto; position: relative; }
+.home .my .ot a:after{ content: ""; border: .3rem solid transparent; border-left: .55rem solid #ff6f3d; position: absolute; right: 1.5rem; top: 50%; margin-top: -.3rem }
+.home .my .ot a:last-child{ background-image:url(../images/index/index_m_icon7.png)}
+
+/****************************************************************** discount ******************************************************************/
+
+.discount>.head{ background: transparent; color: white; border: 0; position: relative; margin: -5rem 0 }
+.discount>.head .back{ background-image:url(../images/member/ic_bg_back_xxh_w.png)  }
+.discount .header{ height: 18.5rem; position: relative}
+.discount .header:before{ content: ""; position: absolute; height: 100%; width: 100%; z-index: 2; background: url(../images/discount/cd_bg.png); background-size: 1px 100% }
+.discount .header img{ height: 100%; width: 100% }
+.discount .bot_buy{ position: fixed; bottom: 0; width: 100%; height: 5rem; z-index: 2; line-height: 5rem}
+.discount .bot_buy>a{ height: 100%; width: 100%; display: block; background: #ff6f3d; color: white; text-align: center; font-size: 1.6rem; line-height: 5rem}
+.discount .bot_buy>a.ylq{ background: #888 }
+.discount .bot_buy .buy{ width: 100%; height: 100%; border-top: 1px solid #e3e3e3; text-indent: 1.5rem; color: #ff6f3d; font-size: 1.4rem; background: white}
+.discount .bot_buy .buy span{ font-size: 2.5rem }
+.discount .bot_buy .buy a{ float: right; height: 100%; width: 14.8rem; background: #ff6f3d; color: white; text-align: center; line-height: 5rem; font-size: 1.6rem; text-indent: 0}
+.discount .con{ border-bottom: .5rem solid #f9f9f9; box-sizing: border-box; padding: 1.5rem }
+.discount .con.title h2{ font-size: 2.3rem; color: #ff6f3d; font-weight: normal;}
+.discount .con.title h2 span{ font-size: 1.5rem; margin-left: .8rem; text-decoration: line-through; }
+.discount .con.title p{ font-size: 1.4rem; color: #1c1c1c }
+.discount .notice{ padding: 1.5rem 1.5rem 6rem}
+.discount .notice li{ padding-left: 1.2rem; font-size: 1.3rem; color: #1c1c1c; line-height: 2}
+.discount .notice li:before{ content: ""; float: left; margin-left: -1.2rem; width: .5rem; height: .5rem; background: #d2d2d2; margin-top: 1.05rem; border-radius: 50%}
+
+/****************************************************************** shop ******************************************************************/
+
+.shop .shop_info .shop_name{ font-size: 1.9rem; font-weight: bold; color: #1c1c1c }
+.shop .bot_buy a{ display: none; }
+.shop .discount .more{ width: 100%; display: block; height: 4.5rem; line-height: 4.5rem; font-size: 1.4rem; color: #888; text-align: center; margin-bottom: -1.5rem}
+.shop .discount .more img{ display: inline-block; width: 1.1rem; margin-left: .45rem }
+.shop .shop_content{ padding: 1.5rem 1.5rem 1rem }
+.shop .shop_content .content{ font-size: 1.4rem; line-height: 2; margin-bottom: 1rem; color: #1c1c1c}
+.shop .shop_content .content img{ max-width: 100% }
+.shop .comment_shop h2{ font-size: 1.6rem; margin-bottom: .5rem }
+.shop .comment_shop .comment_list{ margin: 0 }
+
+.shop_index .shop_list.empty{ padding-top: 10rem }
+.shop_index .shop_list.empty:after{ content: "暂时没有相关商家！"; display: block; text-align: center; }
+.shop_index .menu{ position: fixed; width: 100%; height: 4rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
+.shop_index .menu a{ font-size:1.4rem; padding: 0 1.5rem; display: block; position: relative; }
+.shop_index .menu a.active{ color: #ff6f3d }
+.shop_index .menu a.active:after{ content: ""; position: absolute; bottom: 0; border-bottom: 2px solid #ff6f3d; width: 100%; left: 0 }
+.shop_index .menu .swiper-slide{ width: auto }
+.shop_index .menu .swiper-slide:first-child{ margin-left: 1.5rem }
+.shop_index .menu .swiper-slide:last-child{ margin-right: 1.5rem }
+
+.shop_index .shop_list{ padding-top: 9rem }
+.shop_index .shop_list li{ box-sizing: border-box; padding:1.5rem; height: 12rem }
+.shop_index .shop_list li img{ float: left; height: 100%; width: 12.5rem; margin-right: 1.2rem }
+.shop_index .shop_list li .text{ float: left; width: calc(100% - 13.7rem); height: 100%; position: relative; }
+.shop_index .shop_list li .text .title{ font-size: 1.6rem; line-height: 2rem; margin-bottom: .4rem; color: #1c1c1c }
+.shop_index .shop_list li .text .address{ position: absolute; bottom: 0; width: 100%; font-size: 1.2rem }
+.home .shop_index .shop_list li{ padding:1.5rem 0 }
+.home .shop_index .shop_list{ padding-top: 0 }
+
+/****************************************************************** member ******************************************************************/
+
+.member .tab .tab_menu{ width: 30rem; margin: 1.5rem auto; background: #f2f3f9; border-radius: 3rem; line-height: 4rem; height: 4rem; position: relative; font-size: 1.5rem; text-align: center;}
+.member .tab .tab_menu .active_bg{ width: 50%; position: absolute; height: 100%; background: #ff6f3d; border-radius: 3rem; -webkit-transition:all .5s; transition:all .5s;}
+.member .tab .tab_menu .active_bg.rig{ -webkit-transform:translateX(100%);transform:translateX(100%);}
+.member .tab .tab_menu a{ width: 50%; float: left; position: relative; z-index: 2; -webkit-transition:all .5s; transition:all .5s;}
+.member .tab .tab_menu a.active{ color: white}
+.member .tab_con .tab_group{ display: none; margin: 0 1.5rem}
+.member .tab_con .tab_group.active{ display: block; }
+.member .form_group{ margin-top: .7rem }
+.member .login_other{ position: absolute; bottom: 0; height: 9rem; width: 100%; box-sizing: border-box; padding: 0 1.5rem; text-align: center; }
+.member .login_other:before{ content: ""; border-top: 1px solid #e3e3e3; width: 100%; left: 0; margin-bottom: -.7rem; display: block;}
+.member .login_other .title{ color: #a2a2a2; font-size: 1.4rem; line-height: 1.4rem; width: 8.5rem; background: white; margin: auto; position: relative; z-index: 2 }
+.member .login_other .list a{ float: left; height: 7rem; margin-top: .9rem; width: calc(100% / 3 - 1px); background:url(../images/member/ic_bg_wechat_xxh.png) center center no-repeat; background-size: auto 2rem }
+.member .login_other .list a.qq{ background-image: url(../images/member/ic_bg_qq_xxh.png) }
+.member .login_other .list a.weibo{ background-image: url(../images/member/ic_bg_weibo_xxh.png) }
+.member .agreement{ position: absolute; bottom: 0; width: 100%; height: 4rem; line-height: 1.3rem; text-align: center; color: #888888 }
+.member .agreement a:last-child{ color: #ff6f3d; text-decoration: underline; }
+.member.login .ver{ position: fixed; z-index: 1001; background: white; width: 26.7rem; height: 19rem; border-radius: .5rem; left: 50%; top: 50%; margin: -9.5rem -13.35rem; box-sizing: border-box; padding: 1rem 1.5rem }
+.member.login .ver .close{ position: absolute; right: 0; top: 0; width: 2.7rem; height:2.2rem; background: url(../images/my/ic_delete_xxh.png) left bottom no-repeat; background-size: 1.2rem 1.2rem}
+.member.login .ver .t{ height: 4rem; line-height: 4rem; margin-bottom: .5rem; text-align: center; font-size: 1.5rem }
+.member.login .ver .inp{ height: 4rem; border: 1px solid #c6c6c6; line-height: 4rem; box-sizing: border-box; border-radius: 3px }
+.member.login .ver .inp img{ float: right; width: 10rem; height: 100% }
+.member.login .ver .inp input{ float: left; width: calc(100% - 10rem); height: 100%; text-indent: 1rem }
+.member.login .ver .sub{ display: block; background: #ff6f3d; color: white; text-align: center; line-height: 4.4rem; margin-top: 2.5rem; height: 4.4rem; font-size: 1.6rem; border-radius: .5rem }
+.member.login .shadow{ display: block; }
+.member.login .forgotPwd{ font-size: 1.3rem; line-height: 4.5rem; height: 4.5rem; color: #ff6f3d; position: absolute; right: 0; top: 0; z-index: 2; text-decoration: underline;}
+.member .forgot_pwd{ width: calc(100% - 3rem); margin: auto}
+
+.userinfo .info{ background: white; border-bottom: 1px solid #e3e3e3}
+.userinfo .info .group{ border-bottom: 1px solid #e3e3e3; margin: 0 1.5rem; height: 5rem; line-height: 5rem; font-size: 1.5rem}
+.userinfo .info .group:last-child{ border: 0 }
+.userinfo .info .group a{ display: block; height: 100%; position: relative; }
+.userinfo .info .group a:before,.home .my .menu a:before,.creat_shop .creat_brand .form_group .sel_text:before{ content: ""; float: right; width: 1.5rem; height: 100%; background: url(../images/member/ic_bg_arrow_xxh.png) right center no-repeat; background-size: .65rem auto }
+.userinfo .info .group label{ float: left; color: #1c1c1c }
+.userinfo .info .group p{ color: #888; float: right; height: 100% }
+.userinfo .info .group p img{ border-radius: 50%; width: 4rem; height: 4rem; margin-top: .5rem }
+.userinfo .info .group .update_photo{ position: absolute; width:100%; height: 100%; opacity: 0; z-index: 2 }
+.userinfo .update_nk{ position: absolute; width: 100%; height: 100%; background: white; transition: all .5s;-webkit-transition: all .5s; top: 0; left: 100%; box-sizing: border-box; padding: 0 1.5rem; padding-top: 5rem; z-index: 20}
+.userinfo .update_nk .head{ width: calc(100% + 3rem); margin-left:-1.5rem }
+.userinfo .update_nk.show{ left: 0 }
+.userinfo .update_nk .form_group{ padding: 0 }
+.userinfo .update_tel{ z-index: 21 }
+.userinfo .update_tel .form .form_group{ padding: 0 }
+.userinfo .update_pwd{ padding: 5rem 0 0 }
+
+.updatephone .form .form_group{ padding: 0 1.5rem; background: white; margin: 0; border-bottom: none; font-size: 1.4rem }
+.updatephone .form .form_group p,.updatephone .form .form_group.nobor{ border-bottom: 1px solid #e3e3e3}
+.updatephone .form .form_group.nobor p{ border-bottom: 0}
+
+.updatephone.setpwd .form .form_group:first-child{ background: #fafafa }
+.updatephone.setpwd .form .form_group:first-child input{ background: none }
+.updatephone.setpwd .form .form_group:first-child p{ border-bottom: none; }
+
+.setcardid .submit{ position: fixed; bottom: 0; width: 100%; background: #ff6f3d; color: white; height: 5rem; font-size: 1.6rem; z-index: 2; left: 0}
+.setcardid .card{ height: 20.7rem; position: relative; margin: 1rem 1.5rem; border: 1px dashed #c8c8c8; border-radius: 3px; background: url(../images/icon/icon_card.png) center 8rem no-repeat white; background-size:auto 1.8rem }
+.setcardid .card:before{ content: "请上传清晰的身份证正面照"; color: #888; text-align: center; font-size: 1.4rem; line-height: 1; padding-top: 10.7rem; display: block; }
+.setcardid .card .uploader .add{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; background: none; z-index: 2 }
+.setcardid .card .uploader .img_group{ position: absolute; z-index: 2; left: 0; top: 0; width: 100%; height: 100%}
+.setcardid .card .uploader .img_group .delete{ display: none; }
+.setcardid .card2{ background-image: url(../images/icon/icon_card2.png) }
+.setcardid .card2:before{ content: "请上传清晰的身份证背面照"}
+
+.hasnum .phone_number .icon{ width: 11.5rem; height: 11.5rem; margin: 2rem auto; background: url(../images/member/ic_bg_pic_xxh.png); background-size: 100% 100% }
+.hasnum .phone_number .num{ text-align: center; font-size: 1.6rem }
+.hasnum .phone_number .tip{ color: #888; text-align: center; font-size: 1.4rem }
+
+.seting .login_out{ display: block; margin-top: 1rem; color: #ff6f3d; height: 5rem; line-height: 5rem; text-align: center; background: white; font-size: 1.5rem }
+.seting .info2{ margin-top: 1rem }
+.seting .popup{ margin-top: -7.3rem }
+
+.success .phone_number .icon{ background-image: url(../images/member/success.png) }
+
+.register .success .icon{ width: 11.5rem; height: 11.5rem; margin: 2rem auto; background: url(../images/member/success.png); background-size: 100% 100% }
+.register .success .tips{ color: #55a5ff; font-size: 2rem; text-align: center; }
+.register .success .num{ font-size: 1.3rem; text-align: center; color: #1c1c1c; line-height: 2 }
+.register .success .num span{ color: #888 }
+.register .success .btn_submit{ position: relative; display: block; margin: 1.5rem; width: calc(100% - 3rem); border-radius:.5rem }
+.register .fz_pop .contt{ height: 100% }
+
+.nickName .form_group{ margin-top: 0 ; box-sizing: border-box; padding: 0 1.5rem}
+.nickName .form_group:last-child{ border:0; }
+.nickName .form_group:last-child span{ display: block; font-size: 1.2rem; color: #888; line-height: 4rem; margin-bottom: -1rem }
+.nickName .form_group:first-child{ background: white }
+.nickName .clear{ z-index: 3}
+
+/****************************************************************** my ******************************************************************/
+
+.order_dis .menu{ position: fixed; width: 100%; height: 4rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
+.order_dis .menu p{ float: left; width: calc(100% / 3 - 1px); text-align: center; }
+.order_dis .menu a{ font-size:1.4rem; width: 100%; display: inline-block; position: relative; }
+.order_dis .menu a.active{ color: #ff6f3d }
+.order_dis .menu a.active:after{ content: ""; position: absolute; bottom: 0; border-bottom: 2px solid #ff6f3d; width: 100%; left: 0 }
+.order_dis .dis_list{ padding-top: 9rem; padding-bottom: 4rem }
+.order_dis .dis_list.no,.pur_history .ph_list.no{ min-height: 15.5rem; position: relative; background: url(../images/discount/ic_pic_xxh.png) center 13.5rem no-repeat; background-size: 7rem auto }
+.order_dis .dis_list.no:after,.pur_history .ph_list.no:after{ content: '您还没有优惠券订单记录...'; position: absolute; bottom: 0; font-size: 1.5rem; color: #888; text-align: center; width: 100%; line-height: 1 }
+.order_dis.my_dis .dis_list.no{ background: url(../images/my/ic_pic_xxh.png) center 11rem no-repeat; background-size: 11rem auto; }
+.order_dis.my_dis .dis_list.no:after{ content: "空空如也~您还没有优惠券" }
+.pur_history .ph_list.no{ background: url(../images/my/ic_pics_xxh.png) center 6rem no-repeat; background-size: 5.7rem auto; }
+.pur_history .ph_list.no:after{ content: "您还没有消费记录..." }
+.order_dis .dis_list.expired{ padding-top: 5rem }
+.order_dis .dis_list.expired.no{ min-height: 19rem }
+
+.order_dis_detail .info .t{ font-size: 1.6rem; line-height: 2; font-weight: bold; margin-bottom: .5rem }
+.order_dis_detail .info .dis_info,.order_dis_detail .info .shop_info{ padding: 1.5rem; border-bottom: .5rem solid #f9f9f9 }
+.order_dis_detail .info .dis_info img{ float: left; width: 5rem; height: 5rem; border-radius: 50%; margin-right: 1rem }
+.order_dis_detail .info .dis_info .text{ float: left; width: calc(100% - 6rem); position: relative; font-size: 1.5rem; line-height: 1.5rem }
+.order_dis_detail .info .dis_info .text .type{ color: #1c1c1c }
+.order_dis_detail .info .dis_info .text.isuse:after{ content: ""; position: absolute; right: 1.5rem; height: 5rem; width: 6.1rem; background: url(../images/my/icon_use.png); background-size: 100% 100%; top: 0}
+.order_dis_detail .info .dis_info .text:before{ content: ""; float: right; width: 1.5rem; height: 5rem; background: url(../images/member/ic_bg_arrow_xxh.png) right center no-repeat; background-size: .65rem auto}
+.order_dis_detail .info .dis_info .text .title{ margin-top: .3rem }
+.order_dis_detail .info .dis_info .text .price{ color: #ff6f3d; font-size: 1.7rem; line-height: 1.7rem; margin-top: 1.3rem }
+.order_dis_detail .info .dis_info .text .price span:first-child{ font-size: 2.8rem }
+.order_dis_detail .info .dis_info .text .price span:last-child{ text-decoration: line-through; }
+.order_dis_detail .info .shop_info{ line-height: 1.5; font-size: 1.6rem }
+.order_dis_detail .info .shop_info .phone{ margin-top: 0; height: 4.3rem; border-left: 1px solid #cbcbcb }
+.order_dis_detail .info .shop_info .address{ margin-top: .5rem }
+.order_dis_detail .info .shop_info .ause{ font-size: 1.5rem; line-height: 4rem }
+.order_dis_detail .info .shop_info .ause p{ height: 4rem }
+.order_dis_detail .info .shop_info .ause p.t{ height: 2.4rem }
+.order_dis_detail .info .shop_info .ause p:nth-child(2){ border-bottom: 1px solid #e3e3e3 }
+.order_dis_detail .info .shop_info .ause p span{ float: right; max-width: 21.5rem; width: auto; font-size: 1.5rem }
+.order_dis_detail .info .shop_info .ause p:last-child{ margin-bottom: -.6rem }
+.order_dis_detail .info .order_detail{ padding: 1.5rem; line-height: 1.8; font-size: 1.3rem }
+.order_dis_detail .info .order_detail label{ color: #888 }
+.order_dis_detail .info .my_comment{ padding: 1.5rem; border-bottom: .5rem solid #f9f9f9 }
+.order_dis_detail .info .my_comment .title{ text-indent: 2.25rem; background: url(../images/my/icon_t.png) no-repeat; height: 1.4rem; line-height: 1.4rem; margin: 1rem 0; font-size: 1.4rem; background-size: auto 100% }
+.order_dis_detail .info .my_comment .content{ font-size: 1.4rem; margin-top: .5rem; line-height: 1.5 }
+.order_dis_detail .again{ position: fixed; bottom: 0; width: 100%; z-index: 2; background: #ff6f3d; color: white; text-align: center; height: 5rem; line-height: 5rem; font-size: 1.6rem }
+
+.comment .con .score_star{ text-align: center; height: 5.8rem; line-height: 5.8rem; margin: 0 1.5rem; border-bottom: 1px solid #dddddd }
+.comment .con .score_star a{ width: 2.2rem; height: 2.2rem; float: none; display: inline-block; vertical-align: middle; }
+.comment .con .inp{ margin:2rem 1.5rem 0; position: relative;}
+.comment .con .inp textarea{ border: none; width: 100%; height: 15rem; font-size: 1.4rem; resize:none; }
+.comment .con .inp label{ position: absolute; top: 12.8rem; right: .5rem; font-size: 1.2rem; line-height: 1.2rem; color: #888; height: 2rem; width: 3rem; background: white; z-index: 2 }
+.comment .con p:last-child{ margin: 1.5rem; font-size: 1.3rem; color: #888 }
+.comment .con p a{ margin-bottom: -.2rem }
+.comment .submit{ display: block; margin: 3.5rem 1.5rem; background: #ff6f3d; text-align: center; font-size: 1.6rem; color: white; border-radius: .5rem; height: 5rem; line-height: 5rem }
+
+.comment_success .con img{ display: block; width: 5.9rem; margin: 3.3rem auto 0 }
+.comment_success .con p{ line-height: 6.2rem; text-align: center; font-size: 1.6rem }
+.comment_success .con a{ display: block; margin: 0 auto 3.4rem; border: 1px solid #ff6f3d; color: #ff6f3d; text-align: center; height: 4rem; line-height: 4rem; box-sizing: border-box; width: 9rem; border-radius: .5rem }
+.comment_success .like{ padding:0 1.5rem; border-top: .5rem solid #f9f9f9 }
+.comment_success .like h3{ font-size: 1.5rem; line-height: 1; padding: 2.3rem 0 1.5rem }
+
+.my_dis .menu p{ width: 50% }
+.my_dis .dis_list{ margin: 0 1.5rem }
+.my_dis .see_agin,.order_dis .see_agin{ font-size: 1.4rem; background: white; border-top: 1px solid #e3e3e3; position: fixed; bottom: 0; z-index: 2; width: 100%; text-align: center; height: 5rem; line-height: 5rem; color: #ff6f3d }
+
+.purse .con .group{ display: block; margin: 1.5rem 1.5rem 0; background-color: white; background-size: 4.4rem; background-position: 1.5rem center; background-repeat: no-repeat; border-radius: .5rem; box-shadow: 0 0 3px #ddd; height: 8rem; line-height: 8rem; box-sizing: border-box; padding-right: 1.5rem; text-indent: 7.5rem; color: #1c1c1c }
+.purse .con .group p{ float: right; color: #888; line-height: 8.1rem }
+.purse .con .group:nth-child(1){ background-image: url(../images/my/purse_icon1.png) }
+.purse .con .group:nth-child(2){ background-image: url(../images/my/purse_icon2.png) }
+.purse .con .group:nth-child(3){ background-image: url(../images/my/purse_icon3.png) }
+
+.pur_history .ph_list li{ padding: 1.5rem; margin-bottom: 1rem; background: white }
+.pur_history .ph_list li img{ float: left; width: 9rem; height: 6.5rem; margin-right: 1.3rem }
+.pur_history .ph_list li .text{ float: left; width:calc(100% - 10.3rem); }
+.pur_history .ph_list li .text .title{ font-size: 1.6rem; line-height: 1.2 }
+.pur_history .ph_list li .text .time{ color: #888; font-size: 1.2rem; line-height: 2 }
+.pur_history .ph_list li .text .price{ color: #ff6f3d; font-size: 1.2rem; height:2.2rem; line-height: 2.2rem}
+.pur_history .ph_list li .text .price span{ font-size: 2rem }
+.pur_history .ph_list li .text .price a{ float: right; height: 2.5rem; padding: 0 1rem; background: #ff6f3d; color: white; border-radius: .5rem; font-size: 1.4rem; margin-top: -.5rem; line-height: 2.5rem}
+.pur_history .ph_list li .text .price a.ypj{ background: none; color: #888 }
+
+.creat_shop form{ padding-bottom: 5rem } 
+.creat_shop .form_group{ background: white; text-indent: 0}
+.creat_shop .form_group p{ padding-right: 1.5rem }
+.creat_shop .form_group .img_group p{ padding-right: 0}
+
+.creat_shop_b .cs_b p{ font-size: 1.4rem; color: #888; background: #fafafa; height: 4rem; line-height: 4rem; text-indent: 1.5rem }
+.creat_shop_b .cs_b p span{ color: #ff6f3d }
+.creat_shop_b .cs_b img{ display: block; margin: 2rem 1.5rem; width: calc(100% - 3rem) }
+
+.add_card form{ padding: 0 1.5rem; background: white; border-bottom: 1px solid #e3e3e3}
+.add_card form .form_group:nth-last-child(2){ border: 0 }
+.add_card .form_group p label{text-indent: 0}
+
+.draw_money .con .card{ border-bottom: 1px solid #e3e3e3; height: 6.5rem; box-sizing: border-box; padding:1.25rem 1.5rem 1.25rem 5.25rem; line-height: 2rem; font-size: 1.5rem; background-repeat: no-repeat;background-size: 2.9rem auto; background-position: 1.5rem center; background-color: white }
+.draw_money .con .card.icbc{ background-image: url(../images/my/ic_gs_xxh.png) }
+.draw_money .con .card.js{ background-image: url(../images/my/ic_js_xxh.png) }
+.draw_money .con .card.jt{ background-image: url(../images/my/ic_jt_xxh.png) }
+.draw_money .con .card.ny{ background-image: url(../images/my/ic_ny_xxh.png) }
+.draw_money .con .card.zg{ background-image: url(../images/my/ic_zg_xxh.png) }
+.draw_money .con .card.zgyz{ background-image: url(../images/my/ic_zgyz_xxh.png) }
+.draw_money .con .card.zs{ background-image: url(../images/my/ic_zs_xxh.png) }
+.draw_money .con .card.zx{ background-image: url(../images/my/ic_zx_xxh.png) }
+.draw_money .con .card span{ font-size: 1.3rem; color: #888 }
+.draw_money .con .money{ height: 10rem; margin-top: 1rem; border-bottom: 1px solid #e3e3e3; background: white; padding: 0 1.5rem; font-size: 1.5rem }
+.draw_money .con .money .text{ line-height: 5rem }
+.draw_money .con .money .text span{ font-size: 1.3rem; color: #888; margin-left: .5rem }
+.draw_money .con .money .text i{ display: inline-block; width: 3.5rem; height: 3.5rem; margin-bottom: -1.2rem; background: url(../images/my/ic_i_xxh.png) center center no-repeat; background-size: 1.4rem 1.4rem }
+.draw_money .con .money .info input{ font-size: 3rem; line-height: 3.6rem; border: 0; }
+.draw_money .con .submit{ position: relative; display: block; margin: 4rem 1.5rem 1.4rem; width: auto; border-radius: .5rem }
+.draw_money .con .submit.no{ background: #bdbdbd }
+.draw_money .con .gz{ color: #ff6f3d; font-size: 1.4rem; text-decoration: underline; line-height: 1.4rem; margin-left : 1.5rem}
+.draw_money .shadow{ display: block; }
+.dm_popup{ position: fixed; background: white; left: 50%; top: 50%; width: 27.5rem; height: 19rem; margin-left: -13.75rem; margin-top: -9.5rem; z-index: 101; border-radius: .5rem; box-sizing: border-box; padding: 1rem }
+.dm_popup .close{ position: absolute; right: 0; top: 0; width: 3.3rem; height: 3.3rem; background: url(../images/my/ic_delete_xxh.png) center center no-repeat; background-size: 1.2rem auto;}
+.dm_popup p{ font-size: 1.4rem; color: #888; line-height: 1; margin-top: 1.4rem }
+.dm_popup p span{ color: #1c1c1c}
+.dm_popup .title{ font-size: 1.7rem; color: #1c1c1c; line-height: 3rem; padding-bottom: .7rem; border-bottom: 1px solid #e3e3e3; margin-top: 0 }
+
+.feedback .con .text{ margin: 1.5rem 1.5rem; padding-bottom: 2.7rem; border-bottom: 1px solid #e3e3e3 }
+.feedback .con .text textarea{ border: none; width: 100%; height: 15rem; font-size: 1.4rem; resize:none; line-height:2; display: block; }
+.feedback .con .text span{ float: right; font-size: 1.4rem; color: #888 }
+.feedback .con .img_loader{ border: 0 }
+.feedback .con .btn_submit{ position: relative; display: block; width: auto; margin: 2.4rem 1.5rem; border-radius: .5rem }
+
+.myfb{ overflow: auto }
+.myfb_detail .con{ padding: 0 1.5rem; font-size: 1.4rem}
+.myfb_detail .top{ height: 4.4rem; line-height: 4.4rem; border-bottom: 1px solid #e3e3e3 }
+.myfb_detail .bot{ padding: 1.2rem 0; line-height: 1.8 }
+.myfb_detail .bot .img_list{ margin-top: 1.5rem }
+.myfb_detail .bot .img_list img{ float: left; width: 7.5rem; height: 7.5rem; margin-right: 1.5rem }
+
+.balance .con .top{ height: 11rem; background: #ff6f3d; color: white; text-align: center; }
+.balance .con .top .money{ font-size: 3rem; line-height: 1; padding: 2.6rem 0 .3rem }
+.balance .con .list{ border-top: 1rem solid #f9f9f9 ; margin: 0 1.5rem}
+.balance .con .menu{ height: 5.5rem; line-height: 5.5rem; text-align: center; border-bottom: 1px solid #e3e3e3 }
+.balance .con .menu a{ display: inline-block; height: 100%; padding: 0 2.8rem; position: relative; font-size: 1.5rem }
+.balance .con .menu a.active{ color: #ff6f3d }
+.balance .con .menu a:nth-child(1){ margin-left: -.75rem }
+.balance .con .menu a:nth-child(2):after,.balance .con .menu a:nth-child(2):before{ content: ""; position: absolute; height: 1.5rem; border-left: 1px solid #c1c1c1; top: 50%; margin-top: -.75rem; left: 0 }
+.balance .con .menu a:nth-child(2):before{ right: 0; left: initial; }
+.balance .list a:last-child .balance_group{ border: 0 }
+
+.balance_detail .con{ padding: 3rem 1.5rem }
+.balance_detail .con .top{ height: 12rem; border-radius: .5rem; background: white; position: relative; box-shadow: 0 0 10px #e3e3e3 }
+.balance_detail .con .top .tag{ position: absolute; background: url(../images/purse/ic_tag_xxh.png); background-size: 100% 100%; width: 7.3rem; height: 2.3rem; line-height: 2.1rem; text-indent: .8rem; color: white; font-size: 1.3rem }
+.balance_detail .con .top .logo{ width: 4.5rem; height: 4.5rem; border-radius: 50%; position: absolute; margin: -2.25rem; left: 50% }
+.balance_detail .con .top .title{ padding-top: 3.6rem; font-size: 1.5rem; text-align: center; padding-bottom: 1.4rem; line-height: 1 }
+.balance_detail .con .top .price{ font-size: 2.7rem; line-height: 1; text-align: center; }
+.balance_detail .con .info{ line-height: 4.1rem; font-size: 1.5rem; padding-top: 1.5rem }
+.balance_detail .con .info>section:after{ content: ""; display: block; clear: both}
+.balance_detail .con .info label{ color: #888; float: left; width:8.5rem; }
+.balance_detail .con .info .status{ float: left; margin-bottom: 1rem }
+.balance_detail .con .info .status p{ color: #ff6f3d; font-size: 1.4rem; line-height: 4rem; text-indent: 2.5rem; position: relative; background: url(../images/purse/ic_success_xxh.png) 0 center no-repeat; background-size: 1.5rem}
+.balance_detail .con .info .status p:nth-child(1):before,.balance_detail .con .info .status p:nth-child(2):before{ content: ""; position: absolute; height: 4rem; border-left: 1px solid #ff6f3d; left: .74rem; top: 2rem; z-index: -1 }
+.balance_detail .con .info .status span{ color: #888; margin-left: .5rem }
+
+.statistic .con{ margin: 0 1.5rem}
+.statistic .con .total{ padding: 2.2rem 0 1.6rem; border-bottom: 1px solid #e3e3e3; font-size: 2.5rem; line-height: 1; text-align: center }
+.statistic .con .total p{ font-size: 1.5rem; color: #888; padding-top:.6rem }
+.statistic .con .sdate{ height: 4.5rem; line-height: 4.5rem; background: #fbfdff; position: relative; overflow: hidden; }
+.statistic .con .sdate input{ position: absolute; height: 100%; width: 19.5rem; left: 50%; margin-left: -9.75rem; font-size: 1.5rem; text-align: center }
+.statistic .con .sdate .sbtn{ position: absolute; height: 100%; top: .1rem; width: 5rem; background: url(../images/purse/ic_arrowl_xxh.png) center center no-repeat; background-size: .65rem auto; left: 2.6rem }
+.statistic .con .sdate .srbtn{ position: absolute; height: 100%; width: 5rem; background: url(../images/purse/ic_arrowr_xxh.png) center center no-repeat; background-size: .65rem auto; left: initial; right: 2.6rem }
+.statistic .con .yue{ border-bottom: 1px solid #e3e3e3; height: 5.5rem; line-height: 5.5rem; font-size: 1.5rem }
+.statistic .con .yue span{ float: right; font-size: 1.8rem }
+.statistic .con .bor-fg{ width: calc(100% + 3rem); margin-left: -1.5rem }
+.statistic .con .info{ padding-top: 2.8rem; padding-bottom: 2.8rem }
+.statistic .con .info .text{ float: left; max-width: 13rem; font-size: 1.3rem; }
+.statistic .con .info .text p{ padding-left: 2.5rem; background: url(../images/purse/ic_fa_xxh.png) left top no-repeat; background-size: 1.7rem auto; line-height: 1; margin-bottom: 2.5rem}
+.statistic .con .info .text.t1 p:nth-child(2){ background-image: url(../images/purse/ic_tui_xxh.png) }
+.statistic .con .info .text.t1 p:nth-child(3){ background-image: url(../images/purse/ic_xiao_xxh.png) }
+.statistic .con .info .text.t2 p:nth-child(1){ background-image: url(../images/purse/ic_shang_xxh.png) }
+.statistic .con .info .text.t2 p:nth-child(2){ background-image: url(../images/purse/ic_xia_xxh.png) }
+.statistic .con .info .text p span{ display: block; padding-top: .65rem }
+.statistic .con .chart{ float: right; width: 18rem; height: 18rem; position: relative; border-radius: 50%; background: #d5dce4}
+.statistic .con .chart .data{ width: 7.7rem; height: 7.7rem; background: white; border-radius: 50%; left: 5.15rem; top: 5.15rem; position: absolute; line-height: 7.7rem; text-align: center; font-size: 1.5rem}
+
+.cs_type form{ padding: 0 1.5rem; font-size: 1.5rem }
+.cs_type form>p{ font-weight: bold; height: 5rem; line-height: 5rem }
+.cs_type form .btn_submit{ position: relative; display: block; margin-top: 4rem; border-radius: .5rem }
+.cs_type .shadow{ display: block; }
+.fz_pop{ position: fixed; z-index: 1002; width: calc(100% - 6rem); left: 3rem; background: white; height: 80%; border-radius: 1rem; top: 10%; box-sizing: border-box; padding: 1.5rem; line-height: 2 }
+.fz_pop .contt{ overflow: auto; height:calc(100% - 6.5rem);}
+.fz_pop .close{ position: absolute; background: url(../images/member/ic_bg_delete_xxh.png) center center no-repeat; background-size: 1.5rem 1.5rem; width: 3rem; height: 3rem; right:0; top: 0; z-index: 2 }
+.fz_pop .t{ padding-bottom: 2rem; text-align: center; font-size: 1.6rem }
+.cs_type .checkbox{ height: 4rem; line-height: 4rem; color: #888 }
+.cs_type .checkbox:before{ margin-top: 1.35rem }
+.cs_type .btns{ position: absolute; width: 100%; height: 4rem; line-height: 4rem; text-align: center; color: #ff6f3d; border-top: 1px solid #e3e3e3; left: 0; bottom: 0 }
+.cs_type .btns a{ float: left; width: 50%; height: 100% }
+.cs_type .btns a:first-child{ border-right:1px solid #e3e3e3; box-sizing: border-box; }
+.cs_type .btns a.none{ color: #888 }
+
+.my_card{ padding-top: 5rem }
+.my_card .con{ padding: 1.5rem 1.5rem 0 }
+.my_card .con .card{ height: 18.5rem; border-radius: .5rem; background: url(../images/my/ic_bg_xxh.png); background-size: 100% 100%; box-sizing: border-box; padding: 2rem }
+.my_card .con .card .t{ font-size: 2rem; line-height: 1; padding-bottom: 2.2rem }
+.my_card .con .card img{ float: left; width: 10.3rem; height: 10.3rem; margin-right: 2rem }
+.my_card .con .card .ctt{ width: calc(100% - 12.3rem); float: left; }
+.my_card .con .card .ctt span{ line-height: 1; font-size: 1.7rem; padding-bottom: 1.5rem; display: block; position: relative; margin-bottom: 1.2rem}
+.my_card .con .card .ctt span:after{ content: ""; display: block; width: 2.1rem; height: .3rem; background: black; position: absolute; bottom: 0 }
+.my_card .text{ padding-top: 2.5rem; line-height: 4.5rem; font-size: 1.5rem }
+.my_card .text span{ color: #ff6f3d }
+.my_card .text p{ border-bottom: 1px solid #e3e3e3 }
+.my_card .text a{ float: right; padding-top: 2rem; line-height: 1; text-decoration: underline; color: #ff6f3d }
+.my_card .fz_pop .contt{ height: 100% }
+.my_card .shadow{ display: block; }
+
+.pay_result .price{ padding-top: 3.2rem; text-align: center; font-size: 1.4rem; line-height: 1 }
+.pay_result .price span{ font-size: 3rem }
+.pay_result .name{ padding: 1.5rem 0 3.5rem; text-align: center; font-size: 1.6rem }
+.pay_result .pay_info{ margin: 0 1.5rem; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; padding: .6rem 0; line-height: 3.6rem; font-size: 1.4rem }
+.pay_result .pay_info .left{ float: left; color: #888; width: 7.5rem }
+.pay_result .pay_info .right{ width: calc(100% - 7.5rem); float: left; }
+.pay_result .pay_info .right p span:last-child{ float: right }
+.pay_result .arow{ display: block; line-height: 4.5rem; border-bottom: 1px solid #e3e3e3; margin: 0 1.5rem; height: 4.5rem; color: #1c1c1c }
+
+
+.sub_page.about_us{ background: #fafafa }
+.about_us .top{ text-align: center; font-size: 1.6rem; padding: 2.8rem 0; line-height: 1 }
+.about_us .top img{ display: block; width: 9rem; margin: auto; margin-bottom: 2rem }
+.about_us .bot{ position: absolute; bottom: 2rem; line-height: 2; font-size: 1.2rem; color: #888; text-align: center; width: 100% }
+.about_us .cen{ background: white; font-size: 1.5rem }
+.about_us .cen p{ height: 5rem; line-height: 5rem; margin: 0 1.5rem; border-bottom: 1px solid #e3e3e3 }
+.about_us .cen p:last-child{ border: 0 }
+.about_us_t .con{ height: calc(100% - 2rem); line-height: 2; font-size: 1.3rem; line-height: 1.5; overflow: auto; padding: 0 1.5rem }
+.about_us_t .con p{ margin-bottom: 1rem }
+
+
+.balance_group{ border-bottom: 1px solid #e3e3e3; padding: 1.4rem 0; color: #1c1c1c }
+.balance_group .bg_top{ font-size: 1.6rem; line-height: 1.6rem }
+.balance_group .bg_top span{ float: right; color: #888; font-size: 1.2rem }
+.balance_group .bg_bot{ font-size: 1.6rem; line-height: 1.6rem; margin-top: .5rem; font-size: 1.3rem }
+.balance_group .bg_bot span{ float: right; font-size: 1.6rem }
+
+.fb_group{ border-bottom: 1px solid #e3e3e3; background: white; box-sizing: border-box; padding: 1.5rem; color: #1c1c1c }
+.fb_group .top{ line-height: 1; height: 1.3rem }
+.fb_group .top .time{ font-size: 1.2rem; color: #888}
+.fb_group .top .status,.myfb_detail .top .status{ float: right; color: #ff6f3d; font-size: 1.3rem }
+.fb_group .top .status.ar,.myfb_detail .top .ar{ color: #888 }
+.fb_group .bot{ font-size: 1.5rem; line-height: 1; margin-top: 1.5rem }
+
+.popup{ position: fixed; z-index: 101; width: 24.5rem; left: 50%; margin-left: -12.25rem; top: 50%; background: white; border-radius: .5rem; height: auto; text-align: center; font-size: 1.4rem; margin-top: -6.7rem}
+.popup p{ margin: 3rem 1.5rem; text-align: center; line-height: 2 }
+.popup .btns{ border-top: 1px solid #d8d8d8; height: 4.5rem; line-height: 4.5rem; color: #ff6f3d; line-height: 4.5rem }
+.popup .btns a{ display: block; }
+.popup.double .btns a{ float: left; width: 50% }
+.popup.double .btns a:first-child{ box-sizing: border-box; border-right: 1px solid #d8d8d8 }
+
+.head{ position: fixed; background: white; top: 0; width: 100%; height: 5rem; border-bottom: 1px solid #e3e3e3; text-align: center; font-size: 1.7rem; line-height: 5rem; box-sizing: border-box; z-index: 10}
+.head .back,.reback{ position: absolute; width: 5rem; height: 5rem; background: url(../images/member/ic_bg_back_xxh.png) center center no-repeat; background-size: .9rem auto; z-index: 2; left: 0 ; top: 0}
+.head .com{ position: absolute; width: 5rem; height: 5rem; padding-right: 1.5rem; line-height: 5rem; text-align: right; top: 0; color: #ff6f3d; font-size: 1.5rem; z-index: 2; right: 0 }
+.head .close{ position: absolute; width: 4.5rem; height: 5rem; top: 0; z-index: 2; right: 0; background: url(../images/member/ic_bg_delete_xxh.png) center center no-repeat; background-size: 1.5rem auto; }
+#app.has_head{ padding-top: 5rem }
+#app{ padding-bottom: 2rem }
+.shadow{ position: fixed; top: 0; background: black; opacity: .7; z-index: 100; width: 100%; height: 100%; display: none;}
+.shadow.show{ display: block;}
+.btn_submit{ position: fixed; bottom: 0; width: 100%; background: #ff6f3d; color: white; height: 5rem; font-size: 1.6rem; z-index: 10; line-height: 5rem; text-align: center; }
+.home .reback{ height: 4.7rem; width: 4rem }
+
+.arow:before{ content: ""; float: right; width: 1.5rem; height: 100%; background: url(../images/member/ic_bg_arrow_xxh.png) right center no-repeat; background-size: .65rem auto}
+a.checkbox{ display: inline-block; padding-left: 1.9rem; height: 1.3rem; margin-bottom: -.3rem }
+a.checkbox:before{ content: ""; float: left; width: calc(1.3rem - 2px); height: calc(1.3rem - 2px); border: 1px solid #ff6f3d; margin-left: -1.9rem; background: url(../images/member/ic_bg_select_xxh.png) no-repeat; background-size: calc(1.3rem - 2px) calc(1.3rem - 2px); border-radius: .3rem }
+a.checkbox.none:before{ background: #fff}
+
+.form_group{ border-bottom: 1px solid #e3e3e3; height: 4.8rem; line-height: 4.8rem; position: relative; }
+.form_group.img_loader{ border-top: 1rem solid #fafafa; height: auto; }
+.form_group p{ box-sizing: border-box; height: 100% }
+.form_group p.label{ padding-left: 10rem }
+.form_group p.label.label_long{ padding-left: 13rem }
+.form_group p label{ text-indent: 1.5rem; font-size: 1.5rem; float: left; margin-left: -10rem }
+.form_group p label span{ color: #888; font-size: 1.3rem; margin-left: 1rem }
+.form_group p.label_long label{ margin-left: -13rem }
+.form_group p .sel_text{ position: absolute; width: calc(100% - 11.5rem); right: 1.5rem; height: 100%; font-size: 1.5rem; top: 0 }
+.form_group p .sel_text.nosel{ color: #888 }
+.form_group p.radio input{ position: absolute; width: 100%; height: 100%; opacity: 0; z-index: 2 }
+.form_group p.radio label{ padding-left: 3rem ; position: relative; display: block; margin: 0; text-indent: 0}
+.form_group p.radio label:before{ content: ""; position: absolute; left: 0; width: 1.2rem; height: 1.2rem; border: 2px solid #b5b5b5; top: 50%; margin-top: calc(-.6rem - 2px) ; border-radius: 50%}
+.form_group p.radio input:checked+label:before{ border-color: #ff6f3d }
+.form_group p.radio input:checked+label:after{ content: ""; position: absolute; width: .8rem; height: .8rem; background: #ff6f3d; border-radius: 50%; top: 50%; margin-top: -.4rem; left: calc(.2rem + 2px) }
+.form_group input{ width: 100%; height: 100% ; font-size: 1.4rem; position: relative; z-index: 2; background: transparent;}
+.form_group input.nowid{ width: 60% }
+.form_group .pwd_clear{ position: absolute; background: transparent; }
+.form_group .icon{ padding-left: 4.5rem; background-repeat: no-repeat; background-position: left center; background-size: 1.5rem auto; position: relative; height: 100%}
+.form_group .icon:before{ content: ""; position: absolute; left: 3rem; height: 2rem; border-right: 1px solid #1c1c1c; top: 1.4rem }
+.form_group .icon.icon_phone{ background-image: url(../images/member/ic_bg_phone_xxh.png) }
+.form_group .icon.icon_email{ background-image: url(../images/member/ic_email_xxh.png) }
+.form_group .icon.icon_user{ background-image: url(../images/member/ic_4_xxh.png) }
+.form_group .icon.icon_vercode{ background-image: url(../images/member/ic_bg_ma_xxh.png) }
+.form_group .icon.icon_pwd{ background-image: url(../images/member/ic_bg_password_xxh.png) }
+.form_group .icon .pwd_clear{ position: absolute; right: 0; height: 100%; width: 3.5rem; background: url(../images/member/pwd_clear.png) right center no-repeat white; background-size: 1.5rem }
+.form_group .icon.icon_dpwd{ background-image: url(../images/member/ic_bg_password2_xxh.png) }
+.form_group .icon.icon_vercode a,.form_group .vercode a{ position: absolute; color: #ff6f3d; right: 0; height: 4.5rem; text-decoration: underline; font-size: 1.3rem; top: 0; z-index: 3; background: white }
+.form_group .submit{ margin-top: 3.3rem }
+.form_group .submit input{ background: #ff6f3d; font-size: 1.6rem; text-align: center; border-radius: .6rem; color: white}
+.form_group .submit input.none{ background: #888 }
+.form_group .other a{ color: #ff6f3d; font-size: 1.6rem; text-align: center; display: block; height: 4.8rem; margin-top: .5rem ;border-width: 1px; border-color: rgb(255, 111, 61); border-style: solid; border-radius: .6rem; background-color: rgb(255, 255, 255);}
+
+.uploader{ clear: both; padding: 0 1.5rem }
+.uploader>section{ float: left; width: calc((100% - 4.5rem) / 4 - 1px); height: 7.5rem; position: relative; margin-bottom: 1.5rem; margin-right: 1.5rem }
+.uploader>section img{ max-width: 150% }
+.uploader>section:nth-child(4n){ margin-right: 0 }
+.uploader>section p{ height: 100%; overflow: hidden; }
+.uploader>section .delete{ position: absolute; z-index: 2; top: -1.5rem; right: -1.5rem; width: 3rem; height: 3rem; background: url(../images/icon/icon_delete.png) center center no-repeat; background-size: 50% 50% }
+.uploader .add{ box-sizing: border-box; border: 1px dashed #b6b6b6; background: url(../images/icon/icon_add.png) center center no-repeat; background-size: 2.2rem 2.2rem }
+.uploader .add input{ display: block; width: 100%; height: 100%; opacity: 0 }
+.uploader:after{ content: ""; display: block; clear: both }
+
+.shop_info h3,.discount .notice h3,.shop .shop_content h3,.shop .discount h2{ font-size: 1.6rem; color: #1c1c1c; margin-bottom: .5rem; line-height: 2}
+.shop_info .shop_name{ font-size: 1.6rem; line-height: 2}
+.shop_info .shop_name a{ color: #1c1c1c}
+.shop_info .phone{ float: right; background: url(../images/discount/ic_bg_phone_xxh.png) right center no-repeat; background-size: auto 50%; width: 4rem; height: 4.5rem; margin-top: -2.7rem}
+.shop_info .address,.shop_index .shop_list .address{ display: block; line-height: 1; background: url(../images/discount/ic_address_xxh.png) left center no-repeat; background-size: auto 100%; height: 1.4rem; font-size: 1.4rem; color: #5b5b5b; text-indent: 1.9rem; margin-top: 1.2rem}
+.shop_info span:first-child{ float: left; width: calc(100% - 4.5rem) }
+
+.discount_group{ margin-top: .9rem }
+.discount_group.default{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
+.discount_group.default_z{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
+.discount_group.rate{ background: url(../images/index/ic_bg_znormall_xxh.png); background-size: 100% 100% }
+.discount_group.rate_z{ background: url(../images/index/ic_bg_znormall_xxh.png); background-size: 100% 100% }
+.discount_group.dk{ background: url(../images/index/ic_bg_dknormall_xxh.png); background-size: 100% 100% }
+.discount_group.dk_z{ background: url(../images/index/ic_bg_dknormall_xxh.png); background-size: 100% 100% }
+.discount_group.expired.default,.discount_group.expired.default_z{ background: url(../images/discount/ic_bg_dpast_xxh.png); background-size: 100% 100% }
+.discount_group.expired.rate,.discount_group.expired.rate_z{ background: url(../images/discount/ic_bg_zpast_xxh.png); background-size: 100% 100% }
+.discount_group.expired.dk,.discount_group.expired.dk_z{ background: url(../images/discount/ic_bg_dkpast_xxh.png); background-size: 100% 100% }
+.discount_group.lqgl.dk_z{ background: url(../images/index/ic_bg_dkylq@3x.png); background-size: 100% 100% }
+.discount_group.lqgl.rate_z{ background: url(../images/index/ic_bg_zylq@3x.png); background-size: 100% 100% }
+.discount_group.lqgl.default_z{ background: url(../images/index/ic_bg_dylq@3x.png); background-size: 100% 100% }
+.discount_group.lqgl a.nohx p{ color: #ff6f3d }
+.discount_group .info{ float: left; width: 25.5rem; margin: 1.1rem 0 0 1.3rem}
+.discount_group .info .top img{ float: left; width: 5rem; height: 5rem; margin-right: .9rem; border-radius: 50%}
+.discount_group .info .top .text{ float: left; width: calc(100% - 5.9rem - 2px)}
+.discount_group .info .top .text .title_n{ font-size: 1.3rem; color: #1c1c1c; line-height: 1.3rem; margin-top: 3px; margin-bottom: 1.5rem}
+.discount_group .info .top .text .title_n span{ float: right; color: #888; font-size: 1.1rem; line-height: 1.1rem }
+.discount_group .info .top .text .discounted{ color: #ff6f3d; font-size: 2rem; line-height: 1rem}
+.discount_group .info .top .text .discounted span{ font-size: 2.8rem }
+.discount_group .info .top .text .discounted b{ font-size: 2rem; text-decoration: line-through; font-weight: normal; display: inline-block; margin-left: .7rem }
+.discount_group .info .bot{ margin-top: 1rem; border-top: 1px dashed #9b999b; font-size: 1.1rem; color: #888; padding-top: .8rem; margin-bottom: .9rem}
+.discount_group .info .bot span:last-child{ float: right; max-width: 14rem; color: #1c1c1c }
+.discount_group .status{ float: right; width: 6.5rem}
+.discount_group .status a{ display: block; color: white; font-size: 1.6rem; line-height: 1.1; text-align: center; position: relative; height: 10.6rem}
+.discount_group .status a p{ position: absolute; width: 100%; top: 50%; margin-top: -1.7rem }
+.discount_group .status a.nohx p{ margin-top: -1.05rem }
+
+.dis_order_group{ border-bottom: 1rem solid #fafafa; padding: 1.5rem; position: relative; background: white }
+.dis_order_group>a{ color: #1c1c1c }
+.dis_order_group:last-child{ border: 0 }
+.dis_order_group.use .last_time{ display: none; }
+.dis_order_group.use .right{ background: url(../images/my/icon_use.png) right center no-repeat white; background-size: 6.2rem auto }
+.dis_order_group .last_time{ position: absolute; right: 1.5rem; width: 4.5rem; height: 6rem; background: url(../images/my/ic_tagtime_xxh.png); background-size: 100% 100%; top: 0; color: white; font-size: 1.1rem; line-height: 2; text-align: center; box-sizing: border-box; padding-top: .5rem }
+.dis_order_group .last_time p:last-child{ width: 2.2rem; margin: auto; border-top: 1px solid white }
+.dis_order_group .left{ float: left; width: 5rem; margin-right: 1.9rem}
+.dis_order_group .left .price{ line-height: 3.3rem; font-size: 1.5rem; color: #ff6f3d }
+.dis_order_group .left .price span{ font-size: 2.7rem}
+.dis_order_group .left .type{ width: 100%; height: 1.8rem; line-height: 1.8rem; font-size: 1.2rem; background: #ffeae2; color: #ff6f3d; text-align: center; }
+.dis_order_group .right{ float: left; width: calc(100% - 6.9rem); margin-bottom: 1.5rem }
+.dis_order_group .right .title{ font-size: 1.5rem; line-height: 1.5rem; width: 22.2rem }
+.dis_order_group .right .limit{ font-size: 1.2rem; line-height: 2 }
+.dis_order_group .right .time{ font-size: 1.2rem; color:#888; margin-top: .3rem }
+.dis_order_group .bot{ clear: both; border-top: 1px solid #e3e3e3; padding-top: 1.3rem; font-size: 1.3rem; line-height: 1.3rem }
+.dis_order_group .bot p{ float: right; color: #888 }
+.dis_order_group.gq a,.dis_order_group.gq .left .price,.dis_order_group.gq .left .type{ color: #888; background: none }
+
+.search_p{ position: fixed; width: 100%; height: 100%; z-index: 1001; background: white; top: 0; left: 100%; -webkit-transition:all .5s;transition:all .5s }
+.search_p.show{ left: 0 }
+.search_p .top{ height: 3rem; padding: .8rem 1.5rem; border-bottom: 1px solid #e3e3e3; position: relative; }
+.search_p .top input{ border: 1px solid #e3e3e3; border-radius: 2rem; background-position: 1.2rem center; text-indent: 1.2rem; background-color: #fafafa; width: 25rem; margin-left: 2.5rem }
+.search_p .top .delete{ position: absolute; width: 3rem; height: 3rem; left: 27.8rem; z-index: 3; background: url(../images/index/ic_x_xxh.png) center center no-repeat; background-size: 1.2rem 1.2rem }
+.search_p .top .canle{ float: right; height: 3rem; line-height: 3rem; font-size: 1.5rem }
+.search_p .tags{ padding: 0 1.5rem; height: calc(100% - 5.2rem); overflow: auto }
+.search_p .tags h3{ padding: 2rem 0 .8rem; font-size: 1.5rem; font-weight: bold; clear: both; line-height: 1}
+.search_p .tags .hot a{ float: left; margin-right: 1rem; margin-top: 1rem; border: 1px solid #dfe0e3; background: #f9fbfd; font-size: 1.4rem; line-height: 3rem; padding: 0 1.5rem; border-radius: .5rem }
+.search_p .tags .history a{ display: block; border-bottom: 1px solid #e3e3e3; height: 4.5rem; line-height: 4.5rem; font-size: 1.4rem }
+.search_p .tags h3 .delete{ background: url(../images/index/ic_delete_xxh.png) center center no-repeat; background-size: 1.5rem auto; float: right; height: 4.5rem; width: 4.5rem; margin-top: -1.5rem }
+
+.comment_list{ margin: 0 1.5rem; padding: 1.35rem 0; border-bottom: 1px solid #e3e3e3 }
+.comment_list:last-child{ border: 0 }
+.comment_list img{ float: left; width: 4rem; height: 4rem; border-radius: 50%; margin-right: .7rem }
+.comment_list .info{ float: left; width: calc(100% - 4.7rem) }
+.comment_list .info .time{ float: right; color: #888; font-size: 1.2rem }
+.comment_list .info .name{ font-size: 1.3rem; line-height: 2 }
+.comment_list .info .content{ padding-top: .5rem; line-height: 1.5; font-size: 1.4rem }
+
+.prompt{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 11000; display: none;opacity:0;-webkit-transform: translate3d(0, 0, 0) scale(1.185);transform: translate3d(0, 0, 0) scale(1.185);-webkit-transition-property: -webkit-transform, opacity;transition-property: transform, opacity; }
+.prompt.show{ opacity:1; display:block;-webkit-transition-duration: 400ms;transition-duration: 400ms;-webkit-transform: translate3d(0, 0, 0) scale(1);transform: translate3d(0, 0, 0) scale(1); }
+.prompt.hide{ display: none;opacity: 0;z-index: 10999;-webkit-transition-duration: 400ms;transition-duration: 400ms;-webkit-transform: translate3d(0, 0, 0) scale(0.815);transform: translate3d(0, 0, 0) scale(0.815); }
+.prompt .shadow_b{ position: absolute; width: 100%; height: 100%; background: black; opacity: .5 }
+.prompt .text{ position: absolute; z-index: 2; top: 22rem; text-align: center; width: 100% }
+.prompt .text p{ display: inline-block; background: white; border-radius: .5rem; line-height: 2.5rem; padding: 1.5rem 4rem; font-size: 1.6rem; max-width: calc(100% - 11rem)}
+
+.score_star{ line-height: 1.5rem; font-size: 1.2rem; color: #888 }
+.score_star a{ width: 1.5rem; height: 1.5rem; float: left; margin-right: 5px; background: url(../images/discount/ic_bg_gstar_xxh.png); background-size: 100% 100% }
+.score_star a.active{ background-image: url(../images/discount/ic_bg_ystar_xxh.png) }
+.score_star a b{ display: block; height: 100%; background: url(../images/discount/ic_bg_ystar_xxh.png); background-size: 1.5rem 100%}
+.bor-fg{ border-top: .5rem solid #f9f9f9 }
+[v-clock]{ display: none; }
+input,select,textarea{-webkit-appearance:none}
+
+
+.height{ position: fixed; z-index: -1; width: 100%; height: 100%; opacity: 0 }
+.infinite-scroll-preloader{margin:.5rem;text-align:center}
+.infinite-scroll-preloader .preloader{width:2rem;height:2rem}
+.preloader{display:inline-block;width:1rem;height:1rem;-webkit-transform-origin:50%;transform-origin:50%;-webkit-animation:preloader-spin 1s steps(12,end) infinite;animation:preloader-spin 1s steps(12,end) infinite}
+.preloader:after{display:block;content:"";width:100%;height:100%;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%20120%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20xmlns%3Axlink%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink'%3E%3Cdefs%3E%3Cline%20id%3D'l'%20x1%3D'60'%20x2%3D'60'%20y1%3D'7'%20y2%3D'27'%20stroke%3D'%236c6c6c'%20stroke-width%3D'11'%20stroke-linecap%3D'round'%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(30%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(60%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(90%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(120%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(150%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.37'%20transform%3D'rotate(180%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.46'%20transform%3D'rotate(210%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.56'%20transform%3D'rotate(240%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.66'%20transform%3D'rotate(270%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.75'%20transform%3D'rotate(300%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.85'%20transform%3D'rotate(330%2060%2C60)'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-position:50%;background-size:100%;background-repeat:no-repeat}.preloader-white:after{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%20120%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20xmlns%3Axlink%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink'%3E%3Cdefs%3E%3Cline%20id%3D'l'%20x1%3D'60'%20x2%3D'60'%20y1%3D'7'%20y2%3D'27'%20stroke%3D'%23fff'%20stroke-width%3D'11'%20stroke-linecap%3D'round'%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(30%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(60%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(90%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(120%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(150%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.37'%20transform%3D'rotate(180%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.46'%20transform%3D'rotate(210%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.56'%20transform%3D'rotate(240%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.66'%20transform%3D'rotate(270%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.75'%20transform%3D'rotate(300%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.85'%20transform%3D'rotate(330%2060%2C60)'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")}@-webkit-keyframes preloader-spin{100%{-webkit-transform:rotate(360deg)}}@keyframes preloader-spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
+
+
+.creatlogin .success .icon{ width: 11.45rem; height: 11.45rem; margin: 2rem auto; background: url(../images/creat/ic_pic_xxh.png); background-size: 100% 100% }
+.creatlogin .success .tips{ color: #55a5ff; font-size: 2rem; text-align: center; margin-bottom:2.2rem; line-height: 2rem; }
+.creatlogin .success .num{ font-size: 1.5rem; text-align: center; color: #1c1c1c; margin-bottom:1.2rem; line-height: 1.5rem;  }
+.creatlogin .success .num span{ color: #1c1c1c }
+.creatlogin .success .backweb {font-size: 1.5rem; text-align: center; color: #55a5ff; margin-bottom:4rem; line-height: 1.5rem;  }
+.creatlogin .success .btn_submit{ position: relative; display: block; margin: 1.5rem; width: calc(100% - 3rem); border-radius:.5rem }
+
+.creatlogin .loading .icon{ width: 11.45rem; height: 11.45rem; margin: 2rem auto; background: url(../images/creat/ic_pic3_xxh.png); background-size: 100% 100% }
+.creatlogin .loading .tips{ color: #1c1c1c; font-size: 2rem; text-align: center; margin-bottom:1.4rem; line-height: 2rem; }
+.creatlogin .loading .num{ font-size: 1.3rem; text-align: center; color: #888888; margin-bottom:3rem; line-height: 1.3rem;  }
+.creatlogin .loading .num span{ color: #888888 }
+
+.creatlogin .falut .icon{ width: 11.45rem; height: 11.45rem; margin: 2rem auto; background: url(../images/creat/ic_pic2_xxh.png); background-size: 100% 100% }
+.creatlogin .falut .tips{ color: #1c1c1c; font-size: 2rem; text-align: center; margin-bottom:1.4rem; line-height: 2rem; }
+.creatlogin .falut .num{ font-size: 1.3rem; text-align: center; color: #888888; margin:0 1.5rem 3rem 1.5rem; line-height: 1.3rem; width: calc(100% - 3rem); }
+.creatlogin .falut .num span{ color: #888888 }
+.creatlogin .falut .btn_submit{ position: relative; display: block; margin: 1.5rem; width: calc(100% - 3rem); border-radius:.5rem }
+
+.creat_shop .tip{ color:#1c1c1c; font-size: 1.2rem; line-height: 1.2rem; margin-top: 2rem; width:calc(100%-3rem); margin: 1.5rem; }
+
+
+.creat_brand  form{ padding-bottom: 5rem } 
+.creat_brand .form_group{ background: white; text-indent: 0;height: 8.4rem; line-height: 8.4rem;}
+.creat_brand .form_group p{ padding-right: 1.5rem ;    padding-left: 0;height:auto;}
+.creat_brand .form_group p .brandlogo { width: 4.3rem;
+  height: 4.3rem;float:left;margin:1.4rem 0 0 1.5rem;
+ border-width: 1px;
+  border-color: rgb(28, 28, 28);
+  border-style: solid;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+}
+  .creat_brand .form_group  .brandname{  font-size: 1.6rem;
+  color: rgb(28, 28, 28);
+  line-height: 1.6rem;
+  margin:1.4rem 0 0 0;height: 1.6rem;overflow: hidden; text-overflow:ellipsis; white-space: nowrap;width: 25rem;
+}
+.creat_brand .form_group .blic{
+    height: 5.55rem;margin-left:1.5rem;float: left;
+}
+.creat_brand .form_group  .introduction{   font-size: 1.3rem;
+  color: rgb(136, 136, 136);height: 1.3rem;margin-top: 0.65rem;overflow: hidden; text-overflow:ellipsis; white-space: nowrap;width: 25rem;
+  line-height: 1.3rem; }
+  .creat_brand .form_group  .phone{   font-size: 1.3rem;
+  color: rgb(136, 136, 136);height: 1.3rem;margin-top: 0.65rem;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;width: 25rem;
+  line-height: 1.3rem; }
+.creat_brand .head .search{ width:calc(100% - 12rem); height: 3rem;  border-width: 1px;
+  border-color: rgb(229, 229, 229);
+  background-color: rgb(250, 250, 250);
+  border-style: solid;
+  opacity: 0.902;
+  border-radius: 30px;
+  position: relative; z-index: 2; line-height: 3rem;
+  height: 3rem; font-size: 1.4rem; background-image:url(../images/icon/ic_search_xxh.png) ;
+  background-position: 1.25rem center ;
+  background-repeat: no-repeat;
+  padding-left:3.5rem; background-size : 1.3rem auto;
+  float:left;
+  margin:0.9rem 0 0 1.5rem;
+}
+.creat_brand .head .search:before{ content: ""; width: 100%; height: 100%; position: absolute; background: white; opacity: .9; border-radius: 25px}
+.creat_brand .head .clear{ position: absolute;top:1.8rem;right:8.1rem;width: 1.3rem;height: auto;z-index: 3;float:left;}
+.creat_brand .head  .backfont{font-size: 1.5rem;
+  color: rgb(28, 28, 28);float:left;margin: 0 0 0 1.5rem;
+ }
+.creat_brand .shadow{opacity: 1;background:  rgba(0,0,0,0.7);}
+.topCom .comback{border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left:calc((100% - 26.6rem)/2);
+  top: 19.75rem;
+  width: 26.6rem;
+  height: 16.95rem; }
+.topCom .comback .agreement{  width: 100%; height: 1.3rem; line-height: 1.3rem; text-align: left; color: #888888;margin-top:1.85rem; margin-left:1.3rem}
+.topCom .comback .agreement a:last-child{ color: #ff6f3d; text-decoration: underline; }
+.topCom .comback .comfim{font-size: 1.6rem;color: rgb(28, 28, 28);;margin:2.1rem 0 0 1.5rem;text-align: center;width: calc(100% - 3rem);height: 4.3rem;}
+.topCom .comback .dotline{border-width: 1px;
+  border-color: rgb(155, 153, 155);
+  border-style: dashed;width: calc(100% - 3rem);
+  margin:1.3rem 0 0 1.5rem;
+ }
+.topCom .comback .bottomline{
+border-top:1px solid rgb(216, 216, 216);
+  width: 26.6rem;
+  height: 4.55rem;margin-top:1.3rem;
+  overflow: hidden;
+  }
+.topCom .comback .cacenl
+{
+     font-size: 1.5rem;
+  color: rgb(255, 111, 61);
+  line-height: 1.2;
+  text-align: center;
+width: 13.3rem;
+height: 100%;
+float:left;
+padding-top: 1.3rem;
+}
+.topCom .comback .sure
+{font-size: 1.5rem;color: rgb(255, 111, 61);line-height: 1.2;text-align: center;width: 13.2rem;height: 100%;float:left;
+padding-top: 1.3rem;
+}
+.topCom .comback .midline
+{
+     background-color: rgb(216, 216, 216);
+  width: 1px;
+  height: 4.5rem;
+ float:left;
+}
+
+.topCom .comback .sure.none{ color: #888 }
+
+
+
+.creat_shop_A .form_brand{ background: white; text-indent: 0}
+.creat_shop_A .form_brand p{ padding-right: 1.5rem }
+.creat_shop_A  form{ padding-bottom: 5rem } 
+
+.creat_shop_A .tip{ color:#1c1c1c; font-size: 1.2rem; line-height: 1.2rem; margin-top: 2rem; width:calc(100%-3rem); margin: 1.5rem; }
+.creat_shop_A .form_group{ background: white; text-indent: 0;height: 8.4rem; line-height: 8.4rem;}
+.creat_shop_A .form_group p{ padding-right: 1.5rem ;    padding-left: 0;height:auto;}
+.creat_shop_A .form_group p .brandlogo { width: 4.3rem;
+  height: 4.3rem;float:left;margin:1.4rem 0 0 1.5rem;
+ border-width: 1px;
+  border-color: rgb(28, 28, 28);
+  border-style: solid;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+}
+  .creat_shop_A .form_group  .brandname{  font-size: 1.6rem;
+  color: rgb(28, 28, 28);
+  line-height: 1.6rem;
+  margin:1.4rem 0 0 0;height: 1.6rem;overflow: hidden; text-overflow:ellipsis; white-space: nowrap;width: 25rem;
+}
+.creat_shop_A .form_group .blic{
+    height: 5.55rem;margin-left:1.5rem;float: left;
+}
+.creat_shop_A .form_group  .introduction{   font-size: 1.3rem;
+  color: rgb(136, 136, 136);height: 1.3rem;margin-top: 0.65rem;overflow: hidden; text-overflow:ellipsis; white-space: nowrap;width: 25rem;
+  line-height: 1.3rem; }
+  .creat_shop_A .form_group  .phone{   font-size: 1.3rem;
+  color: rgb(136, 136, 136);height: 1.3rem;margin-top: 0.65rem;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;width: 25rem;
+  line-height: 1.3rem; }
+
+.creat_shop_A  .form_brand{ border-bottom: 1px solid #e3e3e3; height: 4.8rem; line-height: 4.8rem; position: relative; }
+.creat_shop_A .form_brand.img_loader{ border-top: 1rem solid #fafafa; height: auto; }
+.creat_shop_A .form_brand p{ box-sizing: border-box; height: 100% }
+.creat_shop_A .form_brand p.label{ padding-left: 10rem }
+.creat_shop_A .form_brand p.label.label_long{ padding-left: 13rem }
+.creat_shop_A .form_brand p label{ text-indent: 1.5rem; font-size: 1.5rem; float: left; margin-left: -10rem }
+.creat_shop_A .form_brand p label span{ color: #888; font-size: 1.3rem; margin-left: 1rem }
+.creat_shop_A .form_brand p.label_long label{ margin-left: -13rem }
+.creat_shop_A .form_brand p .sel_text{ position: absolute; width: calc(100% - 11.5rem); right: 1.5rem; height: 100%; font-size: 1.5rem; top: 0 }
+.creat_shop_A .form_brand p .sel_text.nosel{ color: #888 }
+.creat_shop_A .form_brand p.radio input{ position: absolute; width: 100%; height: 100%; opacity: 0; z-index: 2 }
+.creat_shop_A .form_brand p.radio label{ padding-left: 3rem ; position: relative; display: block; margin: 0; text-indent: 0}
+.creat_shop_A .form_brand p.radio label:before{ content: ""; position: absolute; left: 0; width: 1.2rem; height: 1.2rem; border: 2px solid #b5b5b5; top: 50%; margin-top: calc(-.6rem - 2px) ; border-radius: 50%}
+.creat_shop_A .form_brand p.radio input:checked+label:before{ border-color: #ff6f3d }
+.creat_shop_A .form_brand p.radio input:checked+label:after{ content: ""; position: absolute; width: .8rem; height: .8rem; background: #ff6f3d; border-radius: 50%; top: 50%; margin-top: -.4rem; left: calc(.2rem + 2px) }
+.creat_shop_A .form_brand input{ width: 100%; height: 100% ; font-size: 1.4rem; position: relative; z-index: 2; background: transparent;}
+.creat_shop_A .form_brand input.nowid{ width: 60% }
+.creat_shop_A .form_brand .pwd_clear,.clear{ position: absolute; background: transparent; }
+.creat_shop_A .form_brand .icon{ padding-left: 4.5rem; background-repeat: no-repeat; background-position: left center; background-size: 1.5rem auto; position: relative; height: 100%}
+.creat_shop_A .form_brand .icon:before{ content: ""; position: absolute; left: 3rem; height: 2rem; border-right: 1px solid #1c1c1c; top: 1.4rem }
+.creat_shop_A .form_brand .icon.icon_phone{ background-image: url(../images/member/ic_bg_phone_xxh.png) }
+.creat_shop_A .form_brand .icon.icon_email{ background-image: url(../images/member/ic_email_xxh.png) }
+.creat_shop_A .form_brand .icon.icon_vercode{ background-image: url(../images/member/ic_bg_ma_xxh.png) }
+.creat_shop_A .form_brand .icon.icon_pwd{ background-image: url(../images/member/ic_bg_password_xxh.png) }
+.creat_shop_A .form_brand .icon .pwd_clear,.clear{ position: absolute; right: 0; height: 100%; width: 3.5rem; background: url(../images/member/pwd_clear.png) right center no-repeat white; background-size: 1.5rem }
+.creat_shop_A .form_brand .icon.icon_dpwd{ background-image: url(../images/member/ic_bg_password2_xxh.png) }
+.creat_shop_A .form_brand .icon.icon_vercode a,.form_group .vercode a{ position: absolute; color: #ff6f3d; right: 0; height: 4.5rem; text-decoration: underline; font-size: 1.3rem; top: 0; z-index: 3; background: white }
+.creat_shop_A .form_brand .submit{ margin-top: 3.3rem }
+.creat_shop_A .form_brand .submit input{ background: #ff6f3d; font-size: 1.6rem; text-align: center; border-radius: .6rem; color: white}
+.creat_shop_A .form_brand .submit input.none{ background: #888 }
+.creat_shop_A .form_brand .other a{ color: #ff6f3d; font-size: 1.6rem; text-align: center; display: block; height: 4.8rem; margin-top: .5rem ;border-width: 1px; border-color: rgb(255, 111, 61); border-style: solid; border-radius: 10px; background-color: rgb(255, 255, 255);}
+.creat_shop .positive {border-width: 1px;margin:1rem 0 0 2rem;
+  border-color: rgb(200, 200, 200);
+  border-style: dashed;background: url("../images/icon/icon_card.png") center center no-repeat;
+  border-radius: 6px;background-size: 2.5rem 1.8rem;
+  background-color: rgb(255, 255, 255);
+  width: calc(100% - 4rem);
+  height: 20.6rem;}
+  .creat_shop .positive .uploader{ padding: 0; height: 100%}
+  .creat_shop .positive .uploader .add{
+  height: 20.6rem;border:none;background: none;
+  }
+.creat_shop .positive .uploader>section{    float: none;width: 100%;margin:0 0 0 0}
+.creat_shop .positive .img_group{ height: 100% }
+.creat_shop .positive .img_group p img{ width: 100% !important; height: 100% !important; margin: 0 !important; }
+.creat_shop .positive .img_group p{ margin: 0; width: 100% }
+.creat_shop .positive p{text-align: center;font-size: 1.35rem;
+  color: rgb(136, 136, 136);   position: absolute;  
+   margin-top: 11.5rem;
+    width: calc(100% - 4rem);
+ }
+.add_bank  .agreement{  width: 100%; height: 1.3rem; line-height: 1.3rem; text-align: left; color: #888888;margin-top:1.85rem; margin-left:1.3rem}
+.add_bank  .agreement a:last-child{ color: #ff6f3d; text-decoration: underline; }
+.add_bank  .btn_submit.none{ background: #888 }
+.cert .loading .icon{ width: 11.45rem; height: 11.45rem; margin: 2rem auto; background: url(../images/creat/ic_pic3_xxh.png); background-size: 100% 100% }
+.cert .loading .tips{ color: #1c1c1c; font-size: 2rem; text-align: center; margin-bottom:1.4rem; line-height: 2rem; }
+.cert .loading .num{ font-size: 1.3rem; text-align: center; color: #888888; margin-bottom:3rem; line-height: 1.3rem;  }
+.cert .loading .num span{ color: #888888 }
+.nobefore a:before{ display: none !important }
+.sub_page,.sub_page2,.sub_page3{ position: fixed; width: 100%; height: 100%; z-index: 20; background: white; box-sizing: border-box; padding-top: 5rem; top: 0; left: 100% ; -webkit-transition:all .5s;transition:all .5s; overflow: auto;}
+.sub_page.show,.sub_page2.show,.sub_page3.show{ left: 0 }
+.sub_page2{ z-index: 21 }
+.sub_page3{ z-index: 22 }
+.sub_page .head .com{ width: 6.5rem }
+.sub_page .head,.sub_page2 .head,.sub_page3 .head{ position: absolute; }
+/* .bank_info .uploader img{
+  width: 100%;
+  height: 100%;
+} */

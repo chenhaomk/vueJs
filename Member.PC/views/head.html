@@ -1,0 +1,61 @@
+<div class="top">
+    <div class="con">
+        <div class="userinfo fn-left" id="userinfo">
+            <div class="info">
+                <a href="/views/personal/seting.html"><img src="/assets/images/personal/ic_bg_user_xxh.png">
+                <p class="fn-left"></p></a>
+                <a id="loginOut">退出</a>
+            </div>
+            <div class="log">
+                <a href="/views/user/login.html">登录</a>
+                <a href="/views/user/register.html">注册</a>
+            </div>
+        </div>
+        <div class="btns fn-right">
+            <a href="/views/enter/login.html">商家入驻</a>
+            <b></b>
+            <a class="apply">申请成为商家发展人</a>
+        </div>
+    </div>
+</div>
+<div class="cen">
+    <div class="con">
+        <a href="/"><img src="/assets/images/index/logo.png" class="fn-left"></a>
+        <p class="address"></p>
+        <div class="search">
+            <div class="search_p">
+                <form>
+                    <input type="text" class="inp" id="name" placeholder="火锅冒菜">
+                    <input type="submit" class="fn-right se_btn" value="搜索">
+                </form>
+            </div>
+            <div class="quick_btns" id="hotSearch"></div>
+        </div>
+        <div class="ewm"><img src="/assets/images/icon/ewm.png" alt=""><span>下<br>载APP</span></div>
+    </div>
+</div>
+<div class="bot">
+    <div class="con">
+        <div class="nav">
+            <div class="all_dis fn-left">
+                <p>全部优惠券</p>
+                <div class="list" id="couponsType"></div>
+            </div>
+            <a href="/">首页</a>
+            <a class="hide">最热优惠</a>
+            <a href="/views/shop/list.html">商家</a>
+            <a href="/views/coupon/list.html">优惠券</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    
+    $(".se_btn").click(function(event) {
+        event.preventDefault();
+        var val = $("#name").val();
+        if(val.length != 0){
+            window.open("/views/shop/list.html?text="+encodeURI(encodeURI(val)),"_self");
+        }
+    });
+    
+</script>

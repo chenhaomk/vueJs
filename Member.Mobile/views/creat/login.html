@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title>商家入驻登录</title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+
+<body>
+
+    <section id='app' class='member login has_head creatlogin'>
+
+        <section class="head">
+            <a class="back" href="login.html" :class='[active!=0?"":"hide"]'></a>
+            <p>商家入驻登录</p>
+            <a class="close" href="/" :class='[active==0?"":"hide"]'></a>
+
+        </section>
+
+        <section class="tab">
+            <!-- <section class="tab_menu">
+                <section class="active_bg" :class='[active==0?"":"rig"]'></section>
+                <a v-on:click='tab(0)' :class='[active==0?"active":""]'>手机号快捷登录</a>
+                <a v-on:click='tab(1)' :class='[active==0?"":"active"]'>密码登录</a>
+            </section> -->
+            <section class="tab_con">
+                <form>
+                    <section class="tab_group active" :class='[active==0?"":"hide"]'>
+                        <section class="form_group">
+                            <p class="icon icon_phone">
+                                <input v-model="phone" v-on:blur="blurTip(phone,'phone')" type="number" placeholder="请输入手机号码">
+                            </p>
+                        </section>
+                        <section class="form_group">
+                            <p class="icon icon_vercode">
+                                <input v-model="vercode" type="number" placeholder="请输入验证码">
+                                <get-vercode :mobile="phone" :sms_type="'0007'"></get-vercode>
+                            </p>
+                        </section>
+                        <section class="form_group">
+                            <p class="submit">
+                                <input type="submit" @click="login1($event)" value="登录">
+                            </p>
+                            <p class="other">
+                                <a href="register.html">注册</a>
+                            </p>
+                        </section>
+                    </section>
+                </form>
+                <!-- <form>
+                    <section class="tab_group" :class='[active==1?"active":""]'>
+                        <section class="form_group">
+                            <p class="icon icon_phone">
+                                <input v-model="userId" v-on:blur="blurTip(userId,'phone')" placeholder="请输入手机号">
+                            </p>
+                        </section>
+                        <section class="form_group">
+                            <p class="icon icon_pwd">
+                                <input type="password" v-model="pwd" v-on:focus='$event.target.value=""' placeholder="请输入密码">
+                            </p>
+                        </section>
+                        <section class="form_group">
+                            <p class="submit">
+                                <input type="submit" @click="login2($event)" value="登录">
+                            </p>
+                            <p class="other">
+                                <a href="register.html">注册</a>
+                            </p>
+                        </section>
+                    </section>
+                </form> -->
+            </section>
+
+            <section class="success" :class='[active==2?"":"hide"]'>
+                <section class="icon"></section>
+                <p class="tips">审核成功 !</p>
+                <p class="num"><span>恭喜您成为商家，请登陆以下网址管理你的门店</span></p>
+                <p class="backweb" v-on:click="jumpnet">https://ingo.yingegou.com</p>
+                <!-- <a v-on:click="brandurl" class="btn_submit">{{brandState}}</a> -->
+            </section>
+            <section class="loading" :class='[active==1?"":"hide"]'>
+                <section class="icon"></section>
+                <p class="tips">审核中...</p>
+                <p class="num"><span>很快就好啦，请耐心等待~</span></p>
+            </section>
+            <section class="falut" :class='[active==3?"":"hide"]'>
+                <section class="icon"></section>
+                <p class="tips">审核失败</p>
+                <p class="num"><span>抱歉！您的审核被驳回，驳回原因:<br>{{reason}}</span></p>
+                <a href="creatShopB.html" class="btn_submit">重新认证</a>
+            </section>
+        </section>
+
+        <!-- <section class="login_other">
+            <p class="title">第三方登录</p>
+            <section class="list">
+                <a class="wechat"></a>
+                <a class="qq"></a>
+                <a class="weibo"></a>
+            </section>
+        </section>
+    
+        <section class="ver" v-show="vshow">
+            <a class="close" @click="close"></a>
+            <p class="t">请输入图形验证码</p>
+            <p class="inp">
+                <input type="number" v-model="ver" placeholder="按右图输入">
+                <img src="/assets/images/index/demo1.jpg" alt="">
+            </p>
+            <a class="sub" @click="yzm">确定</a>
+        </section>
+        <section class="shadow" v-show="vshow"></section>
+    </section> -->
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/login.js"></script>
+<html>

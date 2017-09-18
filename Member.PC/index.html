@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit" />
+    <title>银个购</title>
+    
+    <link rel="icon" href="/assets/images/icon/logo.png">
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <div class="head"></div>
+
+    <div class="index con">
+
+        <div class="banner" id='banner'>
+            <div class="list"></div>
+            <div class="pages"></div>
+        </div>
+
+        <div class="business">
+            <div class="title">
+                热门商家
+                <a href="/views/shop/list.html" class="move fn-right">更多</a>
+            </div>
+            <div class="hot bgwhite" id="fromBusiness"></div>
+            <div class="list">
+                <a class="btn lbtn"></a>
+                <a class="btn rbtn"></a>
+                <div class="list_g">
+                    <div class="list_gl" id="hotBusiness"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="discount_i">
+            <div class="title">
+                热门优惠
+                <div class="btns fn-right" id="btns">
+                    <a class="active">全部</a>
+                    <a>销量</a>
+                    <a>评价</a>
+                    <a class="ck">共享券</a>
+                    <a class="ck last">专属券</a>
+                </div>
+            </div>
+            <div class="coupon_list fn-clear"></div>
+            <div class="paging clear"></div>
+        </div>
+
+    </div>
+
+    <div class="footer"></div>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.3&key=a9506f1b1e66b4e85d7e15c8461ca4d4&plugin=AMap.CitySearch"></script>
+    <script src="/controllers/index.js"></script>
+<html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/sui/sm.min.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <section id='app' class='statistic has_head'>
+
+        <section class="head">
+            <a class="back"></a>
+            <p>钱包</p>
+        </section>
+        
+        <section class="con">
+            <section class="total">
+                +800.00
+                <p>累计分润</p>
+            </section>
+            <section class="sdate">
+                <input id='totalDate' value="2017.01.02   ~   2017.02.03" />
+                <a class="sbtn slbtn"></a>
+                <a class="sbtn srbtn"></a>
+            </section>
+            <p class="yue">分润总额：<span>+200.00</span></p>
+            <section class="info fn-clear">
+                <section class="text t1">
+                    <p>
+                        发展商家分润
+                        <span>--</span>
+                    </p>
+                    <p>
+                        推荐用户分润
+                        <span>--</span>
+                    </p>
+                    <p>
+                        消费返利
+                        <span>--</span>
+                    </p>
+                </section>
+                <section class="chart">
+                    <section class="data">--</section>
+                    <canvas></canvas>
+                </section>
+            </section>
+            <section class="bor-fg"></section>
+            <section class="total">
+                -800.00
+                <p>累计消费</p>
+            </section>
+            <section class="sdate">
+                <input id='totalDate' value="2017.01.02   ~   2017.02.03" />
+                <a class="sbtn slbtn"></a>
+                <a class="sbtn srbtn"></a>
+            </section>
+            <p class="yue">消费总额：<span>-200.00</span></p>
+            <section class="info fn-clear">
+                <section class="text t2">
+                    <p>
+                        线上购物
+                        <span>--</span>
+                    </p>
+                    <p>
+                        线下消费
+                        <span>--</span>
+                    </p>
+                </section>
+                <section class="chart">
+                    <section class="data">--</section>
+                    <canvas></canvas>
+                </section>
+            </section>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/plugins/zepto/zepto.js"></script>
+    <script src="/plugins/sui/sm.min.js"></script>
+    <script src="/controllers/my/purse/statistic.js"></script>
+<html>

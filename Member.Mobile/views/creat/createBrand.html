@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+</head>
+
+<body class="bg">
+
+    <section id='app' class='creat_shop_A has_head' >
+
+        <section class="head">
+            <a class="back" href="creatShop.html"></a>
+            <p>品牌绑定</p>
+        </section>
+
+        <form>
+            <section class="form_brand" v-on:click="jumpToList()">
+                <p class="label info">
+                    <label>绑定品牌</label>
+                    <span class="sel_text nosel" id="filter_shop"></span>
+                </p>
+            </section>
+            <section class="form_group" v-show="isbrand">
+                <p class="label">
+                    <img class="brandlogo" :src="brand.logo">
+                    <div class="blic">
+                        <p class="brandname" v-text="brand.brand_name"></p>
+                        <p class="introduction" v-text="brand.introduction"></p>
+                        <p class="phone">{{brand.phone==null?'':'电话 : '}}{{brand.phone}}</p>
+                    </div>
+                </p>
+            </section>
+            <section>
+                <p class="tip">绑定品牌可以增加品牌的曝光度</p>
+            </section>
+            <a href="addIdentityAuth.html" class="btn_submit">{{btn_next}}</a>
+        </form>
+
+    </section>
+
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/creatBrand.js"></script>
+<html>

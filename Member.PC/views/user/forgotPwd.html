@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>银个购-找回密码</title>
+    
+    <link rel="icon" href="/assets/images/icon/logo.png">
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+
+    <div class="forgot_pwd con m_con">
+
+        <div class="top">
+            <img src="/assets/images/user/logo.png" alt="" class="logo">
+            <p>找回密码<a href="login.html">返回登录页面</a></p>
+        </div>
+
+        <div class="fp_group">
+            <div class="group active">
+                <p class="t">通过手机号找回密码</p>
+                <div class="form_group">
+                    <p class="text">手机号</p>
+                    <p class="inp fn-left">
+                        <input type="text" id="phone" placeholder="请输入手机号">
+                    </p>
+                </div>
+                <div class="form_group yzm">
+                    <p class="text">验证码</p>
+                    <p class="inp fn-left">
+                        <input type="text" placeholder="请输入验证码" id="Txtidcode"/>
+                        <span class="codeImg" id="codeImg"></span>
+                    </p>
+                </div>
+                <div class="form_group submit">
+                    <p class="prompt prompt1">&nbsp;</p>
+                    <a class="btn">下一步</a>
+                </div>
+            </div>
+            <div class="group">
+                <p class="t" id="ph">您已绑定手机号 <span></span></p>
+                <div class="form_group yzm yzm2">
+                    <p class="text">短信验证码</p>
+                    <p class="inp fn-left">
+                        <input type="text" id="yzm" placeholder="请输入验证码">
+                        <a id="getYzm">获取验证码</a>
+                    </p>
+                </div>
+                <div class="form_group">
+                    <p class="text">新密码</p>
+                    <p class="inp fn-left">
+                        <input type="password" id="pwd" placeholder="请输入新密码">
+                    </p>
+                </div>
+                <div class="form_group">
+                    <p class="text">确认密码</p>
+                    <p class="inp fn-left">
+                        <input type="password" id="rpwd" placeholder="确认密码">
+                    </p>
+                </div>
+                <div class="form_group submit">
+                    <p class="prompt prompt2">&nbsp;</p>
+                    <a class="btn">下一步</a>
+                </div>
+            </div>
+            <div class="group">
+                <p class="t s">密码修改成功！请重新登录</p>
+                <div class="form_group success submit">
+                    <a href="login.html" class="btn ml0">登录</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/user/forgotPwd.js"></script>
+<html>

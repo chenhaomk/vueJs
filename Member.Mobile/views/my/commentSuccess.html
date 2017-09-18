@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/swiper/swiper.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <section id='app' class='comment_success has_head'>
+
+        <section class="head">
+            <a class="back"></a>
+            <p>评价成功</p>
+            <a href="" class="com">完成</a>
+        </section>
+        
+        <section class="con">
+            <img src="/assets/images/icon/ic_success_xxh.png">
+            <p>评价成功！下载APP并分享可得优惠券哦~</p>
+            <a>去分享</a>
+        </section>
+
+        <section class="like">
+            <h3>猜你喜欢</h3>
+            <section class="swiper-shop">
+                <section class="swiper-wrapper">
+                    <section class="swiper-slide shop_list" v-for="a of shop">
+                        <a href="#">
+                            <img src="/assets/images/index/demo3.jpg">
+                            <span>{{a.distance}}km</span>
+                            <p class="text-sl">{{a.title}}</p>
+                        </a>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/commentSuccess.js"></script>
+<html>

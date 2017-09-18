@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/swiper/swiper.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section class="height"></section>
+    <section id='app' class='pur_history has_head'>
+
+        <section class="head">
+            <a href="/index.html?my=show" class="back"></a>
+            <p>消费记录</p>
+        </section>
+        
+        <section class="ph_list" :class="isNo">
+            <ul>
+                <li v-for='(a,index) of list' class="fn-clear">
+                    <img :src="a.inner_imgs">
+                    <section class="text">
+                        <p class="title">{{a.business_name}}</p>
+                        <p class="time">{{a.pay_date}}</p>
+                        <p class="price">
+                            ￥<span>{{a.pay_total}}</span>
+                            <a :class="{ypj:a.statusT=='已评价'}" @click="comment(a.statusT,a.business_id,a.orders_id,index)">{{a.statusT}}</a>
+                        </p>
+                    </section>
+                </li>
+            </ul>
+            <section v-show="scrollIsShow" class="infinite-scroll-preloader">
+               <section class="preloader"></section>
+            </section>
+        </section>
+
+        <section class="sub_page comment" :class="comIsShow">
+            <section class="head">
+                <a @click="comIsShow=''" class="back"></a>
+                <p>评价</p>
+            </section>
+            <section class="con">
+                <section class="score_star">
+                    <a v-for='(a,index) of star' @click="comm(index)" :class='[a]'></a>
+                </section>
+                <p class="inp">
+                    <label>{{syComText}}</label>
+                    <textarea v-model="comText" placeholder="随便说点啥吧~"></textarea>
+                </p>
+            </section>
+
+            <a @click="subComment" class="submit">发布</a>
+        </section>
+
+        <section class='sub_page2 comment_success' :class="comIsSuc">
+
+            <section class="head">
+                <a class="back" @click="comIsSuc=''"></a>
+                <p>评价成功</p>
+                <a @click="comIsSuc=comIsShow=''" class="com">完成</a>
+            </section>
+            
+            <section class="con">
+                <img src="/assets/images/icon/ic_success_xxh.png">
+                <p>评价成功！下载APP并分享可得优惠券哦~</p>
+                <a>去分享</a>
+            </section>
+
+            <section class="like">
+                <h3>猜你喜欢</h3>
+                <section class="swiper-shop">
+                    <section class="swiper-wrapper">
+                        <section class="swiper-slide shop_list" v-for="a of shop">
+                            <a href="#">
+                                <img :src="a.inner_imgs">
+                                <p class="text-sl">{{a.business_name}}</p>
+                            </a>
+                        </section>
+                    </section>
+                </section>
+            </section>
+
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/purHistory.js"></script>
+<html>

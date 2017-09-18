@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/drainage/drainage.css">
+</head>
+
+<body id="body">
+    <div id="app" class="main">
+        <div class="header">
+            <div class="banner">
+                <div class="banner_logo">
+                    <div class="inner_img"><img v-bind:src="img" alt="title" /></div>
+                    <div class="title" v-text="b_n"></div>
+                    <!-- <div class="title_img"><img v-bind:src="shopcoupen.title_log" alt="title" /></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content_lau">
+                <img src="../../assets/images/darinage/bg_lau@2x.png" alt="" />
+            </div>
+            <div class="pay_fault">
+                <p>感觉错过了1个亿~T^T~</p>
+                <p>抱歉！优惠券已领取完毕</p>
+            </div>
+        </div>
+
+        <div class="footersucc">
+            <p class="faluttext">您已成为{{b_n}}的会员</p>
+            <div class="footer_bg">
+                <img src="../../assets/images/darinage/btn_down@2x.png" alt="" v-on:click="dowm">
+            </div>
+        </div>
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/drainage/drainage.js "></script>
+
+</html>

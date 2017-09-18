@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='member updatephone setcardid has_head'>
+        
+        <section class="head">
+            <a class="back"></a>
+            <p>实名认证</p>
+        </section>
+
+        <section class="form">
+            <form>
+                <section class="form_group">
+                    <p>
+                        <input id='name' name="name" placeholder="请输入姓名">
+                    </p>
+                </section>
+                <section class="form_group nobor">
+                    <p>
+                        <input id='cardId' type="password" name="cardId" placeholder="请输入身份证号码">
+                    </p>
+                </section>
+                <section class="card card1">
+                    <uploader :get-file-han="getData" :is-one='1'></uploader>
+                </section>
+                <section class="card card2">
+                    <uploader :get-file-han="getData"></uploader>
+                </section>
+                <input type="submit" class="submit" id='submit' name="submit" value="提交">
+            </form>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/user/setcardid.js"></script>
+<html>

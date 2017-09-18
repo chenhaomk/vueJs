@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <section id='app' class='cs_type has_head'>
+
+        <section class="head">
+            <a class="back" href="/index.html?my=show"></a>
+            <p>申请成为商家发展人</p>
+        </section>
+        
+        <form>
+            <p>优惠券选择设置</p>
+            <section class="form_group">
+                <p class="radio">
+                    <input type="radio" checked name="radio" @click="radio(0)">
+                    <label>系统自动推荐最优优惠券</label>
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="radio">
+                    <input type="radio" name="radio" @click="radio(1)">
+                    <label>每次手动选择最优优惠券</label>
+                </p>
+            </section>
+            <a @click="sso=true" class="btn_submit">提交申请</a>
+        </form>
+
+        <section class="fz_pop" v-show="sso">
+            <section class="contt">
+                <p class="t">申请成为商家发展人协议说明</p>
+                <p>银个购商家发展人规则<br>
+                1. 申请为商家发展人成功之后，银个购系统会生成相应二维码和分享链接，可进行分享或扫描此二维码，若有商家通过此分享链接或二维码入驻成为银个购平台商家。则商家发展人会获得相应的奖励，具体奖励如下：<br>
+                ①单次佣金80元； <br>②按5%比例获取佣金
+                5%由银个购平台佣金中抽取。比如，你推荐A商家入驻平台，A商家在平台累计营业额1万。银个购平台佣金500。500的5%（25元）即你所得分润<br>
+                2.您所推荐入驻银个购平台的商家必须是从未入住过银个购平台的新商家<br>
+                3.推荐奖励会即时发放到您的银个购账户，提现规则：<br>
+                ①单笔奖励m（m=80元）、当发展商家销售额达到n（n=80倍），发展人可提现这80元（系统会扣除个人所得税6%），每个月15号到账。财务手工转账到发展人绑定的银行卡<br>
+                ②5%分润，每天统计一次。T+45到账。系统实现，用户自己提现到银行卡<br>
+                ③当用户发展的商家达到提现规则时，会对用户进行提醒。<br>
+                4.如有其它疑问请咨询银个购客服。</p>
+            </section>
+            <a class="checkbox" @click="ckClass==''?ckClass='none':ckClass=''" :class="ckClass">我已阅读并同意该协议</a>
+            <section class="btns">
+                <a @click="sso=false">取消</a>
+                <a :class="ckClass" @click="apply">提交申请</a>
+            </section>
+        </section>
+        <section class="shadow" v-show="sso"></section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/user/set/disSet.js"></script>
+<html>

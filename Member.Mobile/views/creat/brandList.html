@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+</head>
+
+<body class="bg">
+    <section class="height"></section>
+    <section id='app' class='creat_brand has_head'>
+
+        <section class="head">
+            <input class="search" type="text" placeholder="请输入品牌名" v-model="searchName">
+            <img src="/assets/images/icon/ic_x_xxh.png" class="clear" v-on:click="clearSearch">
+            <a class="backfont" href="createBrand.html">取消</a>
+        </section>
+
+        <form>
+            <section class="form_group" v-for="brand in brandList" v-on:click="selectBrand(brand.brand_id,brand.brand_name)">
+                <p class="label">
+                    <img class="brandlogo" v-bind:src="brand.logo">
+                    <div class="blic">
+                        <p class="brandname" v-text="brand.brand_name"></p>
+                        <p class="introduction" v-text="brand.introduction"></p>
+                        <p class="phone">{{brand.phone==null?'':'电话 : '}}{{brand.phone}}</p>
+                    </div>
+                </p>
+            </section>
+        </form>
+        <section class="shadow topCom" :style="{display:isSelected}">
+            <div class="comback">
+                <p class="comfim">确定绑定 {{selectName}} ?</p>
+                <div class="dotline"></div>
+                <section class="agreement">
+                    <a class="checkbox" @click="checkbox" :class='ck'>我已阅读并同意</a><a href="#">用户协议</a>
+                </section>
+                <section class="bottomline">
+                    <div class="cacenl" v-on:click="cacenlBrand">取消</div>
+                    <div class="midline"></div>
+                    <div class="sure" :class="ck" v-on:click="bindBrand">确认绑定</div>
+                </section>
+            </div>
+        </section>
+    </section>
+
+
+
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/brandList.js"></script>
+<html>

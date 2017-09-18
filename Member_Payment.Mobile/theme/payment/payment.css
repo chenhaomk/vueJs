@@ -1,0 +1,596 @@
+::-webkit-input-placeholder {
+    color: #b3b3b3;
+    font-size: 0.30rem;
+}
+
+input[type="tel"],
+input[type="text"] {
+    border: 1px solid #1E0B55;
+    border-radius: 0px;
+    padding-left: 0.2rem;
+}
+
+body {
+    background-color: #f8fafc;
+    z-index: 1;
+}
+
+.main {
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    z-index: 1;
+}
+
+header>div {
+    font-size: 0.3rem;
+    color: #000000;
+    float: left;
+    margin: 0.3rem 0 0 0.2rem;
+}
+
+.main .payInput {
+    position: relative;
+}
+
+.main .payInput p {
+    font-size: 0.32rem;
+    color: #000000;
+    position: absolute;
+    top: 1.25rem;
+    left: 0.4rem;
+}
+
+.main .payInput input {
+    width: 5.9rem;
+    font-size: 0.3rem;
+    color: #000000;
+    border: 1px solid #ff6c00;
+    line-height: 1.2rem;
+    border-radius: 3px;
+    padding: 0 0.6rem;
+    margin-bottom: 0.2rem;
+}
+
+.main .payKind {
+    height: 20%;
+    width: 7.1rem;
+    margin-left: 0.2rem;
+    z-index: 10;
+}
+
+.main .payKind .payDiv {
+    background-color: #FFFFFF;
+    height: 1rem;
+}
+
+.main .payKind .payDiv img {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.main .payKind .payDiv .active {
+    background-color: #FFFFFF;
+    height: 1.5rem;
+    background: url("../../assets/images/payment/ic_seleted@2x.png") no-repeat;
+    background-size: 0.32rem 0.32rem;
+    background-position: 6.5rem 0.4rem;
+}
+
+.main .payKind .payDiv:nth-child(1) {
+    margin-bottom: 0.02rem;
+}
+
+.main .payKind .payKindBorder {
+    border: 1px solid #000000;
+}
+
+.main .payKind div img {
+    float: left;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.25rem 0 0 0.5rem;
+}
+
+.main .payKind div p {
+    float: left;
+    font-size: 0.3rem;
+    color: #000000;
+    margin: 0.3rem 0 0 0.2rem;
+}
+
+.main .loginInGogo p {
+    float: left;
+    color: #A9A9A9;
+    font-size: 0.28rem;
+    margin: 0.6rem 0 0 0.2rem;
+}
+
+.main .loginInGogo a {
+    float: right;
+    color: #FF6F3D;
+    font-size: 0.28rem;
+    margin: 0.6rem 0.2rem 0 0;
+    text-decoration: underline;
+}
+
+footer .keywords {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+footer .keywords table {
+    width: 100%;
+    border: 1px solid #A2A2A2;
+    background-color: #fffefa;
+}
+
+footer .keywords table tr {
+    border: 1px solid #A2A2A2;
+}
+
+footer .keywords table tr img {
+    width: 0.49rem;
+    height: 0.36rem;
+}
+
+footer .keywords table tr td {
+    width: 1.875rem;
+    height: 1.1rem;
+    border: 1px solid #A2A2A2;
+    font-size: 0.44rem;
+    font-weight: bolder;
+    color: #000000;
+}
+
+footer .keywords table tr td:nth-child(1) {
+    border-left: 1px solid #ffffff;
+}
+
+footer .keywords table .funcbtn,
+footer .keywords table .funcbtnSbumit {
+    border-right: 1px solid #ffffff;
+}
+
+footer .keywords table .funcbtnSbumit {
+    font-weight: normal;
+    color: #FFFFFF;
+    font-size: 0.3rem;
+    background-color: #FF6F3D;
+}
+
+.openBg {
+    width: 7.5rem;
+    height: 13.34rem;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    display: none;
+}
+
+.openBg .openMark {
+    width: 5.4rem;
+    height: 5.08rem;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 3rem;
+    left: 1.05rem;
+    border-radius: 0.15rem;
+}
+
+.openBg .openMark img {
+    width: 3.21rem;
+    height: 1.86rem;
+    position: absolute;
+    top: -0.84rem;
+    left: 1.095rem;
+}
+
+.openBg .openMark .openContent {
+    font-size: 0.36rem;
+    width: 4.4rem;
+    margin: 1.5rem 0 0 0.5rem;
+    text-align: center;
+    color: #000000;
+}
+
+.openBg .openMark .openContent span {
+    color: #FF6F3D;
+}
+
+.openBg .openMark input {
+    width: 4.4rem;
+    height: 0.9rem;
+    color: #FFFFFF;
+    background-color: #FF6F3D;
+    border-radius: 0.15rem;
+    margin-left: 0.5rem;
+    font-size: 0.34rem;
+}
+
+.openBg .openMark .canle {
+    color: #FF6F3D;
+    font-size: 0.34rem;
+    margin: 0.4rem 0 0 2.3rem;
+}
+
+.paymerchantMain {
+    background-color: #FAFAFA;
+    z-index: 1;
+}
+
+.paymerchantMain #app {
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    z-index: 1;
+}
+
+.paymerchantMain .payInput {
+    position: relative;
+    top: 1rem;
+    left: 0.2rem;
+    height: 1.1rem;
+    background-color: #FFFFFF;
+    width: 7.1rem;
+}
+
+.paymerchantMain .payInput p {
+    float: left;
+    color: #1C1C1C;
+    font-size: 0.32rem;
+    position: absolute;
+    top: 0.3rem;
+    left: 0.2rem;
+}
+
+.paymerchantMain .payInput .trueMoney {
+    float: left;
+    color: #1C1C1C;
+    font-size: 0.5rem;
+    position: absolute;
+    top: 0.25rem;
+    left: 0.52rem;
+    border: 0px;
+}
+
+.paymerchantMain .payInput .changeMoney {
+    width: 1.2rem;
+    color: #FF6F3D;
+    font-size: 0.28rem;
+    position: absolute;
+    top: 0.34rem;
+    left: 5.6rem;
+}
+
+.paymerchantMain .discount {
+    height: 40%;
+    width: 7.1rem;
+    margin: 1.3rem 0 0 0.2rem;
+    z-index: 10;
+}
+
+.paymerchantMain .discount .discountKind {
+    background-color: #FFFFFF;
+    height: 1rem;
+    margin-bottom: 0.02rem;
+    position: relative;
+}
+
+.paymerchantMain .discount .discountKind .select {
+    width: 0.32rem;
+    height: 0.32rem;
+    float: left;
+    background: url("../../assets/images/payment/ic_selet@2x.png") no-repeat;
+    background-size: 0.32rem 0.32rem;
+    margin: 0.4rem 0 0 0.2rem;
+}
+
+.paymerchantMain .discount .active .select {
+    width: 0.32rem;
+    height: 0.32rem;
+    float: left;
+    background: url("../../assets/images/payment/ic_seleted@2x.png") no-repeat;
+    background-size: 0.32rem 0.32rem;
+    color: #FF6F3D;
+    margin: 0.4rem 0 0 0.2rem;
+}
+
+.paymerchantMain .discount .discountKind p {
+    float: left;
+    color: #3C3C3C;
+    font-size: 0.3rem;
+    margin: 0.34rem 0 0 0.2rem;
+}
+
+.paymerchantMain .discount .discountKind img {
+    width: 0.13rem;
+    height: 0.22rem;
+    position: absolute;
+    top: 0.42rem;
+    left: 6.7rem;
+}
+
+.paymerchantMain .discount .discountKind .circle {
+    width: 0.12rem;
+    height: 0.12rem;
+    background-color: #FF6F3D;
+    border-radius: 50px;
+    position: absolute;
+    top: 0.49rem;
+    left: 1.6rem;
+}
+
+.paymerchantMain .discount .discountKind .discountMoneyManual {
+    float: left;
+    color: #FF6F3D;
+    font-size: 0.28rem;
+    position: absolute;
+    top: 0.34rem;
+    right: 0.6rem;
+}
+
+.paymerchantMain .discount .discountKind .discountMoney {
+    float: left;
+    color: #1C1C1C;
+    font-size: 0.28rem;
+    position: absolute;
+    top: 0.34rem;
+    right: 0.4rem;
+    /* margin: 0.34rem 0 0 4.2rem; */
+}
+
+.paymerchantMain .discount .active .discountMoney {
+    float: left;
+    color: #FF6F3D;
+}
+
+.paymerchantMain .sjtitle {
+    font-size: 0.28rem;
+    color: #1C1C1C;
+    float: left;
+    margin: 0.3rem 0 0 0.4rem;
+}
+
+.paymerchantMain .sjCount {
+    float: right;
+    font-size: 0.4rem;
+    color: #FF6F3D;
+    margin: 0.28rem 0.58rem 0 0;
+}
+
+.paymerchantMain .payKind {
+    height: 30%;
+    width: 7.1rem;
+    margin-left: 0.2rem;
+    z-index: 10;
+    margin-top: 1rem;
+}
+
+.paymerchantMain .payKind .payDiv {
+    background-color: #FFFFFF;
+    height: 1rem;
+    position: relative;
+}
+
+.paymerchantMain .payKind .payDiv .payKindImg {
+    float: left;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0.25rem 0 0 0.23rem;
+}
+
+.paymerchantMain .payKind .payDiv .active {
+    background-color: #FFFFFF;
+    height: 1.5rem;
+    background: url("../../assets/images/payment/ic_seleted@2x.png") no-repeat;
+    background-size: 0.32rem 0.32rem;
+    background-position: 6.5rem 0.4rem;
+}
+
+.paymerchantMain .payKind .payDiv:nth-child(1) {
+    margin-bottom: 0.02rem;
+}
+
+.paymerchantMain .payKind .payKindBorder {
+    border: 1px solid #000000;
+}
+
+.paymerchantMain .payKind div p {
+    float: left;
+    font-size: 0.3rem;
+    color: #000000;
+    margin: 0.3rem 0 0 0.2rem;
+}
+
+.paymerchantMain .payKind .payDiv .right {
+    height: 0.5rem;
+    position: absolute;
+    top: 0.3rem;
+    left: 5.6rem;
+}
+
+.paymerchantMain .payKind .payDiv .right .goto {
+    color: #A2A2A2;
+    font-size: 0.28rem;
+    float: left;
+}
+
+.paymerchantMain .payKind .payDiv .right img {
+    width: 0.13rem;
+    height: 0.22rem;
+    float: left;
+    transform: translate(0.16rem, 0.1rem);
+}
+
+.paymerchantMain .loginLog {
+    height: 0.46rem;
+    margin: 0.4rem 0 0 0.2rem;
+}
+
+.paymerchantMain .loginLog img {
+    float: left;
+    width: 0.46rem;
+    height: 0.46rem;
+    border: 1px solid #1C1C1C;
+    border-radius: 0.5rem;
+    /* -webkit-mask-box-image: url("../../assets/images/payment/ic_userpic@2x.png"); */
+}
+
+.paymerchantMain .loginLog p {
+    float: left;
+    color: #1C1C1C;
+    font-size: 0.28rem;
+    margin: 0.08rem 0 0 0.2rem;
+}
+
+.availMain .availcouponsHeader {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    color: #1C1C1C;
+    float: none;
+    margin: 0.2rem 0 0 0.26rem;
+}
+
+.availMain .couponList {
+    margin: 0.3rem 0 0 0.24rem;
+}
+
+.availMain .couponList .coupons {
+    width: 7.02rem;
+    height: 2.12rem;
+}
+
+.availMain .couponList .coupons.kind_1 {
+    background: url("../../assets/images/payment/ic_bg_znormall@2x.png");
+    background-repeat: no-repeat;
+    background-size: 7.02rem 2.12rem;
+}
+
+.availMain .couponList .coupons.kind_2 {
+    background: url("../../assets/images/payment/ic_bg_dknormall@2x.png");
+    background-repeat: no-repeat;
+    background-size: 7.02rem 2.12rem;
+}
+
+.availMain .couponList .coupons img {
+    width: 1.02rem;
+    height: 1.02rem;
+    border: 1px solid #1C1C1C;
+    border-radius: 0.5rem;
+    margin: 0.22rem 0 0 0.26rem;
+}
+
+.availMain .couponList .coupons .couponKind {
+    width: 4rem;
+    font-size: 0.26rem;
+    color: #1C1C1C;
+    margin: -1.35rem 0 0 1.5rem;
+    text-align: left;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.availMain .couponList .coupons .couponKindLabel {
+    font-size: 0.56rem;
+    color: #FF6F3D;
+    margin: 0rem 0 0 1.5rem;
+}
+
+.availMain .couponList .coupons p {
+    font-size: 0.4rem;
+    color: #FF6F3D;
+    margin: -0.6rem 0 0 2.35rem;
+}
+
+.availMain .couponList .coupons .dkCoupon {
+    font-size: 0.4rem;
+    color: #FF6F3D;
+    margin: -0.5rem 0 0 2.9rem;
+    text-decoration: line-through;
+    height: 0.52rem;
+}
+
+.availMain .couponList .coupons .throwLine {
+    width: 5.2rem;
+    height: 0.01rem;
+    border-bottom: 1px dashed #9b999b;
+    margin: 0.2rem 0 0 0.26rem;
+}
+
+.availMain .couponList .coupons .couponUse {
+    font-size: 0.32rem;
+    color: #FFFFFF;
+    margin: -1.3rem 0 0 6rem;
+}
+
+.availMain .couponList .coupons .couponHow {
+    font-size: 0.22rem;
+    color: #888888;
+    margin: 0.1rem 0 0 0.25rem;
+    height: 0.32rem;
+}
+
+.availMain .linkMore {
+    font-size: 0.26rem;
+    color: #888888;
+    margin: 0.4rem 0 0 2.5rem;
+    width: 3rem;
+    height: 0.3rem;
+}
+
+.availMain .linkMore img {
+    width: 0.24rem;
+    height: 0.15rem;
+}
+
+.availMain .linkMore span {
+    color: #FF6F3D;
+}
+
+.availMain footer {
+    height: 0.98rem;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #FFFFFF;
+}
+
+.availMain .underFunc {
+    height: 0.98rem;
+    background: url("../../assets/images/payment/ic_select@2x.png") no-repeat;
+    background-size: 0.26rem 0.26rem;
+    margin: 0.3rem 0 0 0.26rem;
+}
+
+.availMain .underFunc.active {
+    height: 0.98rem;
+    background: url("../../assets/images/payment/ic_selected@2x.png") no-repeat;
+    background-size: 0.26rem 0.26rem;
+    margin: 0.3rem 0 0 0.26rem;
+}
+
+.availMain .underFunc div {
+    font-size: 0.26rem;
+    float: left;
+    transform: translate(0, -0.06rem);
+    margin-left: 0.35rem;
+    color: #1C1C1C;
+}
+
+.availMain .underFunc div:nth-child(2) {
+    font-size: 0.26rem;
+    float: left;
+    transform: translate(0, -0.06rem);
+    margin-left: 0;
+    color: #888888;
+}

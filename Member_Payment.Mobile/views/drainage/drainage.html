@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/drainage/drainage.css">
+</head>
+
+<body>
+    <div id="app" class="main">
+        <div class="backImg"></div>
+        <div class="header">
+            <div class="banner">
+                <div class="banner_logo">
+                    <div class="inner_img"><img v-bind:src="img" alt="title" /></div>
+                    <div class="title" v-text="b_n"></div>
+                    <!-- <div class="title_img"><img v-bind:src="shopcoupen.title_log" alt="title" /></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="shopcoupen_notes">
+                <div class="pay_success">
+                    <div class="content_notes">
+                        <span>￥</span>
+                        <span v-text="shopcoupen.payMoney"></span>
+                    </div>
+                    <span class="pay_status" v-cloak>
+                        {{shopcoupen.coupon_kind_label}}
+                    </span>
+                </div>
+                <div class="img_money"></div>
+
+                <div class="img_quan">
+                    <div class="shopcoupn_use_how" v-text="how"></div>
+                    <div class="shopcoupn_use_all" v-text="all"></div>
+                    <div class="shopcoupn_use_time" v-text="time"></div>
+                </div>
+                <div class="shop_area" v-text="a_n"></div>
+
+            </div>
+            <div class="coupen_verification">
+                <div class="coupen_phone"><input type="tel" placeholder="请输入手机号领劵" v-model="phone" /></div>
+                <div class="coupen_verification_code">
+                    <input type="text" placeholder="请输入验证码" v-model="verificationCode" />
+                    <input type="button" value="获取验证码" v-on:click="getVerification" />
+                    <!--根据切图效果改为div-->
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer_btn">
+                <img src="../../assets/images/darinage/btn_lq@2x.png" alt="lingqu" v-on:click="verificationSubmit()">
+            </div>
+            <p class="activitydescription">活动说明</p>
+        </div>
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/drainage/drainage.js "></script>
+
+</html>

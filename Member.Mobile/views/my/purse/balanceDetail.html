@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='balance_detail has_head'>
+
+        <section class="head">
+            <a class="back"></a>
+            <p>明细详情</p>
+        </section>
+        
+        <section class="con" v-if="false">
+            <section class="top">
+                <p class="tag">交易成功</p>
+                <img src="/assets/images/index/demo3.jpg" class="logo" alt="">
+                <p class="title">一个个公司名</p>
+                <p class="price">+100.00</p>
+            </section>
+            <section class="info">
+                <section><label>交易说明</label>推荐商户分润</section>
+                <section><label>入驻商户</label>火锅店就是我</section>
+                <section><label>创建时间</label>2017.01.01 12:11</section>
+            </section>
+        </section>
+
+        <section class="con" v-else-if="false">
+            <section class="top">
+                <p class="tag">交易成功</p>
+                <p class="title">一个个公司名2</p>
+                <p class="price">-100.00</p>
+            </section>
+            <section class="info">
+                <section><label>商品说明</label>火锅店</section>
+                <section><label>消费商家</label>火锅店就是我</section>
+                <section><label>创建时间</label>2017.01.01 12:11</section>
+            </section>
+        </section>
+
+        <section class="con" v-else>
+            <section class="top">
+                <p class="tag">交易成功</p>
+                <p class="title">中国农业银行</p>
+                <p class="price">-100.00</p>
+            </section>
+            <section class="info">
+                <section>
+                    <label>提现说明</label>
+                    <section class="status">
+                        银购购余额 - 提现到银行卡
+                        <p>付款成功 <span>2017.01.12 12:11</span></p>
+                        <p>银行处理中 <span>2017.01.12 12:11</span></p>
+                        <p>到账成功 <span>2017.01.12 12:11</span></p>
+                    </section>
+                </section>
+                <section><label>转入账户</label>火锅店就是我</section>
+                <section><label>到账时间</label>一天内到账</section>
+                <section><label>创建时间</label>2017.01.01 12:11</section>
+            </section>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/purse/balanceDetail.js"></script>
+<html>

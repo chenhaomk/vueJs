@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>银个购-商家入驻</title>
+    
+    <link rel="icon" href="/assets/images/icon/logo.png">
+    <link href="/assets/css/enter.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <div class="head">
+        <div class="con">
+            <a href="/" class="fn-left"><img src="/assets/images/enter/logo2.png" alt=""></a> 
+            <p class="fn-left hct">商家入驻</p>
+        </div> 
+    </div>
+
+    <div class="status in_audit">
+        <p class="icon"></p>
+        <p class="text">审核中...</p>
+        <p class="cont">很快就好啦，请耐心等待~</p>
+    </div>
+
+    <div class="status success">
+        <p class="icon"></p>
+        <p class="text">审核成功！</p>
+        <p class="cont">恭喜您成为商家，请登录以下网址管理您的门店</p>
+        <p class="url"><a href="https://ingo.yingegou.com/admin/login">https://ingo.yingegou.com/admin/login</a></p>
+        <a href="apply.html?isbind=1" class="btn">绑定品牌</a>
+    </div>
+
+    <div class="status error">
+        <p class="icon"></p>
+        <p class="text">审核失败</p>
+        <p class="cont"></p>
+        <a href="apply.html?isAgain=1" class="btn">重新认证</a>
+    </div>
+
+    <div class="shadow"></div>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/enter/status.js"></script>
+<html>

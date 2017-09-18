@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <section id='app' class='discount shop has_head'>
+
+        <section class="head" v-clock>
+            <a :href="returnUrl" class="back"></a>
+            <p>{{shop.name}}</p>
+        </section>
+
+        <section class="header" v-clock>
+            <img :src="shop.inner_imgs">
+        </section>
+
+        <section class="con shop_info" v-clock>
+            <p class="shop_name text-sl">{{shop.name}}</p>
+            <a class="phone" :href="'tel:'+shop.phone"></a>
+            <star :score='shop.star*10'></star>
+            <a class="address"><span class="text-sl">{{shop.address}}</span></a>
+        </section>
+        
+        <section class="con discount" v-clock>
+            <h2>相关优惠（{{coupons.length}}）</h2>
+            <dis v-for='(a,index) of coupons' :return-url="'/views/shop/detail.html'" :a='a' v-show="index<disIsShow"></dis>
+            <a class="more" v-show="coupons.length > 2 && moreIsShow" @click='viewMore'>查看更多<img src="/assets/images/shop/ic_bg_more_xxh.png"></a>
+        </section>
+
+        <section class="con comment_shop" v-clock v-show="comments.length != 0">
+            <h2>评价（{{shop.comment_count}}）<a @click="moreComment" class="more">更多</a></h2>
+            <comment v-for='a of comments' :a='a'></comment>
+        </section>
+
+        <section class="shop_content" v-clock>
+            <h3>商户详情</h3>
+            <section class="content">
+                <img v-for="a of shop.detail_imgs" :src="a" alt="">
+            </section>
+        </section>
+
+        <section class="bot_buy gobuy" v-clock>
+            <a href="">去买单</a>
+        </section>
+
+        <section class="sub_page" :class="comIsShow">
+            <section class="head" v-clock>
+                <a class="back" @click="comIsShow=''"></a>
+                <p>评价（{{shop.comment_count}}）</p>
+            </section>
+
+            <comment v-for='a of comment_list' :a='a'></comment>
+        </section>
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/shop/detail.js"></script>
+<html>

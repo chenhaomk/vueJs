@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/swiper/swiper.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section class="height"></section>
+    <section id='app' class='order_dis my_dis'>
+
+        <section class="head">
+            <a href="myDis.html" class="back"></a>
+            <p>已过期优惠券</p>
+        </section>
+        
+        <section class="dis_list expired" :class="isNo">
+            <dis v-for='a of discount' :is-gq="'true'" :a='a'></dis>
+            <section v-show="scrollIsShow" class="infinite-scroll-preloader">
+               <section class="preloader"></section>
+            </section>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/myExpiredDis.js"></script>
+<html>

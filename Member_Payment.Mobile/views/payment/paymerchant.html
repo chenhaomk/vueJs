@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/payment/payment.css">
+</head>
+
+<body class="paymerchantMain">
+    <div id="app">
+        <header>
+            <div v-text="b_n"></div>
+        </header>
+        <section>
+            <div class="payInput">
+                <p>￥</p>
+                <div><input type="number" min="0" v-model="trueMoney" class="trueMoney" readonly v-on:blur="moneyBlur()"></div>
+                <div class="changeMoney" v-on:click="changeMoney()">修改金额</div>
+            </div>
+            <div class="discount" v-cloak :style="{height:merchantllogInfo.length==0?'1px':'40%'}">
+                <div class="discountKind " v-bind:id="'kind_d_' + dis.id" v-bind:class="isActive==dis.id?'active':''" v-on:click="selectedDiscountType(dis.id,dis.calculate_discount,dis.is_from_business)"
+                    v-for="(dis,index) in merchantllogInfo">
+                    <div class="select"></div>
+                    <p>{{dis.name}}</p>
+                    <div class="discountMoney ">-￥{{dis.calculate_discount}}</div>
+                </div>
+            </div>
+
+            <p class="sjtitle">实际支付:</p>
+            <p class="sjCount" v-cloak>￥{{actual}}</p>
+
+            <div class="payKind ">
+                <!-- <div class="payDiv ">
+                    <img class="payKindImg " src="../../assets/images/payment/ic_wechat@2x.png " alt=" ">
+                    <p>微信支付</p>
+                    <div class="right ">
+                        <div class="goto ">去支付</div>
+                        <img src="../../assets/images/payment/ic_arrow@2x.png " alt=" ">
+                    </div>
+                </div> -->
+                <div class="payDiv " v-on:click="payment">
+                    <img class="payKindImg " src="../../assets/images/payment/ic_zhi@2x.png " alt=" ">
+                    <p>支付宝支付</p>
+                    <div class="right ">
+                        <div class="goto ">去支付</div>
+                        <img src="../../assets/images/payment/ic_arrow@2x.png " alt=" ">
+                    </div>
+                </div>
+                <!-- <div class="payDiv ">
+                    <img class="payKindImg " src="../../assets/images/payment/ic_ingogo@2x.png " alt=" ">
+                    <p>inGogo支付</p>
+                    <div class="right ">
+                        <div class="goto ">去支付</div>
+                        <img src="../../assets/images/payment/ic_arrow@2x.png " alt=" ">
+                    </div>
+                </div> -->
+            </div>
+            <div class="loginLog ">
+                <img v-bind:src="user_inner " alt=" ">
+                <p v-text="userPhone "></p>
+            </div>
+        </section>
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/payment/paymerchant.js "></script>
+
+</html>

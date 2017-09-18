@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/sui/sm.min.css" rel='stylesheet' type="text/css">
+</head>
+
+<body class="bg">
+
+    <section id='app' class='creat_shop has_head bank_info' style="overflow: hidden;">
+
+        <section class="head">
+            <a class="back" href="createBrand.html"></a>
+            <p>身份认证</p>
+        </section>
+
+        <form>
+            <section class="form_group">
+                <p class="label">
+                    <label>持卡人姓名</label>
+                    <input placeholder="点击输入" v-model="name">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>身份证号</label>
+                    <input placeholder="点击输入" v-model="card">
+                </p>
+            </section>
+             <section class="form_group">
+                <p class="label">
+                    <label>银行卡号</label>
+                    <input placeholder="点击输入" v-model="bank_card_no">
+                </p>
+            </section>
+             <section class="form_group">
+                <p class="label">
+                    <label>所属银行</label>
+                    <span class="sel_text nosel" id="filter_bank">{{bank_name}}</span>
+                </p>
+            </section>
+            <section class="positive" >
+                <p class="label">
+                    <label>身份证正面照</label>
+                </p>
+                <uploader :get-file-han="getPositive" :old-imgs="postive_img" :max-length='1'></uploader>
+
+            </section>
+            <section class="positive" style="background-image: url(/assets/images/icon/icon_card2.png) ;background-repeat: no-repeat;">
+                <p class="label">
+                    <label>身份证反面照</label>
+                </p>
+                <uploader :get-file-han="getOther" :old-imgs="other_img" :max-length='1'></uploader>
+
+            </section>
+            <a class="btn_submit" v-on:click="next">下一步</a>
+        </form>
+
+    </section>
+
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/addIdentityAuth.js"></script>
+<html>

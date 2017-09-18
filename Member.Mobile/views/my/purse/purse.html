@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='purse has_head'>
+
+        <section class="head">
+            <a class="back"></a>
+            <p>钱包</p>
+        </section>
+        
+        <section class="con" v-clock>
+            <a href="balance.html" class="group arow">账户余额<p>{{ind}}</p></a>
+            <a href="" class="group arow">统计</a>
+            <a class="group arow">银行卡</a>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/purse/purse.js"></script>
+<html>

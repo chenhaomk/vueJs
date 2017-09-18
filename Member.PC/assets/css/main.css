@@ -1,0 +1,639 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0; padding:0; -webkit-tap-highlight-color:transparent}
+body, h1, h2, h3, h4, h5, h6, hr, p,blockquote,dl, dt, dd, ul, ol, li,pre,form, fieldset, legend, button,input, textarea,th, td,img{border:medium none;margin: 0;padding: 0; outline:none;}
+body,button, input, select, textarea {font: 16px/1.5 "微软雅黑",tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif; outline:none; -webkit-font-smoothing: antialiased; color: #1c1c1c}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+em{font-style:normal;}
+ul, ol,li { list-style: none; }
+a { text-decoration: none; color: #1c1c1c}
+a:hover{ outline:none; color: #ff6f3d}
+img{ border:0px;}
+table { border-collapse: collapse; border-spacing: 0; }
+html{ height:100%}
+html,body{ color:#1c1c1c; min-height:100%; width:100%; max-width:100%; left:0; right:0; position:relative}
+.clear{ clear:both;}
+.fn-clear:after{ content:""; display:block; clear:both}
+.fn-left{ float: left; }
+.fn-right{ float: right; }
+.t-left{ text-align: left; }
+.t-center{ text-align: center; }
+.t-right{ text-align: right; }
+.hide{ display:none}
+.text-sl{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.hover-underline:hover{ text-decoration:underline; }
+
+body{ background: #f8f9fc }
+
+/****************************************************************** 首页 ******************************************************************/
+
+.index .banner{ margin-left: 230px; height: 350px; overflow: hidden; position: relative; }
+.index .banner .list{ height: 350px }
+.index .banner .list img{ width: 950px; height: 100%; float: left; }
+.index .banner .pages{ position: absolute; height: 33px; bottom: 0; width: 100%; text-align: center; z-index: 2 }
+.index .banner .pages a{ display: inline-block; width: 12px; height: 12px; cursor:pointer; border-radius: 50%; opacity: .5; filter: alpha(opacity=50); margin:0 7.5px; background: white }
+.index .banner .pages a.active{ opacity: 1; filter: alpha(opacity=100) }
+.index .business .title,.index .discount_i .title{ margin-top: 20px; height: 84px; line-height: 84px; font-size: 28px; font-weight: bold; text-indent: 55px; background: url(../images/icon/icon_hot.png) left center no-repeat }
+.index .business .title a{ font-size: 18px; color: #ff6f3d; padding-right: 20px; background: url(../images/icon/jt.png) right center no-repeat; text-indent: 0; line-height: 1; margin-top: 33px; font-weight: normal; }
+.index .business .hot{ height: 350px }
+.index .business .hot img.fn-left{ width: 780px; height: 350px; margin-right: 35px }
+.index .business .hot .info{ width: 345px; position: relative; }
+.index .business .hot .info .logo{ height: 52px; width: 60px; background: #fff0eb; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; padding-top: 28px }
+.index .business .hot .info .logo img{ width: 52px; height: 52px; margin: auto; display: block; border-radius: 50% }
+.index .business .hot .info .title_h{ margin-top: 24px; font-size: 28px; font-weight: bold; line-height: 1.2 }
+.index .business .hot .info .content{ position: absolute; top: 243px; padding-top: 20px; color: #888; font-size: 16px }
+.index .business .hot .info .content:before{ content: ""; width: 46px; height: 5px; background: #ff6f3d; position: absolute; top: 0 }
+.index .business .list{ height: 275px; position: relative; margin-top: 20px }
+.index .business .list .btn{ width: 50px; height: 50px; position: absolute; top: 50%; margin-top: -25px; left: -70px; background: url(../images/icon/icon_btnl.png); cursor: pointer; }
+.index .business .list .rbtn{ background: url(../images/icon/icon_btnr.png); left: initial; right: -70px }
+.index .business .list .list_g{ overflow: hidden; height: 100% }
+.index .business .list .list_g .list_gl{ min-width: 1200px }
+.index .business .list .list_g .group{ float: left; margin-right: 20px; width: 380px }
+.index .business .list .list_g .group img{ width: 100%; height: 205px; display: block;}
+.index .business .list .list_g .group p{ background: white; line-height: 70px; font-size: 22px; padding: 0 20px }
+.index .discount_i .title{ background-image: url(../images/icon/icon_dishot.png) }
+.index .discount_i .title .btns a{ padding: 0 30px; border-right: 1px solid #c0c0c0; font-size: 20px; text-indent: 0; font-weight: normal; float: left; margin-top: 32px; line-height: 1; cursor: pointer; }
+.index .discount_i .title .btns a.ck{ padding-left: 55px }
+.index .discount_i .title .btns a.ck:before{ content: ""; float: left; width: 14px; height: 14px; border: 1px solid #ccc; margin-left: -25px; margin-top: 3px }
+.index .discount_i .title .btns a.ck.active2:before{ border: 1px solid #ff6f3d; background: url(../images/icon/ck_g.png) center center no-repeat #ff6f3d }
+.index .discount_i .title .btns a.ck.active2{ color: #ff6f3d }
+.index .discount_i .title .btns a.last{ border: 0; padding-right: 0 }
+.index .discount_i .title .btns a.active{ color: #ff6f3d }
+
+/****************************************************************** 个人中心 ******************************************************************/
+
+.con.personal{ margin: 20px auto }
+.con.personal:after{ content: ""; display: block; clear: both; }
+.con.personal .sidebar{ float: left; height: 740px; width: 230px; background: #f1f3fb; line-height: 50px; position: relative; }
+.con.personal .sidebar .btn_set{ width: 16px; height: 16px; position: absolute; background: url(../images/icon/icon_set.png); right: 12px; top: 12px }
+.con.personal .sidebar .photo{ display: block; width: 102px; height:102px; border-radius: 50%; margin: 30px auto 0}
+.con.personal .sidebar .name{ text-align: center; line-height: 42px }
+.con.personal .sidebar .menu{ margin-top: 20px }
+.con.personal .sidebar .menu a{ display: block; }
+.con.personal .sidebar .menu a p{ margin: 0 20px; border-bottom: 1px solid #e3e6f2; text-indent: 29px; background-image: url(../images/icon/icon_sb_menu.png); background-repeat: no-repeat; }
+.con.personal .sidebar .menu a.pur p{ background-position: left 0 }
+.con.personal .sidebar .menu a.dis p{ background-position: left -50px }
+.con.personal .sidebar .menu a.ord p{ background-position: left -100px }
+.con.personal .sidebar .menu a.his p{ background-position: left -150px }
+.con.personal .sidebar .menu a.active,.con.personal .sidebar .menu a:hover{ background-color: white; color: #1c1c1c }
+.con.personal .sidebar .menu a.active p,.con.personal .sidebar .menu a:hover p{ border-color:white }
+
+.con.personal .sub{ float: left; width: 870px; padding: 10px 40px 0; min-height: 730px; background: white}
+.con.personal .sub .t_m{ height: 45px; line-height: 45px; border-bottom: 1px solid #e3e3e3 }
+.con.personal .sub .t_m a{ cursor: pointer; }
+.con.personal .sub .t_m .abtn{ float: right; width: 90px; height: 32px; border-radius: 3px; line-height: 32px }
+.con.personal .sub .t_m .abtn:hover{ color: white }
+
+.con.personal .cont{ float: left; width: 870px; padding: 0 40px; background: white; min-height: 740px }
+.con.personal .cont .tab_group .group.empty,.con.personal .empty{ background-position: center 95px; background-repeat: no-repeat; }
+.con.personal .cont .tab_group .group.empty:after,.con.personal .empty.cont:after{ content: ""; display: block; text-align: center; padding-top: 207px; color: #a2a2a2; line-height: 1 }
+.con.personal .cont .tab_group .group.empty:after{ padding-top: 250px }
+.con.personal .cont .tab_group .group.empty *,.con.personal .empty *{ display: none; }
+.con.personal .cont .tab .tab_menu{ border-bottom: 1px solid #e3e3e3; padding-top: 12px }
+.con.personal .cont .tab .tab_menu .group{ float: left; line-height: 42px; height: 42px; margin-right: 50px; font-size: 18px; border-bottom: 2px solid transparent; cursor: pointer }
+.con.personal .cont .tab .tab_menu .group.active{ border-color: #ff6f3d; color: #ff6f3d; cursor: default}
+
+/****************************************************************** 个人中心-设置 ******************************************************************/
+
+.seting.personal .tab .tab_group .group .userinfo{ margin-top: 20px }
+.seting.personal .tab .tab_group .group .userinfo .photo{ float: left; width: 165px; height: 215px; background: #fafafa; text-align: center; }
+.seting.personal .tab .tab_group .group .userinfo .photo img{ width: 102px; height: 102px; border-radius: 50%; display: block; margin: 20px auto 12px }
+.seting.personal .tab .tab_group .group .userinfo .photo a{ color: #ff6f3d; font-size: 14px; line-height: 1 }
+.seting.personal .tab .tab_group .group .userinfo .photo p{ font-size: 12px; color: #888; margin: 10px 15px 0 }
+.seting.personal .tab .tab_group .group .form{ float: left; margin-left: 40px; width: 585px }
+.seting.personal .tab .tab_group .group .account{ margin-top: 20px; line-height: 50px }
+.seting.personal .tab .tab_group .group .account .info_group{ height: 50px }
+.seting.personal .tab .tab_group .group .account .info_group *{ float: left; }
+.seting.personal .tab .tab_group .group .account .info_group label{ width: 80px }
+.seting.personal .tab .tab_group .group .account .info_group input{ width: 128px; height: 50px }
+.seting.personal .tab .tab_group .group .account .info_group a{ color: #ff6f3d; cursor:pointer; }
+.seting.personal .tab .tab_group .group .set_dis .form{ margin-left: 0 }
+.seting.personal .tab .tab_group .group .set_dis .title{ font-size: 20px; font-weight: bold; padding: 30px 0 15px; line-height: 1 }
+.seting.personal .update_phone .form{ margin-top: 25px }
+.seting.personal .update_phone .form .submit input,.seting.personal .update_pwd .form .submit input{ margin-left: 95px }
+.seting.personal .update_pwd .form{ margin-top: 40px }
+.seting.personal .prompt,.forgot_pwd .prompt{ margin: -10px 0 -30px }
+.forgot_pwd .prompt{ margin-left: 80px; margin-bottom: -20px }
+.seting.personal .up_photo{ cursor: pointer; }
+.seting.personal #photoFile{ display: none; }
+
+/****************************************************************** 个人中心-订单 ******************************************************************/
+
+.order.personal .empty{ background-image: url(../images/personal/empty_order.png) }
+.order.personal .empty.cont:after{ content: "您还没有优惠券订单记录..." }
+.order.personal .tab .tab_group table{ margin-top: 10px; width: 100%; font-size: 14px; text-align: center; }
+.order.personal .tab .tab_group table thead{ height: 38px; line-height: 38px; background: #fafafa; color: #737373 }
+.order.personal .tab .tab_group table tbody tr{ height: 65px; border-bottom: 1px solid #e3e3e3 }
+.order.personal .tab .tab_group table tbody tr.expired{ color: #717171 }
+.order.personal .tab .tab_group table tbody tr:hover{ background: #fafafa }
+.order.personal .tab .tab_group table tbody tr .first{ text-align: left; }
+.order.personal .tab .tab_group table tbody tr .first .stime{ color: #ff6f3d }
+.order.personal .tab .tab_group table tbody tr .sname p{ margin: 0 20px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 210px }
+.order.personal .tab .tab_group table tbody tr .btns a{ color: #ff6f3d; cursor: pointer; }
+.order.personal .tab .tab_group table tbody tr .btns a:hover{ text-decoration: underline; }
+.order.personal .detail .info{ margin-top: 20px }
+.order.personal .detail .info .bot{ position: relative; }
+.order.personal .detail .info .bot .line{ position: absolute; height: 120px; border-right: 1px solid #e7e9f1; left: 15px; top: 0 }
+.order.personal .detail .info .bot .group{ padding-top: 34px; height: 30px; line-height: 30px; position: relative; z-index: 2 }
+.order.personal .detail .info .bot .group>*{ float: left; font-size: 14px}
+.order.personal .detail .info .bot .group .st{ width: 30px; height: 30px; text-align: center; color: white; background: #357cff; border-radius: 50%; margin-right: 17px }
+.order.personal .detail .info .bot .group .st2{ background: #ff7f39 }
+.order.personal .detail .info .bot .group .st2.no{ background: #b5b8c2 }
+.order.personal .detail .info .bot .group .time{ color: #888; margin-right: 25px }
+.order.personal .detail .info .bot .group .price{ margin: 0 30px 0 8px }
+.order.personal .detail .info .bot .group .name{ color: #ff6f3d }
+
+/****************************************************************** 个人中心-消费记录 ******************************************************************/
+
+.pur_history .tab_group{ padding-top: 14px }
+.order.pur_history .empty{ background-image: url(../images/personal/empty_purHis.png) }
+.order.pur_history .empty.cont:after{ content: "您还没有消费记录..." }
+.order.pur_history.personal .tab .tab_group table tbody tr{ height: 90px}
+.order.pur_history.personal .tab .tab_group table tbody tr .first .shop{ height: 60px }
+.order.pur_history.personal .tab .tab_group table tbody tr .first .shop img{ float: left; width: 110px; height: 60px; margin-right: 16px }
+.order.pur_history.personal .tab .tab_group table tr .stimet,.order.pur_history.personal .tab .tab_group table tbody tr .stime{ text-align: left; }
+.order.pur_history.personal .tab .tab_group table tr .stimet{ text-indent: 25px }
+
+/****************************************************************** 个人中心-优惠券 ******************************************************************/
+
+.disc.personal .cont .tab_group .group.empty{ background-image: url(../images/personal/empty_cou.png) }
+.disc.personal .cont .tab_group .group.empty:after{ content: "空空如也~您还没有优惠券" }
+.disc.personal .list{ margin-top: 20px; padding-bottom: 20px }
+.disc.personal .list .discount{ margin-bottom: 10px; background: white }
+.disc.personal .list .discount.no{ display: none; background: #fafafa }
+.disc.personal .list .discount .status{ color: #ff6f3d}
+.disc.personal .more{ color: #ff6f3d; margin-top: 20px; font-size: 14px; height: 14px; line-height: 1; cursor: pointer }
+.disc.personal .more:before{ content: "查看过期优惠券" }
+.disc.personal .more:after{ content: ""; display: inline-block; border: 4px solid transparent; border-top: 6px solid #ff6f3d; margin-left: 6px; margin-bottom: -3px }
+.disc.personal .more.active:before{ content: "收起" }
+.disc.personal .more.active:after{ border: 4px solid transparent; border-bottom: 6px solid #ff6f3d; margin-bottom: 2px }
+
+/****************************************************************** 个人中心-钱包 ******************************************************************/
+
+.wallet .statis .total{ height: 75px; line-height: 75px; border-bottom: 1px solid #e3e3e3; font-size: 28px;}
+.wallet .statis .total span{ font-size: 18px; float: left; color: #888; margin-right: 6px}
+.wallet .statis .time_qj{ height: 48px; background: #fbfdff; line-height: 48px }
+.wallet .statis .time_qj .se{ margin: auto; width: 326px; height: 48px }
+.wallet .statis .time_qj .se .btn{ width: 48px; height: 48px; float: left; cursor: pointer; position: relative;}
+.wallet .statis .time_qj .se .btn:after{ content: ""; position: absolute; border: 4px solid transparent; border-right: 8px solid #ff6f3d; left: 50%; margin-left: -8px; top: 50%; margin-top: -4px }
+.wallet .statis .time_qj .se .btnr:after{ border: 4px solid transparent; border-left: 8px solid #ff6f3d; margin-left: -4px}
+.wallet .statis .time_qj .se .select_time{ float: left; width: 230px }
+.wallet .statis .time_qj .se .select_time b{ float: left; font-weight: normal; width: 60px; color: #888; text-align: center; }
+.wallet .statis .data{ padding: 40px 145px}
+.wallet .statis .data .info{ float: left; width: 300px; background: url(../images/icon/we_icon.png) 0 54px no-repeat}
+.wallet .statis .data .info .t{ font-size: 24px; height: 20px; line-height: 20px }
+.wallet .statis .data .info .t span{ float: left; font-size: 18px }
+.wallet .statis .data .info .g{ margin-top: 30px; padding-left: 32px }
+.wallet .statis .data .info .g span{ display: block; }
+.wallet .statis .data .chart{ float: right; width: 280px; height: 280px; border-radius: 50%; background: #d5dce4; position: relative }
+.wallet .statis .data .chart .res{ width: 120px; height: 120px; position: absolute; top: 0; margin: 80px; background: white; z-index: 3; border-radius: 50%; font-size: 18px; line-height: 120px; text-align: center; }
+.wallet .statis .data .chart .icons{ width: 100%; height: 100%; position: absolute; z-index: 2; top: 0; left: 0 }
+.wallet .statis .data .chart .icons div{ position: absolute; width: 100%; height: 100%; display: none; }
+.wallet .statis .data .chart .icons div img{ display: block; margin: 25px auto }
+.wallet .statis .data .chart.ie8{ display: none; background: none; width: 340px; padding-left: 100px; margin-right: -100px; margin-left: -300px }
+.wallet .statis .data .chart.ie8>p{ height: 15px; line-height: 15px; margin-bottom: 15px; font-size: 14px }
+.wallet .statis .data .chart.ie8>p label{ float: left; margin-left: -100px }
+.wallet .statis .data .chart.ie8>p b{ display: block; height: 15px; background: #445b9f; width: 0 }
+.wallet .statis .data .chart.ie8>p.t b{ width: 100% }
+.wallet .statis .data .chart.ie8>p.fr_1 b{ background-color: #85e09a }
+.wallet .statis .data .chart.ie8>p.fr_2 b{ background-color: #78a9fa }
+.wallet .statis .data .chart.ie8>p.fr_3 b{ background-color: #ff7d7d }
+.wallet .statis .data .chart.ie8>p.fr_4 b{ background-color: #ffc21f }
+.wallet .statis .data .chart.ie8>p.fr_5 b{ background-color: #ff7d5f }
+.wallet .statis .cost .total{ border-top: 1px solid #e3e3e3 }
+.wallet .statis .cost .data .info{ background-image: url(../images/icon/we_icon2.png)}
+.wallet .balance .money{ padding: 30px 0 20px }
+.wallet .balance .money span{ font-size: 30px }
+.wallet .balance .btns a{ float: left; margin-right: 14px; padding: 5px 12px; color: #ff6f3d; border: 1px solid #ff6f3d; border-radius: 15px; font-size: 14px; cursor: pointer; }
+.wallet .balance .btns a.active,.wallet .balance .btns a:hover{ color: white; background: #ff6f3d }
+.wallet .balance table{ margin-top: 15px; font-size: 14px; text-align: center; width: 100% }
+.wallet .balance table thead{ background: #fafafa; height: 38px; line-height: 38px; color: #737373 }
+.wallet .balance table thead .f{ text-align: left; text-indent: 30px }
+.wallet .balance table thead .l{ text-align: right; padding-right: 25px }
+.wallet .balance table tbody tr{ border-bottom: 1px solid #e3e3e3; height: 45px; line-height: 45px }
+.wallet .balance table tbody .f{ text-align: left; }
+.wallet .balance table tbody .btn a{ float: right; margin-right: 10px; cursor: pointer; color: #ff6f3d }
+.wallet .balance table tbody .btn a:hover{ text-decoration: underline; }
+.wallet .balance_detail .group{ padding: 30px 0 20px; display: none;}
+.wallet .balance_detail .group.active{ display: block; }
+.wallet .balance_detail .group .top{ height: 110px; border-radius: 10px; background: #f8f9fc; position: relative; border: 1px solid #e7eaee; width: 350px}
+.wallet .balance_detail .group .top .tag{ position: absolute; background: url(../images/icon/qb_bg.png); width: 80px; height: 30px; line-height: 30px; text-indent: 10px; color: white; font-size: 14px }
+.wallet .balance_detail .group .top .logo{ width: 35px; height: 35px; border-radius: 50%; position: absolute; margin: -17.5px; left: 50%}
+.wallet .balance_detail .group .top .title{ padding-top: 30px; font-size: 18px; text-align: center; padding-bottom: 12px; line-height: 1 }
+.wallet .balance_detail .group .top .price{ font-size: 28px; line-height: 1; text-align: center; }
+.wallet .balance_detail .group .info{ line-height: 45px; padding-top: 15px }
+.wallet .balance_detail .group .info>div:after{ content: ""; display: block; clear: both}
+.wallet .balance_detail .group .info label{ color: #888; float: left; width:90px; }
+.wallet .balance_detail .group .info .status{ float: left; margin-bottom: 10px }
+.wallet .balance_detail .group .info .status p{ color: #ff6f3d; font-size: 16px; text-indent: 25px; position: relative;}
+.wallet .balance_detail .group .info .status p:after{ content: ""; background: url(../images/icon/ye_success.png); position: absolute; width: 16px; height: 16px; top: 14.5px; z-index: 2; left: 0 }
+.wallet .balance_detail .group .info .status p.two:before,.balance_detail .group .info .status p.last:before{ content: ""; position: absolute; height: 40px; border-left: 1px solid #ff6f3d; left: 8px; top: -15px }
+.wallet .balance_detail .group .info .status p.no:after{ background: url(../images/icon/ye_ns.png)}
+.wallet .balance_detail .group .info .status p.no:before{ border-color: #bfc5cb }
+.wallet .balance_detail .group .info .status span{ color: #888; margin-left: 16px }
+
+/****************************************************************** 优惠券-列表 ******************************************************************/
+
+.coupon .filter{ border: 1px solid #dbdde1; background: white; margin: 20px 0 10px }
+.coupon .filter .top{ height: 52px; line-height: 52px; border-bottom: 1px solid #dbdde1; padding-left: 20px }
+.coupon .filter .top .total{ float: right; margin-right: 20px; font-size: 14px }
+.coupon .filter .top .total span{ color: #ff6f3d }
+.coupon .filter .top .tag img{ display: inline-block; margin: 0 12px -1px }
+.coupon .filter .top .tag a{ display: inline-block; padding: 9px 12px; border: 1px solid #dbdde1; border-radius: 3px; color: #ff6f3d; font-size: 14px; line-height: 1 }
+.coupon .filter .top .tag a b{ display: inline-block; margin-left: 12px; width: 12px; height: 12px; background: url(../images/icon/close_o.png); cursor: pointer; margin-bottom: -2px }
+.coupon .filter .req{ margin: 0 20px;}
+.coupon .filter .req .group{ line-height: 24px; min-height: 24px; padding: 8px 0; border-bottom: 1px dashed #dbdde1; font-size: 14px }
+.coupon .filter .req .group.last{ border: 0 }
+.coupon .filter .req label{ float: left; width: 100px; color: #888 }
+.coupon .filter .req .tag{ float: left; width: 1038px }
+.coupon .filter .req .tag a{ float: left; margin-right: 44px; cursor: pointer; }
+.coupon .filter .req .tag a.active{ color: #ff6f3d }
+.coupon .filter .req .group:after{ content: ""; display: block; clear: both }
+.coupon .sort{ height: 38px; border: 1px solid #dbdde1; line-height: 38px; margin-bottom: 20px; background: white }
+.coupon .sort a{ float: left; border-right: 1px solid #dbdde1; font-size: 14px; padding: 0 15px; cursor: pointer; }
+/*.coupon .sort a:after{ content: ""; display: inline-block; width: 7px; height: 13px; background: url(../images/icon/arrow_b.png) 7px top; margin-left: 4px; margin-bottom: -2px}
+.coupon .sort a.active:after,.coupon .sort a:hover:after{ background-position: 0 0 }*/
+.coupon .sort a.active{ color: #ff6f3d }
+.coupon .sort a.checkbox:after{ display: none; }
+.coupon .sort a.checkbox:before{ content: ""; width: 12px; height: 12px; margin-right: 6px; border: 1px solid #dbdde1; border-radius: 1px; display: inline-block; margin-bottom: -2px }
+.coupon .sort a.checkbox.checked:before{ width: 14px; height: 14px; border: 0; background: url(../images/icon/checked.png) #ff6f3d}
+
+/****************************************************************** 优惠券-详情 ******************************************************************/
+
+.coupon_detail .t_m,.shop_detail .t_m{ height: 34px; line-height: 34px; font-size: 14px }
+.coupon_detail .main .top{ height: 240px; padding: 10px; background: white }
+.coupon_detail .main .top img{ float: left; height: 240px; width: 490px; margin-right: 45px }
+.coupon_detail .main .top .text{ float: left; width: 405px }
+.coupon_detail .main .top .text .title{ height: 33px; line-height: 33px; margin-top: 20px; font-size: 35px; color: #ff6f3d }
+.coupon_detail .main .top .text .title span{ float: left;}
+.coupon_detail .main .top .text .title span.t{ font-size: 22px; margin-top: 6px}
+.coupon_detail .main .top .text .explain{ font-size: 14px; line-height: 36px; height: 36px; clear: both }
+.coupon_detail .main .top .text .sd{ margin-top: 20px; height: 38px }
+.coupon_detail .main .top .text .sd p{ float: left; font-size: 16px; line-height: 1; height: 38px }
+.coupon_detail .main .top .text .sd p.old_price{ margin-right: 29px; padding-right: 29px}
+.coupon_detail .main .top .text .sd p span{ display: block; font-size: 14px; color: #888; margin-top: 8px }
+.coupon_detail .main .top .text a{ display: block; margin-top: 30px; background: #ff6f3d; color: white; text-align: center; font-size: 20px; height: 45px; line-height: 45px; width: 200px; border-radius: 4px; cursor: pointer; }
+.coupon_detail .main .top .text a.ylql{ color: #ff6f3d; background: #ffe7df }
+.coupon_detail .main .top .text a span{ font-size: 14px }
+.coupon_detail .main .bot{ margin-top: 10px; padding-bottom: 20px }
+.coupon_detail .main .bot .bot_left{ width: 620px; float: left; background: white; height: 420px; font-size: 14px }
+.coupon_detail .main .bot .bot_left p{ height: 40px; line-height: 40px; text-indent: 20px }
+.coupon_detail .main .bot .bot_left table{ margin: 0 20px; border-top: 1px solid #e3e3e3 }
+.coupon_detail .main .bot .bot_left table tr{ border-bottom: 1px solid #e3e3e3}
+.coupon_detail .main .bot .bot_left table tr .t{ background: #f8f9fc }
+.coupon_detail .main .bot .bot_left table tr td{ padding:12px 20px}
+.coupon_detail .main .bot .bot_rig{ float: right; width: 290px; background: white; height: 420px; padding: 0 20px }
+.coupon_detail .main .bot .bot_rig .shop{ display: block; height: 40px; line-height: 40px; border-bottom: 1px solid #e3e3e3; background: url(../images/icon/icon_jt.png) right center no-repeat }
+.coupon_detail .main .bot .bot_rig h3{ font-size: 20px; line-height: 1.5; padding: 11px 0 5px }
+.coupon_detail .main .bot .bot_rig .phone{ margin-top: 25px; font-size: 14px; height: 14px; margin-bottom: 10px; line-height: 1; background: url(../images/icon/icon_phone.png) left center no-repeat; text-indent: 18px  }
+.coupon_detail .main .bot .bot_rig .address{ font-size: 14px; height: 14px; line-height: 1; background: url(../images/icon/icon_address.png) left center no-repeat; text-indent: 18px; margin-bottom: 25px  }
+.coupon_detail .main .bot .bot_rig .map{ height: 195px}
+
+/****************************************************************** 商户-列表 ******************************************************************/
+
+.shop_list .tags{ height: 73px; line-height: 73px; font-size: 14px }
+.shop_list .tags a{ display: inline-block; line-height: 14px; padding: 9px 15px; color: #ff6f3d; border: 1px solid #dbdde1; border-radius: 20px; background: white; margin-right: 12px; cursor: pointer;}
+.shop_list .tags a.active,.shop_list .tags a:hover{ background: #ff6f3d; border-color: #ff6f3d; color: white }
+.shop_list .list{ width: 1200px }
+.shop_list .group{ float: left; height: 300px; margin-right: 20px; width: 380px; margin-bottom: 20px; background: white }
+.shop_list .group .img{ width: 100%; height: 205px; overflow: hidden; }
+.shop_list .group .img.noImg{ background: url(../images/icon/logo_g.png) center center no-repeat #e6eaf6 }
+.shop_list .group .img.noImg img{ display: none }
+.shop_list .group .img img{ width: 100%; height: 100%; -webkit-transition:all .3s;transition:all .3s; }
+.shop_list .group:hover img{ -webkit-transform:scale(1.1);transform:scale(1.1); }
+.shop_list .group .text{ padding: 20px; height: 55px }
+.shop_list .group .text p{ font-size: 22px; line-height: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%; margin-bottom: 10px }
+
+/****************************************************************** 商户-详情 ******************************************************************/
+
+.shop_detail .top{ height: 485px; position: relative; }
+.shop_detail .top .all_pt{ position: absolute; right: -43px; bottom: 105px; width: 16px; text-align: center; height: 78px; background: url(../images/icon/icon_cjt.png) center 70px no-repeat #ff6f3d; color: white; padding: 10px 11px 0; border-bottom-left-radius: 7px; border-top-left-radius: 7px; line-height: 1.1 }
+.shop_detail .top .ban{ width: 100%; height: 100% }
+.shop_detail .top .info{ top: 285px; position: absolute; left: 115px; width: 950px; background: white; height: 315px; z-index: 2 }
+.shop_detail .top .new_com{ position: absolute; top: 0; width: 100% }
+.shop_detail .top .new_com .group{ height: 34px; line-height: 34px; margin-top: 20px; width: 100%; overflow: hidden; }
+.shop_detail .top .new_com .group p{ background: url(../images/icon/shadow.png); border-radius: 15px; padding-right: 12px; float: left; color: white }
+.shop_detail .top .new_com .group p span{ color: #ffd800; display: inline-block; margin: 0 2px 0 10px }
+.shop_detail .top .new_com .group p b{ background: url(../images/icon/icon_star.png); display: inline-block; width: 15px; height: 15px; margin-bottom: -1px}
+.shop_detail .top .new_com .group p img{ float: left; width: 30px; height: 30px; margin-left: 1px; margin-top:2px; border-radius: 50% }
+.shop_detail .top .info .reply{ position: absolute; right: 0; top: -52px; width: 40px; height: 40px; background: url(../images/icon/ic_ondm@2x.png); cursor: pointer; display: none }
+.shop_detail .top .info .title{ text-align: center; font-size: 40px; line-height: 1; padding-top: 40px; padding-bottom: 20px }
+.shop_detail .top .info .b_logo{ position: absolute; left: 50%; margin-left: -30px; width: 60px; height: 60px; top: -30px; border-radius: 50% }
+.shop_detail .top .info .star{ text-align: center; line-height: 30px; height: 30px; font-size: 24px; width: 231px; margin: 0 auto 35px}
+.shop_detail .top .info .star a{ background: url(../images/icon/icon_star@2.png) 30px top; width: 30px; height: 30px; margin-right: 4px}
+.shop_detail .top .info .star a b{ background: url(../images/icon/icon_star@2.png); width: 0; height: 30px}
+.shop_detail .top .info .pa{ margin: 0 30px; height: 54px; border-top: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; font-size: 18px; color: #5b5b5b }
+.shop_detail .top .info .pa .address{ float: left; height: 40px; line-height: 40px; margin-top: 7px; text-indent: 42px; background: url(../images/icon/icon_address@2.png) 20px center no-repeat }
+.shop_detail .top .info .pa .phone{ float: right; width: 295px; border-left: 1px solid #d2d2d2; height: 40px; line-height: 40px; margin-top: 7px; text-indent: 52px; background: url(../images/icon/icon_phone@2.png) 27px center no-repeat }
+.shop_detail .top .info .share,.myc .share{ margin-top: 30px; text-align: center; display: none; }
+.shop_detail .top .info .share a,.myc .share a{ width: 34px; height: 34px; display: inline-block; margin: 0 16px; background: url(../images/icon/icon_share.png) }
+.shop_detail .top .info .share a.qq_q{ background-position: 34px top }
+.shop_detail .top .info .share a.wechat{ background-position: 68px top }
+.shop_detail .top .info .share a.wei{ background-position: 102px top }
+.shop_detail .top .info .share a.weibo{ background-position: 136px top }
+.shop_detail .cen{ margin-top: 140px }
+.shop_detail .cen .t{ line-height: 80px; height: 80px; text-align: center; font-size: 24px }
+.shop_detail .bot{ margin-bottom: 20px }
+.shop_detail .bot .tab .tab_menu{ margin:55px 0 28px; font-size: 24px; height: 24px; line-height: 1; text-align: center; }
+.shop_detail .bot .tab .tab_menu a{ margin: 0 55px; position: relative; cursor: pointer; }
+.shop_detail .bot .tab .tab_menu a.active{ color: #ff6f3d }
+.shop_detail .bot .tab .tab_menu a.s_de:after{ content: ""; position: absolute; height: 24px; border-right:1px solid #c8c8c8; right: -54px; margin-top: 2px}
+.shop_detail .bot .tab .tab_group{ background: white }
+.shop_detail .bot .tab .tab_group .comment{ padding: 0 110px }
+.shop_detail .bot .tab .tab_group.empty{ background: none }
+.shop_detail .bot .tab .tab_group.empty .comment .paging{ display: none; }
+.shop_detail .bot .tab .tab_group .comment li{ padding: 25px 0; border-bottom: 1px solid #e3e3e3 }
+.shop_detail .bot .tab .tab_group .comment li .time{ float: right; color: #888 }
+.shop_detail .bot .tab .tab_group .comment li img{ float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 15px }
+.shop_detail .bot .tab .tab_group .comment li .text{ font-size: 14px }
+.shop_detail .bot .tab .tab_group .comment li .text .name{ height: 28px; line-height: 28px }
+.shop_detail .bot .tab .tab_group .comment li .text .star{ text-align: center; line-height: 20px; height: 20px; font-size: 18px}
+.shop_detail .bot .tab .tab_group .comment li .text .star a{ background: url(../images/icon/icon_star@15.png) 20px top; width: 20px; height: 20px; margin-right: 3px}
+.shop_detail .bot .tab .tab_group .comment li .text .star a b{ background: url(../images/icon/icon_star@15.png); width: 0; height: 20px}
+.shop_detail .bot .tab .tab_group .comment li .conte{ margin-left: 65px; width: 710px; line-height: 2; margin-top: 15px }
+.shop_detail .bot .tab .tab_group .content{ padding: 40px 110px; font-size: 14px; line-height: 2 }
+.shop_detail .bot .tab .tab_group .content p{ margin-bottom: 20px }
+.shop_detail .bot .tab .tab_group .content img{ max-width: 100%; display: block; margin: auto }
+
+/****************************************************************** 登录 ******************************************************************/
+
+.login{ width: 780px; height: 446px; position: absolute; left: 50%; top: 50%; margin-left: -390px; margin-top: -223px }
+.login .tab{ float: right; width: 360px }
+.login .tab .logo{ display: block; margin: 0 auto 42px }
+.login .tab .tab_menu{ height: 44px; line-height: 43px; border-bottom: 1px solid #ececec; text-align: center; }
+.login .tab .tab_menu a{ float: left; width: 50%; cursor: pointer; height: 43px; margin-bottom: -1px }
+.login .tab .tab_menu a.active{ border-bottom: 2px solid #ff6f3d; color: #ff6f3d }
+.login .tab .tab_group .form_group{ height: 50px; line-height: 50px; border-bottom: 1px solid #ececec; margin-bottom: 0 }
+.login .tab .tab_group .form_group.no_bor{ border: none; }
+.login .tab .tab_group .form_group.submit{ height: auto; }
+.login .tab .tab_group .form_group.submit a,.login .tab .tab_group .form_group.submit .sub{ height: 50px; display: block; width: 100%; margin-top: 28px; padding: 0; line-height: 50px; text-align: center; font-size: 20px; border-radius: 5px }
+.login.register .tab .tab_group .form_group.submit a.no,.login .tab .tab_group .form_group.submit .sub.no{ background: #888; cursor: default; }
+.login.register .tab .tab_group .form_group.submit .prompt{ line-height: 1 }
+.login .tab .tab_group .form_group.oth{ text-align: center;}
+.login .tab .tab_group .form_group.oth a{ cursor: pointer; color: #ff6f3d }
+.login .tab .tab_group .form_group .checkbox label{ float: left; font-size: 14px; color: #888}
+.login .tab .other p{ padding: 14px 0 20px; height: 14px; line-height: 1; position: relative; font-size: 14px; color: #888; text-align: center; }
+.login .tab .other p span{ position: relative; z-index: 2; display: inline-block; padding: 0 8px; background: white }
+.login .tab .other p:before{ content: ""; position: absolute; width: 100%; border-top: 1px solid #e3e3e3; top: 21px; left: 0 }
+.login .tab .other .btns a{ float: left; width: 30px; height: 30px; cursor: pointer; margin: 0 45px }
+.login .form_group .prompt{ margin: 0 0 -28px; height: 38px; line-height: 38px }
+
+/****************************************************************** 找回密码 ******************************************************************/
+
+.forgot_pwd .top{ height: 142px; border-bottom: 1px solid #e3e3e3; position: relative; }
+.forgot_pwd .top img{ float: left; margin: 45px 0 25px }
+.forgot_pwd .top p{ position: absolute; width: 100%; bottom: 0; height: 44px; line-height: 44px; font-size: 18px }
+.forgot_pwd .top p a{ float: right; color: #ff6f3d }
+.forgot_pwd .fp_group{ width: 380px; margin: auto; }
+.forgot_pwd .fp_group .group{ display: none; margin-top: 15px }
+.forgot_pwd .fp_group .group.active{ display: block; }
+.forgot_pwd .fp_group .group .t{ height: 85px; line-height: 85px; text-align: center; }
+.forgot_pwd .fp_group .group .t span{ color: #ff6f3d }
+.forgot_pwd .fp_group .group .t.s:before{ content: ""; display: inline-block; width: 26px; height: 26px; background: url(../images/user/gp_success.png); margin-bottom: -6px; margin-right: 10px }
+.forgot_pwd .fp_group .group .form_group{ height: 44px }
+.forgot_pwd .fp_group .group .form_group .text{ float: left; width: 65px; text-align: right; line-height: 44px; white-space: pre }
+.forgot_pwd .fp_group .group .form_group p.inp{ width: 300px; line-height: 42px }
+.forgot_pwd .fp_group .group .form_group.yzm p.inp input{ width: 180px }
+.forgot_pwd .fp_group .group .form_group.yzm p.inp .codeImg{ float: right; height: 44px; width: 110px }
+.forgot_pwd .fp_group .group .form_group.yzm p.inp a{ float: right; color: #ff6f3d; text-decoration: underline; line-height: 1; font-size: 16px; margin-top: 14px }
+.forgot_pwd .fp_group .group .form_group.yzm2 .text{ margin-left: -15px; margin-right: 30px }
+.forgot_pwd .fp_group .group .form_group.yzm2 p.inp input{ width: 190px }
+.forgot_pwd .fp_group .group .form_group.submit a{ height: 22px; line-height: 22px; margin-left: 80px; width: 68px; text-align: center; margin-top: 20px }
+.forgot_pwd .fp_group .group .form_group.success{ text-align: center; margin: 0 }
+
+/****************************************************************** 商户入驻 ******************************************************************/
+
+.popup{ width: 380px; height: 320px; padding: 0 20px; background: white; border-radius: 5px; position: fixed; z-index: 1001; margin: -160px -210px; left: 50%; top: 50%; display: none; }
+.popup .close{ position: absolute; width: 24px; height: 24px; right: -12px; top: -12px; background: url(../images/icon/p_close.png) center center no-repeat black; border-radius: 50%; cursor: pointer; }
+.popup .title{ height: 55px; line-height: 55px; font-size: 20px; text-align: center; border-bottom: 1px solid #ececec }
+
+.ap_popup .text{ margin-top: 15px; height: 36px; line-height: 36px; font-weight: bold; }
+.ap_popup .form_group .radio{ height: 52px; line-height: 52px; border-bottom: 1px solid #ececec }
+.ap_popup .form_group.submit a,.ap_popup_explain .form_group.submit a{ width: 100px; height: 40px; line-height: 40px; padding: 0; text-align: center; display: block; margin: 30px auto 0 }
+
+.ap_popup_explain,.yhxx_popup{ width: 590px; height: 550px; margin: -275px -295px}
+.ap_popup_explain .content,.yhxx_popup .content{ height: 355px; padding-bottom: 15px; overflow: auto; font-size: 14px }
+.ap_popup_explain .content p,.yhxx_popup .content p{ margin-top: 22px }
+.ap_popup_explain .content p.sb,.yhxx_popup .content p.sb{ margin-left: 15px; margin-top: 10px }
+.ap_popup_explain .form_group .checkbox{ height: 50px; line-height: 50px }
+.ap_popup_explain .form_group.submit a{ margin-top: 10px }
+.yhxx_popup .content{ height: 455px }
+
+.pay_popup{ width: 426px; height: 480px; margin: -240px -213px }
+.pay_popup .title{ visibility: hidden }
+.pay_popup .title:before{ content: ""; display: inline-block; width: 26px; height: 22px; background: url(../images/icon/pay_wechat.png); margin-right: 8px; margin-bottom: -3px }
+.pay_popup .money{ height: 44px; line-height: 44px; position: absolute; margin-top: -44px}
+.pay_popup .money span{ color: #ff6f3d }
+.pay_popup .money span b{ font-size: 26px; font-weight: normal; }
+.pay_popup .ewm{ border: 1px solid #ececec; width: 280px; height: 330px; margin:auto; text-align: center; color: #888; position: relative; margin-top: 44px }
+.pay_popup .ewm img{ display: block; width: 220px; height: 220px; margin: 24px auto 20px}
+.pay_popup .ewm p span{ color: #ff6f3d }
+
+.my_card{ padding-top: 60px }
+.my_card .myc{ width: 540px; margin: 0 auto 120px }
+.my_card .myc .left{ width: 266px; height: 174px; border-radius: 8px; background: white; padding: 17px; float: left; }
+.my_card .myc .left .t{ font-size: 18px; line-height: 1; padding-bottom: 20px }
+.my_card .myc .left .eem .qrcode{ float: left; width: 80px; height: 80px; margin-right: 26px }
+.my_card .myc .left .eem p{ font-size: 12px; float: left; width:160px; }
+.my_card .myc .left .eem p span{ display: block; font-size: 15px; font-weight: bold; line-height: 1; margin-bottom: 14px }
+.my_card .myc .left .eem p span:after{ content: ""; display: block; width: 14px; height: 3px; background: black; margin-top: 15px }
+.my_card .myc .left .eem a{ color: #ff6f3d; cursor: pointer; border: 1px solid #ff6f3d; padding: 0 10px; line-height: 24px; height: 24px; float: left; margin-top: 8px; border-radius: 15px; font-size: 12px }
+.my_card .myc .left .eem b{ display: block; font-weight: normal; font-size: 12px; word-break: break-all; color: #888;overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%; padding-top: 7px}
+.my_card .myc .left .share{ position: relative; clear: both; padding-top: 20px }
+.my_card .myc .left .share:before{ content: "分享至"; display: block; width: 46px; margin: auto; background: white; line-height: 1; font-size: 12px; position: relative; z-index: 2 }
+.my_card .myc .left .share:after{ content: ""; position: absolute; width: 100%; border-top: 1px solid #e3e3e3; top: 26px; left: 0 }
+.my_card .myc .left .share a{ width: 20px; height: 20px; background-image: url(../images/icon/icon_share2.png); margin: 10px 14px }
+.my_card .myc .share a.qq_q{ background-position: 20px top }
+.my_card .myc .share a.wechat{ background-position: 40px top }
+.my_card .myc .share a.wei{ background-position: 60px top }
+.my_card .myc .share a.weibo{ background-position: 80px top }
+.my_card .myc .right{ width: 200px; float: right; font-size: 14px; line-height: 38px; height: 38px }
+.my_card .myc .right p{ white-space: pre}
+.my_card .myc .right span{ color: #ff6f3d }
+.my_card .myc .right a{ margin-top: 46px; line-height: 1; color: #ff6f3d; float: left; }
+.my_card .myc .right a:hover{ cursor: pointer; text-decoration: underline; }
+.ap_popup_explain.popup_mc .content{ height: 455px }
+
+
+.star{ height: 15px; line-height: 15px; font-size: 14px; color: #888 }
+.star a{ float: left; margin-right: 2px; background: url(../images/icon/icon_star.png) 15px top; width: 15px; height: 15px; }
+.star a b{ display: block; background: url(../images/icon/icon_star.png); width: 0; height: 100%  }
+.star span{ margin-left: 3px; float: left; }
+
+.discount{ width: 470px; height: 122px; border: 1px solid #e7e9f1; background: #fafafa; border-radius: 3px; padding: 23px 20px 0}
+.discount .left{ float: left; width: 75px; margin-right: 15px; line-height: 40px; text-align: center; }
+.discount .left img{ width: 75px; height: 75px; border-radius: 50%; display: block; }
+.discount .right{ float: left; width: 380px }
+.discount .right .title{ height: 33px; line-height: 33px; color: #ff6f3d; font-size: 44px; margin-top: 7px }
+.discount .right .title span{ float: left; }
+.discount .right .title .pt{ line-height: 22px; margin-top: 11px; font-size: 22px }
+.discount .right .title b{ float: right; font-weight: normal; width: 70px; height: 28px; line-height: 28px; text-align: center; background: #ffebfd; color: #ff3dea; font-size: 16px; margin-top: 5px }
+.discount .right .title b.dk{ color: #2fc68f; background: #eaf9f4 }
+.discount .right .title b.dj{ color: #2db7ff; background: #eaf8ff }
+.discount .right .name{ font-size: 18px; line-height: 48px; height: 48px; white-space: pre; clear: both }
+.discount .right .tanc{ font-size: 14px; line-height: 1; color: #888 }
+.discount.no .right .title b{ background: #e8e8e8 }
+.discount.no .left .status,.discount.no .right .title,.discount.no .right .title b,.discount .right .name{ color: #888 !important}
+
+.coupon_list{ width: 1200px }
+.coupon_list.empty:after,.shop_detail .bot .tab .tab_group.empty .comment:after,.shop_listd.empty:after,.wallet .balance table.empty:after{ content: "抱歉！暂无相关优惠"; display: block; font-size: 20px; color: #888; text-align: center; width: 220px; margin: 20px auto; text-indent: 39px; background:url(../images/icon/ic_quan@2x.png) left center no-repeat }
+.shop_detail .bot .tab .tab_group.empty .comment:after{ content: "抱歉！暂无相关评论"; background-image: url(../images/icon/comment.png); margin: 40px auto }
+.shop_listd.empty:after{ content: "抱歉！暂无相关商铺"; background-image: url(../images/icon/shop_icon.png); margin: 40px auto }
+.wallet .balance table.empty:after{ content: "抱歉！暂无相关明细"; background-image: url(../images/icon/mx_icon.png);}
+.cl_search.coupon_list.empty:after{ margin-top: 80px; margin-bottom: 80px }
+.coupon_list .group{ float: left; width: 540px; height: 140px; background: white; border-radius: 3px; padding: 30px 20px; margin-right: 20px; margin-bottom: 20px }
+.coupon_list .group img{ float: left; width: 140px; height: 140px; border-radius: 50%; margin-right: 20px }
+.coupon_list .group .text{ float: left; width: 380px }
+.coupon_list .group .text .t{ height: 33px; line-height: 33px; font-size: 22px; color: #ff6f3d }
+.coupon_list .group .text .t span{ float: left; }
+.coupon_list .group .text .t .p{ font-size: 44px}
+.coupon_list .group .text .t .pt{ line-height: 22px; margin-top: 11px }
+.coupon_list .group .text .t .type{ width: 70px; height: 28px; float: right; margin-top: 5px; text-align: center; line-height: 28px; font-size: 16px; background: #ffebfd; color: #ff3dea }
+.coupon_list .group .text .t .type.dk{ color: #2fc68f; background: #eaf9f4 }
+.coupon_list .group .text .t .type.dj{ color: #2db7ff; background: #eaf8ff }
+.coupon_list .group .text .cont{ font-size: 18px; line-height: 55px; height: 55px; white-space: pre }
+.coupon_list .group .text .btn{ height: 45px; line-height: 45px; margin-top: 7px; font-size: 18px; color: #888 }
+.coupon_list .group .text .btn a{ float: right; font-size: 20px; width: 120px; background: #ff6f3d; text-align: center; color: white; border-radius: 3px ; cursor: pointer;}
+a.lq_suc{ cursor: default !important; background: #ffe7df !important; color: #ff6f3d !important }
+
+.paging{ padding: 70px 0; text-align: center; height: 40px; line-height: 40px; text-align: center; font-size: 20px }
+.paging a{ display: inline-block; width: 40px; background: white; margin-right: 3px; position: relative; height: 40px; cursor: pointer;}
+.paging a.active,.paging a:hover{ color: white; background: #ff6f3d }
+.paging a.prev{ margin-right: 13px;}
+.paging a.prev:after{ content:""; position: absolute; border: 6px solid transparent; border-right: 9px solid #ff6f3d; top: 50%; margin-top: -6px; left: 50%; margin-left: -10px}
+.paging a.prev:hover:after{ border-right-color: white }
+.paging a.next{ margin-left: 10px;}
+.paging a.next:after{ content:""; position: absolute; border: 6px solid transparent; border-left: 9px solid #ff6f3d; top: 50%; margin-top: -6px; right: 50%; margin-right: -10px}
+.paging a.next:hover:after{ border-left-color: white }
+.paging a.more{ background: none; line-height: 20px }
+.paging a.more:hover{ background: none; color: #1c1c1c; cursor: default }
+
+
+.time_picker{ width: 85px; float: left;font-size: 14px }
+.time_picker>input{ width: 100%; cursor: pointer; }
+.calender{ width: 290px; height: 295px; background: white; border-radius: 3px; position: absolute; z-index: 999; border: 1px solid #f2f2f2; margin-left: -100px; display: none;}
+.calender .getyear{ height: 17px; margin: 22px }
+.calender .getyear select{ float: left; width: 100px; margin-left: 60px; font-size: 14px; border: 0; cursor: pointer; }
+.calender .getyear>a{ cursor: pointer; }
+.calender .getyear .preMonth{ background: url(../images/icon/time_picker_l.png); float: left; width: 17px; height: 17px }
+.calender .getyear .nextMonth{ background: url(../images/icon/time_picker_r.png); float: right; width: 17px; height: 17px }
+.calender table{ margin: 0 25px; width: 245px }
+.calender table tr{ height: 35px; line-height: 35px }
+.calender table td{ width: 35px; height: 35px; text-align: center; font-size: 14px; cursor: pointer;}
+.calender table td p{ display: block; font-weight: normal; width: 28px; height: 28px; margin: 3.5px auto; border-radius: 50%; line-height: 28px }
+.calender table .tdtoday p,.calender table td:hover p{ background: #ff6f3d; color: white }
+
+.tab .tab_group .group{ display: none; }
+.tab .tab_group .group.active{ display: block; }
+.form_group{ line-height: 40px; margin-bottom: 10px; position: relative;}
+.form_group:after{ content: ""; display: block; clear: both }
+.form_group .prompt{ color: red; font-size: 14px }
+.form_group .np_text{ height: 40px }
+.form_group.submit a,.form_group.submit input,.form_group.submit .sub{ font-size: 14px; padding: 9px 16px; display: inline-block; background: #ff6f3d; color: white; margin-top: 30px; line-height: 1; border-radius: 4px; cursor: pointer; }
+.form_group p.inp{ float: left; width: 775px; height: 38px; line-height: 38px }
+.form_group p.inp a{ margin-left: 14px; font-size: 14px; color: #ff6f3d; text-decoration: underline; cursor: pointer; }
+.form_group p.inp input{ text-indent: 12px; border: 1px solid #dadbe0; height: 100%; width: 298px; border-radius: 4px }
+.form_group p{ height: 100%; min-height: 40px }
+.form_group p.radio input,.form_group p.checkbox input{ display: none;}
+.form_group p.radio label,.form_group p.checkbox label{ padding-left: 30px ; position: relative; display: block; margin: 0; text-indent: 0; cursor: pointer; float: left;}
+.form_group p.radio label:before,.form_group p.checkbox label:before{ content: ""; position: absolute; left: 0; width: 12px; height: 12px; border: 1px solid #b5b5b5; top: 50%; margin-top: -7px ; border-radius: 50%}
+.form_group p.checkbox label:before{ width: 16px; height: 16px; margin-top: -9px; border-radius: 2px }
+.form_group p.checkbox input:checked+label:before{ border-color: #ff6f3d }
+.form_group p.checkbox input:checked+label:before{ background: url(../images/icon/ck_g.png) center center no-repeat #ff6f3d}
+.form_group p.checkbox a{ position: absolute; right: 0; color: #ff6f3d; line-height: 1; cursor: pointer; font-size: 14px; top: 50%; margin-top: -7px }
+.form_group p.checkbox label+a{ position: relative; float: left; }
+.form_group p.checkbox label+a:hover{ text-decoration: underline; }
+.form_group p.radio input:checked+label:before{ border-color: #ff6f3d }
+.form_group p.radio input:checked+label:after{ content: ""; position: absolute; width: 8px; height: 8px; background: #ff6f3d; border-radius: 50%; top: 50%; margin-top: -4px; left: 3px }
+.form_group p.text{ float: left; width: 80px; text-align: right; margin-right: 15px }
+.form_group p.icon{ padding-left: 48px}
+.form_group p.icon input{ width: 100%; height: 100% }
+.form_group p.icon label{ left: 0; height: 100%; background-repeat: no-repeat; position: absolute; top: 50%; margin-top: -10.5px; width: 32px }
+.form_group p.icon label:after{ content: ""; float: right; height: 19px; border-right: 1px solid #1c1c1c; margin-top: 1px }
+.form_group p.icon.tel label{ background-image: url(../images/user/icon_tel.png) }
+.form_group p.icon.pwd label{ background-image: url(../images/user/icon_pwd.png) }
+.form_group p.icon.pwd2 label{ background-image: url(../images/user/icon_pwd2.png) }
+.form_group p.icon.ver_code{ padding-right: 85px }
+.form_group p.icon.ver_code label{ background-image: url(../images/user/icon_code.png) }
+.form_group p.icon.ver_code a{ position: absolute; right: 0; width: 75px; font-size: 14px; color: #ff6f3d; text-decoration: underline; line-height: 1; margin-top: -7px; cursor: pointer; top: 50%; text-align: right; }
+
+.head{ background: white; height: 199px; position: relative; z-index: 888}
+.shop_index.head{ height: 41px; overflow: hidden; }
+.head .top{ height: 40px; border-bottom: 1px solid #ebebeb; line-height: 40px; font-size: 14px }
+.head .top .userinfo .info{ min-width: 300px; display: none; }
+.head .top .userinfo .info img{ float: left; width: 24px; height: 24px; margin-top: 7px; margin-right: 10px; border-radius: 50%; behavior:url(PIE.htc); }
+.head .top .userinfo .info a{ float: left; margin-left: 20px; cursor: pointer; }
+.head .top .userinfo .info p:after{ content: ""; display: inline-block; border: 4px solid transparent; border-top: 6px solid #abacb6; margin-left: 9px; margin-bottom: -3px; display: none; }
+.head .top .userinfo .log{ display: none; }
+.head .top .userinfo .log a{ float: left; color: #ff6f3d; margin-right: 20px }
+.head .top .userinfo .log a:hover{ text-decoration: underline; }
+.head .top .btns a{ cursor: pointer; }
+.head .top .btns b{ margin: 0 20px; height: 14px; border-right: 1px solid #cbcbcb; display: inline-block; margin-bottom: -2px }
+.head .cen{ height: 108px }
+.head .cen .con .ewm{ position: absolute; right: 0; top: -3px; border: none; padding: 0; margin: 0 }
+.head .cen .con .ewm span{ margin-top: 29px; text-align: center; width: 30px }
+.head .cen img{ display: inline-block; vertical-align: middle; }
+.head .cen .address{ display: inline-block; float: left; line-height: 108px; margin-left: 10px; font-size: 20px }
+.head .cen .search{ margin: auto; width: 645px; padding-top: 17px }
+.head .cen .search .search_p{ height: 40px; width: 643px; border: 2px solid #ff6f3d; background: #ff6f3d ; position: relative;}
+.head .cen .search .search_p:before{ content: ""; position: absolute; height: 40px; width: 40px; background:url(../images/icon/search_icon.png) 14px center no-repeat white; z-index: 2 }
+.head .cen .search .search_p .inp{ width: 568px; text-indent: 45px; font-size: 16px; line-height: 40px; height: 40px }
+.head .cen .search .search_p .se_btn{ color: white; width: 75px; text-align: center; height: 40px; line-height: 40px; cursor: pointer; background: #ff6f3d }
+.head .cen .search .quick_btns{ width: 900px }
+.head .cen .search .quick_btns a{ float: left; margin-right: 38px; margin-top: 11px }
+.head .bot{ height: 50px; line-height: 50px; background: #ff6f3d }
+.head .bot .nav{ font-size: 20px; text-align: center }
+.head .bot .nav .all_dis{ width: 230px}
+.head .bot .nav .all_dis p{ height: 50px; background:url(../images/icon/icon_menu.png) black; text-indent: 56px; color: white; text-align: left; }
+.head .bot .nav .all_dis .list{ height: 350px; background: white ; display: none; position: absolute; width: 230px}
+.head .bot .nav .all_dis .list.show,.head .bot .nav .all_dis:hover .list{ display: block; }
+.head .bot .nav .all_dis .list a{ display: block; height: 46px; line-height: 46px; border-bottom: 1px solid #ebebeb; font-size: 16px; text-align: left; margin: 0 20px }
+.head .bot .nav>a{ float: left; width: 138px; color: white; cursor: pointer;}
+.head .bot .nav>a.active,.head .bot .nav>a:hover{ background: #e8673a; color: white }
+
+.footer{ height: 275px; background: white; border-top: 1px solid #e3e3e3;}
+.footer .foot{ width: 1028px; margin: auto; }
+.footer .foot .left{ float: left; }
+.footer .foot .left .btns{ margin: 50px 0; height: 16px; line-height: 16px }
+.footer .foot .left .btns a{ float: left; margin-right: 60px; cursor: pointer; }
+.footer .foot .left .btns a:after{ content: ""; float: right; height: 16px; margin-right:-30px; border-right:1px solid #cecece; }
+.footer .foot .left .btns a.last:after{ display: none; }
+.footer .foot .left .contact .text{ font-size: 12px; color: #888 }
+.footer .foot .left .contact .text span{ font-size: 16px; color: #1c1c1c; margin-right: 5px }
+.footer .foot .left .contact .tel{ background: url(../images/icon/footer_tel.png) no-repeat; height: 22px; font-size: 30px; line-height: 22px; text-indent: 38px; margin-top: 12px }
+.footer .foot .ewm{ float: right; width: 500px}
+.footer .foot .ewm p,.head .cen .ewm{ width: 154px; height: 94px; float: left; margin-top: 30px; margin-left: 30px; border: 1px solid #e3e3e3; border-radius: 3px; padding: 28px }
+.footer .foot .ewm p span,.head .cen .ewm span{ display: inline-block; vertical-align: middle; width: 14px; font-size: 14px; color: #6e6e6e; line-height: 1; text-align: center; margin-left: 7px }
+.footer .foot .ewm p.f span{ margin-top: 24px; width: 30px }
+.footer .foot .ewm p img,.head .cen .ewm img{ float: right; width: 94px; height: 94px }
+.footer .foot .bq{ font-size: 14px; color: #888; text-align: center; padding-top: 30px }
+.head .cen .ewm{ width: 140px }
+.head .cen .ewm img{ margin-top: 10px }
+
+.promptp{ position: fixed; background: white; border-radius: 8px; left: 50%; top: 50%; width: 270px; height: 146px; margin-top: -73px; margin-left: -135px; z-index: 1001; text-align: center; }
+.promptp .title{ text-align: center; line-height: 80px; height: 80px; font-size: 20px }
+.promptp a{ display: inline-block; width: 98px; height: 38px; margin: 0 10px; border: 1px solid #ff6f3d; color: white; background: #ff6f3d; border-radius: 5px; text-align: center; line-height: 38px; cursor: pointer;}
+.promptp a.canle{ background: white; color: #ff6f3d }
+
+.con{ width: 1180px; margin: auto; position: relative;}
+.m_con{ width: 960px }
+.bgwhite{ background: white }
+.abtn{ color: white; background: #ff6f3d; text-align: center; }
+.r_top{ position: fixed; width: 70px; height: 70px; background: url(../images/icon/ic_up@2x.png); bottom: 100px; left: 50%; margin-left: 600px; z-index: 101; cursor: pointer; display: none; }
+.shadow{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; opacity: .5; filter: alpha(opacity=50); z-index: 1000; display: none; }
+.bg{ background: white }
+.hover_de{ cursor: default !important; text-decoration: none !important; }
+#prompt2{ text-indent: 95px }
+.ml0{ margin-left: 0 !important }
+#apply.none{ background: #888; cursor: default; }
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+.loading{ width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: 9999; background: url(../images/loading-go.gif) center center no-repeat; display: none; }
+@media screen and (max-width : 1280px) {
+	.index .business .list .btn{ left: -25px }
+	.index .business .list .rbtn{ right: -25px; left: initial; }
+	.r_top{ margin-left: 550px }
+}
+.yhxy{ cursor: pointer; }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+
+<body class="bg">
+
+    <section id='app' class='creat_shop has_head cert'>
+
+        <section class="head">
+            <a href="/index.html" class="back" :class='[active==1?"":"hide"]'></a>
+            <a href="addIdentityAuth.html" class="back" :class='[active==0?"":"hide"]'></a>
+            <p>资质认证</p>
+        </section>
+
+        <form :class='[active==0?"":"hide"]'>
+            <section class="form_group">
+                <p class="label label_long">
+                    <label>营业执照注册号</label>
+                    <input placeholder="点击输入" v-model="business_licence_num">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label label_long">
+                    <label>营业执照名称</label>
+                    <input placeholder="点击输入" v-model="business_licence_name">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label label_long">
+                    <label>营业执照地址</label>
+                    <input placeholder="点击输入" v-model="business_licence_address">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label label_long">
+                    <label>注册时间</label>
+                    <input placeholder="点击输入" type="date" v-model="business_licence_date">
+                </p>
+            </section>
+            <section class="form_group img_loader">
+                <p class="label">
+                    <label>上传营业执照图</label>
+                </p>
+                <uploader :get-file-han="getLicence" :old-imgs="licence_img" :max-length="2"></uploader>
+            </section>
+            <a v-on:click="submit" class="btn_submit">提交审核</a>
+        </form>
+        <section class="loading" :class='[active==1?"":"hide"]'>
+            <section class="icon"></section>
+            <p class="tips">审核中...</p>
+            <p class="num"><span>很快就好啦，请耐心等待~</span></p>
+        </section>
+    </section>
+
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/cert.js"></script>
+<html>

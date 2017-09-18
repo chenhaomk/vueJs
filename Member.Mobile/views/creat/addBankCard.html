@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+</head>
+
+<body class="bg">
+
+    <section id='app' class='creat_shop has_head add_bank' style="overflow: hidden;">
+
+        <section class="head">
+            <a class="back" href="addIdentityAuth.html"></a>
+            <p>添加银行卡</p>
+        </section>
+
+        <form>
+            <section class="form_group">
+                <p class="label">
+                    <label>持卡人姓名</label>
+                    <input placeholder="请输入姓名" v-model="card_holder">
+                </p>
+            </section>
+              <section class="form_group">
+                <p class="label">
+                    <label>身份证号</label>
+                    <input placeholder="请输入身份证号" v-model="bank_card_no" maxlength="20">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>银行卡号</label>
+                    <input placeholder="请输入银行卡号" v-model="bank_card_no" maxlength="20">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>所属银行</label>
+                    <input placeholder="所属银行" v-model="bank" :readonly="isRead">
+                </p>
+            </section>
+            <!--<section class="agreement" :class='[active==1?"hide":""]'>
+                <a class="checkbox" @click="checkbox" :class='ck'>我已阅读并同意</a><a href="#">用户协议</a>
+            </section>-->
+            <a class="btn_submit" v-on:click="next" :class="ck">下一步</a>
+        </form>
+
+    </section>
+
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/addBankCard.js"></script>
+<script src="/controllers/creat/bankBin.js"></script>
+<html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title>注册</title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <section id='app' class='member register has_head'>
+        
+        <section class="head">
+            <p>忘记密码</p>
+            <a class="close" href="login.html"></a>
+        </section>
+
+        <section class="forgot_pwd">
+            <form>
+                <section class="form_group">
+                    <p class="icon icon_phone">
+                        <input v-model="userId" v-on:blur="blurTip(userId,'phone')" placeholder="请输入手机号">
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p class="icon icon_pwd">
+                        <input type="password" v-model="pwd" v-on:blur="blurTip(pwd,'pwd')" v-on:focus='$event.target.value=""' placeholder="请输入密码">
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p class="icon icon_dpwd">
+                        <input type="password" v-model="dpwd" v-on:blur="blurTip(dpwd,'dpwd',pwd)" v-on:focus='$event.target.value=""' placeholder="请输入确认密码">
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p class="icon icon_vercode">
+                        <input v-model="vercode" type="number" placeholder="请输入验证码">
+                        <get-vercode :mobile="userId" :sms_type="'0006'"></get-vercode>
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p class="submit">
+                        <input type="submit" @click="submit($event)" value="确认">
+                    </p>
+                </section>
+            </form>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/user/forgotPwd.js"></script>
+<html>

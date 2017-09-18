@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+
+input,select,textarea{-webkit-appearance:none}
+*{ margin:0; padding:0; -webkit-tap-highlight-color:transparent}
+body, h1, h2, h3, h4, h5, h6, hr, p,blockquote,dl, dt, dd, ul, ol, li,pre,form, fieldset, legend, button,input, textarea,th, td,img{border:medium none;margin: 0;padding: 0; outline:none;}
+body,button, input, select, textarea {font: 14px/1.5; outline:none;}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+
+em{font-style:normal;}
+ul, ol,li { list-style: none; }
+a { text-decoration: none}
+a:hover{ outline:none;}
+img{ border:0px;}
+table { border-collapse: collapse; border-spacing: 0; }
+html{ height:100%}
+html,body{ color:#5c5c5c; min-height:100%; width:100%; overflow:hidden; overflow-y:auto; max-width:100%; left:0; right:0; position:relative}
+.clear{ clear:both;}
+.fn-clear:after{ content:""; display:block; clear:both}
+.hide{ display:none}
+.text-sl{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+body{    max-width: 7.5rem;
+    margin: auto;}
+/* ******************************** index ********************************
+
+.home .header{ margin: 0 1.5rem ; position: absolute; z-index: 2; margin-top: .8rem; width: calc(100% - 3rem); height: 3rem}
+.home .header div{ float: left; }
+.home .header .address{ width: 5.4rem; height: 3rem; line-height: 3rem; color:white; font-size:1.5rem; position: relative; margin-right: 1.5rem}
+.home .header .address p{ width: 4.5rem }
+.home .header .address:after{ content: ""; position: absolute; right: 0; border: 4px solid transparent; border-top: 7px solid white; top: 50%; margin-top: -3px }
+.home .header .search{ width: 20rem; height: 3rem; position: relative;}
+.home .header .search:before{ content: ""; width: 100%; height: 100%; position: absolute; background: white; opacity: .9; border-radius: 25px}
+.home .header .search input{ position: relative; z-index: 2; margin-left: 1.3rem; line-height: 3rem; height: 3rem; font-size: 1.4rem; background:url(../images/icon/ic_search_xxh.png) left center no-repeat; background-color: none; padding-left:1.8rem; background-size : 1.3rem auto }
+.home .header .user{ float: right; width: 3rem; height: 3rem; background:url(../images/icon/ic_user_xxh.png) center center no-repeat; background-size: auto 2rem}
+.home .banner{ height: 15rem }
+.home .banner img{ width: 100%; height: 100% }
+.home .banner.swiper-container-horizontal .swiper-slide a{ position: relative; display: block; width: 100%; height: 100%}
+.home .banner.swiper-container-horizontal .swiper-slide a:before{ content: ""; position: absolute; width: 100%; height: 10rem; background:url(../images/index/home_shadow.png) repeat-x; background-size: auto 100%}
+.home .banner.swiper-container-horizontal>.swiper-pagination-bullets{ height: .7rem; top: 13.4rem; line-height: .7rem }
+.home .banner.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{ width: .7rem; height: .7rem; margin: 0 .45rem; background: white; opacity: .5}
+.home .banner.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet-active{ opacity: 1 }
+.home .main{ margin: 0 1.5rem }
+.home .main .title{ margin: 2.5rem 0 1.5rem; font-size: 2rem; line-height: 2rem; color: #1c1c1c }
+.home .main .title .more{ float: right; font-size: 1.4rem; color: #ff6f3d; padding-right: 1.05rem; background:url(../images/icon/ic_arrow_xxh.png) right center no-repeat; background-size: .55rem auto}
+.home .main .shop .hot{ height: 17rem ; position: relative;}
+.home .main .shop .hot img{ box-sizing: border-box; border: 1px solid #dddddd; width: 100%; height: 100% ; border-radius: 3px}
+.home .main .shop .hot:before{ content: ""; position: absolute; height: 6rem; width: 100%; bottom: 0; background:url(../images/index/hot_shadow.png) repeat-x; background-size: auto 100%; z-index: 2}
+.home .main .shop .hot .text{ position: absolute; z-index: 3 }
+
+
+
+input,select,textarea{-webkit-appearance:none} */
+
+.prompt{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 11000; display: none;opacity:0;-webkit-transform: translate3d(0, 0, 0) scale(1.185);transform: translate3d(0, 0, 0) scale(1.185);-webkit-transition-property: -webkit-transform, opacity;transition-property: transform, opacity; }
+.prompt.show{ opacity:1; display:block;-webkit-transition-duration: 400ms;transition-duration: 400ms;-webkit-transform: translate3d(0, 0, 0) scale(1);transform: translate3d(0, 0, 0) scale(1); }
+.prompt.hide{ display: none;opacity: 0;z-index: 10999;-webkit-transition-duration: 400ms;transition-duration: 400ms;-webkit-transform: translate3d(0, 0, 0) scale(0.815);transform: translate3d(0, 0, 0) scale(0.815); }
+.prompt .shadow_b{ position: absolute; width: 100%; height: 100%; background: black; opacity: .5 }
+.prompt .text{ position: absolute; z-index: 2; top: 4.4rem; text-align: center; width: 100% }
+.prompt .text p{ display: inline-block; background: white; border-radius: .1rem; line-height: .5rem; padding: .3rem .8rem; font-size: 0.32rem; max-width: calc(100% - 2.2rem)}
+
+

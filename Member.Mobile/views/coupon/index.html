@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    
+    <section id='app' class='discount detail has_head'>
+
+        <section class="head" v-show="ttIsShow">
+            <a class="back" :href="returnUrl"></a>
+            <p>{{detail.business_name}}</p>
+        </section>
+
+        <section class="header" v-show="ttIsShow">
+            <img :src="detail.img_path">
+        </section>
+        
+        <section class="con title" v-show="ttIsShow">
+            <h2 v-if="detail.type == 2">{{detail.discount}}元抵扣券</h2>
+            <h2 v-else-if="detail.type == 0">{{detail.discount}}元代金券</h2>
+            <h2 v-else>{{detail.rate*10}}折折扣券</h2>
+            <p>{{gz}}</p>
+        </section>
+
+        <section class="con shop_info" v-show="ttIsShow">
+            <h3>发布商家</h3>
+            <p class="shop_name text-sl"><a href="">{{detail.business_name}}</a></p>
+            <a class="phone" :href="'tel:'+detail.business_phone"></a>
+            <star :score='detail.business_star'></star>
+            <a class="address"><span class="text-sl">{{detail.business_address}}</span></a>
+        </section>
+
+        <section class="notice" v-show="ttIsShow">
+            <h3>使用规则</h3>
+            <ul>
+                <li>使用时间：{{detail.stime}}</li>
+                <li>使用条件：满{{detail.min_price}}可用</li>
+                <li>代金券使用：本产品不可叠加使用</li>
+                <li>退换货支持：本产品不支持退换货</li>
+            </ul>
+        </section>
+
+        <section class="bot_buy" v-show="ttIsShow">
+            <section class="buy" v-if="detail.type == 2">
+                ￥<span>{{money[0]}}</span>.{{money[1]}}<a @click="buyCoupon">立即抢购</a>
+            </section>
+            <a v-else-if="detail.already_get || btnIsShow" class="ylq">已领取</a>
+            <a @click="getCounpn" v-else>免费领取</a>
+        </section>
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/coupon/index.js"></script>
+<html>

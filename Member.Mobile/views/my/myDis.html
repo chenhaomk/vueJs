@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/swiper/swiper.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section class="height"></section>
+    <section id='app' class='order_dis my_dis'>
+
+        <section class="head">
+            <a href="/index.html?my=show" class="back"></a>
+            <p>我的优惠券</p>
+        </section>
+        
+        <section class="menu">
+            <p v-for="(a,index) of menu">
+                <a :class='[ind == index?"active":""]' v-on:click="menuSwitch(index)">{{a}}</a>
+            </p>
+        </section>
+        
+        <section class="dis_list" :class="isNo">
+            <dis v-for='a of discount' :is-my="'true'" :return-url="'/views/my/myDis.html'" :a='a'></dis>
+            <section v-show="scrollIsShow" class="infinite-scroll-preloader">
+               <section class="preloader"></section>
+            </section>
+        </section>
+        <a href="myExpiredDis.html" class="see_agin">查看过期优惠券</a>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/myDis.js"></script>
+<html>

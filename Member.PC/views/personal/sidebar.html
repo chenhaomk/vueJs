@@ -1,0 +1,23 @@
+<div id="sidebar">
+    <a href="/views/personal/seting.html" class="btn_set"></a>
+    <img src="/assets/images/personal/ic_bg_user_xxh.png" class="photo" alt="">
+    <p class="name"></p>
+    <div class="menu">
+        <a href="statistics.html" class="pur">
+            <p>钱包</p>
+        </a>
+        <a href="coupon.html" class="dis">
+            <p>优惠券</p>
+        </a>
+        <a href="order.html" class="ord">
+            <p>订单</p>
+        </a>
+        <a href="purHistory.html" class="his">
+            <p>消费记录</p>
+        </a>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#sidebar .photo").attr("src",$("#userinfo .info img").attr("src"));
+    $("#sidebar .name").text($("#userinfo .info p").text());
+</script>

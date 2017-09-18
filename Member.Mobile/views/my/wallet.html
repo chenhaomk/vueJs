@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/swiper/swiper.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='pur_history has_head'>
+
+        <section class="head">
+            <a class="back"></a>
+            <p>消费记录</p>
+        </section>
+        
+        <section class="ph_list">
+            <ul>
+                <li v-for='a of list' class="fn-clear">
+                    <img src="/assets/images/index/demo3.jpg">
+                    <section class="text">
+                        <p class="title">{{a.title}}</p>
+                        <p class="time">2017.7.10 12:11</p>
+                        <p class="price">
+                            ￥<span>80</span>
+                            <a href="">去评价</a>
+                        </p>
+                    </section>
+                </li>
+            </ul>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/wallet.js"></script>
+<html>

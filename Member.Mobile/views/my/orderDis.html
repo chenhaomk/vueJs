@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section class="height"></section>
+    <section id='app' class='order_dis'>
+
+        <section class="head">
+            <a href="/index.html?my=show" class="back"></a>
+            <p>优惠券订单</p>
+        </section>
+        
+        <section class="menu">
+            <p v-for="(a,index) of menu">
+                <a :class='[ind == index?"active":""]' v-on:click="menuSwitch(index)">{{a}}</a>
+            </p>
+        </section>
+        
+        <section class="dis_list" :class="isNo">
+            <order-list v-for='a of list' :get-detail="getDetaile" :now="now" :a='a'></order-list>
+            <section v-show="scrollIsShow" class="infinite-scroll-preloader">
+               <section class="preloader"></section>
+            </section>
+        </section>
+        <a href="orderExpiredDis.html" class="see_agin">查看过期订单</a>
+    
+        <scetion class="sub_page order_dis_detail" :class="detailIsShow">
+            <section class="head">
+                <a class="back" @click="detailIsShow=''"></a>
+                <p>优惠券订单详情</p>
+            </section>
+            
+            <section class="info">
+                <section class="dis_info fn-clear">
+                    <img :src="orderDetail.img_path">
+                    <a :href="'/views/coupon/index.html?returnUrl=/views/my/orderDis.html&bid='+orderDetail.business_id+'&id='+orderDetail.coupon_activity_id"><section class="text" :class="{isuse:orderDetail.status==1}">
+                        <p class="type">{{orderDetail.is_share?'共享券':'专属券'}}</p>
+                        <p class="price"><span>{{orderDetail.price}}</span>元 <span>{{orderDetail.discount}}元</span></p>
+                    </section></a>
+                </section>
+
+                <section class="my_comment hide">
+                    <p class="t">我的评价</p>
+                    <p class="title">小胖日式烤肉店(复城店）</p>
+                    <section class="score_star">
+                        <a class="active"></a>
+                        <a class="active"></a>
+                        <a class="active"></a>
+                        <a class="active"></a>
+                        <a></a>
+                        <label>4.0分</label>
+                    </section>
+                    <p class="content">吃的还好，就是空调坏了，太热了。吃的还好，就是空调坏了，太热了。</p>
+                </section>
+                
+                <section class="shop_info">
+                    <section class="nouse" v-if="{isuse:orderDetail.status!=1}">
+                        <p class="t">发券商家</p>
+                        <a class="phone" :href="'tel:'+orderDetail.business_phone"></a>
+                        <p class="title">{{orderDetail.business_name}}</p>
+                        <a class="address">{{orderDetail.business_address}}</a>
+                    </section>
+                    <section class="ause" v-else>
+                        <p class="t">商家信息</p>
+                        <p class="arow">
+                            发券商家
+                            <span class="text-sl">{{orderDetail.business_name}}</span>
+                        </p>
+                        <p class="arow">
+                            消费商家
+                            <span class="text-sl">{{orderDetail.use_business_name}}</span>
+                        </p>
+                    </section>
+                </section>
+                <section class="order_detail">
+                    <p class="t">订单详情</p>
+                    <p>
+                        <label>订单号：</label>
+                        {{orderDetail.coupon_id}}
+                    </p>
+                    <p>
+                        <label>下单时间：</label>
+                        {{orderDetail.cTime}}
+                    </p>
+                    <p>
+                        <label>实付：</label>
+                        ￥{{orderDetail.price}}
+                    </p>
+                </section>
+            </section>
+            
+            <a class="again hide" href="">再来一张</a>
+        </scetion>
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/orderDis.js"></script>
+<html>

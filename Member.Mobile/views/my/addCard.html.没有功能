@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='creat_shop add_card has_head'>
+
+        <section class="head">
+            <a class="back"></a>
+            <p>添加银行卡</p>
+        </section>
+        
+        <form>
+            <section class="form_group">
+                <p class="label">
+                    <label>持卡人姓名</label>
+                    <input placeholder="请输入持卡人姓名">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>银行卡号</label>
+                    <input placeholder="您本人的银行卡号">
+                </p>             
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>所属银行</label>
+                    <input placeholder="自动识别">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>预留手机</label>
+                    <input placeholder="请输入预留手机号码">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label vercode">
+                    <label>验证码</label>
+                    <input placeholder="点击输入">
+                    <a>获取验证码</a>
+                </p>
+            </section>
+            <a href="" class="btn_submit">下一步</a>
+        </form>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/my/addCard.js"></script>
+<html>
+ 

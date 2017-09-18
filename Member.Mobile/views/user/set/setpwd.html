@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body class="bg">
+    
+    <section id='app' class='member updatephone setpwd has_head'>
+        
+        <section class="head">
+            <a class="back"></a>
+            <p>设置密码</p>
+        </section>
+
+        <section class="form">
+            <form>
+                <section class="form_group">
+                    <p>
+                        用户名：<input value="13334567891" readonly class="nowid">
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p>
+                        <input id='pwd' type="password" v-on:focus='$event.target.value=""' name="pwd" placeholder="请输入密码">
+                    </p>
+                </section>
+                <section class="form_group nobor">
+                    <p>
+                        <input id='npwd' type="password" v-on:focus='$event.target.value=""' name="npwd" placeholder="请输入确认密码">
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p class="submit">
+                        <input type="submit" id='submit' name="submit" value="确认修改">
+                    </p>
+                </section>
+            </form>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/user/setpwd.js"></script>
+<html>

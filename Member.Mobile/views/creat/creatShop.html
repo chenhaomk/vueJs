@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/sui/sm.min.css" rel='stylesheet' type="text/css">
+
+
+</head>
+
+<body class="bg">
+
+    <section id='app' class='creat_shop has_head'>
+
+        <section class="head">
+            <a class="back" href="creatShopB.html"></a>
+            <p>创建门店</p>
+        </section>
+
+        <form>
+            <section class="form_group">
+                <p class="label">
+                    <label>商家名称</label>
+                    <input placeholder="请输入门店名称" v-model="name">
+                    
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>商家城市</label>
+                    <!-- <span class="sel_text nosel">请选择</span> -->
+                    <!-- <input value="四川省 成都市 锦江区" id="city-picker" class="sel_text nosel" > -->
+                    <span class="sel_text nosel" id="city-picker">{{city}}</span>
+                    <p class="text-sl">{{city}}</p>
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>详细地址</label>
+                    <input placeholder="请输入详细地址" v-model="address">
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>所在商圈</label>
+                    <span class="sel_text nosel" id="filter_address">{{filterAddress}}</span>
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>商家电话</label>
+                    <input placeholder="座机号需填写区号" v-model="mobile" >
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>经营类别</label>
+                    <span class="sel_text nosel" id="filter_shop">{{filterShop}}</span>
+                </p>
+            </section>
+            <section class="form_group img_loader">
+                <p class="label">
+                    <label>门头照<span>凡上传图片大小不能超过4M</span></label>
+                </p>
+                <uploader :get-file-han="getDataDoor" :old-imgs="face_img" :max-length="1"></uploader>
+            </section>
+            <section class="form_group img_loader">
+                <p class="label">
+                    <label>内景图</label>
+                </p>
+                <uploader :get-file-han="getDataInner" :old-imgs="inner_imgs" :max-length="4"></uploader>
+            </section>
+            <section class="form_group img_loader">
+                <p class="label">
+                    <label>商家logo</label>
+                </p>
+                <uploader :get-file-han="getDataLogo" :old-imgs="logo_img" :max-length="1"></uploader>
+            </section>
+            <a class="btn_submit" v-on:click="next">下一步</a>
+        </form>
+
+    </section>
+
+</body>
+<script src="https://webapi.amap.com/maps?v=1.3&key=a9506f1b1e66b4e85d7e15c8461ca4d4&plugin=AMap.CitySearch"></script>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/creatShop.js"></script>
+<html>
