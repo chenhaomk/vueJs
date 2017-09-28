@@ -109,7 +109,8 @@ require(['config'], function () {
                     vm.bank_card_no = that.bank_card;
                     vm.bank = that.bank;
                 }
-            });
+            }); 
         }
     });
 });
+

@@ -185,7 +185,6 @@ require(['config'],function(){
                         del : function(index){
                             n_img.splice(index,1);
                             oldIm.splice(index,1);
-                            hasNi = false;
                         },
                         maxSize : 4,
                         om : data.inner_imgs
@@ -671,7 +670,10 @@ require(['config'],function(){
                 $.fn.uploadImg(f_img,function(d){
                     f_img = d[0];
                     for(var i=0;i<n_img.length;i++){
-                        if(typeof(n_img[i]) == "string")n_img.splice(i,1);
+                        if(typeof(n_img[i]) == "string"){
+                            n_img.splice(i,1);
+                            i--;
+                        }
                     }
                     if(n_img.length == 0){
                         n_img = d;
@@ -698,7 +700,10 @@ require(['config'],function(){
                 $.fn.uploadImg(l_img,function(d){
                     l_img = d[0];
                     for(var i=0;i<n_img.length;i++){
-                        if(typeof(n_img[i]) == "string")n_img.splice(i,1);
+                        if(typeof(n_img[i]) == "string"){
+                            n_img.splice(i,1);
+                            i--;
+                        }
                     }
                     if(n_img.length == 0){
                         n_img = d;

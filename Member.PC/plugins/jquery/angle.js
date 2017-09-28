@@ -270,6 +270,10 @@
                 }
             }
 
+            that.find("input").click(function(){
+                $(this).val("");
+            });
+
             that.find("input").change(function(event) {
                 if(this.files && this.files[0]){
                     if(!/\.(gif|jpg|jpeg|bmp|png|GIF|JPG|JPEG|PNG|BMP)$/.test((this.files[0].name).substring((this.files[0].name).lastIndexOf("."))) || (this.files[0].type).indexOf("image/") == -1){
@@ -290,16 +294,6 @@
                         });
                         return;
                     }
-                    if(names[this.files[0].name]){
-                        $.fn.prompt({
-                            t : "该图片已存在!",
-                            ct : false,
-                            rt : "确定",
-                            noc : true
-                        });
-                        return;
-                    }
-                    names[this.files[0].name] = this.files[0].name;
                     that.children('.add').before('\
                         <div class="group">\
                             <a class="delete"></a>\
@@ -336,10 +330,10 @@
             that.on("click",".delete",function(){
                 var val = that.find("input").val();
                 delete names[val.substring(val.lastIndexOf("\\")+1)];
-                $(this).parent().remove();
                 that.children('.add').show();
                 that.find("input").val("");
                 a.del($(this).parent().index());
+                $(this).parent().remove();
             });
         },
         formatImgName : function(url){
@@ -674,6 +668,7 @@
                         rt : "确定",
                         noc : true
                     });
+                    $.fn.loading(false);
                 });
 
             }

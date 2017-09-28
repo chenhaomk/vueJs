@@ -33,9 +33,8 @@ require(['config'], function () {
                     praram.verification_code = that.vercode;
                     if (that.email.length > 0)
                         praram.email = that.email;
-                    //API文档未给出，暂时不写
-                    // if (that.salesmanCode.length > 0)
-                    //     praram.salesmanCode = that.salesmanCode;
+                     if (that.salesmanCode.length > 0)
+                         praram.commissioner_id = that.commissioner_id;
                     var mid = ygg.getCookie("member_id");
                     if (mid != null || mid != "")
                         praram.member_id = mid;
