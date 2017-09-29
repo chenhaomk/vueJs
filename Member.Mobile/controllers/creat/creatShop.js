@@ -14,6 +14,7 @@ require(['config'], function () {
                     area_name: "",
                     business_circle_id: "",
                     business_circle_name: "",
+                    commissioner_id: "",
                     address: "",
                     industry_id: "",
                     industry_name: "",
@@ -386,10 +387,12 @@ require(['config'], function () {
             }
             param.face_img = vm.face_img_list;
             param.logo = vm.logo_img_list;
+            if (vm.commissioner_id.length > 0)
+                param.commissioner_id = vm.commissioner_id;
             ygg.ajax("/business/addBusinessCheckTwo", param, function (data) {
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
-                } else if (data.status == "success") {
+                } else if (data.status == "success") {debugger;
                     su = true;
                     ygg.setCookie("business_check_id", data.data.business_check_id);
                     //ygg.prompt("商家创建成功！");

@@ -26,7 +26,7 @@
                 <p class="label">
                     <label>商家名称</label>
                     <input placeholder="请输入门店名称" v-model="name">
-                    
+
                 </p>
             </section>
             <section class="form_group">
@@ -53,13 +53,19 @@
             <section class="form_group">
                 <p class="label">
                     <label>商家电话</label>
-                    <input placeholder="座机号需填写区号" v-model="mobile" >
+                    <input placeholder="座机号需填写区号" v-model="mobile">
                 </p>
             </section>
             <section class="form_group">
                 <p class="label">
                     <label>经营类别</label>
                     <span class="sel_text nosel" id="filter_shop">{{filterShop}}</span>
+                </p>
+            </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>客服号码</label>
+                    <input v-model="commissioner_id" v-on:blur="blurTip(commissioner_id,'phone')" placeholder="客服号码(选填)">
                 </p>
             </section>
             <section class="form_group img_loader">

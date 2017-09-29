@@ -18,7 +18,6 @@ require(['config'],function(){
 
         $("#register").click(function(event) {
             event.preventDefault(); 
-            window.event.returnValue = false;
 
             if($(this).hasClass('no'))return;
 
@@ -36,7 +35,6 @@ require(['config'],function(){
     			$(".prompt").text("请输入正确邮箱！");
     			return;
     		}
-
     		$.fn.getData({
                 url : "/business/addBusinessCheckOne",
                 data : {

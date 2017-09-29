@@ -25,8 +25,8 @@ define(['axio', 'vue'], function (axio, Vue) {
         }
     }, 1);
 
-    //axio.defaults.baseURL = '192.168.1.130:8082';
-    axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
+    axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.0';
+    //axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
     var ygg = {};
     ygg.maxImgSize = 10485760;
     ygg.ajax = function (url, data, callback) {
@@ -769,6 +769,15 @@ define(['axio', 'vue'], function (axio, Vue) {
                 historyUrl: "/views/my/purHistory.html"
             }
         },
+        computed : {
+            aurl : function(){
+                var a = "/views/user/login.html";
+                if(ygg.getCookie("member_id")){
+                    a = "/views/user/set/disSet.html"
+                }
+                return a;
+            }
+        },
         template: '<section class="my">' +
             '<section class="top">' +
             '<a href="/views/user/set/seting.html" v-show="user.nickName" class="set"></a>' +
@@ -791,7 +800,7 @@ define(['axio', 'vue'], function (axio, Vue) {
             '</section>' +
             '<section class="ot">' +
             '<a href="/views/my/myCard.html" v-if="user.is_expand">邀请商家入驻</a>' +
-            '<a href="/views/user/set/disSet.html" v-else>申请为商户发展人</a>' +
+            '<a :href="aurl" v-else>申请为商户发展人</a>' +
             '<a href="/views/creat/register.html">免费入驻为商家</a>' +
             '</section>' +
             '</section>',
@@ -1037,6 +1046,113 @@ define(['axio', 'vue'], function (axio, Vue) {
                 var bool = (this.imgs).isHav(a);
                 bool ? alert('该图片已上传') : this.imgs.push(a);
                 this.getFileHan(this.uFiles, a.src, 0);
+            },
+            dele: function (e, s, i) {
+                var j = 0;
+                if (this.imgs.length > this.uFiles.length)
+                    j = this.imgs.length - this.uFiles.length;
+                this.imgs.remove(s);
+                this.isAdd = true;
+                if (s.indexOf("https://") < 0) //.src
+                    this.uFiles.splice(i - j, 1);
+                this.getFileHan(this.uFiles, s, 1); //.src
+            }
+        }
+    });
+
+    ygg.template.imgList2 = Vue.extend({
+        props: {
+            imgData: {},
+            deleteImg: Function,
+            index: 0
+        },
+        template: '<section class="img_group">\
+                        <a class="delete" @click="deleteImg($event,imgData,index)"></a>\
+                        <p><img :src="imgData.src" :style="style"></p>\
+                    </section>',
+        computed: { //.src
+            style: function () {
+                var s = "",
+                    bl = 7.5 * rem,
+                    a = this.imgData;
+
+                if (a.width > a.height) {
+                    bl = bl / a.height;
+                    s = "width:" + bl * a.width + "px;height:100%;margin-left:" + -(bl * a.width - 7.5 * rem) / 2 + "px;object-fit: cover;";
+                } else {
+                    bl = bl / a.width;
+                    s = "height:100%;width:100%;margin-top:" + -(bl * a.height - 7.5 * rem) / 2 + "px;object-fit: cover;";
+                }
+
+                return s;
+            }
+        }
+    });
+
+    ygg.template.uploader2 = Vue.extend({
+        props: {
+            getFileHan: Function,
+            isOne: String,
+            maxLength: {
+                type: Number,
+                default: 50
+            }
+        },
+        template: '<section class="uploader">\
+                        <img-list :deleteImg="dele" v-for="(a,index) of imgs" :index="index" :imgData="a" ></img-list>\
+                        <section class="add" v-show="isAdd"><input type="file" accept="image/*" v-on:change="getFile($event)" multiple></section>\
+                    </section>',
+        components: {
+            imgList: ygg.template.imgList2
+        },
+        data: function () {
+            return {
+                uFiles: [],
+                isAdd: true,
+                imgs: []
+            }
+        },
+        methods: {
+            getFile: function (e) {
+                var that = this;
+                for (var i = 0; i < e.target.files.length; i++) {
+                    if (!/\.(gif|jpg|jpeg|bmp|png|GIF|JPG|JPEG|PNG|BMP)$/.test((e.target.files[i].name).substring((e.target.files[i].name).lastIndexOf(".")))) {
+                        ygg.prompt("图片格式不正确!");
+                        ygg.loading(false);
+                        return;
+                    }
+                    if (this.isOne) {
+                        if (i > 0) return;
+                    }
+                    if (this.uFiles.length > this.maxLength) return;
+                    var file = e.target.files[i];
+                    if (file.size > ygg.maxImgSize) {
+                        ygg.prompt("图片大于10M，请压缩后再上传！");
+                        ygg.loading(false);
+                        return;
+                    }
+                    this.uFiles.push(file);
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function (e) {
+                        var img = new Image();
+                        img.src = this.result;
+                        img.onload = function () {
+                            that.addImg({
+                                src: this.src,
+                                width: this.width,
+                                height: this.height
+                            });
+                        }
+                    }
+                }
+                e.target.value = "";
+            },
+            addImg: function (a) {
+                var bool = (this.imgs).isHav(a);
+                bool ? alert('该图片已上传') : this.imgs.push(a);
+                this.getFileHan(this.uFiles, a.src, 0);
+                if (this.uFiles.length >= this.maxLength) this.isAdd = false;
             },
             dele: function (e, s, i) {
                 var j = 0;

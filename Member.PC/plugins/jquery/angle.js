@@ -17,9 +17,10 @@
         factory($);
     }
 }(function ($) {
+    
     window.ie8 = navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0";
-    window.local = "https://api.yingegou.com/v1.0";
-
+    // window.local = "https://api.yingegou.com/v1.0";
+    window.local = "http://119.23.10.30:9000/v1.0";
     if(!+'\v1' && !'1'[0]){ 
         
     }
@@ -263,9 +264,9 @@
                         ');
                     }
                     if(a.maxSize >= a.om.length){
-                        that.children('.add').show();
-                    }else{
                         that.children('.add').hide();
+                    }else{
+                        that.children('.add').show();
                     }
                 }
             }

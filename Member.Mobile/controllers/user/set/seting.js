@@ -60,18 +60,17 @@ require(['config'],function(){
                     su = false;
                 },
                 send : function(){
-                    if(isSend)return;
+                    ygg.loading(true);
                     var that = this;
                     if(that.imgs.length == 0 && that.content.length == 0){
                         ygg.prompt("请您说点什么或上传图片！");
+                        ygg.loading(false);
                         return;
                     }
                     if(su){
-                        isSend = true;
                         submit();
                         return;
                     }
-                    isSend = true;
                     ygg.uploadImg(that.imgs,function(names){
                         su = true;
                         that.names = names;
@@ -115,12 +114,11 @@ require(['config'],function(){
             },
             components : {
                 popup : ygg.template.popup,
-                uploader : ygg.template.uploader,
+                uploader : ygg.template.uploader2,
                 feedback : ygg.template.feedback
             }
         }),
         su = true,
-        isSend = false,
         member_id = ygg.getCookie("member_id"),
         popupEl = document.getElementById("popup");
 
@@ -142,7 +140,6 @@ require(['config'],function(){
                 imgs : vm.names
             },function(d){
                 vm.myfbShow = 'show';
-                ygg.loading(true);
                 ygg.ajax("/member/getMemberFeedBacks",{
                     member_id : member_id,
                     page : 1,

@@ -50,7 +50,7 @@
             <section class="buy" v-if="detail.type == 2">
                 ￥<span>{{money[0]}}</span>.{{money[1]}}<a @click="buyCoupon">立即抢购</a>
             </section>
-            <a v-else-if="detail.already_get || btnIsShow" class="ylq">已领取</a>
+            <a v-else-if="detail.already_get" class="ylq">已领取</a>
             <a @click="getCounpn" v-else>免费领取</a>
         </section>
     </section>

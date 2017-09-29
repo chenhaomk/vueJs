@@ -25,8 +25,8 @@ define(['axio', 'vue'], function (axio, Vue) {
         }
     }, 1);
 
-    //axio.defaults.baseURL = '192.168.1.130:8082';
-    axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
+    axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.0';
+    //axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
     var ygg = {};
     ygg.maxImgSize = 4194304;
     ygg.ajax = function (url, data, callback) {
@@ -796,6 +796,15 @@ define(['axio', 'vue'], function (axio, Vue) {
                 historyUrl: "/views/my/purHistory.html"
             }
         },
+        computed: {
+            aurl: function () {
+                var a = "/views/user/login.html";
+                if (ygg.getCookie("member_id")) {
+                    a = "/views/user/set/disSet.html"
+                }
+                return a;
+            }
+        },
         template: '<section class="my">' +
             '<section class="top">' +
             '<a href="/views/user/set/seting.html" v-show="user.nickName" class="set"></a>' +
@@ -818,7 +827,7 @@ define(['axio', 'vue'], function (axio, Vue) {
             '</section>' +
             '<section class="ot">' +
             '<a href="/views/my/myCard.html" v-if="user.is_expand">邀请商家入驻</a>' +
-            '<a href="/views/user/set/disSet.html" v-else>申请为商户发展人</a>' +
+            '<a :href="aurl" v-else>申请为商户发展人</a>' +
             '<a href="/views/creat/register.html">免费入驻为商家</a>' +
             '</section>' +
             '</section>',
@@ -934,7 +943,7 @@ define(['axio', 'vue'], function (axio, Vue) {
                         <a class="delete" @click="deleteImg($event,imgData,index)"></a>\
                         <p><img :src="imgData" :style="style"></p>\
                     </section>',
-        computed: {//.src
+        computed: { //.src
             style: function () {
                 var s = "",
                     bl = 7.5 * rem,
@@ -971,7 +980,7 @@ define(['axio', 'vue'], function (axio, Vue) {
                         <img-list :deleteImg="dele" v-for="(a,index) of imgs" :index="index" :imgData="a" ></img-list>\
                         <section class="add" v-show="isAdd"><input type="file" accept="image/*" v-on:change="getFile($event)" multiple></section>\
                     </section>',
-        components: {//<section class="hide">{{imggs}}</section>\
+        components: { //<section class="hide">{{imggs}}</section>\
             imgList: ygg.template.imgList
         },
         data: function () {
@@ -1065,9 +1074,9 @@ define(['axio', 'vue'], function (axio, Vue) {
                     j = this.imgs.length - this.uFiles.length;
                 this.imgs.remove(s);
                 this.isAdd = true;
-                if (s.indexOf("https://") < 0)//.src
+                if (s.indexOf("https://") < 0) //.src
                     this.uFiles.splice(i - j, 1);
-                this.getFileHan(this.uFiles, s, 1);//.src
+                this.getFileHan(this.uFiles, s, 1); //.src
             }
         }
     });

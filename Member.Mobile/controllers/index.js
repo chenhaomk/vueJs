@@ -37,7 +37,6 @@ require(['config'],function(){
         	methods : {
         		openMenu : function(){
         			this.openUser = this.openShadow = "show";
-                    document.documentElement.style.overflow='hidden';
         		},
         		closeMeun : function(){
                     var that = this;
@@ -104,6 +103,8 @@ require(['config'],function(){
         },defaultCoupons = false;
 
         if(ygg.getCookie('member_id'))vm.$set(vm,"isLogin",true);
+
+        document.addEventListener('touchmove', function (e) {}, false);
         
         if(ygg.getQueryString("my")){
             vm.$set(vm,"openShadow","show");
@@ -114,8 +115,9 @@ require(['config'],function(){
         var citysearch = new AMap.CitySearch();
         citysearch.getLocalCity(function(status, result) {
             vm.city = (result.city).replace("市","");
-            $("#city-picker").val(result.province+" "+result.city);
-            $("#city-picker").cityPicker({
+            $("#city-picker").val("成都市");
+            //$("#city-picker").val(result.province+" "+result.city);
+            /*$("#city-picker").cityPicker({
                 toolbarTemplate: '<header class="bar bar-nav">\
                 <button class="button button-link pull-right close-picker">确定</button>\
                 <h1 class="title">选择地址</h1>\
@@ -141,7 +143,9 @@ require(['config'],function(){
                 }
             });
             filterData.area_id = result.adcode;
-            searchData.area_id = result.adcode;
+            searchData.area_id = result.adcode;*/
+            filterData.area_id = "510100";
+            searchData.area_id = "510100";
             ygg.setCookie('area_id',filterData.area_id);
 
             if(filterData.member_id){
@@ -178,6 +182,7 @@ require(['config'],function(){
         
         function getCoupons(cb,data){
             var sdata = data || filterData;
+            var sdd = data;
             ygg.loading(true);
             ygg.ajax('/home/getCouponHomeScreen',sdata,function(data){
                 ygg.loading(false);
@@ -204,11 +209,12 @@ require(['config'],function(){
                 }else{
                     if(!sdata)$(".home .main .discount .list").removeClass('none');
                 }
-                if(sdata){
+                if(sdata == sdd){
                     defaultCoupons = true;
                 }else{
                     defaultCoupons = false;
                 }
+                if(!defaultCoupons && data.coupons.length != 0)$(".home .main .discount .list").removeClass('none');
             });
         }
 

@@ -626,7 +626,11 @@ require(['config'],function(){
                 $(".prompt1").text("请输入合理的手机号码！");
                 return;
             }
-
+            var ygphone = $("#ygphone").val();
+            if(!(/^1[34578]\d{9}$/.test(ygphone)) && ygphone.length != 0){
+                $(".prompt").text("请输入正确的手机号！");
+                return;
+            }
             $.fn.loading(true);
 
             if(hasFi && hasNi && hasLi){
@@ -745,7 +749,8 @@ require(['config'],function(){
                         industry_id : b_type,
                         inner_imgs : n_img,
                         face_img : f_img,
-                        logo : l_img
+                        logo : l_img,
+                        commissioner_id : ygphone
                     },
                     result : function(data){
                         $.fn.loading(false);

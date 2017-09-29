@@ -91,7 +91,7 @@ body.bg{ background: url(../images/enter/register_bg.jpg) center top no-repeat }
 .register .prompt{ height: 14px; padding-top: 10px; line-height: 1; color: #f60000; font-size: 14px; text-align: center; }
 .register .title{ padding-top: 105px; line-height: 1; font-size: 50px; text-align: center; color: white }
 .register .text{ font-size: 30px; padding-top: 25px; color: white; text-align: center; line-height: 1.5 }
-.register .form{ position: absolute; width: 640px; height: 350px; background: url(../images/enter/register_po.png); top: 290px; left: 50%; margin-left: -320px }
+.register .form{ position: absolute; width: 640px; height: 417px; background: url(../images/enter/register_po.png); top: 290px; left: 50%; margin-left: -320px }
 .register.login .form{ height: 290px; background: url(../images/enter/login_po.png); top: 310px }
 .register .form form{ width: 505px; margin: 15px auto }
 .register .form form .xy{ margin: 10px 0 20px }

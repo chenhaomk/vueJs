@@ -33,7 +33,7 @@ require(['config'],function(){
                 }
             },
             components : {
-                uploader : ygg.template.uploader
+                uploader : ygg.template.uploader2
             }
         }),su = false,
         member_id = ygg.getCookie("member_id"),

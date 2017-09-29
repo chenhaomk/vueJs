@@ -18,6 +18,7 @@ require(['config'], function () {
                 methods: {
                     getCounpn: function () {
                         var that = this;
+                        if(!ygg.getCookie("member_id"))window.open("/views/user/login.html","_self");
                         ygg.ajax('/thirdPay/create_coupon_order', {
                             coupon_id: coupon_id,
                             member_id: ygg.getCookie("member_id")
