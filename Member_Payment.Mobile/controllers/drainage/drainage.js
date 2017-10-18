@@ -5,6 +5,29 @@ require(['config'], function () {
             imgurl = "https://img.yingegou.com/" + imgurl;
         if (main.getQueryString("img") != null && main.getSession("img") == null)
             main.setSession("img", imgurl);
+
+        //二维码兼容性添加
+        if (bussinessName == null || bussinessName == undefined || bussinessName == "") {
+            main.post("/thirdPay/create_pay",
+                data,
+                function (res) {
+                    if (res.status == 200) {
+                        var data = res.data.data;
+                        if (res == null) {
+                            main.prompt("二维码解析异常");
+                            return;
+                        }
+                        bussinessName = data.bussinessName;
+                        couponID = data.couponID;
+                        couponAID = data.couponAID;
+                        imgurl = data.imgurl;
+                        main.setSession("a_n", decodeURI(data.a_n));
+                        main.setSession("c_n", decodeURI(data.c_n));
+                    }
+                });
+        }
+
+
         var vm = new vue({
             el: "#app",
             data: {

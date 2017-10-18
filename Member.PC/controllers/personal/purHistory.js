@@ -64,10 +64,9 @@ require(['config'],function(){
                                     </td>\
                                     <td>￥'+data.pay_record_list[i].pay_total+'</td>\
                                     <td class="stime">'+$.fn.getd('Y.m.d H:i',data.pay_record_list[i].pay_date/1000)+'</td>\
-                                    <td class="btns"><a href="">去评价</a></td>\
                                 </tr>\
                             ');
-                        }
+                        }//<td class="btns"><a href="">去评价</a></td>\
                     }else{
                         $(".cont").addClass('empty');
                     }

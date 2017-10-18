@@ -13,12 +13,12 @@
     <section class="height"></section>
     <section id='app' class='has_head'>
 
-        <section class="head" v-clock>
+        <!-- <section class="head" v-clock>
             <a class="back" :href="'/views/shop/detail.html?returnUrl='+returnUrl+'&id='+businessId"></a>
             <p>评价（{{comment_list.length}}）</p>
-        </section>
+        </section> -->
 
-        <comment v-for='a of comment_list' :a='a'></comment>
+        <!-- <comment v-for='a of comment_list' :a='a'></comment> -->
         <section v-show="scrollIsShow" class="infinite-scroll-preloader">
            <section class="preloader"></section>
         </section>

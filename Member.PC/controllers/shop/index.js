@@ -34,7 +34,7 @@ require(['config'],function(){
                     }
 
                     $("#ct").text('相关优惠('+data.coupons.length+')');
-                    $("#cmp").text("评价("+data.comments.length+")");
+                    // $("#cmp").text("评价("+data.comments.length+")");
 
                     for(var i=0;i<data.business_details.detail_imgs.length;i++){
                         $("#content").append('<p><img src="'+data.business_details.detail_imgs[i]+'"></p>')
