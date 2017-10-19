@@ -12,7 +12,7 @@ function start() {
         var plen = request.url.replace('/', '').length;
         if (plen != 6)
             return;
-        var paramUrl = 'http://s.yingougou.com' + pathname;
+        var paramUrl = 'https://s.yingougou.com' + pathname;
 
         if (pathname.indexOf('.ico') >= 0)
             return;
