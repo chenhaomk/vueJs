@@ -1,120 +1,123 @@
-require(['config'],function(){
-    require(['vue','main','swiper'],function (Vue,ygg,Swiper) {
+require(['config'], function () {
+    require(['vue', 'main', 'swiper'], function (Vue, ygg, Swiper) {
 
-    	var vm = new Vue({
-        	el : "#app",
-        	data : {
-        		banner : [],
-        		shop : [],
-        		discount : [],
-        		user : {photo:"/assets/images/index/ic_bg_user_xxh.png"},
-        		openUser : "",
-                openShadow : '',
-                city : "",
-                business  : {},
-                filterType : "全部",
-                filterShop : "行业",
-                filterAddress : "所有商圈",
-                filterSort : "智能排序",
-                isShowMy : false,
-                isLogin : false,
-                searchShow : "",
-                searchVal : "",
-                hotSearch : [],
-                hisSearch : [],
-                islo : false,
-                scrollIsShow : true,
-                shopList : [],
-                scrollIsShow2 : false,
-                isSS : true,
-                isEmpty : ""
-        	},
-        	components : {
-        		my : ygg.template.my,
-        		dis : ygg.template.discount,
-                list : ygg.template.shopList
-        	},
-        	methods : {
-        		openMenu : function(){
-        			this.openUser = this.openShadow = "show";
-        		},
-        		closeMeun : function(){
-                    var that = this;
-                    if(this.openUser == "show"){
-                        this.openUser = this.openShadow = "";
-                    }
-                    window.history.pushState("", "title", "/");
-                    document.documentElement.style.overflow='auto';
-        		},
-                showSearch : function(){
-                    document.documentElement.style.overflow='hidden';
-                    this.$set(this,"searchShow","show");
-                    var that = this;
-                    if(this.hotSearch.length == 0){
-                        ygg.ajax('/home/getHistoryAndHotSearch',{
-                            member_id : filterData.member_id,
-                            area_id : filterData.area_id
-                        },function(data){
+        var vm = new Vue({
+                el: "#app",
+                data: {
+                    banner: [],
+                    shop: [],
+                    discount: [],
+                    user: {
+                        photo: "/assets/images/index/ic_bg_user_xxh.png"
+                    },
+                    openUser: "",
+                    openShadow: '',
+                    city: "",
+                    business: {},
+                    filterType: "全部",
+                    filterShop: "行业",
+                    filterAddress: "所有商圈",
+                    filterSort: "智能排序",
+                    isShowMy: false,
+                    isLogin: false,
+                    searchShow: "",
+                    searchVal: "",
+                    hotSearch: [],
+                    hisSearch: [],
+                    islo: false,
+                    scrollIsShow: true,
+                    shopList: [],
+                    scrollIsShow2: false,
+                    isSS: true,
+                    isEmpty: ""
+                },
+                components: {
+                    my: ygg.template.my,
+                    dis: ygg.template.discount,
+                    list: ygg.template.shopList
+                },
+                methods: {
+                    openMenu: function () {
+                        this.openUser = this.openShadow = "show";
+                    },
+                    closeMeun: function () {
+                        var that = this;
+                        if (this.openUser == "show") {
+                            this.openUser = this.openShadow = "";
+                        }
+                        window.history.pushState("", "title", "/");
+                        document.documentElement.style.overflow = 'auto';
+                    },
+                    showSearch: function () {
+                        document.documentElement.style.overflow = 'hidden';
+                        this.$set(this, "searchShow", "show");
+                        var that = this;
+                        if (this.hotSearch.length == 0) {
+                            ygg.ajax('/home/getHistoryAndHotSearch', {
+                                member_id: filterData.member_id,
+                                area_id: filterData.area_id
+                            }, function (data) {
 
+                                data = data.data;
+                                vm.$set(vm, "hotSearch", data.hot_search);
+                                vm.$set(vm, "hisSearch", data.search_history);
+                            });
+                        }
+                    },
+                    clearVal: function () {
+                        this.$set(this, "searchVal", "");
+                    },
+                    returni: function () {
+                        this.$set(this, "searchShow", "");
+                        document.documentElement.style.overflow = 'auto';
+                    },
+                    hots: function (bname) {
+                        searchData.business_name = bname;
+                        this.$set(this, "searchVal", bname);
+                        ygg.loading(true);
+                        ygg.ajax('/home/getSearchResult', searchData, function (data) {
+
+                            ygg.loading(false);
                             data = data.data;
-                            vm.$set(vm,"hotSearch",data.hot_search);
-                            vm.$set(vm,"hisSearch",data.search_history);
+                            vm.$set(vm, "isSS", false);
+                            vm.$set(vm, "shopList", data.businessArr);
+                            if (data.businessArr.length == 0) {
+                                vm.$set(vm, "isEmpty", "empty");
+                                vm.$set(vm, "isSS", true);
+                            }
                         });
                     }
-                },
-                clearVal : function(){
-                    this.$set(this,"searchVal","");
-                },
-                returni : function(){
-                    this.$set(this,"searchShow","");
-                    document.documentElement.style.overflow='auto';
-                },
-                hots : function(bname){
-                    searchData.business_name = bname;
-                    this.$set(this,"searchVal",bname);
-                    ygg.loading(true);
-                    ygg.ajax('/home/getSearchResult',searchData,function(data){
-
-                        ygg.loading(false);
-                        data = data.data;
-                        vm.$set(vm,"isSS",false);
-                        vm.$set(vm,"shopList",data.businessArr);
-                        if(data.businessArr.length == 0){
-                            vm.$set(vm,"isEmpty","empty");
-                            vm.$set(vm,"isSS",true);
-                        }
-                    });
                 }
-        	}
-        }),
-        firstOpen = true,
-        filterData = {
-            member_id : ygg.getCookie('member_id'),
-            page:1,
-            area_id:"",
-            size:10
-        },
-        searchData = {
-            member_id : filterData.member_id,
-            area_id : filterData.area_id,
-            business_name : "",
-            page : 1,
-            size : 10
-        },defaultCoupons = false;
+            }),
+            firstOpen = true,
+            filterData = {
+                member_id: ygg.getCookie('member_id'),
+                page: 1,
+                area_id: "",
+                size: 10
+            },
+            searchData = {
+                member_id: filterData.member_id,
+                area_id: filterData.area_id,
+                business_name: "",
+                page: 1,
+                size: 10
+            },
+            defaultCoupons = false;
 
-        if(ygg.getCookie('member_id'))vm.$set(vm,"isLogin",true);
+        if (ygg.getCookie('member_id')) vm.$set(vm, "isLogin", true);
 
         document.addEventListener('touchmove', function (e) {}, false);
-        
-        if(ygg.getQueryString("my")){
-            vm.$set(vm,"openShadow","show");
-            vm.$set(vm,"openUser","show");
-            document.documentElement.style.overflow='hidden';
+
+        if (ygg.getQueryString("my")) {
+            vm.$set(vm, "openShadow", "show");
+            vm.$set(vm, "openUser", "show");
+            document.documentElement.style.overflow = 'hidden';
         }
 
         var citysearch = new AMap.CitySearch();
-        citysearch.getLocalCity(function(status, result) {
-            vm.city = (result.city).replace("市","");
+        citysearch.getLocalCity(function (status, result) {
+            vm.city = (result.city).replace("市", "");
             $("#city-picker").val("成都市");
             //$("#city-picker").val(result.province+" "+result.city);
             /*$("#city-picker").cityPicker({
@@ -146,86 +149,86 @@ require(['config'],function(){
             searchData.area_id = result.adcode;*/
             filterData.area_id = "510100";
             searchData.area_id = "510100";
-            ygg.setCookie('area_id',filterData.area_id);
+            ygg.setCookie('area_id', filterData.area_id);
 
-            if(filterData.member_id){
-                ygg.ajax('/member/getPersonCenterInfo',{
-                    member_id : filterData.member_id
-                },function(data){
+            if (filterData.member_id) {
+                ygg.ajax('/member/getPersonCenterInfo', {
+                    member_id: filterData.member_id
+                }, function (data) {
 
                     data = data.data;
 
                     getTopData(data.business_id);
                     getFilter();
-                    getCoupons(function(d){
+                    getCoupons(function (d) {
                         console.dir(data)
-                        vm.$set(vm,"discount",d);
+                        vm.$set(vm, "discount", d);
                     });
 
-                    vm.$set(vm.user,"photo",data.head_portrait);
-                    vm.$set(vm.user,"nickName",data.nick_name);
-                    vm.$set(vm.user,"coupon_total",data.coupon_total);
-                    vm.$set(vm.user,"is_expand",data.is_expand);
+                    vm.$set(vm.user, "photo", data.head_portrait);
+                    vm.$set(vm.user, "nickName", data.nick_name);
+                    vm.$set(vm.user, "coupon_total", data.coupon_total);
+                    vm.$set(vm.user, "is_expand", data.is_expand);
 
-                    ygg.setCookie("select_setting",data.select_setting);
+                    ygg.setCookie("select_setting", data.select_setting);
 
                 });
-            }else{
+            } else {
                 getTopData();
                 getFilter();
-                getCoupons(function(data){
-                    vm.$set(vm,"discount",data);
+                getCoupons(function (data) {
+                    vm.$set(vm, "discount", data);
                 });
             }
-            
+
         });
-        
-        function getCoupons(cb,data){
+
+        function getCoupons(cb, data) {
             var sdata = data || filterData;
             var sdd = data;
             ygg.loading(true);
-            ygg.ajax('/home/getCouponHomeScreen',sdata,function(data){
+            ygg.ajax('/home/getCouponHomeScreen', sdata, function (data) {
                 ygg.loading(false);
                 data = data.data;
-                if(filterData.page > data.pages && data.pages != 0){
+                if (filterData.page > data.pages && data.pages != 0) {
                     $(".infinite-scroll-preloader").hide();
                     return;
-                }else if(data.pages <= 1){
-                    vm.$set(vm,"scrollIsShow",false);
+                } else if (data.pages <= 1) {
+                    vm.$set(vm, "scrollIsShow", false);
                 }
-                cb(data.coupons,data.pages);
+                cb(data.coupons, data.pages);
                 flag;
-                if(data.coupons.length == 0){
+                if (data.coupons.length == 0) {
                     $(".home .main .discount .list").addClass('none');
-                    getCoupons(function(data){
-                        vm.$set(vm,"discount",data);
-                    },{
-                        member_id : ygg.getCookie('member_id'),
-                        page:1,
-                        area_id:"510100",
-                        size:10
+                    getCoupons(function (data) {
+                        vm.$set(vm, "discount", data);
+                    }, {
+                        member_id: ygg.getCookie('member_id'),
+                        page: 1,
+                        area_id: "510100",
+                        size: 10
                     });
                     defaultCoupons = true;
-                }else{
-                    if(!sdata)$(".home .main .discount .list").removeClass('none');
+                } else {
+                    if (!sdata) $(".home .main .discount .list").removeClass('none');
                 }
-                if(sdata == sdd){
+                if (sdata == sdd) {
                     defaultCoupons = true;
-                }else{
+                } else {
                     defaultCoupons = false;
                 }
-                if(!defaultCoupons && data.coupons.length != 0)$(".home .main .discount .list").removeClass('none');
+                if (!defaultCoupons && data.coupons.length != 0) $(".home .main .discount .list").removeClass('none');
             });
         }
 
-        function getTopData(bid){
-            ygg.ajax('/home/getHomeTop',{
-                area_id : filterData.area_id,
-                business_id : bid
-            },function(data){
+        function getTopData(bid) {
+            ygg.ajax('/home/getHomeTop', {
+                area_id: filterData.area_id,
+                business_id: bid
+            }, function (data) {
                 data = data.data;
-                vm.$set(vm,"banner",data.adverts);
-                setTimeout(function(){
+                vm.$set(vm, "banner", data.adverts);
+                setTimeout(function () {
                     new Swiper('.banner', {
                         pagination: '.swiper-pagination',
                         slidesPerView: 1,
@@ -234,23 +237,23 @@ require(['config'],function(){
                         autoplay: 2000,
                         loop: true
                     });
-                },1);
-                
-                vm.$set(vm,"shop",data.hot_business);
-                setTimeout(function(){
+                }, 1);
+
+                vm.$set(vm, "shop", data.hot_business);
+                setTimeout(function () {
                     new Swiper('.swiper-shop', {
                         slidesPerView: 'auto',
                         paginationClickable: true,
-                        spaceBetween: 1*rem,
+                        spaceBetween: 1 * rem,
                         freeMode: true
                     });
-                },1);
+                }, 1);
 
-                if(data.from_business.business_id){
+                if (data.from_business.business_id) {
                     $("#thot").removeClass('none');
-                    vm.$set(vm,"business",data.from_business);
-                }else{
-                    vm.$set(vm,"business","none");
+                    vm.$set(vm, "business", data.from_business);
+                } else {
+                    vm.$set(vm, "business", "none");
                     $("#thot").addClass('none');
                 }
             });
@@ -258,51 +261,49 @@ require(['config'],function(){
 
         var height = document.getElementsByClassName('height')[0].clientHeight,
             flag = true;
-        window.onscroll = function(e){
-            if(e.target.scrollingElement.scrollTop + height + 5.5*rem >= e.target.scrollingElement.clientHeight){
-                if(flag)return;
+        window.onscroll = function (e) {
+            if (e.target.scrollingElement.scrollTop + height + 5.5 * rem >= e.target.scrollingElement.clientHeight) {
+                if (flag) return;
                 flag = true;
                 filterData.page++;
-                getCoupons(function(data){
-                    vm.$set(vm,"discount",vm.discount.concat(data));
+                getCoupons(function (data) {
+                    vm.$set(vm, "discount", vm.discount.concat(data));
                     flag = false;
                 });
             }
         }
 
-        function getFilter(){
-            ygg.ajax('/home/getHomeCenter',{
-                area_id : filterData.area_id
-            },function(data){
+        function getFilter() {
+            ygg.ajax('/home/getHomeCenter', {
+                area_id: filterData.area_id
+            }, function (data) {
                 data = data.data;
-                    
+
                 $("#filter_type").picker({
                     toolbarTemplate: '<header class="bar bar-nav">\
                     <button class="button button-link pull-right close-picker">确定</button>\
                     <h1 class="title">选择优惠券类型</h1>\
                     </header>',
-                    cols: [
-                      {
+                    cols: [{
                         textAlign: 'center',
-                        values: ['全部','专属券','共享券']
-                      }
-                    ],
-                    onOpen : function(p){
+                        values: ['全部', '专属券', '共享券']
+                    }],
+                    onOpen: function (p) {
                         vm.openShadow = "show";
                     },
-                    onClose : function(p){
+                    onClose: function (p) {
                         vm.openShadow = "";
-                        vm.$set(vm,"filterType",p.cols[0].value);
-                        p.cols[0].activeIndex == 0?filterData.coupon_type="":filterData.coupon_type=p.cols[0].activeIndex-1;
+                        vm.$set(vm, "filterType", p.cols[0].value);
+                        p.cols[0].activeIndex == 0 ? filterData.coupon_type = "" : filterData.coupon_type = p.cols[0].activeIndex - 1;
                         filterData.page = 1;
-                        getCoupons(function(data){
-                            vm.$set(vm,"discount",data);
+                        getCoupons(function (data) {
+                            vm.$set(vm, "discount", data);
                         });
                     }
                 });
 
                 var filterShopList = ["行业"];
-                for(var i=0;i<data.industry_list.length;i++){
+                for (var i = 0; i < data.industry_list.length; i++) {
                     filterShopList.push(data.industry_list[i].name);
                 }
 
@@ -311,32 +312,30 @@ require(['config'],function(){
                     <button class="button button-link pull-right close-picker">确定</button>\
                     <h1 class="title">选择行业</h1>\
                     </header>',
-                    cols: [
-                      {
+                    cols: [{
                         textAlign: 'center',
                         values: filterShopList
-                      }
-                    ],
-                    onOpen : function(p){
+                    }],
+                    onOpen: function (p) {
                         vm.openShadow = "show";
                     },
-                    onClose : function(p){
+                    onClose: function (p) {
                         vm.openShadow = "";
-                        vm.$set(vm,"filterShop",p.cols[0].value);
-                        p.cols[0].activeIndex == 0?filterData.industry_id="":filterData.industry_id=data.industry_list[p.cols[0].activeIndex-1].industry_id;
+                        vm.$set(vm, "filterShop", p.cols[0].value);
+                        p.cols[0].activeIndex == 0 ? filterData.industry_id = "" : filterData.industry_id = data.industry_list[p.cols[0].activeIndex - 1].industry_id;
                         filterData.page = 1;
-                        getCoupons(function(data){
-                            vm.$set(vm,"discount",data);
+                        getCoupons(function (data) {
+                            vm.$set(vm, "discount", data);
                         });
                     }
                 });
 
-                var filterAddressCols0=['所有商圈'],
-                    filterAddressCols1=['所有商圈'],
-                    currentAddress='所有商圈',
+                var filterAddressCols0 = ['所有商圈'],
+                    filterAddressCols1 = ['所有商圈'],
+                    currentAddress = '所有商圈',
                     t,
                     addFirstOpen = true;
-                for(var i=0;i<data.area_circle_list.length;i++){
+                for (var i = 0; i < data.area_circle_list.length; i++) {
                     filterAddressCols0.push(data.area_circle_list[i].area_name);
                 }
 
@@ -345,63 +344,62 @@ require(['config'],function(){
                     <button class="button button-link pull-right close-picker">确定</button>\
                     <h1 class="title">选择商圈</h1>\
                     </header>',
-                    cols: [
-                      {
-                        textAlign: 'center',
-                        values: filterAddressCols0
-                      },
-                      {
-                        textAlign: 'center',
-                        values: filterAddressCols1
-                      }
+                    cols: [{
+                            textAlign: 'center',
+                            values: filterAddressCols0
+                        },
+                        {
+                            textAlign: 'center',
+                            values: filterAddressCols1
+                        }
                     ],
-                    onOpen : function(p){
+                    onOpen: function (p) {
                         vm.openShadow = "show";
-                        if(addFirstOpen){
-                            p.cols[1].setValue(p.cols[1].items[0].innerText,"all 0s");
+                        if (addFirstOpen) {
+                            p.cols[1].setValue(p.cols[1].items[0].innerText, "all 0s");
                             addFirstOpen = false;
                         }
                     },
-                    onClose : function(p){
+                    onClose: function (p) {
                         vm.openShadow = "";
-                        vm.$set(vm,"filterAddress",p.cols[1].value);
-                        if(p.cols[0].activeIndex == 0){
+                        vm.$set(vm, "filterAddress", p.cols[1].value);
+                        if (p.cols[0].activeIndex == 0) {
                             filterData.circle_id = "";
                             $(".discount .list").removeClass('none');
-                        }else{
-                            var d = data.area_circle_list[p.cols[0].activeIndex-1];
-                            if(d.circle_list.length == 0){
+                        } else {
+                            var d = data.area_circle_list[p.cols[0].activeIndex - 1];
+                            if (d.circle_list.length == 0) {
                                 filterData.circle_id = "";
                                 $(".discount .list").addClass('none');
-                            }else{
+                            } else {
                                 $(".discount .list").removeClass('none');
                                 filterData.circle_id = d.circle_list[p.cols[1].activeIndex].circle_id;
                             }
                         }
-                        
+
                         filterData.page = 1;
-                        getCoupons(function(data){
-                            vm.$set(vm,"discount",data);
+                        getCoupons(function (data) {
+                            vm.$set(vm, "discount", data);
                         });
                     },
-                    onChange : function(p){
+                    onChange: function (p) {
                         var index = p.cols[0].activeIndex;
                         var newAddress = p.cols[0].value;
                         if (newAddress !== currentAddress) {
                             var newRegion = [];
-                            if(index==0){
+                            if (index == 0) {
                                 newRegion = filterAddressCols1;
-                            }else{
-                                if(data.area_circle_list[index-1].circle_list.length == 0){
-                                    newRegion.push(data.area_circle_list[index-1].area_name);
-                                }else{
-                                    for(var i=0;i<data.area_circle_list[index-1].circle_list.length;i++){
-                                        newRegion.push(data.area_circle_list[index-1].circle_list[i].circle_name);
+                            } else {
+                                if (data.area_circle_list[index - 1].circle_list.length == 0) {
+                                    newRegion.push(data.area_circle_list[index - 1].area_name);
+                                } else {
+                                    for (var i = 0; i < data.area_circle_list[index - 1].circle_list.length; i++) {
+                                        newRegion.push(data.area_circle_list[index - 1].circle_list[i].circle_name);
                                     }
                                 }
                             }
                             clearTimeout(t);
-                            t = setTimeout(function() {
+                            t = setTimeout(function () {
                                 p.cols[1].replaceValues(newRegion);
                                 currentAddress = newAddress;
                                 p.updateValue();
@@ -410,53 +408,52 @@ require(['config'],function(){
                         }
                     }
                 });
-                
+
                 $("#filter_sort").picker({
                     toolbarTemplate: '<header class="bar bar-nav">\
                     <button class="button button-link pull-right close-picker">确定</button>\
                     <h1 class="title">选择排序方式</h1>\
                     </header>',
-                    cols: [
-                      {
+                    cols: [{
                         textAlign: 'center',
-                        values: ['智能排序','销量最高','评价最高']
-                      }
-                    ],
-                    onOpen : function(p){
+                        // values: ['智能排序','销量最高','评价最高']
+                        values: ['智能排序', '销量最高']
+                    }],
+                    onOpen: function (p) {
                         vm.openShadow = "show";
                     },
-                    onClose : function(p){
+                    onClose: function (p) {
                         vm.openShadow = "";
-                        vm.$set(vm,"filterSort",p.cols[0].value);
-                        switch(p.cols[0].activeIndex){
+                        vm.$set(vm, "filterSort", p.cols[0].value);
+                        switch (p.cols[0].activeIndex) {
                             case 0:
                                 filterData.xlzg = "";
                                 filterData.plzg = "";
-                            break;
+                                break;
                             case 1:
                                 filterData.xlzg = 1;
                                 filterData.plzg = "";
-                            break;
+                                break;
                             case 2:
                                 filterData.xlzg = "";
                                 filterData.plzg = 1;
-                            break;
+                                break;
                         }
                         filterData.page = 1;
-                        getCoupons(function(data){
-                            vm.$set(vm,"discount",data);
+                        getCoupons(function (data) {
+                            vm.$set(vm, "discount", data);
                         });
                     }
                 });
             });
         }
-        
-        function getCityId(b,c){
+
+        function getCityId(b, c) {
             var ct = $.smConfig.rawCitiesData;
-            for(var i=0;i<ct.length;i++){
-                if(ct[i].name == b){
-                    for(var j = 0;j<ct[i]['sub'].length;j++){
-                        if(ct[i]['sub'][j].name == c){
+            for (var i = 0; i < ct.length; i++) {
+                if (ct[i].name == b) {
+                    for (var j = 0; j < ct[i]['sub'].length; j++) {
+                        if (ct[i]['sub'][j].name == c) {
                             return ct[i]['sub'][j].id;
                         }
                     }

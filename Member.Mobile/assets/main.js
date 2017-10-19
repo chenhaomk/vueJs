@@ -25,8 +25,8 @@ define(['axio', 'vue'], function (axio, Vue) {
         }
     }, 1);
 
-    axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.0';
-    //axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
+    //axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.0';
+    axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
     var ygg = {};
     ygg.maxImgSize = 4194304;
     ygg.ajax = function (url, data, callback) {
@@ -113,7 +113,7 @@ define(['axio', 'vue'], function (axio, Vue) {
                 obj = (new Date()).valueOf(),
                 storeAs = "ygg" + appid + obj + "" + (Math.floor(Math.random() * 9000) + 1000) + suffix;
 
-            if (!/\.(gif|jpg|jpeg|bmp|png|bmp)$/.test(suffix.toLowerCase())) {
+            if (!/\.(gif|jpg|jpeg|bmp|png)$/.test(suffix.toLowerCase())) {
                 ygg.prompt("图片格式不正确！");
                 ygg.loading(false);
                 return;

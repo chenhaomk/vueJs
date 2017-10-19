@@ -478,7 +478,9 @@ body{ background: #f8f9fc }
 
 .coupon_list{ width: 1200px }
 .coupon_list.empty:after,.shop_detail .bot .tab .tab_group.empty .comment:after,.shop_listd.empty:after,.wallet .balance table.empty:after{ content: "抱歉！暂无相关优惠"; display: block; font-size: 20px; color: #888; text-align: center; width: 220px; margin: 20px auto; text-indent: 39px; background:url(../images/icon/ic_quan@2x.png) left center no-repeat }
-.shop_detail .bot .tab .tab_group.empty .comment:after{ content: "抱歉！暂无相关评论"; background-image: url(../images/icon/comment.png); margin: 40px auto }
+/* .shop_detail .bot .tab .tab_group.empty .comment:after{ content: "抱歉！暂无相关评论"; background-image: url(../images/icon/comment.png); margin: 40px auto } */
+.shop_detail .bot .tab .tab_group.empty .comment:after{ content: ""; background-image: url(../images/icon/comment.png); margin: 40px auto }
+
 .shop_listd.empty:after{ content: "抱歉！暂无相关商铺"; background-image: url(../images/icon/shop_icon.png); margin: 40px auto }
 .wallet .balance table.empty:after{ content: "抱歉！暂无相关明细"; background-image: url(../images/icon/mx_icon.png);}
 .cl_search.coupon_list.empty:after{ margin-top: 80px; margin-bottom: 80px }
@@ -573,7 +575,7 @@ a.lq_suc{ cursor: default !important; background: #ffe7df !important; color: #ff
 .head .cen{ height: 108px }
 .head .cen .con .ewm{ position: absolute; right: 0; top: -3px; border: none; padding: 0; margin: 0 }
 .head .cen .con .ewm span{ margin-top: 29px; text-align: center; width: 30px }
-.head .cen img{ display: inline-block; vertical-align: middle; }
+.head .cen img{ display: inline-block; vertical-align: middle; margin-top: 29px;}
 .head .cen .address{ display: inline-block; float: left; line-height: 108px; margin-left: 10px; font-size: 20px }
 .head .cen .search{ margin: auto; width: 645px; padding-top: 17px }
 .head .cen .search .search_p{ height: 40px; width: 643px; border: 2px solid #ff6f3d; background: #ff6f3d ; position: relative;}

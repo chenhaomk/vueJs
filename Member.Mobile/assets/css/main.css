@@ -459,6 +459,36 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .about_us_t .con p{ margin-bottom: 1rem }
 
 
+.service .top{ text-align: center; font-size: 1.6rem; padding:3.9rem 0 2rem 0; line-height: 1 }
+.service .top img{ display: block; width: 2.9rem; margin: auto; margin-bottom: 2rem; }
+.service .ser .font{
+	height: 1.9rem;
+	font-family: ﻿PingFangSC-Regular;
+	font-size: 2rem;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.8rem;
+	letter-spacing: 0px;
+  color: #1c1c1c;
+  text-align: center;
+}
+.service .ser .line
+{
+  height: 0.2rem;
+  margin-top:4rem;
+}
+.service .ser .line .l
+{
+  width: 7.5rem;
+  height: 0.2rem;
+  background-color: rgba(225, 227, 232, 1);
+  margin-left: calc((100% - 7.5rem)/2);
+}
+.service .phone{ text-align: center; font-size: 2.5rem; padding:3.9rem 0 2rem 0; line-height: 1;color: #3896ff; }
+.service .phone img{ display: block; width: 3rem; margin: auto; margin-bottom: 2rem; }
+
+
 .balance_group{ border-bottom: 1px solid #e3e3e3; padding: 1.4rem 0; color: #1c1c1c }
 .balance_group .bg_top{ font-size: 1.6rem; line-height: 1.6rem }
 .balance_group .bg_top span{ float: right; color: #888; font-size: 1.2rem }

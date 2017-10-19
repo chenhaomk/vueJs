@@ -34,10 +34,10 @@
             <a class="more" v-show="coupons.length > 2 && moreIsShow" @click='viewMore'>查看更多<img src="/assets/images/shop/ic_bg_more_xxh.png"></a>
         </section>
 
-        <section class="con comment_shop" v-clock v-show="comments.length != 0">
+        <!-- <section class="con comment_shop" v-clock v-show="comments.length != 0">
             <h2>评价（{{shop.comment_count}}）<a @click="moreComment" class="more">更多</a></h2>
             <comment v-for='a of comments' :a='a'></comment>
-        </section>
+        </section> -->
 
         <section class="shop_content" v-clock>
             <h3>商户详情</h3>
@@ -50,14 +50,14 @@
             <a href="">去买单</a>
         </section>
 
-        <section class="sub_page" :class="comIsShow">
+        <!-- <section class="sub_page" :class="comIsShow">
             <section class="head" v-clock>
                 <a class="back" @click="comIsShow=''"></a>
                 <p>评价（{{shop.comment_count}}）</p>
             </section>
 
             <comment v-for='a of comment_list' :a='a'></comment>
-        </section>
+        </section> -->
     </section>
 
 </body>

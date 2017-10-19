@@ -28,7 +28,7 @@
                         <p class="time">{{a.pay_date}}</p>
                         <p class="price">
                             ￥<span>{{a.pay_total}}</span>
-                            <a :class="{ypj:a.statusT=='已评价'}" @click="comment(a.statusT,a.business_id,a.orders_id,index)">{{a.statusT}}</a>
+                            <!-- <a :class="{ypj:a.statusT=='已评价'}" @click="comment(a.statusT,a.business_id,a.orders_id,index)">{{a.statusT}}</a> -->
                         </p>
                     </section>
                 </li>
@@ -38,7 +38,7 @@
             </section>
         </section>
 
-        <section class="sub_page comment" :class="comIsShow">
+        <!-- <section class="sub_page comment" :class="comIsShow">
             <section class="head">
                 <a @click="comIsShow=''" class="back"></a>
                 <p>评价</p>
@@ -54,11 +54,11 @@
             </section>
 
             <a @click="subComment" class="submit">发布</a>
-        </section>
+        </section> -->
 
         <section class='sub_page2 comment_success' :class="comIsSuc">
 
-            <section class="head">
+            <!-- <section class="head">
                 <a class="back" @click="comIsSuc=''"></a>
                 <p>评价成功</p>
                 <a @click="comIsSuc=comIsShow=''" class="com">完成</a>
@@ -68,7 +68,7 @@
                 <img src="/assets/images/icon/ic_success_xxh.png">
                 <p>评价成功！下载APP并分享可得优惠券哦~</p>
                 <a>去分享</a>
-            </section>
+            </section> -->
 
             <section class="like">
                 <h3>猜你喜欢</h3>

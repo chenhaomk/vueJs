@@ -422,6 +422,7 @@ require(['config'], function () {
                     vm.industry_id = that.industry_id;
                     vm.industry_name = that.industry_name;
                     vm.inner_imgs = that.inner_imgs;
+                    vm.commissioner_id=that.commissioner_id;
                     for (var i = 0; i < that.inner_imgs.length; i++) {
                         vm.inner_imgs_list.push(that.inner_imgs[i].replace("https://img.yingegou.com/", ""));
                     }

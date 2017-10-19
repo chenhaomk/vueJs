@@ -26,7 +26,7 @@ define(['axio', 'vue'], function (axio, Vue) {
     }, 1);
 
     axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.0';
-    //axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
+    // axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
     var ygg = {};
     ygg.maxImgSize = 10485760;
     ygg.ajax = function (url, data, callback) {
@@ -769,10 +769,10 @@ define(['axio', 'vue'], function (axio, Vue) {
                 historyUrl: "/views/my/purHistory.html"
             }
         },
-        computed : {
-            aurl : function(){
+        computed: {
+            aurl: function () {
                 var a = "/views/user/login.html";
-                if(ygg.getCookie("member_id")){
+                if (ygg.getCookie("member_id")) {
                     a = "/views/user/set/disSet.html"
                 }
                 return a;

@@ -50,7 +50,7 @@ require(['config'],function(){
                         that.shop = data.guess_like_list;
                         that.comIsShow = "";
                         that.comIsSuc = "show";
-                        that.list[that.comIndex].statusT = '已评价';
+                        //that.list[that.comIndex].statusT = '已评价';
 
                         setTimeout(function(){
                             new Swiper('.swiper-shop', {
@@ -106,10 +106,10 @@ require(['config'],function(){
                         data.pay_record_list[i].pay_date = ygg.getd("Y.m.d H:i",data.pay_record_list[i].pay_date/1000);
                         switch(data.pay_record_list[i].status){
                             case 1:
-                            data.pay_record_list[i].statusT="去评价";
+                            //data.pay_record_list[i].statusT="去评价";
                             break
                             case 3:
-                            data.pay_record_list[i].statusT="已评价";
+                            //data.pay_record_list[i].statusT="已评价";
                             break
                         }
 
