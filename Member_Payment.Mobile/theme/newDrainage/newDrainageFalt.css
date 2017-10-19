@@ -1,0 +1,194 @@
+
+body {
+    background-color: #FFFFFF;
+    z-index: 1;
+}
+.shopHdImg ,.deHeade{
+    overflow: hidden;
+}
+.warpBg {
+    background: url("../../assets/images/newDarinage/bg.png");
+}
+.dewarpBg {
+    background: url("../../assets/images/newDarinage/bg2.png");
+}
+.warpBg,.dewarpBg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-origin:padding-box;
+    /*background-position: 0-.7rem;*/
+    background-size: 100% 100%;
+    /*z-index: 2;*/
+}
+.warpBg .imgWarp,.dewarpBg .imgWarp{
+    width: 1.36rem;
+}
+.imgWarp {
+    margin:0 auto;
+    height: 1.36rem;
+    border:1px solid black;
+    border-radius: 50%;
+}
+.imgWarp img {
+    width: 100%;
+    height: 100%;
+}
+.shopName {
+    margin-top: .2rem;
+    font:0.4rem bold;
+    color:#ffffff;
+}
+.main {
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    height: 100%;
+}
+
+.content {
+    overflow: hidden;
+}
+.main .content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    /*height: 60%;*/
+}
+
+.main .content_cash {
+    background: url("../../assets/images/darinage/bg_cash@2x.png") no-repeat;
+    width: 6.12rem;
+    height: 6.12rem;
+    background-size: 6.12rem 6.12rem;
+    z-index: 3;
+    position: absolute;
+    top: 1.82rem;
+    margin-left: 0.69rem;
+}
+
+.main .content_lau {
+    width: 100%;
+    height: 20%;
+}
+
+.main .content_lau img {
+    width: 3.61rem;
+    height: 1.99rem;
+    z-index: 3;
+    margin: 0.8rem 0rem;
+}
+.main .content .pay_success {
+    height: 10%;
+    margin: 2rem 0 0 0;
+    position: relative;
+}
+
+.main .content .pay_success img {
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-right: 0rem;
+    transform: translate(0, 0.25rem);
+}
+
+
+.main .content .pay_success .pay_status {
+    font-size: 0.36rem;
+    color: #1C1C1C;
+}
+
+.main .content .pay_success .pay_status img {
+    width: 0.39rem;
+    height: 0.39rem;
+    transform: translate(0, 0.05rem);
+    margin-right: 0.16rem;
+}
+
+.main .content .pay_fault {
+    color: #011739;
+    margin: -0.5rem 0rem 0rem 0rem;
+}
+
+.main .content .pay_fault p:nth-child(1) {
+    font-size: 0.3rem;
+}
+.main .content .pay_fault p:nth-child(2) {
+    font-size: 0.36rem;
+}
+
+@font-face {
+    font-family: 'shopcoupenFont';
+    src: url('../../assets/fonts/DINPro-CondBold.otf') format("OpenType");
+}
+
+
+.gradient {
+    background: -moz-linear-gradient(right, #ff9532 0%,#ff6f63  100%);
+    background: -webkit-linear-gradient(right, #ff9532 0%,#ff6f63 100%);
+    background: -o-linear-gradient(right, #ff9532 0%,#ff6f63 100%);
+    background: -ms-linear-gradient(right, #ff9532 0%,#ff6f63 100%);
+    background: linear-gradient(to right, #ff9532 0%,#ff6f63 100%);
+}
+
+.inputWarp p {
+    margin-top: 0.4rem;
+    font-size: 0.24rem;
+    color: #c7b8b6;
+}
+.animation1 {
+    width: 0.45rem;
+    height: 0.88rem;
+}
+
+.deHeade {
+    width: 100%;
+    height: 2.7rem;
+    background: url("../../assets/images/newDarinage/bg-head.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.headeImg {
+    text-align: center;
+    margin-top: 0.36rem;
+}
+.headeImg .hdImgWarp {
+    border: 1px solid black;
+    margin: 0 auto;
+    width: 1.36rem;
+    height: 1.36rem;
+    border-radius: 0.68rem;
+}
+.footer {
+    margin-top: 0.66rem;
+}
+.dowBg {
+    margin: 0 auto;
+    width: 6.9rem;
+    height: 4.1rem;
+    position: relative;
+}
+.dowBtn {
+    color: #ffffff;
+    border-radius: .44rem;
+    width: 5.4rem;
+    height: .88rem;
+    text-align: center;
+    line-height: 0.88rem;
+    font-size: 0.28rem;
+    position: absolute;
+    bottom: 0.64rem;
+    left: 50%;
+    margin-left: -2.7rem;
+    z-index: 10
+}
+.dowBg img {
+    width: 100%;
+    height: 100%;
+}
+.footer p {
+    margin-top: .46rem;
+    font-size: 0.24rem;
+    color: #c7b8b6;
+}

@@ -69,6 +69,7 @@ require(['config'], function () {
                             var data = res.data;
                             if (data == null || data.code != 200) {
                                 //main.prompt("数据有误"); //此类提示较为后台化，可根据实际情况修改与用户的会话
+                                return;
                                 location.href = "drainagefalt.html";
                                 return;
                             }
@@ -122,7 +123,7 @@ require(['config'], function () {
                     main.setSession("img", img);
                 var jsonString = JSON.stringify(data.data);
                 if (data == null || jsonString == "{}" || data.code != 200) {
-
+return;
                     location.href = "drainagefalt.html";
                     return;
                 }

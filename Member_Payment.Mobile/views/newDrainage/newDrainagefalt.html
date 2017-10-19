@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/newDrainage/newDrainageFalt.css">
+</head>
+
+<body id="body">
+    <div id="app" class="main dewarpBg">
+        <div class="shopHdImg">
+            <div class="headeImg">
+                <div class="imgWarp">
+                    <img v-bind:src="img" alt="title">
+                </div>
+                <div class="shopName" v-text="b_n"></div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content_lau">
+                <img src="../../assets/images/newDarinage/pic.png" alt="" />
+            </div>
+            <div class="pay_fault">
+                <p>感觉错过了1个亿~T^T~</p>
+                <p>抱歉！优惠券已领取完毕</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="dowBg">
+                <img src="../../assets/images/newDarinage/bg-down.png" alt="">
+                <div v-on:click="dowm" class="dowBtn gradient">
+                    下载APP
+                </div>
+            </div>
+            <p>您已成为{{b_n}}的会员</p>
+        </div>
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/drainage/drainage.js "></script>
+
+</html>
