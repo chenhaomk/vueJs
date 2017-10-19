@@ -1,0 +1,634 @@
+::-webkit-input-placeholder {
+    color: #caad9f;
+    font-size: 0.28rem;
+}
+
+input[type="tel"],
+input[type="text"] {
+    border: 1px solid #ffc2a3;
+    border-radius: 5px;
+    padding-left: 0.55rem;
+    color: #caad9f;
+}
+
+body {
+    background-color: #FFFFFF;
+    z-index: 1;
+}
+.shopHdImg ,.deHeade{
+    overflow: hidden;
+}
+.warpBg {
+    background: url("../../assets/images/newDarinage/bg.png");
+}
+.dewarpBg {
+    background: url("../../assets/images/newDarinage/bg2.png");
+}
+.warpBg,.dewarpBg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-origin:padding-box;
+    /*background-position: 0-.7rem;*/
+    background-size: 100% 100%;
+    /*z-index: 2;*/
+}
+.warpBg .imgWarp,.dewarpBg .imgWarp{
+    width: 1.36rem;
+}
+.imgWarp {
+    margin:0 auto;
+    height: 1.36rem;
+    border:1px solid black;
+    border-radius: 50%;
+}
+.imgWarp img {
+    width: 100%;
+    height: 100%;
+}
+.shopName {
+    margin-top: .2rem;
+    font:0.4rem bold;
+    color:#ffffff;
+}
+.main {
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+    height: 100%;
+}
+
+.shopSum {
+    text-align: center;
+    margin-top: .6rem;
+    overflow: hidden;
+}
+.shopSum img {
+    width: .44rem;
+    height: .44rem;
+}
+.sumWarp {
+
+    height: 1.2rem;
+    line-height: 1.2rem;
+    width: 3.36rem;
+/*    font-size: 1.6rem;*/
+    margin:0 auto;
+    position: relative;
+}
+.sumWarp img {
+    position: absolute;
+    left: -0.16rem;
+    top:0.15rem;
+}
+.sunfo p{
+    color: #cfc2c1;
+    font-size: 0.28rem;
+}
+.inputWarp {
+    margin-top: 2rem
+}
+/* 
+.main .backImg {
+    background: url("../../assets/images/darinage/ic_bg@2x.png") no-repeat;
+    width: 7.5rem;
+    height: 11.41rem;
+    background-size: contain;
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    z-index: 1;
+} */
+
+.main div {
+    /*width: 100%;*/
+}
+
+.main .header {
+    z-index: 10;
+    text-align: center;
+    position: relative;
+}
+
+.main .banner .banner_logo .inner_img {
+    width: 100%;
+    height: 30%;
+    z-index: 10;
+}
+
+.main .banner .banner_logo .inner_img img {
+    width: 7.5rem;
+    height: 2.84rem;
+    z-index: 10;
+    -webkit-mask-box-image: url("../../assets/images/darinage/bg_pic@2x.png");
+}
+
+.main .banner .banner_logo .title {
+    font: 0.4rem bold;
+    color: #FFFFFF;
+    z-index: 10;
+    text-shadow: 0px 0px 30px #000000;
+    position: absolute;
+    top: 1rem;
+}
+
+.main .banner .banner_logo .title_img {
+    z-index: 10;
+    position: absolute;
+    top: 1.68rem;
+}
+
+.main .banner .banner_logo .title_img img {
+    width: 1.88rem;
+    height: 1.88rem;
+}
+.content {
+    overflow: hidden;
+}
+.main .content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    /*height: 60%;*/
+}
+
+.main .content_cash {
+    background: url("../../assets/images/darinage/bg_cash@2x.png") no-repeat;
+    width: 6.12rem;
+    height: 6.12rem;
+    background-size: 6.12rem 6.12rem;
+    z-index: 3;
+    position: absolute;
+    top: 1.82rem;
+    margin-left: 0.69rem;
+}
+
+.main .content_lau {
+    width: 100%;
+    height: 20%;
+}
+
+.main .content_lau img {
+    width: 3.61rem;
+    height: 1.99rem;
+    z-index: 3;
+    margin: 0.8rem 0rem;
+}
+
+.main .content .shopcoupen_notes .pay_success {
+    margin-top: 0rem;
+    text-align: center;
+}
+
+.main .content .shopcoupen_notes .content_notes {
+    margin-top: -0.3rem;
+}
+
+.main .content .shopcoupen_notes .content_notes span:nth-child(1) {
+    color: #FD5255;
+    font-size: 0.4rem;
+    margin-right: -0.3rem;
+}
+
+.main .content .shopcoupen_notes .content_notes span:nth-child(2) {
+    font-family: "shopcoupenFont";
+    font-size: 0.8rem;
+    color: #FD5255;
+}
+
+.main .content .pay_success {
+    height: 10%;
+    margin: 2rem 0 0 0;
+    position: relative;
+}
+
+.main .content .pay_success img {
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-right: 0rem;
+    transform: translate(0, 0.25rem);
+}
+
+.main .content .shopcoupen_notes .pay_success img {
+    width: 0.39rem;
+    height: 0.39rem;
+    margin-right: 0rem;
+    transform: translate(0, 0.25rem);
+}
+
+.content_sy {
+    margin-top: 1rem;
+}
+
+.content_sy img {
+    width: 4.04rem;
+    height: 1.18rem;
+}
+
+.main .content .pay_success .pay_status {
+    font-size: 0.36rem;
+    color: #1C1C1C;
+}
+
+.main .content .pay_success .pay_status img {
+    width: 0.39rem;
+    height: 0.39rem;
+    transform: translate(0, 0.05rem);
+    margin-right: 0.16rem;
+}
+
+.main .content .pay_fault {
+    color: #011739;
+    margin: -0.5rem 0rem 0rem 0rem;
+}
+
+.main .content .pay_fault p:nth-child(1) {
+    font-size: 0.3rem;
+}
+
+.main .content .pay_fault p:nth-child(2) {
+    font-size: 0.36rem;
+}
+
+.main .content .shopcoupen_notes .pay_success .pay_status {
+    font-size: 0.36rem;
+    color: #1C1C1C;
+    position: absolute;
+    top: 1.3rem;
+    left: 3.1rem;
+}
+
+.main .content .shopcoupen_notes .img_money {
+    position: absolute;
+    top: 0.8rem;
+    left: 1.3rem;
+    width: 0.62rem;
+    height: 1rem;
+    background: url("../../assets/images/darinage/ic_gold@2x.png") no-repeat;
+    background-size: contain;
+}
+
+.main .content .shopcoupen_notes .img_quan {
+    position: absolute;
+    top: 1.5rem;
+    left: 0.605rem;
+    width: 6.29rem;
+    height: 3.01rem;
+    background: url("../../assets/images/darinage/ic_quan@2x.png") no-repeat;
+    background-size: contain;
+}
+
+.main .content .shopcoupen_notes .img_money_nologin {
+    position: absolute;
+    top: 0;
+    left: 1.3rem;
+    width: 0.62rem;
+    height: 1rem;
+    background: url("../../assets/images/darinage/ic_gold@2x.png") no-repeat;
+    background-size: contain;
+}
+
+.main .content .shopcoupen_notes .img_quan_nologin {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.605rem;
+    width: 6.29rem;
+    height: 3.01rem;
+    background: url("../../assets/images/darinage/ic_quan@2x.png") no-repeat;
+    background-size: contain;
+}
+
+@font-face {
+    font-family: 'shopcoupenFont';
+    src: url('../../assets/fonts/DINPro-CondBold.otf') format("OpenType");
+}
+
+.main .content .shopcoupen_notes .shopcoupn_use_how {
+    font-family: "shopcoupenFont";
+    font-size: 1.1rem;
+    color: #1C1C1C;
+    position: absolute;
+    top: 0.6rem;
+    left: 1.44rem;
+    z-index: 4;
+    width: 1rem;
+}
+
+.main .content .shopcoupen_notes .shopcoupn_use_all {
+    font-size: 0.22rem;
+    color: #1C1C1C;
+    margin-top: 1.1rem;
+    margin-left: -0.1rem;
+    z-index: 4;
+    text-align: left;
+    padding-left: 2.6rem;
+}
+
+.main .content .shopcoupen_notes .shopcoupn_use_time {
+    font-size: 0.22rem;
+    color: #100327;
+    margin-left: 0.28rem;
+    z-index: 4;
+}
+
+.main .content .shopcoupen_notes .shop_area {
+    width: 2.3rem;
+    font-size: 0.22rem;
+    color: #100327;
+    position: absolute;
+    top: 3.6rem;
+    left: 4.3rem;
+    z-index: 4;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.main .content .shopcoupen_notes .shop_area_nologin {
+    width: 2.3rem;
+    font-size: 0.22rem;
+    color: #100327;
+    position: absolute;
+    top: 2.8rem;
+    left: 4.3rem;
+    z-index: 4;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.main .content .coupen_verification {
+    position: absolute;
+    top: 4.2rem;
+    margin-top: 0rem;
+    z-index: 4;
+    width: 100%;
+}
+
+.main .content .coupen_verification_nologin {
+    position: absolute;
+    top: 3.4rem;
+    margin-top: 0rem;
+    z-index: 4;
+    width: 100%;
+}
+
+.main .content .coupen_verification .coupen_phone {
+    width: 5.9rem;
+    height: 0.9rem;
+    margin: 0 auto;
+}
+
+.main .content .coupen_verification .coupen_phone [type="tel"] {
+    width: 5.9rem;
+    height: 0.9rem;
+    font-size: 0.28rem;
+}
+
+.main .content .coupen_verification .coupen_verification_code {
+    width: 5.9rem;
+    height: 0.9rem;
+}
+
+.main .content .coupen_verification .coupen_verification_code [type="text"] {
+    width: 3.79rem;
+    height: 0.9rem;
+    font-size: 0.28rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 0.8rem;
+}
+
+.main .content .coupen_verification .coupen_verification_code [type="button"] {
+    width: 1.91rem;
+    height: 0.9rem;
+    font-size: 0.28rem;
+    color: #FFFFFF;
+    background-color: #FD5255;
+    border: 1px solid #1E0B55;
+    border-radius: 5px;
+    margin-left: 0rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 5rem;
+}
+
+.main .content .coupen_verification_nologin .coupen_phone {
+    width: 5.9rem;
+    height: 0.9rem;
+    margin: 0 auto;
+}
+
+.main .content .coupen_verification_nologin .coupen_phone [type="tel"] {
+    width: 5.9rem;
+    height: 0.9rem;
+    font-size: 0.28rem;
+}
+
+.main .content .coupen_verification_nologin .coupen_verification_code {
+    width: 5.9rem;
+    height: 0.9rem;
+}
+
+.main .content .coupen_verification_nologin .coupen_verification_code [type="text"] {
+    width: 3.79rem;
+    height: 0.9rem;
+    font-size: 0.28rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 0.8rem;
+}
+
+.main .content .coupen_verification_nologin .coupen_verification_code [type="button"] {
+    width: 1.91rem;
+    height: 0.9rem;
+    font-size: 0.28rem;
+    color: #FFFFFF;
+    background-color: #FD5255;
+    border: 1px solid #1E0B55;
+    border-radius: 5px;
+    margin-left: 0rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 5rem;
+}
+
+.main .footer {
+    position: relative;
+    top: 5.34rem;
+    z-index: 4;
+}
+
+.main .footersucc p {
+    font-size: 0.3rem;
+    color: #888888;
+}
+
+.main .footersucc {
+    position: absolute;
+    bottom: 0.24rem;
+    z-index: 4;
+}
+
+.main .footer .footer_btn img {
+    width: 4.04rem;
+    height: 1.18rem;
+    position: absolute;
+    top: 0.4rem;
+    left: 1.73rem;
+}
+
+.main .footer .footer_btn_nologin img {
+    width: 4.04rem;
+    height: 1.18rem;
+    position: absolute;
+    top: 1.1rem;
+    left: 1.73rem;
+}
+
+.main .footersucc .faluttext {
+    font-size: 0.3rem;
+    color: #888888;
+    margin-bottom: 0.3rem;
+}
+
+.main .footersucc .footer_bg {
+    width: 7.1rem;
+    height: 3.12rem;
+    background: url("../../assets/images/darinage/bg_red@2x.png") no-repeat;
+    background-size: 7.1rem 3.12rem;
+    margin-left: 0.2rem;
+    z-index: 20;
+}
+
+.main .footersucc .footer_bg img {
+    position: absolute;
+    left: 1.37rem;
+    bottom: 0.8rem;
+    width: 4.76rem;
+    height: 0.96rem;
+    z-index: 21;
+}
+
+.main .footer p {
+    font-size: 0.26rem;
+    color: #FD5255;
+    text-decoration: underline;
+    position: absolute;
+    top: 2.3rem;
+    left: 3.2rem;
+}
+
+.main .footer .activitydescription_nologin {
+    font-size: 0.26rem;
+    color: #FD5255;
+    text-decoration: underline;
+    position: absolute;
+    top: 3rem;
+    left: 3.2rem;
+}
+.inputPhone input,.checkNum div input{
+    border-radius: 0.44rem;
+    width: 5rem;
+    font-size: 0.28rem;
+    height: 0.88rem;
+}
+.checkNum {
+    position: relative;
+}
+.gradient {
+    background: -moz-linear-gradient(right, #ff9532 0%,#ff6f63  100%);
+    background: -webkit-linear-gradient(right, #ff9532 0%,#ff6f63 100%);
+    background: -o-linear-gradient(right, #ff9532 0%,#ff6f63 100%);
+    background: -ms-linear-gradient(right, #ff9532 0%,#ff6f63 100%);
+    background: linear-gradient(to right, #ff9532 0%,#ff6f63 100%);
+}
+#verifia {
+    color: #ffffff;
+    width: 1.54rem;
+    height: 0.64rem;
+    border-radius: 0.32rem;
+    position: absolute;
+    top: 50%;
+    margin-top: -0.32rem;
+    margin-left: 3.3rem;
+}
+.checkNum,.checkBtn {
+    padding-top: 0.32rem;
+}
+.fonInput {
+    margin: 0 auto;
+    border: 1px solid #ffc2a3;
+    color: #caad9f;
+    border-radius: 0.44rem;
+    width: 5rem;
+    font-size: 0.28rem;
+    height: 0.88rem;
+    padding-left: .46rem;
+    position: relative;
+}
+.fonInput input{
+    padding:0;
+    position: absolute;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    width: 4rem;
+    border:none;
+    left: 0.45rem;
+}
+.getBtn {
+    height: 0.88rem;
+    line-height: 0.88rem;
+    margin: 0 auto;
+    border: 1px solid #ffc2a3;
+    color: #ffffff;
+    border-radius: 0.44rem;
+    width: 5rem;
+    font-size: 0.28rem;
+    height: 0.88rem;
+    padding-left: .46rem;
+}
+.inputWarp p {
+    margin-top: 0.4rem;
+    font-size: 0.24rem;
+    color: #c7b8b6;
+}
+.animation1 {
+    width: 0.45rem;
+    height: 0.88rem;
+}
+
+.deHeade {
+    width: 100%;
+    height: 2.7rem;
+    background: url("../../assets/images/newDarinage/bg-head.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.headeImg {
+    text-align: center;
+    margin-top: 0.36rem;
+}
+.headeImg .hdImgWarp {
+    border: 1px solid black;
+    margin: 0 auto;
+    width: 1.36rem;
+    height: 1.36rem;
+    border-radius: 0.68rem;
+}
+.autoImg1 {
+    position: absolute;
+    left: 0;
+    top:1.7rem;
+    width: 1.66rem;
+    height: 2.8rem;
+    outline: 1px solid red;
+}

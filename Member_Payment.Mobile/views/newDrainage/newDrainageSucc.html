@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/newDrainage/newDrainageSucc.css">
+</head>
+
+<body id="body">
+    <div id="app" class="main warpBg">
+        <div class="shopHdImg">
+            <div class="headeImg">
+                <div class="imgWarp">
+                    <img v-bind:src="img" alt="title">
+                </div>
+                <div class="shopName" v-text="b_n"></div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="shopSum">
+                <div class="sumWarp">
+                    <h1>50.00</h1>
+                    <img src="../../assets/images/newDarinage/money.png" alt="">
+                    
+                </div>
+            </div>
+            <div class="sunfo">
+                <p>满200.00元可用</p>
+            </div>
+            <div class="inputWarp">
+                <div class="succMsImg">
+                    <img src="../../assets/images/newDarinage/success.png" alt="">
+                </div>
+                <p>恭喜您，领取成功！</p>
+                <div class="checkBtn gradient">
+                    立即使用
+                </div>
+                <div class="botWarp">
+                    您已成为{{b_n}}的会员
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/drainage/drainage.js "></script>
+
+</html>
