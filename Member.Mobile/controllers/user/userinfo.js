@@ -118,6 +118,7 @@ require(['config'],function(){
 			        	if(data.status == "success"){
 			        		data = data.data;
 			        		ygg.prompt("修改成功！");
+                            window.history.go(-1)
 			        	}else if(data.status == "error"){
 			        		ygg.prompt(data.msg);
 			        	}
