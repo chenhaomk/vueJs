@@ -2,7 +2,6 @@ require(['config'],function(){
     require(['angle','zclip','qrcode'],function () {
 
         $.fn.loadHeadFooter(function(){
-
             if(!$.fn.getCookie("member_id"))window.open('/',"_self");
 
             if(!meInfo){
@@ -12,7 +11,6 @@ require(['config'],function(){
                         member_id : $.fn.getCookie("member_id")
                     },
                     result : function(data){
-                        
                         if(data.status == "success"){
                             window.meInfo = data.data;
                         }else{
@@ -27,6 +25,7 @@ require(['config'],function(){
                 width : 80,
                 height : 80
             });
+
             function makeCode () {
                 qrcode.makeCode(meInfo.share_url);
             }

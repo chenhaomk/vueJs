@@ -5,29 +5,6 @@ require(['config'], function () {
             imgurl = "https://img.yingegou.com/" + imgurl;
         if (main.getQueryString("img") != null && main.getSession("img") == null)
             main.setSession("img", imgurl);
-
-        //二维码兼容性添加
-        if (bussinessName == null || bussinessName == undefined || bussinessName == "") {
-            main.post("/thirdPay/create_pay",
-                data,
-                function (res) {
-                    if (res.status == 200) {
-                        var data = res.data.data;
-                        if (res == null) {
-                            main.prompt("二维码解析异常");
-                            return;
-                        }
-                        bussinessName = data.bussinessName;
-                        couponID = data.couponID;
-                        couponAID = data.couponAID;
-                        imgurl = data.imgurl;
-                        main.setSession("a_n", decodeURI(data.a_n));
-                        main.setSession("c_n", decodeURI(data.c_n));
-                    }
-                });
-        }
-
-
         var vm = new vue({
             el: "#app",
             data: {
@@ -38,7 +15,9 @@ require(['config'], function () {
                 a_n: decodeURI(main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n")) + "ㆍ" + decodeURI(main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n")).replace("%2F", "/"),
                 how: "",
                 all: "",
-                time: ""
+                time: "",
+                willShow:true,
+                willHide:false
             },
             methods: {
                 getVerification: function () {
@@ -92,9 +71,12 @@ require(['config'], function () {
                             var data = res.data;
                             if (data == null || data.code != 200) {
                                 //main.prompt("数据有误"); //此类提示较为后台化，可根据实际情况修改与用户的会话
-                                return;
+
                                 location.href = "drainagefalt.html";
                                 return;
+                            }
+                            if (data.data != null) {
+                                 main.prompt("领取异常");
                             }
                             main.setSession("img", decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A", ":"));
                             main.setSession("b_n", main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"));
@@ -106,7 +88,7 @@ require(['config'], function () {
                     if (/iphone|ipad|ipod/.test(ua)) {
                         window.open("https://itunes.apple.com/cn/app/id1273704196");
                     } else if (/android/.test(ua)) {
-                        window.open("https://dl.yingegou.com/Android/app-release_V0.2.5_2017.9.6_002.apk");
+                        window.open("https://dl.yingegou.com/Android/ygg_app-release.apk");
                     }
                     //m.yingegou.com/download.html 
                 },
@@ -131,8 +113,7 @@ require(['config'], function () {
         }
 
         function init() {
-            var base = "https://api.yingegou.com/v1.0/";
-            main.post(base + "common/getShareCouponActivity", {
+            main.post("common/getShareCouponActivity", {
                 business_id: main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
             }, function (res) {
                 if (res.errCode < 0)
@@ -140,13 +121,13 @@ require(['config'], function () {
                 var data = res.data;
                 var bn = decodeURI(main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"));
                 var img = decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%2F", "/").replace("%3A", ":");
-                if (main.getSession("b_n") == null)
+                if (main.getSession("b_n") == null || main.getSession("b_n") == "null")
                     main.setSession("b_n", bn);
-                if (main.getSession("img") == null)
+                if (main.getSession("img") == null || main.getSession("img") == "null")
                     main.setSession("img", img);
                 var jsonString = JSON.stringify(data.data);
                 if (data == null || jsonString == "{}" || data.code != 200) {
-return;
+// debugger;
                     location.href = "drainagefalt.html";
                     return;
                 }
@@ -164,6 +145,7 @@ return;
         //初始化
         if (location.href.indexOf("drainage.html") >= 0 || location.href.indexOf("drainagenologin.html") >= 0)
             init();
+            // debugger;
         if (location.href.indexOf("drainagefalt.html") >= 0) {
             var bn = main.getSession("b_n"),
                 bn_1 = main.getQueryString("b_n");
@@ -175,5 +157,11 @@ return;
         if (location.href.indexOf("drainagesucc.html") >= 0) {
             vm.b_n = decodeURI(main.getSession("b_n"));
         }
+
+        setTimeout(function(){
+            vm.willShow = false;
+            vm.willHide = true
+        },1000)
     });
+    
 });
