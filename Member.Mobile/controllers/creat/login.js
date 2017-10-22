@@ -26,7 +26,7 @@ require(['config'], function () {
                 jumpnet: function () {
                     if (jumpnet == null || jumpnet == "")
                         return;
-                    location.href = "www.baidu.com";
+                    location.href = "https://ingo.yingougou.com";
                 },
                 login1: function (e) {
                     event.preventDefault();
@@ -36,7 +36,7 @@ require(['config'], function () {
                         ygg.prompt("请您仔细填写信息，不能有空哦！");
                         return;
                     }
-                    ygg.ajax('/business/businessFastLogin', {
+                    ygg.ajax('/business/fastLogin', {
                         mobile: that.phone,
                         verification_code: that.vercode
                     }, function (data) {
@@ -50,7 +50,7 @@ require(['config'], function () {
                             switch (that.state) {
                                 case 0: //资料等待提交
                                     ygg.prompt("上次信息还未提交，请完善并提交资料！");
-                                    //location.href = "https://www.yingegou.com/views/enter/login.html";
+                                    //location.href = "https://www.yingougou.com/views/enter/login.html";
                                     location.href = "creatShopB.html";
                                     break;
                                 default:
@@ -114,7 +114,7 @@ require(['config'], function () {
         function init() {
             //判断分辨率，是否进入PC。
             if (window.screen.width >= 1000) {
-                location.href = "https://www.yingegou.com/views/enter/register.html";
+                location.href = "https://www.yingougou.com/views/enter/register.html";
                 return;
             }
             var mid = ygg.getQueryString("m_id");

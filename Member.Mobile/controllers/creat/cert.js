@@ -22,7 +22,7 @@ require(['config'], function () {
                         if (typeof src == 'object')
                             src = src[0];
                         this.licence_img.remove(src);
-                        this.licence_img_list.remove(src.replace("https://img.yingegou.com/", ""));
+                        this.licence_img_list.remove(src.replace("https://img.yingougou.com/", ""));
                     }
                     su = false;
                 },
@@ -122,7 +122,7 @@ require(['config'], function () {
                     vm.licence_img = that.business_licence_img;
                     for (var i = 0; i < that.business_licence_img.length; i++) {
                         var imgName = that.business_licence_img[i];
-                        vm.licence_img_list.push(imgName.replace("https://img.yingegou.com/", ""));
+                        vm.licence_img_list.push(imgName.replace("https://img.yingougou.com/", ""));
                     }
                 }
             });

@@ -62,7 +62,7 @@
                     <span class="sel_text nosel" id="filter_shop">{{filterShop}}</span>
                 </p>
             </section>
-            <section class="form_group">
+            <section class="form_group" v-show="isComShow">
                 <p class="label">
                     <label>客服号码</label>
                     <input v-model="commissioner_id" v-on:blur="blurTip(commissioner_id,'phone')" placeholder="客服号码(选填)">

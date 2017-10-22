@@ -15,7 +15,8 @@ require(['config'], function () {
                 rvercode: "",
                 ck: "",
                 account: "",
-                salesmanCode: ""
+                salesmanCode: "",
+                password = ""
             },
             methods: {
                 register1: function (e) {
@@ -27,15 +28,26 @@ require(['config'], function () {
                         ygg.prompt("请您仔细填写信息，不能有空哦！");
                         return;
                     }
+                    if(that.password.length>0){
+                    if (!/\.(gif|jpg|jpeg|bmp|png|bmp)$/.test(suffix.toLowerCase())) {
+                        ygg.prompt("密码8到16位，且必需带有字母");//文案有问题，根据web版本修改
+                        return;
+                    }
+                }
                     var praram = {};
 
                     praram.mobile = that.phone;
                     praram.verification_code = that.vercode;
+
                     if (that.email.length > 0)
                         praram.email = that.email;
+                    if (that.password.length > 0) {
+                        praram.password = that.password;
+                    }
                     var mid = ygg.getCookie("member_id");
-                    if (mid != null || mid != "")
+                    if (mid != null || mid != "") {
                         praram.member_id = mid;
+                    }
                     ygg.ajax('/business/addBusinessCheckOne', praram, function (data) {
                         if (data.status == "error") {
                             ygg.prompt(data.msg);
@@ -63,6 +75,12 @@ require(['config'], function () {
             }
         });
 
-
+        function init() {
+            var mid = ygg.getQueryString("m_id");
+            if (mid != null && mid != "") {
+                ygg.setCookie("member_id", mid);
+            }
+        }
+        init();
     });
 });

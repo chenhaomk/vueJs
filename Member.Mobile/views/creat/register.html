@@ -41,6 +41,11 @@
                         </section>
                         <section class="form_group">
                             <p class="icon icon_email">
+                                <input v-model="password"  placeholder="请输入密码(选填)">
+                            </p>
+                        </section>
+                        <section class="form_group">
+                            <p class="icon icon_email">
                                 <input v-model="email" v-on:blur="blurTip(email,'email')" placeholder="为及时接收信息建议填写邮箱(选填)">
                             </p>
                         </section>

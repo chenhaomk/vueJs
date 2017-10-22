@@ -26,7 +26,7 @@ define(['axio', 'vue'], function (axio, Vue) {
     }, 1);
 
     axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.0';
-    // axio.defaults.baseURL = 'https://api.yingegou.com/v1.0';
+    // axio.defaults.baseURL = 'https://api.yingougou.com/v1.0';
     var ygg = {};
     ygg.maxImgSize = 10485760;
     ygg.ajax = function (url, data, callback) {

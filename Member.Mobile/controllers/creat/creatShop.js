@@ -30,6 +30,7 @@ require(['config'], function () {
                     inner_imgs_list: [],
                     face_img_list: [],
                     logo_img_list: [],
+                    isComShow = true
                 },
                 methods: {
                     getDataDoor: function (a, src, isDel) {
@@ -50,7 +51,7 @@ require(['config'], function () {
                             if (typeof src == 'object')
                                 src = src[0];
                             this.inner_imgs.remove(src);
-                            this.inner_imgs_list.remove(src.replace("https://img.yingegou.com/", ""));
+                            this.inner_imgs_list.remove(src.replace("https://img.yingougou.com/", ""));
                         }
                         su = false;
                     },
@@ -392,7 +393,8 @@ require(['config'], function () {
             ygg.ajax("/business/addBusinessCheckTwo", param, function (data) {
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
-                } else if (data.status == "success") {debugger;
+                } else if (data.status == "success") {
+                    debugger;
                     su = true;
                     ygg.setCookie("business_check_id", data.data.business_check_id);
                     //ygg.prompt("商家创建成功！");
@@ -422,19 +424,24 @@ require(['config'], function () {
                     vm.industry_id = that.industry_id;
                     vm.industry_name = that.industry_name;
                     vm.inner_imgs = that.inner_imgs;
-                    vm.commissioner_id=that.commissioner_id;
+                    vm.commissioner_id = that.commissioner_id;
                     for (var i = 0; i < that.inner_imgs.length; i++) {
-                        vm.inner_imgs_list.push(that.inner_imgs[i].replace("https://img.yingegou.com/", ""));
+                        vm.inner_imgs_list.push(that.inner_imgs[i].replace("https://img.yingougou.com/", ""));
                     }
                     vm.face_img = that.face_img;
-                    vm.face_img_list = that.face_img.replace("https://img.yingegou.com/", "");
+                    vm.face_img_list = that.face_img.replace("https://img.yingougou.com/", "");
                     vm.logo_img = that.logo;
-                    vm.logo_img_list = that.logo.replace("https://img.yingegou.com/", "");
+                    vm.logo_img_list = that.logo.replace("https://img.yingougou.com/", "");
                     filterData.area_id = vm.area_id;
                     getFilter();
 
                 }
             });
         }
+
+        //业务员业务无法重复获得
+        var mid = ygg.getCookie("member_id");
+        if (mid != null && mid != undefined)
+            isComShow = false;
     });
 });

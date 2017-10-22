@@ -192,9 +192,9 @@ require(['config'], function () {
                     vm.name = that.real_name;
                     vm.card = that.id_card_no;
                     vm.postive_img = that.id_card_front_img;
-                    vm.postive_img_list = that.id_card_front_img.replace("https://img.yingegou.com/", "");
+                    vm.postive_img_list = that.id_card_front_img.replace("https://img.yingougou.com/", "");
                     vm.other_img = that.id_card_back_img;
-                    vm.other_img_list = that.id_card_back_img.replace("https://img.yingegou.com/", "");
+                    vm.other_img_list = that.id_card_back_img.replace("https://img.yingougou.com/", "");
                     vm.bank_card_no = that.bank_card;
                     vm.bank_name = that.bank;
                     vm.bank_code = that.bank_code;
