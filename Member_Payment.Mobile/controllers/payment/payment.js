@@ -71,6 +71,11 @@ require(['config'], function () {
                         main.post("/thirdPay/create_pay",
                             data,
                             function (res) {
+                                if (res.code == 2001) {
+                                    location.href = "../../views/drainage/drainagenologin.html";
+                                    main.clearSessionItem("sn");
+                                    return;
+                                }
                                 if (res.status == 200) {
                                     var data = res.data.data;
                                     if (res == null) {
