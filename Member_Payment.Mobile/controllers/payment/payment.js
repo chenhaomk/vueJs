@@ -1,10 +1,10 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
-        var imgurl = decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A",":");
+        var imgurl = decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A", ":");
         if (imgurl.indexOf("https") < 0)
-            imgurl = "https://img.yingegou.com/" + imgurl;
-        if (main.getQueryString("img") != null&& main.getSession("img") == null)
-            main.setSession("img", "https://img.yingegou.com/" + decodeURI(main.getSession("img")));
+            imgurl = "https://img.yingougou.com/" + imgurl;
+        if (main.getQueryString("img") != null && main.getSession("img") == null)
+            main.setSession("img", "https://img.yingougou.com/" + decodeURI(main.getSession("img")));
         main.setSession("a_n", main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n"));
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
 
@@ -35,24 +35,38 @@ require(['config'], function () {
                         return;
                     if (num == null)
                         return;
-                    if (num == 0 && payNum == "")
-                        return;
-                    if (num == 11 && payNum.indexOf(".") > 0)
-                        return;
-                    if (num == 11 && payNum == "") {
-                        vm.payNum = "0.";
-                        return;
-                    }
-                    if (num == 11) {
-                        vm.payNum += ".";
-                        return;
-                    }
                     if (num == -1) {
                         payNum = payNum.substring(0, payNum.length - 1);
                         vm.payNum = payNum;
                         return;
                     }
+                    // if (num == 0 && payNum.length == 0) {
+                    //     vm.payNum = "0";
+                    //     return;
+                    // }
+                    // if (num == 0 && payNum == "")
+                    //     return;
 
+                    // if (payNum.indexOf('0.') < 0 && payNum.length >= 1 && num < 0)
+                    //     return;
+                    // if (num == 11 && payNum.indexOf(".") > 0)
+                    //     return;
+
+                    if (num == 11 && payNum.indexOf('.') < 0) {
+                        if (payNum == "") {
+                            vm.payNum += "0.";
+                            return;
+                        }
+                        vm.payNum += ".";
+                        return;
+                    }
+                    if (num == 11)
+                        return;
+                    if (isNaN(vm.payNum)) {
+                        if (vm.payNum == '.')
+                            vm.payNum = "0.";
+                        return;
+                    }
                     if (payNum.indexOf(".") > 0 && payNum.split('.')[1].length > 1 && num != 10)
                         return;
                     if (num == 10) {
@@ -72,7 +86,7 @@ require(['config'], function () {
                             data,
                             function (res) {
                                 if (res.code == 2001) {
-                                    location.href = "../../views/drainage/drainagenologin.html";
+                                    location.href = "../../views/newDrainage/drainageLogin.html";
                                     main.clearSessionItem("sn");
                                     return;
                                 }
@@ -91,6 +105,8 @@ require(['config'], function () {
                         return;
                     }
                     vm.payNum += num;
+                    if (payNum.substring(0, 1) == '0' && payNum.indexOf('0.') < 0)
+                        vm.payNum = vm.payNum.substring(1, vm.payNum.length);
                 }
             }
         });
@@ -110,7 +126,7 @@ require(['config'], function () {
                         }
                         if (status == 1) {
                             //支付成功，引流
-                            location.href = "../../views/drainage/drainagenologin.html";
+                            location.href = "../../views/newDrainage/drainageLogin.html";
                             main.clearSessionItem("sn");
                             return;
                         } else {

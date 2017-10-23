@@ -43,15 +43,15 @@ require(['config'], function () {
                         mobile: that.phone,
                         verification_code: that.vercode
                     }, function (data) {
-                        if (data.status == "error") {
+                        if (data.data.status == "error") {
                             main.prompt(data.msg);
-                        } else if (data.status == "200") {
+                        } else if (data.data.status == "success") {
                             data = data.data.data;
                             ygg.setSession("m_id", data.member_id);
                             ygg.setSession("m_n", data.mobile);
                             ygg.setSession("phone", data.mobile);
                             ygg.setSession("token", data.token);
-                            ygg.setSession("h_t",data.head_portrait);
+                            ygg.setSession("h_t", data.head_portrait);
                             ygg.post('member/getPersonCenterInfo', {
                                 member_id: ygg.getSession("m_id")
                             }, function (data) {
@@ -85,13 +85,13 @@ require(['config'], function () {
                             if (data.code == "1001") {
                                 that.cs++;
                             }
-                        } else if (data.status == "200") {
-                            data = data.data.data;
+                        } else if (data.data.status != "error") {
+                            data = data.data;
                             ygg.setSession("m_id", data.member_id);
                             ygg.setSession("m_n", data.mobile);
                             ygg.setSession("phone", data.mobile);
                             ygg.setSession("token", data.token);
-                            ygg.setSession("h_t",data.head_portrait);
+                            ygg.setSession("h_t", data.head_portrait);
                             ygg.post('member/getPersonCenterInfo', {
                                 member_id: ygg.getSession("m_id")
                             }, function (data) {
@@ -106,6 +106,8 @@ require(['config'], function () {
                                     //获取用户设置信息 1-paymerchantmanual,0-paymerchant
                                 }
                             });
+                        } else {
+                            main.prompt(data.data.msg);
                         }
                     });
                 }

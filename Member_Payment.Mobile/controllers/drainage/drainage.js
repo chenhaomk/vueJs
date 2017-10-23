@@ -2,7 +2,7 @@ require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
         var imgurl = decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%2F", "/").replace("%3A", ":");
         if (imgurl.indexOf("https") < 0)
-            imgurl = "https://img.yingegou.com/" + imgurl;
+            imgurl = "https://img.yingougou.com/" + imgurl;
         if (main.getQueryString("img") != null && main.getSession("img") == null)
             main.setSession("img", imgurl);
         var vm = new vue({
@@ -16,8 +16,8 @@ require(['config'], function () {
                 how: "",
                 all: "",
                 time: "",
-                willShow:true,
-                willHide:false
+                willShow: true,
+                // willHide:false
             },
             methods: {
                 getVerification: function () {
@@ -71,16 +71,31 @@ require(['config'], function () {
                             var data = res.data;
                             if (data == null || data.code != 200) {
                                 //main.prompt("数据有误"); //此类提示较为后台化，可根据实际情况修改与用户的会话
-
-                                location.href = "drainagefalt.html";
+                                main.prompt(data.msg);
+                                //location.href = "newDrainagefalt.html";
                                 return;
                             }
                             if (data.data != null) {
-                                 main.prompt("领取异常");
+                                if (data.data[1001] != null)
+                                    main.prompt(data.data[1001]);
+                                if (data.data[9009] != null)
+                                    main.prompt(data.data[9009]);
+                                if (data.data[9012] != null)
+                                    main.prompt(data.data[9012]);
+                                if (data.data[9013] != null)
+                                    main.prompt(data.data[9013]);
+                                if (data.data[9015] != null)
+                                    main.prompt(data.data[9015]);
+                                if (data.data[9016] != null)
+                                    main.prompt(data.data[9016]);
+                                if (data.data[9017] != null)
+                                    main.prompt(data.data[9017]);
+                                return;
+
                             }
                             main.setSession("img", decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A", ":"));
                             main.setSession("b_n", main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"));
-                            location.href = "drainagesucc.html";
+                            location.href = "newDrainageSucc.html";
                         });
                 },
                 dowm: function () {
@@ -88,12 +103,12 @@ require(['config'], function () {
                     if (/iphone|ipad|ipod/.test(ua)) {
                         window.open("https://itunes.apple.com/cn/app/id1273704196");
                     } else if (/android/.test(ua)) {
-                        window.open("https://dl.yingegou.com/Android/ygg_app-release.apk");
+                        window.open("https://dl.yingougou.com/Android/ygg_app-release.apk");
                     }
-                    //m.yingegou.com/download.html 
+                    //m.yingougou.com/download.html 
                 },
                 linkH5: function () {
-                    location.href = "https://m.yingegou.com/";
+                    location.href = "https://m.yingougou.com/";
                 }
             }
         });
@@ -127,8 +142,8 @@ require(['config'], function () {
                     main.setSession("img", img);
                 var jsonString = JSON.stringify(data.data);
                 if (data == null || jsonString == "{}" || data.code != 200) {
-// debugger;
-                    location.href = "drainagefalt.html";
+                    // debugger;
+                    location.href = "newDrainagefalt.html";
                     return;
                 }
                 data = data.data;
@@ -143,10 +158,10 @@ require(['config'], function () {
             });
         }
         //初始化
-        if (location.href.indexOf("drainage.html") >= 0 || location.href.indexOf("drainagenologin.html") >= 0)
+        if (location.href.indexOf("drainageLogin.html") >= 0)
             init();
-            // debugger;
-        if (location.href.indexOf("drainagefalt.html") >= 0) {
+        // debugger;
+        if (location.href.indexOf("newDrainagefalt.html") >= 0) {
             var bn = main.getSession("b_n"),
                 bn_1 = main.getQueryString("b_n");
             if (bn != null)
@@ -154,14 +169,14 @@ require(['config'], function () {
             else if (bn_1 != null)
                 vm.b_n = decodeURI(bn_1);
         }
-        if (location.href.indexOf("drainagesucc.html") >= 0) {
+        if (location.href.indexOf("newDrainageSucc.html") >= 0) {
             vm.b_n = decodeURI(main.getSession("b_n"));
         }
 
-        setTimeout(function(){
+        setTimeout(function () {
             vm.willShow = false;
-            vm.willHide = true
-        },1000)
+            // vm.willHide = true
+        }, 1000)
     });
-    
+
 });

@@ -62,7 +62,7 @@ require(['config'], function () {
                         data,
                         function (res) {
                             if (res.code == 2001) {
-                                location.href = "../../views/drainage/drainagenologin.html";
+                                location.href = "../../views/newDrainage/drainageLogin.html";
                                 main.clearSessionItem("sn");
                                 return;
                             }
@@ -145,7 +145,7 @@ require(['config'], function () {
                     if (isBusiness == null || isBusiness == "" || couponID == null || couponID == "") {
                         main.prompt("当前无其他优惠");
                         return;
-                    } else if (main.getSession("price") == null || main.getSession("price") == ""|| main.getSession("price") == "null") {
+                    } else if (main.getSession("price") == null || main.getSession("price") == "" || main.getSession("price") == "null") {
                         main.prompt("请输入应付金额");
                         return;
                     } else {
@@ -181,7 +181,7 @@ require(['config'], function () {
                         }
                         if (status == 1) {
                             //支付成功，引流
-                            location.href = "../../views/drainage/drainagenologin.html";
+                            location.href = "../../views/newDrainage/drainageLogin.html";
                             main.clearSessionItem("sn");
                             return;
                         } else {

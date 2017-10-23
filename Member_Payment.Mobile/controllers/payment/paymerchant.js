@@ -5,6 +5,7 @@ require(['config'], function () {
             el: "#app",
             data: {
                 isActive: "",
+                discountKindID: "",
                 user_inner: main.getSession("h_t"),
                 userPhone: main.getSession("m_n"),
                 actual: 0,
@@ -14,10 +15,10 @@ require(['config'], function () {
                 isbussiness: true
             },
             methods: {
-                selectedDiscountType: function (typeID, dNum, isbussiness) {
+                selectedDiscountType: function (typeID, dNum) {
 
                     vm.isActive = typeID;
-                    vm.isbussiness = isbussiness;
+                    vm.discountKindID = typeID;
                     try {
                         if (vm.trueMoney <= 0) {
                             vm.actual = 0;
@@ -52,17 +53,17 @@ require(['config'], function () {
                     data.amount = vm.trueMoney;
                     data.business_id = main.getSession("b_id");
                     data.pay_way = 'alipay_web';
-                    main.post("thirdPay/create_pay",
+                    main.post("/thirdPay/create_pay",
                         data,
                         function (res) {
                             if (res.code == 2001) {
-                                location.href = "../../views/drainage/drainagenologin.html";
+                                location.href = "../../views/newDrainage/drainageLogin.html";
                                 main.clearSessionItem("sn");
                                 return;
                             }
                             if (res.status == 200) {
                                 var data = res.data.data;
-                                if (data == null || data == "") {
+                                if (res == null) {
                                     main.prompt("支付异常");
                                     return;
                                 }
@@ -130,7 +131,7 @@ require(['config'], function () {
                         }
                         if (status == 1) {
                             //支付成功，引流
-                            location.href = "../../views/drainage/drainagenologin.html";
+                            location.href = "../../views/newDrainage/drainageLogin.html";
                             main.clearSessionItem("sn");
                             return;
                         } else {

@@ -22,7 +22,7 @@
                 <div class="changeMoney" v-on:click="changeMoney()">修改金额</div>
             </div>
             <div class="discount" v-cloak :style="{height:merchantllogInfo.length==0?'1px':'40%'}">
-                <div class="discountKind " v-bind:id="'kind_d_' + dis.id" v-bind:class="isActive==dis.id?'active':''" v-on:click="selectedDiscountType(dis.id,dis.calculate_discount,dis.is_from_business)"
+                <div class="discountKind " v-bind:id="'kind_d_' + dis.id" v-bind:class="isActive==dis.id?'active':''" v-on:click="selectedDiscountType(dis.id,dis.calculate_discount)"
                     v-for="(dis,index) in merchantllogInfo">
                     <div class="select"></div>
                     <p>{{dis.name}}</p>
