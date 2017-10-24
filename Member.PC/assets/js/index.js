@@ -21,7 +21,6 @@ require(['config'],function(){
                         member_id : member_id
                     },
                     result : function(data){
-                        console.log(data)
                         meInfo = data.data;
                         $("#userinfo .info").show().find('img').attr("src",meInfo.head_portrait)
                             .next().text(meInfo.nick_name);
