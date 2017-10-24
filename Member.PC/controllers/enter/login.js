@@ -3,7 +3,7 @@ require(['config'], function () {
 
         $("#getYzm").getYzm({
             valDom: $("#tel"),
-            sms_type: "0007",
+            sms_type: "0010",
             errorDom: $(".prompt")
         });
 

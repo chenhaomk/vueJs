@@ -31,18 +31,18 @@ require(['config'], function () {
             var str = index.html()
             index.addClass("onChange");
             $(".status").off()
-            if(str == "待补充") {
+            if(str == "待通过") {
                 $(".shopList").html(template(examine_business_list,1))
                 $(".status").click(function () {
                     $.fn.setCookie('business_check_id',$(this).attr("business_check_id"));
-                    window.location.href = "../../views/enter/apply.html?business_check_id="+$(this).attr("business_check_id")
+                    window.location.href = "../../views/enter/apply.html?isbind=1&isAgain=1&isData=1&business_check_id="+$(this).attr("business_check_id")
                 })
-            }else if(str == "待通过") {
+            }else if(str == "待补充") {
                 $(".shopList").html(template(pending_business_list,2))
                 $(".status").click(function (e) {
                     if($(this).find("span").html() != "审核中") {
                         $.fn.setCookie('business_check_id',$(this).attr("business_check_id"));
-                        window.location.href = "../../views/enter/apply.html?business_check_id="+$(this).attr("business_check_id")
+                        window.location.href = "../../views/enter/apply.html?isbind=1&isAgain=1&isData=1&business_check_id="+$(this).attr("business_check_id")
                     }
                 })
 
