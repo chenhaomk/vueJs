@@ -34,11 +34,14 @@ body.bg{ background: url(../images/enter/register_bg.jpg) center top no-repeat }
 .enter .part a{ float: left; height: 37px; background-image: url(../images/enter/part.png); width: 240px; border-bottom: 2px solid #c2c9d0 }
 .enter .part a.active{ background-position-y: 37px; border-color: #ff6f3d }
 .enter .part a.two{ background-position-x: -240px }
-.enter .part a.th{ background-position-x: -480px }
+.enter .part a.th{ background-image: url(../images/enter/03b.png);background-repeat: no-repeat;text-align: center;background-position:37px  0; }
+.enter .part a.thactive {background-image: url(../images/enter/03.png);border-color: #ff6f3d}
 .enter .part a.fo{ background-position-x: -720px }
 .enter form{ width: 605px; margin: auto; padding-top: 40px; padding-bottom: 150px; display: none;}
-.enter form .form_group.address .select{ float: left; width: 158px; padding: 1px; margin-right: 10px }
-.enter form .form_group.address .add{ float: left; margin-top: 10px }
+.enter form .form_group.address .select{ float: left; width: 158px; padding: 1px; margin-right: 10px ;}
+.enter form .form_group.address .addInput{ float: left; margin-top: 10px;width: 100%;position: relative; }
+.enter form .form_group.address .addInput img {width: 18px;height: 18px;position: absolute;top:50%;right: 10px;margin-top: -9px;}
+.enter form .form_group.address .addInput img:hover {cursor: pointer;}
 .enter form .form_group .bank{ position: absolute; height: 48px; padding-right: 15px; right: 0; white-space: pre; padding-left: 10px; background: white; z-index: 2; top: 0 }
 .enter form .uploader{ width: 510px; margin-right: -10px }
 .enter form .info .g{ border: 1px solid #edeff5; padding: 15px 10px; margin-top: 10px; background: white }
@@ -100,10 +103,16 @@ body.bg{ background: url(../images/enter/register_bg.jpg) center top no-repeat }
 .register .form form .form_group input{ border: 0; height: 65px; text-indent: 0 }
 .register .form form .form_group .inp.yzm{ padding-right: 85px }
 .register .form form .form_group .inp.yzm a{ float: right; margin-right: -85px; margin-top: 24px; line-height: 1; color: #ff6f3d; cursor: pointer; text-decoration: underline}
-.register .form form .form_group .inp.icon:before{ content: ""; float: left; margin-left: -60px; width: 38px; height: 22px; margin-top: 21.5px; border-right: 1px solid #1c1c1c; background-position: left center; background-repeat: no-repeat; }
+.register .form form .form_group .inp.icon:before{ content: ""; float: left; margin-left: -60px; width: 38px; height: 22px; margin-top: 21.5px; border-right: 1px solid #1c1c1c; background-position: left center; background-repeat: no-repeat;padding-top: 1px; }
 .register .form form .form_group .inp.phone:before{ background-image: url(../images/user/icon_tel.png) }
 .register .form form .form_group .inp.yzm:before{ background-image: url(../images/user/icon_code.png) }
 .register .form form .form_group .inp.email:before{ background-image: url(../images/user/icon_email.png) }
+.register .form form .form_group .inp.showPsw:before{ background-image: url(../images/user/icon_pwd.png);}
+.register .form form .form_group .inp.showPsw {position: relative;}
+.register .form form .form_group .inp.showPsw .passWordImg {width: 28px;height: 14px;position:absolute;top: 50%;right: 0;margin-top: -7px; }
+#container {float: left;margin-top: 10px;height: 170px;border: 1px solid #edeff5;width: 100%;}
+
+
 .register .form form .form_group.submit input{ display: block; width: 140px; height: 46px; line-height: 46px; color: white; background: #ff6f3d; font-size: 20px; text-align: center; margin: auto; border-radius: 5px; cursor: pointer; }
 .register .form form .form_group.submit input.no{ background: #888888; cursor: default; }
 .register.login .form form .form_group.submit a{ margin-top: 40px }
@@ -210,3 +219,46 @@ input:-webkit-autofill {
 .paging a.next:hover:after{ border-left-color: white }
 .paging a.more{ background: none; line-height: 20px }
 .paging a.more:hover{ background: none; color: #1c1c1c; cursor: default }
+
+.ap_popup_explain,.yhxx_popup{ width: 590px; height: 550px; margin: -275px -295px}
+.ap_popup_explain .content,.yhxx_popup .content{ height: 355px; padding-bottom: 15px; overflow: auto; font-size: 14px }
+.ap_popup_explain .content p,.yhxx_popup .content p{ margin-top: 22px }
+.ap_popup_explain .content p.sb,.yhxx_popup .content p.sb{ margin-left: 15px; margin-top: 10px }
+.ap_popup_explain .form_group .checkbox{ height: 50px; line-height: 50px }
+.ap_popup_explain .form_group.submit a{ margin-top: 10px }
+.yhxx_popup .content{ height: 455px }
+
+.pay_popup{ width: 426px; height: 480px; margin: -240px -213px }
+.pay_popup .title{ visibility: hidden }
+.pay_popup .title:before{ content: ""; display: inline-block; width: 26px; height: 22px; background: url(../images/icon/pay_wechat.png); margin-right: 8px; margin-bottom: -3px }
+.pay_popup .money{ height: 44px; line-height: 44px; position: absolute; margin-top: -44px}
+.pay_popup .money span{ color: #ff6f3d }
+.pay_popup .money span b{ font-size: 26px; font-weight: normal; }
+.pay_popup .ewm{ border: 1px solid #ececec; width: 280px; height: 330px; margin:auto; text-align: center; color: #888; position: relative; margin-top: 44px }
+.pay_popup .ewm img{ display: block; width: 220px; height: 220px; margin: 24px auto 20px}
+.pay_popup .ewm p span{ color: #ff6f3d }
+
+.my_card{ padding-top: 60px }
+.my_card .myc{ width: 540px; margin: 0 auto 120px }
+.my_card .myc .left{ width: 266px; height: 174px; border-radius: 8px; background: white; padding: 17px; float: left; }
+.my_card .myc .left .t{ font-size: 18px; line-height: 1; padding-bottom: 20px }
+.my_card .myc .left .eem .qrcode{ float: left; width: 80px; height: 80px; margin-right: 26px }
+.my_card .myc .left .eem p{ font-size: 12px; float: left; width:160px; }
+.my_card .myc .left .eem p span{ display: block; font-size: 15px; font-weight: bold; line-height: 1; margin-bottom: 14px }
+.my_card .myc .left .eem p span:after{ content: ""; display: block; width: 14px; height: 3px; background: black; margin-top: 15px }
+.my_card .myc .left .eem a{ color: #ff6f3d; cursor: pointer; border: 1px solid #ff6f3d; padding: 0 10px; line-height: 24px; height: 24px; float: left; margin-top: 8px; border-radius: 15px; font-size: 12px }
+.my_card .myc .left .eem b{ display: block; font-weight: normal; font-size: 12px; word-break: break-all; color: #888;overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%; padding-top: 7px}
+.my_card .myc .left .share{ position: relative; clear: both; padding-top: 20px }
+.my_card .myc .left .share:before{ content: "分享至"; display: block; width: 46px; margin: auto; background: white; line-height: 1; font-size: 12px; position: relative; z-index: 2 }
+.my_card .myc .left .share:after{ content: ""; position: absolute; width: 100%; border-top: 1px solid #e3e3e3; top: 26px; left: 0 }
+.my_card .myc .left .share a{ width: 20px; height: 20px; background-image: url(../images/icon/icon_share2.png); margin: 10px 14px }
+.my_card .myc .share a.qq_q{ background-position: 20px top }
+.my_card .myc .share a.wechat{ background-position: 40px top }
+.my_card .myc .share a.wei{ background-position: 60px top }
+.my_card .myc .share a.weibo{ background-position: 80px top }
+.my_card .myc .right{ width: 200px; float: right; font-size: 14px; line-height: 38px; height: 38px }
+.my_card .myc .right p{ white-space: pre}
+.my_card .myc .right span{ color: #ff6f3d }
+.my_card .myc .right a{ margin-top: 46px; line-height: 1; color: #ff6f3d; float: left; }
+.my_card .myc .right a:hover{ cursor: pointer; text-decoration: underline; }
+.ap_popup_explain.popup_mc .content{ height: 455px }

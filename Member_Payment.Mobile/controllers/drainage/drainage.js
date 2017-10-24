@@ -16,7 +16,11 @@ require(['config'], function () {
                 how: "",
                 all: "",
                 time: "",
+<<<<<<< HEAD
                 willShow: true,
+=======
+                willShow:true,
+>>>>>>> 3c21db814f7f0f0c927d9b649fe7a7f97ff3ed56
                 // willHide:false
             },
             methods: {
@@ -176,7 +180,11 @@ require(['config'], function () {
         setTimeout(function () {
             vm.willShow = false;
             // vm.willHide = true
+<<<<<<< HEAD
         }, 1000)
+=======
+        },1000)
+>>>>>>> 3c21db814f7f0f0c927d9b649fe7a7f97ff3ed56
     });
 
 });

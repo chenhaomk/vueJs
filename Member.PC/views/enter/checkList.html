@@ -3,57 +3,35 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>银个购-商家入驻-注册</title>
+    <title>银个购-商家入驻-选择门店</title>
     
     <link rel="icon" href="/assets/images/icon/logo.png">
-    <link href="/assets/css/enter.css" rel='stylesheet' type="text/css">
+    <link href="/assets/css/checkList.css" rel='stylesheet' type="text/css">
 
 </head>
-<body class="bg">
-
-    <div class="register con con_m">
-        <a href="/" class="reback">返回全平台</a>
-        <p class="title">商家锁定会员&nbsp;&nbsp;&nbsp;让商家挣更多的钱</p>
-        <p class="text">先签约，引领市场；后签约，追随市场；不签约，落后市场<br>一个让商家真正拥有属于自己工具的产品</p>
-        <div class="form">
-            <form action="">
-                <p class="prompt">&nbsp;</p>
-                <div class="form_group">
-                    <p class="inp icon phone">
-                        <input type="text" id="tel" placeholder="请输入手机号">
-                    </p>
-                </div>
-                <div class="form_group">
-                    <p class="inp icon yzm">
-                        <a id="getYzm">获取验证码</a>
-                        <input type="text" id="yzm" placeholder="请输入验证码">
-                    </p>
-                </div>
-                <div class="form_group">
-                    <p class="inp icon showPsw">
-                        <img class="passWordImg" src="../../assets/images/user/eye1.png" alt="">
-                        <input type="passWord" id="passWord" placeholder="请设置密码(选填)">
-                    </p>
-                </div>
-                <div class="form_group">
-                    <p class="inp icon email">
-                        <input type="text" id="email" placeholder="为了及时接受信息，建议填写邮箱(选填)">
-                    </p>
-                </div>
-               
-                <p class="xy">
-                    <span class="ck active"></span>
-                    我已阅读并同意<a class="yhxy">用户协议</a>
-                    <b>已有账号去<a href="login.html">登录</a></b>
-                </p>
-                <div class="form_group submit no-bor">
-                    <input type="submit" id="register" value="注册">
-                </div>
-            </form>
+<body>
+    <div class="head">
+        <div class="con">
+            <a href="/" class="fn-left"><img src="/assets/images/enter/logo2.png" alt=""></a>
+            <p class="fn-left hct">选择门店</p>
         </div>
     </div>
-
-    <div class="yhxx_popup popup">
+    <div class="Content con">
+        <div class="shopType">
+            <ul>
+                <li>已通过</li>
+                <li>待通过</li>
+                <li class="onChange">待补充</li>
+            </ul>
+            <div>
+                新建门店
+            </div>
+        </div>
+        <div class="shopList">
+            
+        </div>
+    </div>
+     <div class="yhxx_popup popup">
         <a class="close"></a>
         <p class="title">银个购商家协议</p>
         <div class="content">
@@ -100,7 +78,6 @@
             <p class="sb">f) 实施任何形式的网络监控，从而截取与自身无关的信息；</p>
             <p class="sb">g) 利用银个购从事与网上购物无关或不是以购物为目的的活动，试图扰乱正常购物秩序，谋取不正当利益的行为；</p>
             <p class="sb">h) 注册多个用户账号，通过自我邀请、相互邀请或利用多个手机或邮箱注册等不正当手段获取返利、代金券或任何经济利益。</p>
-            <!-- <p class="sb">i) 采取注册多个用户账号或其他方式购买自己或关联方的优惠券以刷高销售额、获取返利或其他利益、进行虚假评价等不正当行为。</p> -->
             <p class="sb">i) 采取注册多个用户账号或其他方式购买自己或关联方的优惠券以刷高销售额、获取返利或其他利益等不正当行为。</p>
             <p class="sb">j) 其他损害他人或银个购合法权益的行为。</p>
             <p>6、商家在使用银个购提供的服务时，应遵守本协议及银个购的相关使用规则，遵守自愿、平等、公平及诚实信用原则，不利用银个购侵犯他人合法权益及谋取不正当利益，不扰乱网上交易的正常秩序。</p>
@@ -190,9 +167,16 @@
             <p>4、同一个订单不能用多个优惠券。[同优惠券一样的问题]通过其他渠道取得而非通过银个购直接发放的银个购抵扣券，为防止作弊行为及倒卖行为，每个注册用户从该渠道领用的银个购抵扣券最多只能使用一张。</p>
             <p>用户违反银个购抵扣券的使用规则，违规使用银个购抵扣券经银个购发现并证实的，银个购有权终止该用户其他银个购抵扣券的效力。对于用户违规使用银个购抵扣券支付的订单，用户必须补足优惠部分的订单金额（如用户违规使用了一张面值100元的银个购抵扣券，那么用户必须补足100元），否则银个购有权采取终止该订单的效力、停止向用户提供订单产品、查封用户账号等措施，并有权通过法律途径向用户追讨经济损失。</p>
         </div>
+        <div class="userCheck">
+            <p>
+                <span class="active"></span>我已阅读并同意用户协议
+            </p>
+            <div class="active">
+                确定
+            </div>
+        </div>
     </div>
-
 </body>
     <script data-main="/config" src="/plugins/require/require.js"></script>
-    <script src="/controllers/enter/register.js"></script>
+    <script src="/controllers/enter/checkList.js"></script>
 <html>

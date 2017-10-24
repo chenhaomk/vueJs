@@ -92,19 +92,23 @@
             } else {
                 sign = $.fn.getMd5(appid + timestamp);
             }
-
+            var admin_id =  $.fn.getCookie('admin_id')
+            var headerObj = {
+                    appid: appid,
+                    sign: sign,
+                    timestamp: timestamp,
+                    token: token
+                }
+            if(admin_id != undefined) {
+                headerObj.admin_id = admin_id
+            }
             $.ajax({
                 url: local + a.url,
                 type: 'POST',
                 dataType: 'json',
                 async: a.async,
                 contentType: "application/json; charset=utf-8",
-                headers: {
-                    appid: appid,
-                    sign: sign,
-                    timestamp: timestamp,
-                    token: token
-                },
+                headers: headerObj,
                 data: JSON.stringify(data),
                 success: function (data) {
                     a.result(data);
