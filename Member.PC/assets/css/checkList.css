@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0; -webkit-tap-highlight-color:transparent}
+body, h1, h2, h3, h4, h5, h6, hr, p,blockquote,dl, dt, dd, ul, ol, li,pre,form, fieldset, legend, button,input, textarea,th, td,img{border:medium none;margin: 0;padding: 0; outline:none;}
+body,button, input, select, textarea {font: 16px/1.5 "微软雅黑",tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif; outline:none; -webkit-font-smoothing: antialiased; color: #1c1c1c}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+em{font-style:normal;}
+ul, ol,li { list-style: none; }
+a { text-decoration: none; color: #1c1c1c}
+a:hover{ outline:none; color: #ff6f3d}
+img{ border:0px;}
+table { border-collapse: collapse; border-spacing: 0; }
+html{ height:100%}
+html,body{ color:#1c1c1c; min-height:100%; width:100%; overflow:hidden; overflow-y:auto; max-width:100%; left:0; right:0; position:relative}
+.clear{ clear:both;}
+.fn-clear:after{ content:""; display:block; clear:both}
+.fn-left{ float: left; }
+.fn-right{ float: right; }
+.t-left{ text-align: left; }
+.t-center{ text-align: center; }
+.t-right{ text-align: right; }
+.hide{ display:none}
+.text-sl{ overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.hover-underline:hover{ text-decoration:underline; }
+
+body{ background: #fbfcff }
+body.bg{ background: url(../images/enter/register_bg.jpg) center top no-repeat }
+
+.head{ height: 80px; box-shadow: 0 5px 10px #f3f5f9; background: white }
+.head .con .hct{ color: #1c1c1c; font-size: 26px; line-height: 80px; height: 80px; margin-left: 20px}
+.con {margin: auto;width: 1180px;}
+.Content {width: 960px;}
+
+
+.Content .shopType {overflow: hidden;margin-top: 30px;border-bottom: 1px solid #edeff5}
+.Content .shopType ul {overflow: hidden;float: left;width: 500px;margin-bottom: 10px;height: 37px;line-height: 37px; }
+.Content .shopType div{float: right;height: 37px;line-height: 37px;text-align: center;background-color: #ff6f3d;color: white;border-radius: 5px;width: 100px;margin-bottom: 10px;}
+.Content .shopType ul li {float: left;margin-right: 80px;position: relative;color: #99a3ad}
+.Content .shopType ul li:hover,.Content .shopType div:hover {cursor: pointer;}
+.Content .shopType ul li:after {content: "";width: 1px; height: 24px;  background-color: #99a3ad; position: absolute; right: -40px;top: 50%;margin-top: -12px;}
+.Content .shopType ul li:last-child {
+	position: static;
+}
+.Content .shopType ul .onChange {color: #ff6f3d}
+
+.shopList ul {overflow: hidden;padding:10px 0;}
+.shopList ul li {width: 401px;padding: 26px 20px 18px 24px;float: left;margin-top: 32px;background-color: #ffffff; box-shadow: 0 0 10px 5px #f3f5f9;margin-left: 10px;margin-right: 10px; }
+.shopList ul .addMargin {margin-right: 30px;}
+.shopList ul li .shopDetil {overflow: hidden;}
+.shopList ul li .shopDetil img {float: left;width: 150px;height: 108px;margin-right:20px;}
+.shopList ul li .shopDetil div {float: left;width: 216px;}
+.shopList ul li .shopDetil div .shopName {font-size: 16px;}
+.shopList ul li .shopDetil div  .createDate {height: 32px;line-height: 32px;font-size: 14px;color: #bababa;}
+
+.shopList ul li .shopDetil div .shopTypes {overflow: hidden;}
+.shopList ul li .shopDetil div .shopTypes p {float: left;padding:5px 20px;height: 18px;line-height: 18px;background-color: #fff0eb;color: #ff6f3d;border-radius: 20px;}
+.shopList ul li .status {color: #ff6f3d;height: 46px;line-height: 46px;text-align: center;margin-top: 30px;border-top:2px dashed #edeff5;}
+.shopList ul li .status:hover {cursor: pointer;}
+.shopList ul li .status span {color: #bababa;}
+
+
+
+
+.popup{ width: 380px; height: 320px; padding: 0 20px; background: white; border-radius: 5px; position: fixed; z-index: 1001; margin: -160px -210px; left: 50%; top: 50%; display: none; }
+.popup .close{ position: absolute; width: 24px; height: 24px; right: -12px; top: -12px; background: url(../images/icon/p_close.png) center center no-repeat black; border-radius: 50%; cursor: pointer; }
+.popup .title{ height: 55px; line-height: 55px; font-size: 20px; text-align: center; border-bottom: 1px solid #ececec }
+
+.ap_popup .text{ margin-top: 15px; height: 36px; line-height: 36px; font-weight: bold; }
+.ap_popup .form_group .radio{ height: 52px; line-height: 52px; border-bottom: 1px solid #ececec }
+.ap_popup .form_group.submit a,.ap_popup_explain .form_group.submit a{ width: 100px; height: 40px; line-height: 40px; padding: 0; text-align: center; display: block; margin: 30px auto 0 }
+
+.yhxx{ cursor: pointer; position: relative; z-index: 8 }
+.ap_popup_explain,.yhxx_popup{ width: 590px; height: 550px; margin: -275px -295px}
+.ap_popup_explain .content,.yhxx_popup .content{ height: 355px; padding-bottom: 15px; overflow: auto; font-size: 14px }
+.ap_popup_explain .content p,.yhxx_popup .content p{ margin-top: 22px }
+.ap_popup_explain .content p.sb,.yhxx_popup .content p.sb{ margin-left: 15px; margin-top: 10px }
+.yhxx_popup .content{ height: 455px }
+.time_picker{ width: 100%; float: left;font-size: 14px }
+.time_picker>input{ width: 100%; cursor: pointer; }
+.calender{ width: 290px; height: 295px; background: white; border-radius: 3px; position: absolute; z-index: 999; border: 1px solid #f2f2f2; display: none;}
+.calender .getyear{ height: 17px; margin: 22px }
+.calender .getyear select{ float: left; width: 100px; margin-left: 60px; font-size: 14px; border: 0; cursor: pointer; }
+.calender .getyear>a{ cursor: pointer; }
+.calender .getyear .preMonth{ background: url(../images/icon/time_picker_l.png); float: left; width: 17px; height: 17px }
+.calender .getyear .nextMonth{ background: url(../images/icon/time_picker_r.png); float: right; width: 17px; height: 17px }
+.calender table{ margin: 0 25px; width: 245px }
+.calender table tr{ height: 35px; line-height: 35px }
+.calender table td{ width: 35px; height: 35px; text-align: center; font-size: 14px; cursor: pointer;}
+.calender table td p{ display: block; font-weight: normal; width: 28px; height: 28px; margin: 3.5px auto; border-radius: 50%; line-height: 28px }
+.calender table .tdtoday p,.calender table td:hover p{ background: #ff6f3d; color: white }
+.loading{ width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: 9999; background: url(../images/loading-go.gif) center center no-repeat; display: none; }
+.yhxy{ cursor: pointer; }
+.paging{ padding: 70px 0; text-align: center; height: 40px; line-height: 40px; text-align: center; font-size: 20px }
+.paging a{ display: inline-block; width: 40px; background: white; margin-right: 3px; position: relative; height: 40px; cursor: pointer;}
+.paging a.active,.paging a:hover{ color: white; background: #ff6f3d }
+.paging a.prev{ margin-right: 13px;}
+.paging a.prev:after{ content:""; position: absolute; border: 6px solid transparent; border-right: 9px solid #ff6f3d; top: 50%; margin-top: -6px; left: 50%; margin-left: -10px}
+.paging a.prev:hover:after{ border-right-color: white }
+.paging a.next{ margin-left: 10px;}
+.paging a.next:after{ content:""; position: absolute; border: 6px solid transparent; border-left: 9px solid #ff6f3d; top: 50%; margin-top: -6px; right: 50%; margin-right: -10px}
+.paging a.next:hover:after{ border-left-color: white }
+.paging a.more{ background: none; line-height: 20px }
+.paging a.more:hover{ background: none; color: #1c1c1c; cursor: default }
+
+.ap_popup_explain,.yhxx_popup{ width: 590px; height: 590px; margin: -275px -295px}
+.ap_popup_explain .content,.yhxx_popup .content{ height: 355px; padding-bottom: 15px; overflow: auto; font-size: 14px }
+.ap_popup_explain .content p,.yhxx_popup .content p{ margin-top: 22px }
+.ap_popup_explain .content p.sb,.yhxx_popup .content p.sb{ margin-left: 15px; margin-top: 10px }
+.ap_popup_explain .form_group .checkbox{ height: 50px; line-height: 50px }
+.ap_popup_explain .form_group.submit a{ margin-top: 10px }
+.yhxx_popup .content{ height: 420px }
+
+.pay_popup{ width: 426px; height: 480px; margin: -240px -213px }
+.pay_popup .title{ visibility: hidden }
+.pay_popup .title:before{ content: ""; display: inline-block; width: 26px; height: 22px; background: url(../images/icon/pay_wechat.png); margin-right: 8px; margin-bottom: -3px }
+.pay_popup .money{ height: 44px; line-height: 44px; position: absolute; margin-top: -44px}
+.pay_popup .money span{ color: #ff6f3d }
+.pay_popup .money span b{ font-size: 26px; font-weight: normal; }
+.pay_popup .ewm{ border: 1px solid #ececec; width: 280px; height: 330px; margin:auto; text-align: center; color: #888; position: relative; margin-top: 44px }
+.pay_popup .ewm img{ display: block; width: 220px; height: 220px; margin: 24px auto 20px}
+.pay_popup .ewm p span{ color: #ff6f3d }
+.shadow {
+    background: black;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    opacity: .5;
+    filter: alpha(opacity=50);
+    top: 0;
+    left: 0;
+    display: none;
+}
+.userCheck p{text-align:center;margin-bottom: 20px;}
+.userCheck p span {width: 12px;height: 12px;border: 1px solid #ff6f3d;border-radius: 3px;margin-right: 8px;cursor: pointer;display: inline-block;}
+.userCheck p span.active{background: url(../images/icon/checked.png) center center no-repeat #ff6f3d;}
+.userCheck  div{ width: 140px; height: 46px;line-height: 46px; color: white;background-color: #888888;font-size: 20px;text-align: center;margin: auto; border-radius: 5px;cursor: pointer;}
+.userCheck div.active {background-color: #ff6f3d;}

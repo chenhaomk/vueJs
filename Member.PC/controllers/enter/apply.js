@@ -1,6 +1,7 @@
-require(['config'], function () {
+    require(['config'], function () {
     require(["imgup", 'angle', 'citys', 'bankBin'], function (OSS) {
-
+        // var business_check_id = window.location.seach.split("=")[1]
+        // console.log(window.location.seach)
         var f_img = [],
             n_img = [],
             l_img = [],
@@ -54,35 +55,111 @@ require(['config'], function () {
         });
 
         $(".submit").on('click', '.prev', function (event) {
+
             $("form").each(function (index, el) {
                 if ($(this).is(":visible")) {
                     $(this).hide().prev().show();
+                    $(".th").removeClass("thactive")
                     $(".part a").eq(index).removeClass('active').prev().addClass('active');
                 }
             });
         });
 
         setSelect(rawCitiesData, $(".province.select"), "name", 'id');
-
+        var lat ,lng
+        //获取初始位置--------开始------------
+        getLocation()
+        var map = new BMap.Map("container");
+        map.enableScrollWheelZoom(true)
+        var lastMarker
+        function getLocation() {
+            $.fn.loading(true);
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function(r){
+                if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                    removeLastPoint(lastMarker);
+                    lastMarker = new BMap.Marker(r.point);
+                    var point = new BMap.Point(r.point.lng,r.point.lat);
+                    map.centerAndZoom(r.point,16);
+                     map.addOverlay(lastMarker);
+                    $.fn.loading(false);
+                }else {
+                    
+                }        
+            },{enableHighAccuracy: true})
+        }
+        //获取初始位置--------结束------------
+        //移除上一个点位
+        
+        function removeLastPoint(lastMarker) {
+            map.removeOverlay(lastMarker);
+        };
+        function getGeocoder(string,province) {
+            var myGeo = new BMap.Geocoder();
+            myGeo.getPoint(string, function(point){
+                if (point) {
+                    // lat = point.lat
+                    // lng = point.lng
+                    removeLastPoint(lastMarker);
+                    map.centerAndZoom(point, 16);
+                    lastMarker = new BMap.Marker(point)
+                    map.addOverlay(lastMarker);
+                    $.ajax({
+                        url: "http://restapi.amap.com/v3/assistant/coordinate/convert?locations="+point.lng+","+point.lat+"&coordsys=baidu&output=JSON&key=9781ab13347d6669085c90a7db3809e6",
+                        beforeSend:function () {
+                            $.fn.loading(true);
+                        },
+                        success:function (data) {
+                            $.fn.loading(false);
+                            lng = data.locations.split(",")[0]
+                            lat = data.locations.split(",")[1]
+                        }
+                    })   
+                }else{
+                    // alert("您选择地址没有解析到结果!");
+                }
+            }, province);
+        }
+        $(".addInput img").click(function () {
+            if($(".add").val() =="") {
+                getLocation()
+            }else {
+                var str = $("[name='province']").val()+$("[name='city']").val()+$("[name='area']").val()+$("[name='address']").val()
+                getGeocoder(str,$("[name='province']").val())
+            }
+        })
+        $(".add").keyup(function (e) {
+            if(e.keyCode == 13) {
+                if($(".add").val() =="") {
+                    getLocation()
+                }else {
+                    var str = $("[name='province']").val()+$("[name='city']").val()+$("[name='area']").val()+$("[name='address']").val()
+                    getGeocoder(str,$("[name='province']").val())
+                }
+            }
+        })
         var citysearch = new AMap.CitySearch();
-        $.fn.loading(true);
         citysearch.getLocalCity(function (status, result) {
             $.fn.getData({
-                url: "/business/getBusinessCheckDetails",
+                url: "/admin/business/getBusinessCheckDetails",
                 data: {
                     business_check_id: business_check_id
                 },
                 async: false,
                 result: function (data) {
+
                     data = data.data;
-                    $.fn.loading(false);
+                    // $.fn.loading(false);
                     if (data.business_licence_num && !isbind && !isAgain) {
                         window.open("login.html", "_self");
                     }
+                    lat = data.lat
+                    lng = data.lng
                     $("form:eq(0)").show().siblings('form').hide();
 
                     if (data.brand_id && bindBrand == 1) {
                         $("form:eq(1)").show().siblings('form').hide();
+                        $(".th").removeClass("thactive")
                         $(".part a:eq(1)").addClass('active').siblings().removeClass('active');
                         $.fn.getData({
                             url: "/business/getBindBrandInfoById",
@@ -106,6 +183,7 @@ require(['config'], function () {
                         });
                     } else if (bindBrand == 1) {
                         $("form:eq(1)").show().siblings('form').hide();
+                        $(".th").removeClass("thactive")
                         $(".part a:eq(1)").addClass('active').siblings().removeClass('active');
                     }
                     if (isbind) {
@@ -163,6 +241,7 @@ require(['config'], function () {
                         $("[name='area']").val(aDom.text()).attr("data-id", aDom.attr("data-id"));
                         $("[name='b_area']").val(sDom.text()).attr("data-id", sDom.attr("data-id"));
                         $("[name='address']").val(data.address);
+                        $(".th").removeClass("thactive")
                         $(".b_type .options a:contains(" + data.industry_name + ")").addClass("active").siblings().removeClass('active');
                         $("[name='b_type']").val(data.industry_name).attr("data-id", $(".b_type .options a:contains(" + data.industry_name + ")").attr("data-id"));
                         f_img.push($.fn.formatImgName(data.face_img));
@@ -174,7 +253,6 @@ require(['config'], function () {
                     } else {
                         pDom = $(".select.province .options a:contains(" + result.province + ")");
                         provinceIndex = pDom.index();
-
                         pDom.addClass('active');
                         setCitys(provinceIndex);
 
@@ -233,6 +311,7 @@ require(['config'], function () {
 
                     if (data.id_card_front_img) {
                         $("form:eq(2)").show().siblings('form').hide();
+                        $(".th").removeClass("thactive")
                         $(".part a:eq(2)").addClass('active').siblings().removeClass('active');
                         hasZi = true;
                         hasBi = true;
@@ -242,6 +321,7 @@ require(['config'], function () {
 
                     if (isAgain) {
                         $("form:eq(0)").show().siblings('form').hide();
+                        $(".th").removeClass("thactive")
                         $(".part a:eq(0)").addClass('active').siblings().removeClass('active');
                     }
 
@@ -281,6 +361,7 @@ require(['config'], function () {
                             data = data.data;
                             setSelect(data, $(".fsyh.select"), "bank_name", 'bank_code');
                             if (bankName) {
+                                $(".th").removeClass("thactive")
                                 $(".fsyh .options a:contains(" + bankName + ")").addClass("active").siblings().removeClass('active');
                                 $("[name='fsyh']").val(bankName).attr("data-id", $(".fsyh .options a:contains(" + bankName + ")").attr("data-id"));
                             }
@@ -288,7 +369,7 @@ require(['config'], function () {
                     });
 
                     var styz;
-                    if (data.business_licence_img.length != 0) {
+                    if (data.business_licence_img != undefined  &&data.business_licence_img.length != 0) {
                         hasYzi = true;
                         styz = data.business_licence_img[0];
                         yyzz_img.push($.fn.formatImgName(data.business_licence_img[0]));
@@ -321,7 +402,7 @@ require(['config'], function () {
                     } else {
                         $("#stt").manhuaDate();
                     }
-                    $.fn.loading(false);
+                    // $.fn.loading(false);
                 }
             });
 
@@ -348,7 +429,7 @@ require(['config'], function () {
                     $('#search').click();
                     return;
                 }
-                $(".th").addClass('active').siblings().removeClass('active');
+                $(".th").addClass('thactive').siblings().removeClass('active');
                 $("form:eq(2)").show().siblings('form').hide();
                 $(".result").hide();
             });
@@ -383,7 +464,7 @@ require(['config'], function () {
 
             function part4() {
                 $.fn.getData({
-                    url: "/business/addQualificationAuthInfo",
+                    url: "/admin/business/addQualificationAuthInfo",
                     data: {
                         business_check_id: business_check_id,
                         business_licence_num: yzch,
@@ -397,7 +478,6 @@ require(['config'], function () {
                         if (data.status == "error") {
                             $(".prompt5").text(data.msg);
                         } else if (data.status == "success") {
-
                             window.open("status.html?s=0", "_self");
                         }
                     }
@@ -457,7 +537,7 @@ require(['config'], function () {
 
                     bankName = $(".fsyh .options [data-id='" + fsyh + "']").html();
                 $.fn.getData({
-                    url: "/business/bindBankCardAndAuth",
+                    url: "/admin/business/bindBankCardAndAuth",
                     data: {
                         business_check_id: business_check_id,
                         real_name: userName,
@@ -479,7 +559,7 @@ require(['config'], function () {
                                 return;
                             }
                             $.fn.getData({
-                                url: "/business/bindBankCard",
+                                url: "/admin/business/bindBankCard",
                                 data: {
                                     business_check_id: business_check_id,
                                     card_holder: $("#userName").val(),
@@ -491,6 +571,7 @@ require(['config'], function () {
                                     if (data.status == "error") {
                                         $(".prompt4").text(data.msg);
                                     } else if (data.status == "success") {
+                                        $(".th").removeClass("thactive")
                                         $(".last").addClass('active').siblings().removeClass('active');
                                         $("form:eq(3)").show().siblings('form').hide();
                                     }
@@ -625,7 +706,6 @@ require(['config'], function () {
 
         $("#first").click(function (event) {
             event.preventDefault();
-
             var name = $("[name='name']").val(),
                 tel = $("[name='tel']").val(),
                 area = $("[name='area']").attr("data-id"),
@@ -642,11 +722,12 @@ require(['config'], function () {
                 $(".prompt1").text("请输入合理的手机号码！");
                 return;
             }
-            var ygphone = $("#ygphone").val();
-            if (!(/^1[34578]\d{9}$/.test(ygphone)) && ygphone.length != 0) {
-                $(".prompt").text("请输入正确的手机号！");
-                return;
-            }
+            // var shopTelNum = $("#shopTelNum").val();
+
+            // if (!(/^1[34578]\d{9}$/.test(shopTelNum)) && shopTelNum.length != 0) {
+            //     $(".prompt").text("请输入正确的手机号！");
+            //     return;
+            // }
             $.fn.loading(true);
 
             if (hasFi && hasNi && hasLi) {
@@ -752,11 +833,15 @@ require(['config'], function () {
                     });
                 });
             }
-
+            if(lat == undefined || lng == undefined ) {
+                $(".prompt1").text("请您输入正确地址！");
+                return;
+            }
             function part1() {
+
                 var ygphone = $("#ygphone").val();
                 $.fn.getData({
-                    url: "/business/addBusinessCheckTwo",
+                    url: "/admin/business/addBusinessCheckTwo",
                     data: {
                         business_check_id: business_check_id,
                         name: name,
@@ -768,7 +853,10 @@ require(['config'], function () {
                         inner_imgs: n_img,
                         face_img: f_img,
                         logo: l_img,
-                        commissioner_id: ygphone
+                        commissioner_id: ygphone,
+                        lat:lat,
+                        lng:lng,
+                        member_id:""
                     },
                     result: function (data) {
                         $.fn.loading(false);
@@ -776,8 +864,10 @@ require(['config'], function () {
                             $(".prompt1").text(data.msg);
                         } else if (data.status == "success") {
                             data = data.data;
+                            $(".th").removeClass("thactive")
                             $(".two").addClass('active').siblings().removeClass('active');
                             $("form:eq(1)").show().siblings('form').hide();
+                            $.fn.setCookie('business_check_id',data.business_check_id);
                         }
                     }
                 });
@@ -786,10 +876,16 @@ require(['config'], function () {
         });
 
         function len(v) {
-            if (v.length == 0) return true;
+            if(v != undefined) {
+                if (v.length == 0 || v.length == undefined) return true;
+            }else {
+                return true
+            }
+            
         }
 
         $(".select").on('click', '.options a', function (event) {
+            $(".th").removeClass("thactive")
             $(this).addClass('active').siblings().removeClass('active');
             var tt = $(this);
             var t = $(this).text();

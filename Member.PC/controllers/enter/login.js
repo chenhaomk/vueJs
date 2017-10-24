@@ -24,7 +24,7 @@ require(['config'], function () {
             }
 
             $.fn.getData({
-                url: "/business/businessFastLogin",
+                url: "/admin/passport/fastLogin",
                 data: {
                     mobile: $("#tel").val(),
                     verification_code: $("#yzm").val()
@@ -35,14 +35,15 @@ require(['config'], function () {
                         $(".prompt").text(data.msg);
                     } else if (status == "success") {
                         data = data.data;
-                        $.fn.setCookie("business_check_id", data.business_check_id);
-                        if (data.state == 0) {
-                            window.open("apply.html", "_self");
-                        } else {
-                            var url = "status.html?s=" + data.state;
-                            if (data.state == 3) url = "status.html?s=" + data.state + "&t=" + encodeURI(encodeURI(data.reason));
-                            window.open(url, "_self");
-                        }
+                        $.fn.setCookie("admin_id", data.admin_id);
+                        window.location.href = "../../views/enter/checkList.html"
+                        // if (data.state == 0) {
+                        //     window.open("apply.html", "_self");
+                        // } else {
+                            // var url = "checkList.html?s=" + data.type;
+                            // if (data.state == 3) url = "status.html?s=" + data.state + "&t=" + encodeURI(encodeURI(data.reason));
+                            // window.open(url, "_self");
+                        // }
                     }
                 }
             });

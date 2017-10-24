@@ -17,7 +17,7 @@ require(['config'], function () {
                 all: "",
                 time: "",
                 willShow:true,
-                willHide:false
+                // willHide:false
             },
             methods: {
                 getVerification: function () {
@@ -160,7 +160,7 @@ require(['config'], function () {
 
         setTimeout(function(){
             vm.willShow = false;
-            vm.willHide = true
+            // vm.willHide = true
         },1000)
     });
     

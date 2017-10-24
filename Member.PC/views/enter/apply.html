@@ -7,7 +7,6 @@
     
     <link rel="icon" href="/assets/images/icon/logo.png">
     <link href="/assets/css/enter.css" rel='stylesheet' type="text/css">
-
 </head>
 <body>
     
@@ -28,19 +27,19 @@
         <div class="form">
             <form class="active">
                 <div class="form_group">
-                    <label for="">商铺名称</label>
+                    <label for="">门店名称</label>
                     <div class="inp">
-                        <input type="text" name="name" placeholder="请输入商铺名称">
+                        <input type="text" name="name" placeholder="请输入门店名称">
                     </div>
                 </div>
                 <div class="form_group">
-                    <label for="">商铺电话</label>
+                    <label for="">门店电话</label>
                     <div class="inp">
-                        <input type="text" name="tel" placeholder="请输入商铺电话">
+                        <input type="text" name="tel" class="shopTelNum" placeholder="请输入门店电话">
                     </div>
                 </div>
                 <div class="form_group no_hei address">
-                    <label for="">商铺地址</label>
+                    <label for="">门店地址</label>
                     <div class="inp">
                         <div class="select province">
                             <input type="text" name="province" readonly placeholder="省">
@@ -54,7 +53,13 @@
                             <input type="text" name="area" readonly placeholder="区">
                             <div class="options"></div>
                         </div>
-                       <input type="text" name="address" placeholder="请输入详细地址" class="add">
+                        <div class="addInput">
+                            <input type="text" name="address" placeholder="请输入详细地址" class="add">
+                            <img src="../../assets/images/user/ad.png" alt="">
+                        </div>
+                       
+
+                       <div id="container"></div>  
                     </div>
                 </div>
                 <div class="form_group">
@@ -75,12 +80,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="form_group">
+<!--                 <div class="form_group"> 
                         <label for="">客服号码</label>
                     <p class="inp">
                         <input type="text" id="ygphone" placeholder="客服号码(选填)">
                     </p>
-                </div>
+                </div> -->
                 <div class="form_group no_hei">
                     <label for="">门头照(1张)</label>
                     <div class="inp">
@@ -94,7 +99,7 @@
                     </div>
                 </div>
                 <div class="form_group no_hei">
-                    <label for="" class="long">商铺logo(1张)</label>
+                    <label for="" class="long">门店logo(1张)</label>
                     <div class="inp">
                         <div class="uploader l_img"></div>
                     </div>
@@ -152,7 +157,7 @@
                     </div>
                 </div>
                 <div class="form_group">
-                    <label for="">开户行名称</label>
+                    <label for="">所属银行</label>
                     <div class="inp">
                         <div class="select fsyh">
                             <input type="text" name="fsyh" id="fsyh" readonly placeholder="请选择开户银行">
@@ -252,6 +257,8 @@
     <div class="shadow"></div>
 
 </body>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=w7TgjjNMbl8hzRd8r9IDdg7o&s=1"></script>
+    <!-- <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=a8b485ca15d4b95ab84bc7f810bceb29"></script>  -->
     <script data-main="/config" src="/plugins/require/require.js"></script>
     <script src="/controllers/enter/apply.js"></script>
 <html>
