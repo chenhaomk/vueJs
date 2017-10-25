@@ -9,11 +9,11 @@ require(['config'], function () {
             $.fn.getData({
                 url: "/admin/home/getAllBusiness",
                 result: function (data) {
-                    if(data.status == "success") {
-                        $(".shopList").html(template(examine_business_list,1))
+                    if(data.status == "success") {                        
                         examine_business_list = data.data.examine_business_list
                         finish_business_list = data.data.finish_business_list
                         pending_business_list = data.data.pending_business_list
+                        $(".shopList").html(template(pending_business_list,1))
                         $(".status").click(function () {
                             $.fn.setCookie('business_check_id',$(this).attr("business_check_id"));
                             window.location.href = "../../views/enter/apply.html?business_check_id="+$(this).attr("business_check_id")
@@ -32,13 +32,13 @@ require(['config'], function () {
             index.addClass("onChange");
             $(".status").off()
             if(str == "待通过") {
-                $(".shopList").html(template(examine_business_list,1))
+                $(".shopList").html(template(examine_business_list,2))
                 $(".status").click(function () {
                     $.fn.setCookie('business_check_id',$(this).attr("business_check_id"));
                     window.location.href = "../../views/enter/apply.html?isbind=1&isAgain=1&isData=1&business_check_id="+$(this).attr("business_check_id")
                 })
             }else if(str == "待补充") {
-                $(".shopList").html(template(pending_business_list,2))
+                $(".shopList").html(template(pending_business_list,1))
                 $(".status").click(function (e) {
                     if($(this).find("span").html() != "审核中") {
                         $.fn.setCookie('business_check_id',$(this).attr("business_check_id"));
@@ -55,6 +55,7 @@ require(['config'], function () {
         })
         $(".shopType div").click(function () {
            // window.location.href = "https://ingo.yingougou.com"
+           $.fn.setCookie('business_check_id',"");
             event.preventDefault();
             $.fn.yhxy();
         })
@@ -89,7 +90,7 @@ require(['config'], function () {
                     goLocatio = "立即填写>"
                 }else if(status == 2){
                     if(item.state == 3) {
-                        goLocatio = "审核失败，重新入驻>"
+                        goLocatio = "审核失败!重新入驻>"
                     }else {
                         goLocatio = "<span>审核中</span>"
                     }

@@ -55,6 +55,7 @@ require(['config'],function(){
                     member_id:""
                 },
                 result : function(data){
+                    console.log(data)
                     if(data.status == "error"){
                         $(".prompt").text(data.msg);
                     }else if(data.status == "success"){
@@ -62,7 +63,7 @@ require(['config'],function(){
                         $.fn.setCookie("admin_id",data.admin_id);
                         // $.fn.setCookie("account",data.account);
                         // window.open("apply.html","_self");
-                        window.location.href = "../../views/enter/apply.html"
+                        window.location.href = "../../views/enter/before.html"
                     }
                 }
             });
