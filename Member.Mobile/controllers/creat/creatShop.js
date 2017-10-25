@@ -32,8 +32,8 @@ require(['config'], function () {
                     face_img_list: [],
                     logo_img_list: [],
                     isComShow: true,
-                    lat: "",
-                    lng: "",
+                    lat: "1",
+                    lng: "1",
                     member_id: ""
                 },
                 methods: {
@@ -445,7 +445,7 @@ require(['config'], function () {
             }
             param.lat = vm.lat;
             param.lng = vm.lng;
-            axio.defaults.headers.admin_id = vm.admin_id;
+            axio.defaults.headers.admin_id = ygg.getCookie("admin_id");
             ygg.ajax("/business/addBusinessCheckTwo", param, function (data) {
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
@@ -523,7 +523,7 @@ require(['config'], function () {
                     vm.logo_img = shopDetil.logo_img;
                     if (shopDetil.logo_img != undefined && shopDetil.logo_img.length > 0) {
                         // vm.logo_img_list = shopDetil.logo.replace("https://img.yingougou.com/", "");
-                         vm.logo_img_list = shopDetil.logo_img.replace("https://img.yingougou.com/", "");
+                        vm.logo_img_list = shopDetil.logo_img.replace("https://img.yingougou.com/", "");
                     }
                     vm.lat = shopDetil.lat;
                     vm.lng = shopDetil.lng;
