@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+    <link rel="stylesheet" href="../../assets/css/create.css">
+</head>
+
+<body>
+    <div id="warp">
+        <section id="app" class="mapContainer">
+            <div class="head">
+                <p class="back" v-on:click="back"></p>
+                <span class="address"> 详细地址</span>
+            </div>
+        </section>
+        <div class="footer" id="footer">
+            <input class="detailAddress" type="text" v-model="message" placeholder="请输入详细地址">
+            <p class="mapBtn" v-on:click="getMyLocation">确定</p>
+        </div>
+        <div id="container"></div>
+
+    </div>
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=w7TgjjNMbl8hzRd8r9IDdg7o&s=1 "></script>
+<script src="../../controllers/creat/creatMap.js"></script>
+<html>

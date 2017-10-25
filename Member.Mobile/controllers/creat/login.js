@@ -44,21 +44,26 @@ require(['config'], function () {
                             ygg.prompt(data.msg);
                         } else if (data.status == "success") {
                             data = data.data;
-                            ygg.setCookie("business_check_id", data.business_check_id);
-                            that.reason = data.reason;
-                            that.state = data.state;
-                            switch (that.state) {
-                                case 0: //资料等待提交
-                                    ygg.prompt("上次信息还未提交，请完善并提交资料！");
-                                    //location.href = "https://www.yingougou.com/views/enter/login.html";
-                                    location.href = "creatShopB.html";
-                                    break;
-                                default:
-                                    that.active = that.state;
-                                    if (that.state == 2)
-                                        getInfo();
-                                    break;
+                            if (data.admin_id == null) {
+                                ygg.prompt("无法找到当前管理员信息，请稍后重试");
+                                return;
                             }
+                            ygg.setCookie("admin_id", data.admin_id);
+                            location.href = "supplementSelect.html";
+                            // that.reason = data.reason;
+                            // that.state = data.state;
+                            // switch (that.state) {
+                            //     case 0: //资料等待提交
+                            //         ygg.prompt("上次信息还未提交，请完善并提交资料！");
+                            //         //location.href = "https://www.yingougou.com/views/enter/login.html";
+                            //         location.href = "creatShopB.html";
+                            //         break;
+                            //     default:
+                            //         that.active = that.state;
+                            //         if (that.state == 2)
+                            //             getInfo();
+                            //         break;
+                            // }
 
                             //that.active = 1;
                         }
@@ -79,21 +84,21 @@ require(['config'], function () {
             }
         });
 
-        function getInfo() {
-            var id = ygg.getCookie("business_check_id");
-            ygg.ajax("/business/getBusinessCheckDetails", {
-                business_check_id: id
-            }, function (data) {
-                if (data.status == "error") {
-                    ygg.prompt(data.msg);
-                } else if (data.status == "success") {
-                    data = data.data;
-                    if (data.brand_id != null && data.brand_id != "")
-                        vm.brandState = "解绑品牌";
+        // function getInfo() {
+        //     var id = ygg.getCookie("business_check_id");
+        //     ygg.ajax("/business/getBusinessCheckDetails", {
+        //         business_check_id: id
+        //     }, function (data) {
+        //         if (data.status == "error") {
+        //             ygg.prompt(data.msg);
+        //         } else if (data.status == "success") {
+        //             data = data.data;
+        //             if (data.brand_id != null && data.brand_id != "")
+        //                 vm.brandState = "解绑品牌";
 
-                }
-            });
-        }
+        //         }
+        //     });
+        // }
 
         function dropBrand() {
             var id = ygg.getCookie("business_check_id");

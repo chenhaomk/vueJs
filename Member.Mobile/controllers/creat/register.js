@@ -16,7 +16,7 @@ require(['config'], function () {
                 ck: "",
                 account: "",
                 salesmanCode: "",
-                password = ""
+                password : ""
             },
             methods: {
                 register1: function (e) {
@@ -29,7 +29,7 @@ require(['config'], function () {
                         return;
                     }
                     if(that.password.length>0){
-                    if (!/\.(gif|jpg|jpeg|bmp|png|bmp)$/.test(suffix.toLowerCase())) {
+                    if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z`~!@#$%^&*()_+=-]{8,16}$/.test(that.password)) {
                         ygg.prompt("密码8到16位，且必需带有字母");//文案有问题，根据web版本修改
                         return;
                     }

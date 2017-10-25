@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Expires" CONTENT="0">
     <title></title>
 
     <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
@@ -26,16 +29,16 @@
                 <p class="label">
                     <label>商家名称</label>
                     <input placeholder="请输入门店名称" v-model="name">
-
                 </p>
             </section>
             <section class="form_group">
                 <p class="label">
-                    <label>商家城市</label>
+                    <label>商家地区</label>
                     <!-- <span class="sel_text nosel">请选择</span> -->
                     <!-- <input value="四川省 成都市 锦江区" id="city-picker" class="sel_text nosel" > -->
                     <span class="sel_text nosel" id="city-picker">{{city}}</span>
                     <p class="text-sl">{{city}}</p>
+                    <img src="../../assets/images/creat/ic_arrow_xxh.png" class="jt" alt="">
                 </p>
             </section>
             <section class="form_group">
@@ -46,7 +49,7 @@
             </section>
             <section class="form_group">
                 <p class="label">
-                    <label>所在商圈</label>
+                    <label>所在商区</label>
                     <span class="sel_text nosel" id="filter_address">{{filterAddress}}</span>
                 </p>
             </section>
@@ -61,6 +64,7 @@
                     <label>经营类别</label>
                     <span class="sel_text nosel" id="filter_shop">{{filterShop}}</span>
                 </p>
+                <img src="../../assets/images/creat/ic_arrow_xxh.png" class="jt" alt="">
             </section>
             <section class="form_group" v-show="isComShow">
                 <p class="label">
@@ -68,9 +72,19 @@
                     <input v-model="commissioner_id" v-on:blur="blurTip(commissioner_id,'phone')" placeholder="客服号码(选填)">
                 </p>
             </section>
+            <section class="form_group">
+                <p class="label">
+                    <label>地图</label>
+                    <span class="sel_text nosel" v-on:click="goToMap">
+                        地图选择
+                    </span>
+                </p>
+            </section>
             <section class="form_group img_loader">
                 <p class="label">
-                    <label>门头照<span>凡上传图片大小不能超过4M</span></label>
+                    <label>门头照
+                        <span>凡上传图片大小不能超过4M</span>
+                    </label>
                 </p>
                 <uploader :get-file-han="getDataDoor" :old-imgs="face_img" :max-length="1"></uploader>
             </section>
@@ -78,7 +92,7 @@
                 <p class="label">
                     <label>内景图</label>
                 </p>
-                <uploader :get-file-han="getDataInner" :old-imgs="inner_imgs" :max-length="4"></uploader>
+                <uploader :get-file-han="getDataInner" :old-imgs="inner_imgs" :max-length="8"></uploader>
             </section>
             <section class="form_group img_loader">
                 <p class="label">

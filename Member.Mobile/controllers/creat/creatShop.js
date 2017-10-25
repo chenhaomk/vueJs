@@ -1,5 +1,6 @@
 require(['config'], function () {
-    require(['vue', 'main', 'imgup', 'city-picker-area'], function (Vue, ygg, OSS) {
+    require(['vue', 'main', 'imgup', 'axio', 'city-picker-area'], function (Vue, ygg, OSS, axio) {
+
         var vm = new Vue({
                 el: "#app",
                 data: {
@@ -30,9 +31,43 @@ require(['config'], function () {
                     inner_imgs_list: [],
                     face_img_list: [],
                     logo_img_list: [],
-                    isComShow = true
+                    isComShow: true,
+                    lat: "",
+                    lng: "",
+                    member_id: ""
                 },
                 methods: {
+                    goToMap: function (event) {
+                        event.preventDefault();
+                        var shopDetil = {
+                            name: this.name,
+                            area_id: this.area_id,
+                            area_name: this.area_name,
+                            business_circle_id: this.business_circle_id,
+                            business_circle_name: this.business_circle_name,
+                            commissioner_id: this.commissioner_id,
+                            address: this.address,
+                            industry_id: this.industry_id,
+                            industry_name: this.industry_name,
+                            inner: this.inner,
+                            face: this.face,
+                            logo: this.logo,
+                            mobile: this.mobile,
+                            member_id: "",
+                            lat: "",
+                            lng: "",
+                            inner_imgs: this.inner_imgs,
+                            inner_imgs_list: this.inner_imgs_list,
+                            face_img: this.face_img,
+                            face_img_list: this.face_img_list,
+                            logo_img: this.logo_img,
+                            logo_img_list: this.logo_img_list,
+                            city: this.city
+                        }
+                        sessionStorage.removeItem("shopDetil");
+                        sessionStorage.setItem("shopDetil", JSON.stringify(shopDetil));
+                        window.location.href = "map.html"
+                    },
                     getDataDoor: function (a, src, isDel) {
                         this.$set(this, 'face', a);
                         if ((src != null || src != "" || src != undefined) && isDel == 0)
@@ -44,6 +79,8 @@ require(['config'], function () {
                         su = false;
                     },
                     getDataInner: function (a, src, isDel) {
+                        if (this.inner_imgs == undefined)
+                            this.inner_imgs = [];
                         this.$set(this, 'inner', a);
                         if ((src != null || src != "" || src != undefined) && isDel == 0) {
                             this.inner_imgs.push(src);
@@ -171,9 +208,11 @@ require(['config'], function () {
             }),
             su = true,
             bussiness_id = ygg.getCookie("business_check_id");
-        if (bussiness_id == null || bussiness_id == "" || bussiness_id == "undefined")
-            window.open("register.html", "_self");
+        // if (bussiness_id == null || bussiness_id == "" || bussiness_id == "undefined")
+        //     window.open("register.html", "_self");
         ygg.getClient(OSS);
+
+
         firstOpen = true,
             filterData = {
                 member_id: ygg.getCookie('member_id'),
@@ -215,6 +254,10 @@ require(['config'], function () {
             else
                 getShopInfo(ygg.getCookie("business_check_id"));
         });
+
+
+
+
 
         var isin = false;
         var iscl = false;
@@ -306,7 +349,6 @@ require(['config'], function () {
             });
         }
 
-
         function getCityId(b, c) {
             var ct = $.smConfig.rawCitiesData;
             for (var i = 0; i < ct.length; i++) {
@@ -356,6 +398,7 @@ require(['config'], function () {
         }
 
         function submit() {
+            var shopDetil = JSON.parse(sessionStorage.getItem("shopDetil"));
             var param = {};
             var id = ygg.getCookie("business_check_id");
             var inner = "";
@@ -369,13 +412,15 @@ require(['config'], function () {
                         inner += vm.inner_imgs_list[i];
                     }
                 }
+            } else {
+                inner = vm.inner_imgs_list;
             }
             // else
             //     {
             //         ygg.prompt("图片异常，请稍后重试！");
             //     }
-
-            param.business_check_id = id;
+            if (id != undefined && id != "undefined")
+                param.business_check_id = id;
             param.name = vm.name;
             param.area_id = vm.area_id;
             param.business_circle_id = vm.business_circle_id;
@@ -390,6 +435,17 @@ require(['config'], function () {
             param.logo = vm.logo_img_list;
             if (vm.commissioner_id.length > 0)
                 param.commissioner_id = vm.commissioner_id;
+            if (vm.lat == null || vm.lat == "") {
+                ygg.prompt("请选择地图坐标");
+                return;
+            }
+            if (vm.lng == null || vm.lng == "") {
+                ygg.prompt("请选择地图坐标");
+                return;
+            }
+            param.lat = vm.lat;
+            param.lng = vm.lng;
+            axio.defaults.headers.admin_id = vm.admin_id;
             ygg.ajax("/business/addBusinessCheckTwo", param, function (data) {
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
@@ -399,7 +455,8 @@ require(['config'], function () {
                     ygg.setCookie("business_check_id", data.data.business_check_id);
                     //ygg.prompt("商家创建成功！");
                     location.href = "createBrand.html";
-
+                    shopDetil = null;
+                    sessionStorage.removeItem("shopDetil");
                 }
 
                 ygg.loading(false);
@@ -407,36 +464,76 @@ require(['config'], function () {
         }
 
         function getShopInfo(checkId) {
-            ygg.ajax("/business/getBusinessCheckDetails", {
-                business_check_id: checkId
-            }, function (data) {
-                if (data.status == "error") {
-                    ygg.prompt(data.msg);
-                } else if (data.status == "success") {
-                    var that = data.data;
-                    vm.name = that.name;
-                    vm.area_id = that.area_id == null ? 510104 : that.area_id;
-                    vm.area_name = that.area_name;
-                    vm.business_circle_id = that.business_circle_id;
-                    vm.business_circle_name = that.business_circle_name;
-                    vm.address = that.address;
-                    vm.mobile = that.phone;
-                    vm.industry_id = that.industry_id;
-                    vm.industry_name = that.industry_name;
-                    vm.inner_imgs = that.inner_imgs;
-                    vm.commissioner_id = that.commissioner_id;
-                    for (var i = 0; i < that.inner_imgs.length; i++) {
-                        vm.inner_imgs_list.push(that.inner_imgs[i].replace("https://img.yingougou.com/", ""));
+            if (checkId != "undefined") {
+                ygg.ajax("/business/getBusinessCheckDetails", {
+                    business_check_id: checkId
+                }, function (data) {
+                    if (data.status == "error") {
+                        ygg.prompt(data.msg);
+                    } else if (data.status == "success") {
+                        var that = data.data;
+                        vm.name = that.name;
+                        vm.area_id = that.area_id == null ? 510104 : that.area_id;
+                        vm.area_name = that.area_name;
+                        vm.business_circle_id = that.business_circle_id;
+                        vm.business_circle_name = that.business_circle_name;
+                        vm.address = that.address;
+                        vm.mobile = that.phone;
+                        vm.industry_id = that.industry_id;
+                        vm.industry_name = that.industry_name;
+                        vm.inner_imgs = that.inner_imgs;
+                        vm.commissioner_id = that.commissioner_id;
+                        for (var i = 0; i < that.inner_imgs.length; i++) {
+                            vm.inner_imgs_list.push(that.inner_imgs[i].replace("https://img.yingougou.com/", ""));
+                        }
+                        vm.face_img = that.face_img;
+                        vm.face_img_list = that.face_img.replace("https://img.yingougou.com/", "");
+                        vm.logo_img = that.logo;
+                        vm.logo_img_list = that.logo.replace("https://img.yingougou.com/", "");
+                        filterData.area_id = vm.area_id;
+
+                        getFilter();
                     }
-                    vm.face_img = that.face_img;
-                    vm.face_img_list = that.face_img.replace("https://img.yingougou.com/", "");
-                    vm.logo_img = that.logo;
-                    vm.logo_img_list = that.logo.replace("https://img.yingougou.com/", "");
+                });
+            } else {
+                var shopDetil = JSON.parse(sessionStorage.getItem("shopDetil"));
+                console.log(shopDetil)
+                if (shopDetil != null) {
+                    var that = shopDetil.data;
+                    vm.name = shopDetil.name;
+                    vm.area_id = shopDetil.area_id == null ? 510104 : shopDetil.area_id;
+                    vm.area_name = shopDetil.area_name;
+                    vm.business_circle_id = shopDetil.business_circle_id;
+                    vm.business_circle_name = shopDetil.business_circle_name;
+                    vm.address = shopDetil.address;
+                    vm.mobile = shopDetil.mobile;
+                    vm.industry_id = shopDetil.industry_id;
+                    vm.industry_name = shopDetil.industry_name;
+                    vm.inner_imgs = shopDetil.inner_imgs;
+                    vm.commissioner_id = shopDetil.commissioner_id;
+                    if (shopDetil.inner_imgs != undefined) {
+                        for (var i = 0; i < shopDetil.inner_imgs.length; i++) {
+                            vm.inner_imgs_list.push(shopDetil.inner_imgs[i].replace("https://img.yingougou.com/", ""));
+                        }
+                    }
+                    vm.face_img = shopDetil.face_img;
+                    if (shopDetil.face_img != undefined && shopDetil.face_img.length > 0) {
+                        vm.face_img_list = shopDetil.face_img.replace("https://img.yingougou.com/", "");
+                    }
+                    vm.logo_img = shopDetil.logo_img;
+                    if (shopDetil.logo_img != undefined && shopDetil.logo_img.length > 0) {
+                        // vm.logo_img_list = shopDetil.logo.replace("https://img.yingougou.com/", "");
+                         vm.logo_img_list = shopDetil.logo_img.replace("https://img.yingougou.com/", "");
+                    }
+                    vm.lat = shopDetil.lat;
+                    vm.lng = shopDetil.lng;
                     filterData.area_id = vm.area_id;
                     getFilter();
-
+                    shopDetil = null;
+                    sessionStorage.removeItem("shopDetil");
                 }
-            });
+                getFilter();
+            }
         }
 
         //业务员业务无法重复获得

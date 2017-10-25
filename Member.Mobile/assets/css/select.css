@@ -1,0 +1,20 @@
+/*选择门店*/
+body{ background-color: #f3f5f9}
+.select_store_success .header{border-bottom: 0}
+.select_store_success .sc_b{margin-bottom: 100rem}
+.select_store_success .sc_b p{ font-size: 1.4rem; color: #888; background: #f3f5f9; height: 4rem; line-height: 4rem; text-indent: 1rem }
+.select_store_success .sc_b p span{ padding-left: 1rem}
+.select_store_success p .left{float: left;width: 11rem;}
+.select_store_success p .center{margin-left: 2rem}
+.select_store_success p .right{float: right;width: 7rem;}
+
+.select_store_success .sc_b .select_store_con{height:10rem; padding-top: 2rem;margin-bottom: 1rem;background-color: #fff;border-bottom: solid 1px #ccc;}
+.select_store_success .sc_b .select_store_con img{float: left;padding: 1rem;}
+.select_store_success .sc_b .select_store_con .store{float: left;}
+.select_store_success .sc_b  .mange{width:100%;height: 4rem;display:block;text-align: center;background-color: #fff;line-height: 4rem; color: #000;margin-top: 6rem}
+.select_store_success .add_store{  position: fixed;  width: 100%;  height: 5rem;  text-align: center;  font-size: 1.7rem;  line-height: 5rem;  box-sizing: border-box;  z-index: 10;  background-color: #ff6f3d;color: #fff;bottom: 0}
+
+a:visited {color: #ff6f3d}	/* 已访问的链接 */
+a:link {color: #888}		/* 未访问的链接 */
+
+/*地图*/
