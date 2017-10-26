@@ -75,3 +75,13 @@ body {
     float: left;
     margin-left: 1.5rem;
 }
+.backPage {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    background: url(../images/member/ic_bg_back_xxh.png) center center no-repeat;
+    background-size: .9rem auto;
+    z-index: 30;
+    left: 0;
+    top: 0;
+}

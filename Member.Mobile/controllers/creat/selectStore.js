@@ -21,21 +21,19 @@ require(['config'], function () {
                     ygg.prompt(message);
                 },
                 btnOne:function () {
-                    vm.arr = vm.pending_business_list
-                    console.log(vm.arr)
+                    vm.arr = vm.finish_business_list
                     vm.isActiveT = false
                     vm.isActiveTh = false
                     vm.isActiveO = true
                 },
                 btnTwo:function () {
                     vm.arr = vm.examine_business_list
-                    console.log(vm.arr)
                     vm.isActiveT = true
                     vm.isActiveTh = false
                     vm.isActiveO = false
                 },
                 btnThree:function () {
-                    vm.arr = vm.finish_business_list
+                    vm.arr = vm.pending_business_list
                     vm.isActiveT = false
                     vm.isActiveTh = true
                     vm.isActiveO = false
@@ -46,8 +44,14 @@ require(['config'], function () {
                 },
                 gotoAd:function () {
                     window.location.href = "https://ingo.yingougou.com"
+                },
+                cerae:function () {
+                    ygg.setCookie("business_check_id", "");
+                    window.location.href = "../../views/creat/creatShop.html"
+                },
+                backPage:function () {
+                    window.history.go(-1)
                 }
-
             }
         });
 
@@ -62,8 +66,7 @@ require(['config'], function () {
             axio.defaults.headers.admin_id = vm.admin_id;
             ygg.ajax('/business/getAllBusiness', {
                 admin_id: vm.admin_id
-            }, function (data) {
-              
+            }, function (data) {            
                 data = data.data;
                 if (data.status == "error") {
                     ygg.prompt(data.msg);

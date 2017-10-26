@@ -2,7 +2,6 @@
         require(["imgup", 'angle', 'citys', 'bankBin'], function (OSS) {
             // var business_check_id = window.location.seach.split("=")[1]
             // console.log(window.location.seach)
-            debugger;
             var f_img = [],
                 n_img = [],
                 l_img = [],
@@ -117,12 +116,14 @@
                         map.centerAndZoom(point, 16);
                         lastMarker = new BMap.Marker(point)
                         map.addOverlay(lastMarker);
+                        console.log(point)
                         $.ajax({
                             url: "http://restapi.amap.com/v3/assistant/coordinate/convert?locations=" + point.lng + "," + point.lat + "&coordsys=baidu&output=JSON&key=9781ab13347d6669085c90a7db3809e6",
                             beforeSend: function () {
                                 $.fn.loading(true);
                             },
                             success: function (data) {
+                                console.log(data)
                                 $.fn.loading(false);
                                 lng = data.locations.split(",")[0]
                                 lat = data.locations.split(",")[1]

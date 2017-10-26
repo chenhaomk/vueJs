@@ -48,8 +48,9 @@ require(['config'], function () {
                                 ygg.prompt("无法找到当前管理员信息，请稍后重试");
                                 return;
                             }
+                            ygg.setCookie("business_check_id", "");
                             ygg.setCookie("admin_id", data.admin_id);
-                            location.href = "supplementSelect.html";
+                            location.href = "waitSelect.html";
                             // that.reason = data.reason;
                             // that.state = data.state;
                             // switch (that.state) {

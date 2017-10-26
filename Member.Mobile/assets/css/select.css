@@ -31,3 +31,15 @@ a:link {color: #888}		/* 未访问的链接 */
 .select_store_con li .liTop div p:nth-child(3) {background-color:#fff0eb;color: #ff6f3d;padding:0.2rem 1rem;display: inline-block;border-radius: 2rem;}
 .check {margin-top: 2rem;border-top: .1rem dashed #888;padding: 1rem 0;text-align: center;}
 .check span{color: #ff6f3d}
+
+.backPage {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    background: url(../images/member/ic_bg_back_xxh.png) center center no-repeat;
+    background-size: .9rem auto;
+    z-index: 30;
+    left: 0;
+    top: 0;
+}
+}

@@ -36,13 +36,13 @@ require(['config'], function () {
                          }     
                 } 
             }
-         
             obj.open('GET', url, true);
             obj.onreadystatechange = function() {
                 if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { 
                     var data = JSON.parse(obj.responseText)
-                    vm.lat = data.locations.split(",")[0];
-                    vm.lng = data.locations.split(",")[1];
+                    warp.check = "保存"
+                    vm.lng = data.locations.split(",")[0];
+                    vm.lat = data.locations.split(",")[1];
                     // fn.call(this, obj.responseText);  //从服务器获得数据
                 }
             };
@@ -110,7 +110,18 @@ require(['config'], function () {
                     }
                 },
                 getMyLocation:function() {
-                    pointMap()
+                    if(this.check == "保存") {
+                        vm.address = this.message
+                        vm.fromShow = true
+                        this.showMap = false
+                        if(warp.message!=null||warp.message!="") {
+                            vm.address=warp.message
+                        }
+                    }else{
+                        console.log(2)
+                        pointMap()
+                    }
+                    
                 },
                 change:function () {
                     if(vm.address !=warp.message) {
@@ -159,6 +170,10 @@ require(['config'], function () {
                     fromShow:true,
                 },
                 methods: {
+                    backPage:function(event) {
+                        ygg.setCookie("business_check_id", "");
+                        window.history.go(-1)
+                    },
                     goToMap: function (event) {
                         if(vm.address!=null||vm.address!="")
                             warp.message=vm.address;
@@ -187,7 +202,6 @@ require(['config'], function () {
                             var myGeo = new BMap.Geocoder();
                             myGeo.getPoint(vm.address, function (point) {
                                 if (point) {
-
                                     geoPint(point);
                                     // removeMk(maeker);
                                     map.centerAndZoom(point, 16);
@@ -206,9 +220,23 @@ require(['config'], function () {
                             var geolocationControl = new BMap.GeolocationControl({
                                 anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
                             });
+                            var geoc = new BMap.Geocoder();
                             geolocationControl.addEventListener("locationSuccess", function (e) {
-                                // removeMk(maeker);
-                                // geoPint(e.point)
+                                removeMk(maeker);
+                                geoPint(e.point)
+                                geoc.getLocation(e.point, function(rs){
+                                    var str = rs.addressComponents.street +rs.addressComponents.streetNumber
+                                    var area = rs.addressComponents.district
+                                    var province = rs.addressComponents.province
+                                    var city = rs.addressComponents.city
+                                    warp.message = str
+                                    vm.city = area
+                                    $("#city-picker").val(province + " " + city + " " + vm.city);
+                                    filterData.area_id = getCityId(province,city)
+                                    vm.area_id  = getAreaId(province,city,area)
+                                    getFilter();
+
+                                });
                             });
                             geolocationControl.addEventListener("locationError", function (e) {
                                 // 定位失败事件
@@ -225,6 +253,22 @@ require(['config'], function () {
                                     map.addOverlay(maeker);
                                     map.panTo(r.point);
                                     geoPint(r.point)
+                                    geoc.getLocation(r.point, function(rs){
+                                        var str = rs.addressComponents.street +rs.addressComponents.streetNumber
+                                        var area = rs.addressComponents.district
+                                        var province = rs.addressComponents.province
+                                        var city = rs.addressComponents.city
+                                        warp.message = str
+                                        vm.city = area
+                                        $("#city-picker").val(province + " " + city + " " + vm.city);
+                                        filterData.area_id = getCityId(province,city)
+                                        vm.area_id  = getAreaId(province,city,area)
+                                        getFilter();
+
+                                    });
+
+
+
                                 }
 
                             }, {
@@ -388,6 +432,7 @@ require(['config'], function () {
         var citysearch = new AMap.CitySearch();
         citysearch.getLocalCity(function (status, result) {
             $("#city-picker").val(result.province + " " + result.city + " " + vm.city);
+
             $("#city-picker").cityPicker({
                 toolbarTemplate: '<header class="bar bar-nav">\
                 <button class="button button-link pull-right close-picker">确定</button>\
@@ -411,6 +456,7 @@ require(['config'], function () {
                     getFilter();
                 }
             });
+            getFilter()
             filterData.area_id = getCityId(result.province + "省", result.city + "市");
 
             if (ygg.getCookie("business_check_id") == null || ygg.getCookie("business_check_id") == "")
@@ -593,7 +639,6 @@ require(['config'], function () {
             param.industry_id = vm.industry_id;
             if (!su) {
                 param.inner_imgs = inner;
-
             }
             param.face_img = vm.face_img_list;
             param.logo = vm.logo_img_list;
@@ -609,8 +654,9 @@ require(['config'], function () {
             }
             param.lat = vm.lat;
             param.lng = vm.lng;
+            param.member_id = ""
             axio.defaults.headers.admin_id = ygg.getCookie("admin_id");
-            ygg.ajax("/business/addBusinessCheckTwo", param, function (data) {
+            ygg.ajax("/admin/business/addBusinessCheckTwo", param, function (data) {
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
                 } else if (data.status == "success") {

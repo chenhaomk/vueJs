@@ -54,7 +54,7 @@ require(['config'], function () {
                         } else if (data.status == "success") {
                             data = data.data;
                             ygg.setCookie("admin_id", data.admin_id);
-                            // ygg.setCookie("business_check_id", data.business_check_id);
+                            ygg.setCookie("business_check_id", "");
                             // ygg.setCookie("account", data.account);
                             that.account = data.account;
                             that.mobile = "";

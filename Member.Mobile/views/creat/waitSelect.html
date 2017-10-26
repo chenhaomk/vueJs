@@ -14,7 +14,9 @@
 <section id='app' class='select_store_success has_head'>
 
     <section class="head header">
-        <p>选择门店</p>
+        <p>选择门店
+            <span class="backPage" v-on:click="backPage"></span>
+        </p>
     </section>
     <section class="sc_b">
         <ul class="btnList">
@@ -51,7 +53,7 @@
                 <div >
                     <div class="check" v-show=" list.state==0" v-on:click="gotoCreatSop(list.business_check_id)"> <span>立即填写></span></div>
                     <div class="check" v-show=" list.state==1">审核中</div>
-                    <div class="check"  v-show="list.state==2" v-on:click="gotoAd">
+                    <div class="check"  v-show="(list.state==2 ||list.state==undefined)" v-on:click="gotoAd">
                         <span>管理门店></span>                      
                     </div>
                     <div class="check"  v-show="list.state==3" v-on:click="gotoCreatSop(list.business_check_id)">
@@ -62,7 +64,7 @@
         </ul>
 
 </section>
-    <a href="creatShopB.html" class="add_store">添加门店</a>
+    <p v-on:click="cerae" class="add_store">添加门店</p>
 </section>
 </body>
 <script data-main="/config" src="/plugins/require/require.js"></script>
