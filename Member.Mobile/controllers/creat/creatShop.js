@@ -687,7 +687,7 @@ require(['config'], function () {
                     vm.logo_img = shopDetil.logo_img;
                     if (shopDetil.logo_img != undefined && shopDetil.logo_img.length > 0) {
                         // vm.logo_img_list = shopDetil.logo.replace("https://img.yingougou.com/", "");
-                         vm.logo_img_list = shopDetil.logo_img.replace("https://img.yingougou.com/", "");
+                        vm.logo_img_list = shopDetil.logo_img.replace("https://img.yingougou.com/", "");
                     }
                     vm.lat = shopDetil.lat;
                     vm.lng = shopDetil.lng;
