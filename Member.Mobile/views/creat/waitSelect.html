@@ -17,20 +17,50 @@
         <p>选择门店</p>
     </section>
     <section class="sc_b">
-        <p>
-            <span class="left"><a href="selectStore.html">已通过</a></span>
+        <ul class="btnList">
+            <li v-on:click="btnOne" v-bind:class="{ active: isActiveO }">已通过</li>
+            <li v-on:click="btnTwo" v-bind:class="{ active: isActiveT }">待通过</li>
+            <li v-on:click="btnThree" v-bind:class="{ active: isActiveTh }">待补充</li>
+        </ul>
+<!--         <p>
+
+           <span class="left"><a href="selectStore.html">已通过</a></span>
             <span><a href="waitSelect.html">待通过</a></span>
             <span class="right"><a href="supplementSelect.html">待补充</a></span>
-        </p>
-        <div class="select_store_con" v-for="list in examine_business_list">
-            <img v-bind:src="list.inner_imgs" />
+        </p> -->
+<!--         <div class="select_store_con" v-for="list in arr">
+            
             <ul class="store">
                 <li>商家名称 : {{list.name}}</li>
                 <li>经营类别 : {{list.industry_name}}</li>
                 <li>创建时间 : {{list.date}}</li>
             </ul>
             <a class="mange" href="creatShop.html">审核失败!&nbsp&nbsp<span>重新入驻></span></a>
-        </div>
+        </div> -->
+        <ul  class="select_store_con" v-for="list in arr">
+            <li>
+                <div class="liTop">
+                    <img v-bind:src="list.inner_imgs" />
+                    <div>
+                        <p>{{list.name}}</p>
+                        <p>创建时间 : {{list.date}}</p>
+                        <p> {{list.industry_name}} </p>
+                        
+                    </div>
+                </div>
+                <div >
+                    <div class="check" v-show=" list.state==0" v-on:click="gotoCreatSop(list.business_check_id)"> <span>立即填写></span></div>
+                    <div class="check" v-show=" list.state==1">审核中</div>
+                    <div class="check"  v-show="list.state==2" v-on:click="gotoAd">
+                        <span>管理门店></span>                      
+                    </div>
+                    <div class="check"  v-show="list.state==3" v-on:click="gotoCreatSop(list.business_check_id)">
+                        审核未通过!<span>重新入驻></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
 </section>
     <a href="creatShopB.html" class="add_store">添加门店</a>
 </section>
