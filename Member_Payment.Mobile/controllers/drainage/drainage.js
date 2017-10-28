@@ -1,5 +1,7 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+        var checkUser = window.location.search
+
         var imgurl = decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%2F", "/").replace("%3A", ":");
         if (imgurl.indexOf("https") < 0)
             imgurl = "https://img.yingougou.com/" + imgurl;
@@ -16,11 +18,8 @@ require(['config'], function () {
                 how: "",
                 all: "",
                 time: "",
-<<<<<<< HEAD
                 willShow: true,
-=======
-                willShow:true,
->>>>>>> 3c21db814f7f0f0c927d9b649fe7a7f97ff3ed56
+                msgShow:false
                 // willHide:false
             },
             methods: {
@@ -76,14 +75,17 @@ require(['config'], function () {
                             if (data == null || data.code != 200) {
                                 //main.prompt("数据有误"); //此类提示较为后台化，可根据实际情况修改与用户的会话
                                 main.prompt(data.msg);
-                                //location.href = "newDrainagefalt.html";
+                                location.href = "newDrainagefalt.html";
                                 return;
                             }
+                             var isSuc=true;
+                             var pram
                             if (data.data != null) {
                                 if (data.data[1001] != null)
                                     main.prompt(data.data[1001]);
                                 if (data.data[9009] != null)
-                                    main.prompt(data.data[9009]);
+                                    pram = "newUser"
+                                    // main.prompt(data.data[9009]);
                                 if (data.data[9012] != null)
                                     main.prompt(data.data[9012]);
                                 if (data.data[9013] != null)
@@ -94,12 +96,24 @@ require(['config'], function () {
                                     main.prompt(data.data[9016]);
                                 if (data.data[9017] != null)
                                     main.prompt(data.data[9017]);
-                                return;
+                                if(data.data[9010] != null)
+                                    pram = "newUser"
+                                    // main.prompt(data.data[9010]);
+
+                                isSuc=false;
+
+
+                                if(data.data[9010] != null||data.data[9011] != null||data.data[9014] != null)
+                                    isSuc=true;
 
                             }
-                            main.setSession("img", decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A", ":"));
-                            main.setSession("b_n", main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"));
-                            location.href = "newDrainageSucc.html";
+                            if(isSuc) {
+                                main.setSession("img", decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A", ":"));
+                                main.setSession("b_n", main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"));
+                                location.href = "newDrainageSucc.html?"+pram;
+                            }else {
+                                location.href = "newDrainagefalt.html?"+pram;
+                            }
                         });
                 },
                 dowm: function () {
@@ -117,7 +131,9 @@ require(['config'], function () {
             }
         });
         var time = null;
-
+        if(checkUser != null || checkUser != undefined && checkUser=="newUser") {
+            vm.msgShow =true
+        }
         function timetick() {
             var ver = document.getElementById("verifia");
             if (parseInt(ver.getAttribute("t")) > 0) {
@@ -147,7 +163,7 @@ require(['config'], function () {
                 var jsonString = JSON.stringify(data.data);
                 if (data == null || jsonString == "{}" || data.code != 200) {
                     // debugger;
-                    location.href = "newDrainagefalt.html";
+                    // location.href = "newDrainagefalt.html";
                     return;
                 }
                 data = data.data;
@@ -180,11 +196,8 @@ require(['config'], function () {
         setTimeout(function () {
             vm.willShow = false;
             // vm.willHide = true
-<<<<<<< HEAD
         }, 1000)
-=======
-        },1000)
->>>>>>> 3c21db814f7f0f0c927d9b649fe7a7f97ff3ed56
+
     });
 
 });

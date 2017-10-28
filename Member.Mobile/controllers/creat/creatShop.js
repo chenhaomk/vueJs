@@ -1,6 +1,138 @@
 require(['config'], function () {
     require(['vue', 'main', 'imgup', 'axio', 'city-picker-area'], function (Vue, ygg, OSS, axio) {
+        var map = new BMap.Map("container");
+        var maeker;
+        var isInit = false;
+        function removeMk(mk) {
+            map.removeOverlay(mk);
+        }
+        var Ajax={
+            get: function(url, fn) {
+                var obj = new XMLHttpRequest();  // XMLHttpRequest对象用于在后台与服务器交换数据          
+                obj.open('GET', url, true);
+                obj.onreadystatechange = function() {
+                    if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { // readyState == 4说明请求已完成
+                        // console.log(obj.responseText)
+                        fn.call(this, obj.responseText);  //从服务器获得数据
+                    }
+                };
+                obj.send();
+            },
+        }
+        function geoPint(point) {
+            var url = "https://restapi.amap.com/v3/assistant/coordinate/convert?locations=" + point.lng + "," + point.lat + "&coordsys=baidu&output=JSON&key=9781ab13347d6669085c90a7db3809e6"
+            var obj = new XMLHttpRequest();  // XMLHttpRequest对象用于在后台与服务器交换数据 
+            if (window.XMLHttpRequest) {  
+                obj = new XMLHttpRequest(); 
+            }else if (window.ActiveXObject) {
+                var activexName = [ "MSXML2.XMLHTTP", "Microsoft.XMLHTTP" ];     
+                for ( var i = 0; i < activexName.length; i++) {     
+                         try {        
+                            obj = new ActiveXObject(activexName[i]);   
+                            if(obj){  
+                                break;  
+                            }  
+                         } catch (e) {     
+                         }     
+                } 
+            }
+            obj.open('GET', url, true);
+            obj.onreadystatechange = function() {
+                if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { 
+                    var data = JSON.parse(obj.responseText)
+                    warp.check = "保存"
+                    vm.lng = data.locations.split(",")[0];
+                    vm.lat = data.locations.split(",")[1];
+                    // fn.call(this, obj.responseText);  //从服务器获得数据
+                }
+            };
+            obj.send();
 
+        }
+        function pointMap() {
+            // if (shopDetil == null) {
+            //     alert("数据错误，请返回重试!");
+            //     return;
+            // }
+            var map = new BMap.Map("container");
+            var geolocation = new BMap.Geolocation();
+            var geolocationControl = new BMap.GeolocationControl({
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+            });
+            geolocationControl.addEventListener("locationSuccess", function (e) {
+                removeMk(maeker);
+                geoPint(e.point)
+            });
+            geolocationControl.addEventListener("locationError", function (e) {
+                // 定位失败事件
+                alert(e.message);
+            });
+            map.addControl(geolocationControl);
+            var adr = vm.address == null ? "" : vm.address;
+            if (warp.message != null && warp.message != undefined && warp.message != "")
+                adr = warp.message;
+            if (adr != null && adr != undefined && adr != "") {
+                var myGeo = new BMap.Geocoder();
+                var str = warp.message;
+                myGeo.getPoint(str, function (point) {
+                    if (point) {
+                        geoPint(point);
+                        removeMk(maeker);
+                        map.centerAndZoom(point, 16);
+                        maeker = new BMap.Marker(point);
+                        map.addOverlay(maeker);
+                        // shopDetil.lat = point.lat;
+                        // shopDetil.lng = point.lng;
+                        // sessionStorage.setItem("shopDetil", JSON.stringify(shopDetil));
+                        return;
+                    } else {
+                        alert("您选择地址没有解析到结果!");
+                    }
+                }, vm.city);
+            } else {
+                //alert("请填写详细地址!");
+            }
+        }
+        var warp = new Vue ({
+            el:"#warp",
+            data:{
+                showMap:false,
+                message:'',
+                check:"确定",
+            },
+            methods:{
+                back:function () {
+                    vm.address = this.message
+                    vm.fromShow = true
+                    this.showMap = false
+                    if(warp.message!=null||warp.message!="") {
+                        vm.address=warp.message
+                    }
+                },
+                getMyLocation:function() {
+                    if(this.check == "保存") {
+                        vm.address = this.message
+                        vm.fromShow = true
+                        this.showMap = false
+                        if(warp.message!=null||warp.message!="") {
+                            vm.address=warp.message
+                        }
+                    }else{
+                        console.log(2)
+                        pointMap()
+                    }
+                    
+                },
+                change:function () {
+                    if(vm.address !=warp.message) {
+                        this.check = "重新定位"
+                    }else {
+                        this.check = "确定"
+                    }
+                    
+                },
+            }
+        })
         var vm = new Vue({
                 el: "#app",
                 data: {
@@ -32,41 +164,117 @@ require(['config'], function () {
                     face_img_list: [],
                     logo_img_list: [],
                     isComShow: true,
-                    lat: "1",
-                    lng: "1",
-                    member_id: ""
+                    lat: "",
+                    lng: "",
+                    member_id: "",
+                    fromShow:true,
                 },
                 methods: {
+                    backPage:function(event) {
+                        ygg.setCookie("business_check_id", "");
+                        window.history.go(-1)
+                    },
                     goToMap: function (event) {
-                        event.preventDefault();
-                        var shopDetil = {
-                            name: this.name,
-                            area_id: this.area_id,
-                            area_name: this.area_name,
-                            business_circle_id: this.business_circle_id,
-                            business_circle_name: this.business_circle_name,
-                            commissioner_id: this.commissioner_id,
-                            address: this.address,
-                            industry_id: this.industry_id,
-                            industry_name: this.industry_name,
-                            inner: this.inner,
-                            face: this.face,
-                            logo: this.logo,
-                            mobile: this.mobile,
-                            member_id: "",
-                            lat: "",
-                            lng: "",
-                            inner_imgs: this.inner_imgs,
-                            inner_imgs_list: this.inner_imgs_list,
-                            face_img: this.face_img,
-                            face_img_list: this.face_img_list,
-                            logo_img: this.logo_img,
-                            logo_img_list: this.logo_img_list,
-                            city: this.city
+                        if(vm.address!=null||vm.address!="")
+                            warp.message=vm.address;
+                        this.fromShow = false
+                        warp.showMap = true
+                        // 百度地图API功能
+                        if(vm.address==null||vm.address==""||vm.address ==undefined||vm.city==undefined||vm.city==""||vm.city== null) {
+                            getLocation()
+                        }else {
+                            var map = new BMap.Map("container");
+                            map.width = 500
+                                map.height = 800
+                            var geolocation = new BMap.Geolocation();
+                            var geolocationControl = new BMap.GeolocationControl({
+                                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                            });
+                            geolocationControl.addEventListener("locationSuccess", function (e) {
+                                // removeMk(maeker);
+                                geoPint(e.point)
+                            });
+                            geolocationControl.addEventListener("locationError", function (e) {
+                                // 定位失败事件
+                                // alert(e.message);
+                            });
+                            map.addControl(geolocationControl);
+                            var myGeo = new BMap.Geocoder();
+                            myGeo.getPoint(vm.address, function (point) {
+                                if (point) {
+                                    geoPint(point);
+                                    // removeMk(maeker);
+                                    map.centerAndZoom(point, 16);
+                                    var maeker = new BMap.Marker(point);
+                                    map.addOverlay(maeker);
+                                    return;
+                                } else {
+                                    alert("您选择地址没有解析到结果!");
+                                }
+                            }, vm.city);
+
                         }
-                        sessionStorage.removeItem("shopDetil");
-                        sessionStorage.setItem("shopDetil", JSON.stringify(shopDetil));
-                        window.location.href = "map.html"
+                        function getLocation() {
+                            var map = new BMap.Map("container");
+                            var geolocation = new BMap.Geolocation();
+                            var geolocationControl = new BMap.GeolocationControl({
+                                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                            });
+                            var geoc = new BMap.Geocoder();
+                            geolocationControl.addEventListener("locationSuccess", function (e) {
+                                removeMk(maeker);
+                                geoPint(e.point)
+                                geoc.getLocation(e.point, function(rs){
+                                    var str = rs.addressComponents.street +rs.addressComponents.streetNumber
+                                    var area = rs.addressComponents.district
+                                    var province = rs.addressComponents.province
+                                    var city = rs.addressComponents.city
+                                    warp.message = str
+                                    vm.city = area
+                                    $("#city-picker").val(province + " " + city + " " + vm.city);
+                                    filterData.area_id = getCityId(province,city)
+                                    vm.area_id  = getAreaId(province,city,area)
+                                    getFilter();
+
+                                });
+                            });
+                            geolocationControl.addEventListener("locationError", function (e) {
+                                // 定位失败事件
+                                alert(e.message);
+                            });
+                            map.addControl(geolocationControl);
+                            var geolocationControl = new BMap.GeolocationControl();
+                            geolocation.getCurrentPosition(function (r) {
+                                map.width = 500
+                                map.height = 800
+                                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                                    maeker = new BMap.Marker(r.point);
+                                    map.centerAndZoom(r.point, 16);
+                                    map.addOverlay(maeker);
+                                    map.panTo(r.point);
+                                    geoPint(r.point)
+                                    geoc.getLocation(r.point, function(rs){
+                                        var str = rs.addressComponents.street +rs.addressComponents.streetNumber
+                                        var area = rs.addressComponents.district
+                                        var province = rs.addressComponents.province
+                                        var city = rs.addressComponents.city
+                                        warp.message = str
+                                        vm.city = area
+                                        $("#city-picker").val(province + " " + city + " " + vm.city);
+                                        filterData.area_id = getCityId(province,city)
+                                        vm.area_id  = getAreaId(province,city,area)
+                                        getFilter();
+
+                                    });
+
+
+
+                                }
+
+                            }, {
+                                enableHighAccuracy: true
+                            })
+                        }
                     },
                     getDataDoor: function (a, src, isDel) {
                         this.$set(this, 'face', a);
@@ -224,6 +432,7 @@ require(['config'], function () {
         var citysearch = new AMap.CitySearch();
         citysearch.getLocalCity(function (status, result) {
             $("#city-picker").val(result.province + " " + result.city + " " + vm.city);
+
             $("#city-picker").cityPicker({
                 toolbarTemplate: '<header class="bar bar-nav">\
                 <button class="button button-link pull-right close-picker">确定</button>\
@@ -247,6 +456,7 @@ require(['config'], function () {
                     getFilter();
                 }
             });
+            getFilter()
             filterData.area_id = getCityId(result.province + "省", result.city + "市");
 
             if (ygg.getCookie("business_check_id") == null || ygg.getCookie("business_check_id") == "")
@@ -429,7 +639,6 @@ require(['config'], function () {
             param.industry_id = vm.industry_id;
             if (!su) {
                 param.inner_imgs = inner;
-
             }
             param.face_img = vm.face_img_list;
             param.logo = vm.logo_img_list;
@@ -445,12 +654,13 @@ require(['config'], function () {
             }
             param.lat = vm.lat;
             param.lng = vm.lng;
+            param.member_id = ""
             axio.defaults.headers.admin_id = ygg.getCookie("admin_id");
-            ygg.ajax("/business/addBusinessCheckTwo", param, function (data) {
+            ygg.ajax("/admin/business/addBusinessCheckTwo", param, function (data) {
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
                 } else if (data.status == "success") {
-                    debugger;
+                    // debugger;
                     su = true;
                     ygg.setCookie("business_check_id", data.data.business_check_id);
                     //ygg.prompt("商家创建成功！");

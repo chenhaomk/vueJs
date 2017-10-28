@@ -43,12 +43,13 @@ body {
 .imgWarp {
     margin:0 auto;
     height: 1.36rem;
-    border:1px solid black;
+    /*border:1px solid black;*/
     border-radius: 50%;
 }
 .imgWarp img {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
 }
 .shopName {
     margin-top: .2rem;
@@ -94,7 +95,7 @@ body {
     font-size: 0.28rem;
 }
 .inputWarp {
-    margin-top: 2rem
+    margin-top: 1.5rem
 }
 /* 
 .main .backImg {
@@ -541,6 +542,9 @@ body {
     width: 5rem;
     font-size: 0.28rem;
     height: 0.88rem;
+}
+.checkNum div input {
+    width: 2.5rem;
 }
 .checkNum {
     position: relative;

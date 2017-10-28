@@ -7,11 +7,50 @@ require(['config'], function () {
                 admin_id: "",
                 examine_business_list: [],
                 finish_business_list: [],
-                pending_business_list: []
+                pending_business_list: [],
+                isActiveO:false,
+                isActiveT:false,
+                isActiveTh:true,
+                arr:[],
+                isA:false,
+                isB:false,
+                isC:false
             },
             methods: {
                 say: function (message) {
                     ygg.prompt(message);
+                },
+                btnOne:function () {
+                    vm.arr = vm.finish_business_list
+                    vm.isActiveT = false
+                    vm.isActiveTh = false
+                    vm.isActiveO = true
+                },
+                btnTwo:function () {
+                    vm.arr = vm.examine_business_list
+                    vm.isActiveT = true
+                    vm.isActiveTh = false
+                    vm.isActiveO = false
+                },
+                btnThree:function () {
+                    vm.arr = vm.pending_business_list
+                    vm.isActiveT = false
+                    vm.isActiveTh = true
+                    vm.isActiveO = false
+                },
+                gotoCreatSop:function (id) {
+                    ygg.setCookie("business_check_id", id);
+                    window.location.href = "../../views/creat/creatShop.html"
+                },
+                gotoAd:function () {
+                    window.location.href = "https://ingo.yingougou.com"
+                },
+                cerae:function () {
+                    ygg.setCookie("business_check_id", "");
+                    window.location.href = "../../views/creat/creatShop.html"
+                },
+                backPage:function () {
+                    window.history.go(-1)
                 }
             }
         });
@@ -27,11 +66,12 @@ require(['config'], function () {
             axio.defaults.headers.admin_id = vm.admin_id;
             ygg.ajax('/business/getAllBusiness', {
                 admin_id: vm.admin_id
-            }, function (data) {
+            }, function (data) {            
                 data = data.data;
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
                 }
+                vm.arr = data.pending_business_list
                 vm.examine_business_list = data.examine_business_list;
                 vm.finish_business_list = data.finish_business_list;
                 vm.pending_business_list = data.pending_business_list;

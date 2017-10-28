@@ -48,13 +48,14 @@ require(['config'], function () {
                     if (mid != null || mid != "") {
                         praram.member_id = mid;
                     }
-                    ygg.ajax('/business/addBusinessCheckOne', praram, function (data) {
+                    ygg.ajax('/admin/business/addBusinessCheckOne', praram, function (data) {
                         if (data.status == "error") {
                             ygg.prompt(data.msg);
                         } else if (data.status == "success") {
                             data = data.data;
-                            ygg.setCookie("business_check_id", data.business_check_id);
-                            ygg.setCookie("account", data.account);
+                            ygg.setCookie("admin_id", data.admin_id);
+                            ygg.setCookie("business_check_id", "");
+                            // ygg.setCookie("account", data.account);
                             that.account = data.account;
                             that.mobile = "";
                             that.verification_code = "";
