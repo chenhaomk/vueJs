@@ -1,6 +1,6 @@
 require(['config'],function(){
     require(['angle'],function () {
-    	
+    	// debugger
     	var filterData = {};
     	$.fn.loadHeadFooter(function(){
     		$(".nav>a:eq(0)").addClass('active');

@@ -8,8 +8,15 @@ require(['config'], function () {
         });
 
         $("#login").click(function (event) {
-            event.preventDefault();
-            window.event.returnValue = false;
+            var event = event||window.event;
+            if (event.preventDefault) {
+                    event.preventDefault(); 
+                } else {
+                    event.returnValue = false;
+                }
+            
+            // event.preventDefault();
+            // window.event.returnValue = false;
 
             if ($(this).hasClass('no')) return;
 
@@ -30,6 +37,7 @@ require(['config'], function () {
                     verification_code: $("#yzm").val()
                 },
                 result: function (data) {
+                    
                     var status = data.status;
                     if (status == "error") {
                         $(".prompt").text(data.msg);

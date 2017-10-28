@@ -2,7 +2,7 @@
         require(["imgup", 'angle', 'citys', 'bankBin'], function (OSS) {
             // var business_check_id = window.location.seach.split("=")[1]
             // console.log(window.location.seach)
-            debugger;
+            // debugger;
             var f_img = [],
                 n_img = [],
                 l_img = [],
@@ -22,7 +22,7 @@
                 bindBrand = $.fn.getQueryString("bindBrand"),
                 isData = $.fn.getQueryString("isData"),
                 part3Key;
-            if (business_check_id == null || business_check_id == undefined)
+            if ($.fn.getCookie("admin_id") == null || $.fn.getCookie("admin_id") == undefined)
                 window.open('login.html', "_self");
             if (isbind == 1) {
                 isbind = true;
@@ -160,7 +160,7 @@
                     },
                     async: false,
                     result: function (data) {
-
+                        // debugger
                         data = data.data;
                         // $.fn.loading(false);
                         if (data.business_licence_num && !isbind && !isAgain) {
@@ -212,19 +212,17 @@
 
 
                         }
-                        if (!isData) {
-                            return;
-                        }
+
                         $.fn.getData({
                             url: "/business/getAllIndustry",
                             data: {},
                             async: false,
                             result: function (data) {
+                                // console.log(data)
                                 data = data.data;
                                 setSelect(data.industry_list, $(".b_type.select"), "name", 'industry_id');
                             }
                         });
-
                         if (data.area_id) {
                             var pDom, provinceIndex, cDom, cityIndex, aDom, sDom;
                             hasFi = true;
@@ -251,7 +249,6 @@
 
                             sDom = $(".select.sq .options [data-id=" + data.business_circle_id + "]");
                             aDom.addClass('active');
-
                             $("[name='province']").val(pDom.text()).attr("data-id", pDom.attr("data-id"));
                             $("[name='city']").val(cDom.text()).attr("data-id", cDom.attr("data-id"));
                             $("[name='area']").val(aDom.text()).attr("data-id", aDom.attr("data-id"));
@@ -310,7 +307,7 @@
                                 n_img.splice(index, 1);
                                 oldIm.splice(index, 1);
                             },
-                            maxSize: 4,
+                            maxSize: 8,
                             om: data.inner_imgs
                         });
 
@@ -324,7 +321,9 @@
                             },
                             om: data.logo
                         });
-
+                        //                         if (!isData) {
+                        //     return;
+                        // }
                         if (data.id_card_front_img) {
                             $("form:eq(2)").show().siblings('form').hide();
                             $(".th").removeClass("thactive")

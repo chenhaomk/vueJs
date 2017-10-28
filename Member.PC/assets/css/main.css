@@ -602,8 +602,14 @@ a.lq_suc{ cursor: default !important; background: #ffe7df !important; color: #ff
 .footer .foot .left .btns a:after{ content: ""; float: right; height: 16px; margin-right:-30px; border-right:1px solid #cecece; }
 .footer .foot .left .btns a.last:after{ display: none; }
 .footer .foot .left .contact .text{ font-size: 12px; color: #888 }
+.footer .foot .left .contact div {overflow: hidden;}
 .footer .foot .left .contact .text span{ font-size: 16px; color: #1c1c1c; margin-right: 5px }
-.footer .foot .left .contact .tel{ background: url(../images/icon/footer_tel.png) no-repeat; height: 22px; font-size: 30px; line-height: 22px; text-indent: 38px; margin-top: 12px }
+.footer .foot .left .contact div p img {width: 22px;height: 20px;vertical-align:middle;margin-bottom: 5px;}
+.footer .foot .left .contact div p { float: left;  height: 30px; font-size: 16px; line-height: 30px;  margin-top: 12px }
+/*.footer .foot .left .contact div p:nth-child(2) {width: 200px; float: left;  height: 30px; font-size: 24px; line-height: 22px; text-indent: 38px; margin-top: 12px }*/
+.footer .foot .left .contact div p:nth-child(1) {width: 180px}
+.footer .foot .left .contact div p:nth-child(1) {width: 220px}
+
 .footer .foot .ewm{ float: right; width: 500px}
 .footer .foot .ewm p,.head .cen .ewm{ width: 154px; height: 94px; float: left; margin-top: 30px; margin-left: 30px; border: 1px solid #e3e3e3; border-radius: 3px; padding: 28px }
 .footer .foot .ewm p span,.head .cen .ewm span{ display: inline-block; vertical-align: middle; width: 14px; font-size: 14px; color: #6e6e6e; line-height: 1; text-align: center; margin-left: 7px }
