@@ -37,7 +37,7 @@
                 </div>
                 <div class="checkNum">
                     <div class="fonInput">
-                        <input type="text" placeholder="请输入验证码" v-model="verificationCode" />
+                        <input type="number" placeholder="请输入验证码" v-model="verificationCode" />
                         <input type="button" value="获取验证码" class="gradient" v-on:click="getVerification" t="0" id="verifia" />
                     </div>
                 </div>
@@ -52,21 +52,24 @@
         <div class="explain">
             <p>活动说明</p>
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="autoImg1">
+<!--         <div class="autoImg1">
+            <div class="resrts">
+                <img src="../../assets/images/newDarinage/autoImg1.png" alt="" >
+            </div>
+            
+        </div> -->
+        <svg xmlns="https://www.w3.org/2000/svg" class="autoImg1">
            <image xlink:href="../../assets/images/newDarinage/autoImg1.png" x="-10" y="0" height="0.9rem" width=".5rem" v-show="willShow" class="image1"> 
                 <animateMotion path="M100 30 C20 70, 40 130,50 150 ,C50 150, 90 200,0 270,"  begin="0s" dur="1s"  />
             </image>
-<!--             <image xlink:href="../../assets/images/newDarinage/autoImg1.png" x="50" y="50" height="0.9rem" v-show="willHide"  width=".5rem" class="image2" > 
-            </image> -->
-            <!-- <path d="M100 30 C20 70, 40 130,50 150 ,C50 150, 90 200,0 270," stroke="#cd0000" stroke-width="2" fill="none" /> -->
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="autoImg2">
+        <svg xmlns="https://www.w3.org/2000/svg" class="autoImg2">
            <image xlink:href="../../assets/images/newDarinage/autoImg.png" x="0" y="0" height="0.9rem" width=".5rem" v-show="willShow"> 
                 <animateMotion path="M15 0 C1 65, 8 70,30 100,C60 130, 70 180,65 200," begin="0s" dur="1s"  />
             </image>
             <!-- <path d="M15 0 C1 65, 8 70,30 100,C60 130, 70 180,65 200" stroke="#cd0000" stroke-width="2" fill="none" /> -->
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="autoImg3">
+        <svg xmlns="https://www.w3.org/2000/svg" class="autoImg3">
            <image xlink:href="../../assets/images/newDarinage/autoImg3.png" x="0" y="0" height="0.9rem" width=".5rem"  v-show="willShow"> 
                 <animateMotion path="M5  5C7 50, 8 85,90 100" begin="0s" dur="1s"  />
             </image>
@@ -76,5 +79,4 @@
 </body>
 <script data-main=" ../../config" src="../../plugins/require/require.js "></script>
 <script src="../../controllers/drainage/drainage.js "></script>
-
 </html>

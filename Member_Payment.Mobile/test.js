@@ -1,6 +1,6 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (axio, vue, mock, mockApi, main) {
-        var baseURL = 'http://192.168.0.229:8081/v1.0/';
+        var baseURL = 'http://192.168.0.229:8082/v1.0/';
         var vm = new vue({
             el: "#app",
             data: {
@@ -8,18 +8,18 @@ require(['config'], function () {
             },
             methods: {
                 payment: function () {
-                    main.post(baseURL + "pay/getCode", function (res) {
-                        alert(1);
-                        main.post(baseURL + "pay/create_pay", {
-                            amount: 0.1,
-                            member_id: 'd6c74ca9f49945c28c282e4a93def6c9',
-                            business_id: '2c92f9245f5d0d46015f5d0e00f40002',
-                            pay_way: 'wechat_csb'
-                        }, function (res) {
-                            alert(2)
-                            // main.prompt(res.data.data)
-                        });
-                    });
+                    // main.post(baseURL + "pay/getCode", function (res) {
+                    //     alert(1);
+                    //     main.post(baseURL + "pay/create_pay", {
+                    //         amount: 0.1,
+                    //         member_id: 'd6c74ca9f49945c28c282e4a93def6c9',
+                    //         business_id: '2c92f9245f5d0d46015f5d0e00f40002',
+                    //         pay_way: 'wechat_csb'
+                    //     }, function (res) {
+                    //         alert(2)
+                    //         // main.prompt(res.data.data)
+                    //     });
+                    // });
 
 
                 },
@@ -49,7 +49,7 @@ require(['config'], function () {
         });
 
         function init() { //公众号支付
-            debugger;
+            // debugger;
             if (location.href.indexOf("code") >= 0) {
                 var code = main.getQueryString("code");
                 if (code != null && code != "") {
@@ -75,6 +75,35 @@ require(['config'], function () {
                             alert(res.data.status);
                             if (res.data.code == 200) {
                                 //调用官方公众号接口
+                                console.log(res)
+                                var configObj = {
+                                    debug:true,
+                                    appId:res.data.appId,
+                                    timestamp:res.data.timeStamp,
+                                    nonceStr:res.data.nonceStr,
+                                    signature:res.data.paySign,
+                                    jsApiList:["chooseWXPay"]
+                                }
+                                wx.config(configObj);
+                                wx.ready(function () {
+                                    console.log("微信js接口已准备")
+                                })
+                                // wx.checkJsApi({ //判断当前客户端是否支持该接口
+                                //     jsApiList: ['chooseWXPay'], 
+                                //     success: function(res) {
+                                //         console.log(res)
+                                //     }
+                                // });
+                                wx.chooseWXPay({
+                                    timestamp:res.data.timeStamp,
+                                    nonceStr:res.data.nonceStr,
+                                    package:res.data.package,
+                                    signType:res.data.signType,
+                                    paySign:res.data.paySign,
+                                    success:function (res) {
+                                        console.log(111)
+                                    }
+                                })
                             }
                             // main.prompt(res.data.data)
                         });

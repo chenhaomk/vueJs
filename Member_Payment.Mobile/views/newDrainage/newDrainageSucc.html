@@ -23,13 +23,13 @@
         <div class="content">
             <div class="shopSum">
                 <div class="sumWarp">
-                    <p>50.00</p>
+                    <p>{{how}}</p>
                     <img src="../../assets/images/newDarinage/money.png" alt="">
                     
                 </div>
             </div>
             <div class="sunfo">
-                <p>满200.00元可用</p>
+                <p>{{all}}</p>
             </div>
             <div class="inputWarp">
                 <div class="succMsImg">
@@ -37,7 +37,7 @@
                 </div>
                 <p>恭喜您，领取成功！</p>
                 <div class="checkBtn gradient" v-on:click="linkH5">
-                    立即使用
+                    立即下载
                 </div>
                 <div class="botWarp"  v-show="msgShow">
                     您已成为{{b_n}}的会员

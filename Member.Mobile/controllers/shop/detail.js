@@ -12,7 +12,8 @@ require(['config'],function(){
                 businessId : "",
                 returnUrl : ygg.getQueryString("returnUrl"),
                 comIsShow : "",
-                comment_list : []
+                comment_list : [],
+                discountPay:[]//优惠买单
             },
             components : {
                 dis : ygg.template.discount,
@@ -45,6 +46,9 @@ require(['config'],function(){
                         ygg.loading(false);
                         vm.$set(vm,"comment_list",data.comments);
                     });
+                },
+                pay:function (event) {//优惠买点跳转
+                    console.log(event.currentTarget.getAttribute("data"))
                 }
             }
         }),
@@ -62,10 +66,21 @@ require(['config'],function(){
             member_id : ygg.getCookie('member_id')
         },function(data){
             data = data.data;
-            
             vm.$set(vm,"shop",data.business_details);
             vm.$set(vm,"coupons",data.coupons);
             vm.$set(vm,"comments",data.comments);
+            vm.discountPay = [
+                {
+                    name:"9折",
+                    num:"已买250",
+                    id:"12312"
+                },
+                {
+                    name:"满100减10",
+                    num:"已买250",
+                    id:"263236"
+                },
+            ]
         });
 
     });

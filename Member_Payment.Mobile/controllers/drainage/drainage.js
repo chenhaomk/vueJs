@@ -69,6 +69,7 @@ require(['config'], function () {
                     main.post("common/shareTicket",
                         data,
                         function (res) {
+                            console.log(res)
                             if (res.errCode < 0)
                                 main.prompt(res.errMsg);
                             var data = res.data;
@@ -80,6 +81,7 @@ require(['config'], function () {
                             }
                              var isSuc=true;
                              var pram
+
                             if (data.data != null) {
                                 if (data.data[1001] != null)
                                     main.prompt(data.data[1001]);
@@ -100,11 +102,14 @@ require(['config'], function () {
                                     pram = "newUser"
                                     // main.prompt(data.data[9010]);
 
-                                isSuc=false;
+                                
 
 
-                                if(data.data[9010] != null||data.data[9011] != null||data.data[9014] != null)
+                                if(data.data[9010] != null||data.data[9011] != null||data.data[9014] != null) {
                                     isSuc=true;
+                                }else {
+                                    isSuc=false;
+                                }
 
                             }
                             if(isSuc) {
@@ -126,7 +131,8 @@ require(['config'], function () {
                     //m.yingougou.com/download.html 
                 },
                 linkH5: function () {
-                    location.href = "https://m.yingougou.com/";
+                    // location.href = "https://m.yingougou.com/";
+                    location.href = "m.yingougou.com/download.html"
                 }
             }
         });
@@ -167,11 +173,24 @@ require(['config'], function () {
                     return;
                 }
                 data = data.data;
-                if (data.type == 0)
-                    vm.how = data.discount;
-                else if (data.type == 1)
+                if (data.type == 0) {
+                    vm.how =  data.discount+"";
+                    if(vm.how.indexOf(".") == -1) {
+                        vm.how =  data.discount+".00";
+                    }else {
+                        vm.how =  data.discount;
+                    }
+                }else if (data.type == 1) {
                     vm.how = data.rate * 10 + "折";
-                vm.all = "满" + data.min_price + "可用";
+                }
+                if((data.min_price+"").indexOf(".") ==-1) {
+                    vm.all = "满" +data.min_price+ ".00可用";
+                }else {
+                    vm.all = "满" +data.min_price+ "可用";
+                }
+                
+                main.setSession("how", vm.how );
+                main.setSession("all", vm.all );
                 vm.time = main.getd('y.m.d', data.begin_date / 1000) + "-" + main.getd('y.m.d', data.end_date / 1000);
                 if (main.getSession("sn") != null)
                     main.clearSessionItem("sn");
@@ -190,6 +209,8 @@ require(['config'], function () {
                 vm.b_n = decodeURI(bn_1);
         }
         if (location.href.indexOf("newDrainageSucc.html") >= 0) {
+            vm.all = main.getSession("all");
+            vm.how = main.getSession("how");
             vm.b_n = decodeURI(main.getSession("b_n"));
         }
 
