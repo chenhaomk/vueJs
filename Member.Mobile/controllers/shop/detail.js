@@ -47,8 +47,9 @@ require(['config'],function(){
                         vm.$set(vm,"comment_list",data.comments);
                     });
                 },
-                pay:function (event) {//优惠买点跳转
+                pay:function (event) {//优惠买单跳转
                     console.log(event.currentTarget.getAttribute("data"))
+                    window.location.href = "orderPay.html"
                 }
             }
         }),

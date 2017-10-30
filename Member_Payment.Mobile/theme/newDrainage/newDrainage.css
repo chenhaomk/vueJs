@@ -60,6 +60,7 @@ body {
     text-overflow: ellipsis;
     white-space:nowrap;
     overflow: hidden;
+    font-size: .32rem;
 }
 .main {
     flex-flow: column wrap;

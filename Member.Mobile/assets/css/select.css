@@ -74,14 +74,15 @@ a:link {color: #888}		/* 未访问的链接 */
 a:visited {color: #fff;}
 
 /*商家名称*/
-.storeName{ position: relative; width: 100%;height: 18rem;margin-top: 5rem; box-sizing: border-box; z-index: 10}
-.priceBox{width: 90%;height:6rem;margin:2rem auto}
-.priceTotal{font-size: 16px;padding: 2rem 0;}
-.inputTxt{margin: 2rem 0}
-.money{width: 96%;height: 4rem;background-color: #fff;line-height: 4rem;}
-.moneyInput{width: 100%}
-.discount{width: 100%;background-color: #fff;margin-top: 5rem;overflow: hidden}
-.payMoney{margin-bottom: 2rem}
+.storeName{ position: relative; width: 100%;margin-top: 5rem; box-sizing: border-box; z-index: 10;overflow: hidden;}
+.priceBox{width: 94%;margin:0 auto;overflow: hidden;}
+.priceTotal{font-size: 16px;padding-top:1rem; margin-left: 1rem;}
+.inputTxt{margin: 1rem 0 1rem 1rem;}
+.money{width: 90%;height: 4rem;background-color: #fff;line-height: 4rem;overflow:hidden; box-shadow: 0 0 5px 3px #f7f7f8;margin:1rem;}
+.money span {display: block;float: left;width: 8%;text-align:center;}
+.money .moneyInput{display: block;float: left;width: 90%;height: 4rem;line-height: 4rem;}
+.discount{width: 100%;background-color: #fff;margin-top: 2rem;overflow: hidden}
+.payMoney{margin-bottom: 1rem;margin-left: 1rem;}
 .orangeColor{color:#ff6f3d}
 
 /*单选按钮*/
