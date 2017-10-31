@@ -19,7 +19,8 @@ require(['config'], function () {
                 all: "",
                 time: "",
                 willShow: true,
-                msgShow:false
+                msgShow:false,
+                total:"120.00"
                 // willHide:false
             },
             methods: {
@@ -69,7 +70,6 @@ require(['config'], function () {
                     main.post("common/shareTicket",
                         data,
                         function (res) {
-                            console.log(res)
                             if (res.errCode < 0)
                                 main.prompt(res.errMsg);
                             var data = res.data;
@@ -131,8 +131,12 @@ require(['config'], function () {
                     //m.yingougou.com/download.html 
                 },
                 linkH5: function () {
-                    // location.href = "https://m.yingougou.com/";
-                    location.href = "m.yingougou.com/download.html"
+                    var ua = navigator.userAgent.toLowerCase();
+                    if (/iphone|ipad|ipod/.test(ua)) {
+                        window.open("https://itunes.apple.com/cn/app/id1273704196");
+                    } else if (/android/.test(ua)) {
+                        window.open("https://dl.yingougou.com/Android/ygg_app-release.apk");
+                    }
                 }
             }
         });
@@ -213,7 +217,9 @@ require(['config'], function () {
             vm.how = main.getSession("how");
             vm.b_n = decodeURI(main.getSession("b_n"));
         }
-
+        if(location.href.indexOf("paySucc.html") >= 0) {
+            init();
+        }
         setTimeout(function () {
             vm.willShow = false;
             // vm.willHide = true
