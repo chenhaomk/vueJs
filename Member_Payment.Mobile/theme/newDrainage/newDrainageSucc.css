@@ -43,17 +43,24 @@ body {
 .imgWarp {
     margin:0 auto;
     height: 1.36rem;
-    border:1px solid black;
+    /*border:1px solid black;*/
     border-radius: 50%;
 }
 .imgWarp img {
     width: 100%;
     height: 100%;
+     border-radius: 50%;
 }
 .shopName {
-    margin-top: .2rem;
+      padding-top: 0.2rem;
+    margin:0 auto;
     font:0.4rem bold;
     color:#ffffff;
+    width: 3.5rem;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow: hidden;
+    font-size: .32rem;
 }
 .main {
     flex-flow: column wrap;
@@ -86,7 +93,7 @@ body {
 }
 .sumWarp img {
     position: absolute;
-    left: -0.16rem;
+    left: 0.1rem;
     top:0.15rem;
 }
 .sunfo p{

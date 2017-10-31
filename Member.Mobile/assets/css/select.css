@@ -1,4 +1,4 @@
-选择门店*/
+/*选择门店*/
 body{ background-color: #f3f5f9}
 .select_store_success .header{border-bottom: 0}
 .select_store_success .sc_b{margin-bottom: 100rem}
@@ -42,4 +42,79 @@ a:link {color: #888}		/* 未访问的链接 */
     left: 0;
     top: 0;
 }
+
+/*团购*/
+.group{ position: relative; width: 100%; height: 18rem; margin-top: 5rem; background: white; box-sizing: border-box; z-index: 10}
+.bottomBorder{border-bottom: solid 1px #e3e3e3}
+.groupCon{width: 100%;height: 120px}
+.groupCon .groupImg{float: left;width: 80px;height: 80px;border-radius: 50%;margin-top: 2rem}
+.groupCon .groupTitle{float: left;padding-top: 3rem}
+.coupon{width: 90%;margin:0 auto;border-top:solid 1px #e3e3e3;overflow: hidden}
+.couponNum{padding-top: 10px}
+.backIcon{float: right; margin-top: 4rem; width: 2rem; height: 2rem; margin-right: 3rem;background: url("../../assets/images/member/ic_bg_arrow_xxh.png") no-repeat;background-size: contain}
+
+.shopBox{width: 100%; height: 15rem;background-color: #fff;margin-top: 1rem;overflow: hidden}
+.shopCon{width: 90%;  margin:0 auto;}
+.shopName{float:left;height:13rem;padding: 2rem 0;font-size: 18px;}
+.shop{font-weight: bold;padding-bottom: 2px}
+.groupPhone{width: 40px;height: 40px;float: right;background: url("../../assets/images/icon/ic_bg_phone_xxh.png") no-repeat;background-size: cover;margin-top: 50px;}
+.grayColor{color: #ccc}
+.ensureBuy{width: 90%;height:4rem;display:block;margin: 0 auto;background-color: #ff6f3d;color: #fff;font-size: 2rem;border-radius: 1rem;margin-top: 2rem}
+
+/* 团购券码*/
+.groupCode{padding: 1rem;display: inline-block;}
+.total{float: right;color: #ff6f3d}
+
+.phone{width: 80%;margin: 2rem auto;color: #ccc}
+.com_fr{float: right}
+
+.codeBox{height: 30rem}
+.code{text-align: center;padding: 20rem 0}
+.codeImg{margin: 2rem 0}
+a:visited {color: #fff;}
+
+/*商家名称*/
+.storeName{ position: relative; width: 100%;margin-top: 5rem; box-sizing: border-box; z-index: 10;overflow: hidden;}
+.priceBox{width: 94%;margin:0 auto;overflow: hidden;}
+.priceTotal{font-size: 16px;padding-top:1rem; margin-left: 1rem;}
+.inputTxt{margin: 1rem 0 1rem 1rem;}
+.money{width: 90%;height: 4rem;background-color: #fff;line-height: 4rem;overflow:hidden; box-shadow: 0 0 5px 3px #f7f7f8;margin:1rem;}
+.money span {display: block;float: left;width: 8%;text-align:center;}
+.money .moneyInput{display: block;float: left;width: 90%;height: 4rem;line-height: 4rem;}
+.discount{width: 100%;background-color: #fff;margin-top: 2rem;overflow: hidden}
+.payMoney{margin-bottom: 1rem;margin-left: 1rem;}
+.orangeColor{color:#ff6f3d}
+
+/*单选按钮*/
+input[type=checkbox] {
+    isplay: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 0;
+    outline: 0 !important;
+    line-height: 20px;
+    color: #d8d8d8;
+}
+input[type=checkbox]:after {
+    content: "";
+    display:block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 14px;
+    font-size: 16px;
+    color: #fff;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-sizing:border-box;
+}
+
+input[type=checkbox]:checked:after {
+    content: "L";
+    transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
+    border-color: #ff6f3d;
+    background-color: #ff6f3d;
 }

@@ -35,7 +35,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .home .header .search{ width: 23rem; height: 3rem; position: relative;}
 .home .header .search:before{ content: ""; width: 100%; height: 100%; position: absolute; background: white; opacity: .9; border-radius: 25px}
 .home .header .search input{ width: 20rem }
-.home .header .search input,.search_p .top input{ position: relative; z-index: 2; margin-left: 1.3rem; line-height: 3rem; height: 3rem; font-size: 1.4rem; background:url(../images/icon/ic_search_xxh.png) left center no-repeat; background-color: none; padding-left:1.8rem; background-size : 1.3rem auto }
+.home .header .search input,.search_p .top input{ position: relative; z-index: 2; margin-left: 1.3rem; line-height: 3rem; height: 3rem; font-size: 1.4rem; background:url(../images/icon/ic_search_xxh.png) left center no-repeat; background-color: transparent; padding-left:1.8rem; background-size : 1.3rem auto }
 .home .header .user{ float: right; width: 3rem; height: 3rem; background:url(../images/icon/ic_user_xxh.png) center center no-repeat; background-size: auto 2rem}
 .home .banner{ height: 15rem }
 .home .banner img{ width: 100%; height: 100% }
@@ -129,7 +129,8 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 
 .shop_index .shop_list.empty{ padding-top: 10rem }
 .shop_index .shop_list.empty:after{ content: "暂时没有相关商家！"; display: block; text-align: center; }
-.shop_index .menu{ position: fixed; width: 100%; height: 4rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
+.shop_index .menu{ position: relative; width: 100%; height: 20rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
+.shop_index .menu .border{border-bottom:none}
 .shop_index .menu a{ font-size:1.4rem; padding: 0 1.5rem; display: block; position: relative; }
 .shop_index .menu a.active{ color: #ff6f3d }
 .shop_index .menu a.active:after{ content: ""; position: absolute; bottom: 0; border-bottom: 2px solid #ff6f3d; width: 100%; left: 0 }
@@ -137,7 +138,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .shop_index .menu .swiper-slide:first-child{ margin-left: 1.5rem }
 .shop_index .menu .swiper-slide:last-child{ margin-right: 1.5rem }
 
-.shop_index .shop_list{ padding-top: 9rem }
+.shop_index .shop_list{ padding-top: 4rem }
 .shop_index .shop_list li{ box-sizing: border-box; padding:1.5rem; height: 12rem }
 .shop_index .shop_list li img{ float: left; height: 100%; width: 12.5rem; margin-right: 1.2rem }
 .shop_index .shop_list li .text{ float: left; width: calc(100% - 13.7rem); height: 100%; position: relative; }
@@ -235,7 +236,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 /****************************************************************** my ******************************************************************/
 
 .order_dis .menu{ position: fixed; width: 100%; height: 4rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
-.order_dis .menu p{ float: left; width: calc(100% / 3 - 1px); text-align: center; }
+.order_dis .menu p{ float: left; width: calc(100% / 4 - 1px); text-align: center; }
 .order_dis .menu a{ font-size:1.4rem; width: 100%; display: inline-block; position: relative; }
 .order_dis .menu a.active{ color: #ff6f3d }
 .order_dis .menu a.active:after{ content: ""; position: absolute; bottom: 0; border-bottom: 2px solid #ff6f3d; width: 100%; left: 0 }
@@ -291,7 +292,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .comment_success .like{ padding:0 1.5rem; border-top: .5rem solid #f9f9f9 }
 .comment_success .like h3{ font-size: 1.5rem; line-height: 1; padding: 2.3rem 0 1.5rem }
 
-.my_dis .menu p{ width: 50% }
+/*.my_dis .menu p{ width: 50% }*/
 .my_dis .dis_list{ margin: 0 1.5rem }
 .my_dis .see_agin,.order_dis .see_agin{ font-size: 1.4rem; background: white; border-top: 1px solid #e3e3e3; position: fixed; bottom: 0; z-index: 2; width: 100%; text-align: center; height: 5rem; line-height: 5rem; color: #ff6f3d }
 
@@ -568,12 +569,26 @@ a.checkbox.none:before{ background: #fff}
 .uploader .add input{ display: block; width: 100%; height: 100%; opacity: 0 }
 .uploader:after{ content: ""; display: block; clear: both }
 
-.shop_info h3,.discount .notice h3,.shop .shop_content h3,.shop .discount h2{ font-size: 1.6rem; color: #1c1c1c; margin-bottom: .5rem; line-height: 2}
+.shop_info h3,.discount .notice h3,.shop .shop_content h3,.shop .discount h2,.shop .discountPay h2{ font-size: 1.6rem; color: #1c1c1c; margin-bottom: .5rem; line-height: 2}
 .shop_info .shop_name{ font-size: 1.6rem; line-height: 2}
 .shop_info .shop_name a{ color: #1c1c1c}
 .shop_info .phone{ float: right; background: url(../images/discount/ic_bg_phone_xxh.png) right center no-repeat; background-size: auto 50%; width: 4rem; height: 4.5rem; margin-top: -2.7rem}
 .shop_info .address,.shop_index .shop_list .address{ display: block; line-height: 1; background: url(../images/discount/ic_address_xxh.png) left center no-repeat; background-size: auto 100%; height: 1.4rem; font-size: 1.4rem; color: #5b5b5b; text-indent: 1.9rem; margin-top: 1.2rem}
 .shop_info span:first-child{ float: left; width: calc(100% - 4.5rem) }
+
+
+.discountPay p {border: 1px solid #f2f2f2;padding:1rem;margin-bottom: 1rem;border-radius: .5rem;overflow: hidden;}
+.discountPay p:last-child {margin-bottom: 0;}
+.discountPay p .disType {float: left;display: block;color: #ff6f3d;margin-top: .3rem;}
+.discountPay p span:last-child {float: right;overflow: hidden;color: #888888}
+.discountPay p  .payDis {overflow: hidden;}
+.discountPay p  .payDis .disMsg{color:888888;display: block;margin-right: 1rem; float: left ;margin-top: .3rem;}
+.discountPay p .payDis span:last-child {margin-right: 0;color: white;background-color: #ff6f3d;padding:.3rem .8rem;border-radius: .4rem;}
+
+
+
+
+
 
 .discount_group{ margin-top: .9rem }
 .discount_group.default{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
@@ -686,7 +701,7 @@ input,select,textarea{-webkit-appearance:none}
 .creatlogin .falut .num span{ color: #888888 }
 .creatlogin .falut .btn_submit{ position: relative; display: block; margin: 1.5rem; width: calc(100% - 3rem); border-radius:.5rem }
 
-.creat_shop .tip{ color:#1c1c1c; font-size: 1.2rem; line-height: 1.2rem; margin-top: 2rem; width:calc(100%-3rem); margin: 1.5rem; }
+.creat_shop .tip{ color:#1c1c1c; font-size: 1.2rem; line-height: 1.2rem; margin-top: 2rem; width:calc(100%- 3rem); margin: 1.5rem; }
 
 
 .creat_brand  form{ padding-bottom: 5rem } 
@@ -786,7 +801,7 @@ padding-top: 1.3rem;
 .creat_shop_A .form_brand p{ padding-right: 1.5rem }
 .creat_shop_A  form{ padding-bottom: 5rem } 
 
-.creat_shop_A .tip{ color:#1c1c1c; font-size: 1.2rem; line-height: 1.2rem; margin-top: 2rem; width:calc(100%-3rem); margin: 1.5rem; }
+.creat_shop_A .tip{ color:#1c1c1c; font-size: 1.2rem; line-height: 1.2rem; margin-top: 2rem; width:calc(100%- 3rem); margin: 1.5rem; }
 .creat_shop_A .form_group{ background: white; text-indent: 0;height: 8.4rem; line-height: 8.4rem;}
 .creat_shop_A .form_group p{ padding-right: 1.5rem ;    padding-left: 0;height:auto;}
 .creat_shop_A .form_group p .brandlogo { width: 4.3rem;
@@ -881,3 +896,5 @@ padding-top: 1.3rem;
   width: 100%;
   height: 100%;
 } */
+
+.groupImg{width: 40px;height: 40px;border-radius: 50%}
