@@ -11,23 +11,73 @@
 </head>
 
 <body>
-    <div id="app" class="main">
-		<div class="backImg"></div>
-        <div class="header">
-            <div class="banner">
-                <div class="banner_logo">
-                    <div class="inner_img"><img v-bind:src="img" alt="title" /></div>
-                    <div class="title" v-text="b_n"></div>
-                    <!-- <div class="title_img"><img v-bind:src="shopcoupen.title_log" alt="title" /></div> -->
+    <div id="app" class="main warpBg">
+        <div class="shopHdImg">
+            <div class="headeImg">
+                <div class="manWarp">
+                    <span>￥{{total}}</span>
+                </div>
+                <div class="pau_succ" >
+                    <img src="../../assets/images/newDarinage/success1.png" alt="">
+                    <span>支付成功</span>
                 </div>
             </div>
+            <div class="shopSum">
+                <div class="sumWarp">
+                    <p>{{how}}</p>
+                    <img src="../../assets/images/newDarinage/money.png" alt="">
+                    
+                </div>
+            </div>
+            <div class="sunfo">
+                <p>{{all}}</p>
+            </div>
         </div>
-		<div class="content">
-			
-		</div>
-		<div class="footer">
-			<p>活动说明</p>
-		</div>
+        <div class="content">
+            <div class="inputWarp">
+                <div class="inputPhone">
+                    <input type="tel" placeholder="请输入手机号领取优惠券" v-model="phone" >
+                </div>
+                <div class="checkNum">
+                    <div class="fonInput">
+                        <input type="number" placeholder="请输入验证码" v-model="verificationCode" />
+                        <input type="button" value="获取验证码" class="gradient" v-on:click="getVerification" t="0" id="verifia" />
+                    </div>
+                </div>
+                <div class="checkBtn">
+                    <div class="gradient getBtn"  v-on:click="verificationSubmit()">
+                        立即领取
+                    </div>
+                </div>
+                <p>领取后将自动注册银个购</p>
+            </div>
+        </div>
+        <div class="explain">
+            <p>活动说明</p>
+        </div>
+<!--         <div class="autoImg1">
+            <div class="resrts">
+                <img src="../../assets/images/newDarinage/autoImg1.png" alt="" >
+            </div>
+            
+        </div> -->
+        <svg xmlns="https://www.w3.org/2000/svg" class="autoImg1">
+           <image xlink:href="../../assets/images/newDarinage/autoImg1.png" x="-10" y="0" height="0.9rem" width=".5rem" v-show="willShow" class="image1"> 
+                <animateMotion path="M100 30 C20 70, 40 130,50 150 ,C50 150, 90 200,0 270,"  begin="0s" dur="1s"  />
+            </image>
+        </svg>
+        <svg xmlns="https://www.w3.org/2000/svg" class="autoImg2">
+           <image xlink:href="../../assets/images/newDarinage/autoImg.png" x="0" y="0" height="0.9rem" width=".5rem" v-show="willShow"> 
+                <animateMotion path="M15 0 C1 65, 8 70,30 100,C60 130, 70 180,65 200," begin="0s" dur="1s"  />
+            </image>
+            <!-- <path d="M15 0 C1 65, 8 70,30 100,C60 130, 70 180,65 200" stroke="#cd0000" stroke-width="2" fill="none" /> -->
+        </svg>
+        <svg xmlns="https://www.w3.org/2000/svg" class="autoImg3">
+           <image xlink:href="../../assets/images/newDarinage/autoImg3.png" x="0" y="0" height="0.9rem" width=".5rem"  v-show="willShow"> 
+                <animateMotion path="M5  5C7 50, 8 85,90 100" begin="0s" dur="1s"  />
+            </image>
+            <!-- <path d="M5  5C7 50, 8 85,90 100" stroke="#cd0000" stroke-width="2" fill="none" /> -->
+        </svg>
     </div>
 </body>
 <script data-main=" ../../config" src="../../plugins/require/require.js "></script>

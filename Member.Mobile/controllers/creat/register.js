@@ -48,7 +48,7 @@ require(['config'], function () {
                     if (mid != null || mid != "") {
                         praram.member_id = mid;
                     }
-                    ygg.ajax('/admin/business/addBusinessCheckOne', praram, function (data) {
+                    ygg.ajax('/business/addBusinessCheckOne', praram, function (data) {///business/fastLogin
                         if (data.status == "error") {
                             ygg.prompt(data.msg);
                         } else if (data.status == "success") {

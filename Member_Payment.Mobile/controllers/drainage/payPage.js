@@ -14,9 +14,9 @@ require(['config'], function () {
     	}
 
     	if(isWeiXin()) {
-
+            
     	}else {
-
+            
     	}
     	var vm = new vue({
     		el:"#app",
@@ -28,8 +28,9 @@ require(['config'], function () {
     			pay:function() {
     				if(isWeiXin() =="weixin") {
     					console.log("微信支付")
+                        
     				}else if(isWeiXin() =="alipay") {
-
+                        
     				}else {
     					console.log("H5支付")
 			    		main.post(baseURL + "pay/create_pay", {
