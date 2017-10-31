@@ -46,7 +46,7 @@ require(['config'],function(){
     			return;
     		}
     		$.fn.getData({
-                url : "/admin/business/addBusinessCheckOne",
+                url : "/business/addBusinessCheckOne",
                 data : {
                     mobile : $("#tel").val(),
                     verification_code : $("#yzm").val(),
