@@ -82,7 +82,25 @@ a:visited {color: #fff;}
 .money span {display: block;float: left;width: 8%;text-align:center;}
 .money .moneyInput{display: block;float: left;width: 90%;height: 4rem;line-height: 4rem;}
 .discount{width: 100%;background-color: #fff;margin-top: 2rem;overflow: hidden}
-.payMoney{margin-bottom: 1rem;margin-left: 1rem;}
+.priceBox .payMoney{margin-top:.5rem;margin-left: 1rem;margin-bottom: .5rem;vertical-align:middle;}
+.priceBox .payMoney:last-child {
+    margin-left: 3rem;
+}
+.priceBox .payMoney span {vertical-align: middle;}
+.priceBox .payMoney img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+.priceBox .totalNum {
+    overflow: hidden;
+}
+.priceBox .totalNum span {
+    float: right;
+}
+.priceBox .totalNum span:last-child {
+    float: left;
+}
 .orangeColor{color:#ff6f3d}
 
 /*单选按钮*/
@@ -96,6 +114,7 @@ input[type=checkbox] {
     outline: 0 !important;
     line-height: 20px;
     color: #d8d8d8;
+    margin-right: .5rem;
 }
 input[type=checkbox]:after {
     content: "";
@@ -110,6 +129,7 @@ input[type=checkbox]:after {
     border: 1px solid #ddd;
     background-color: #fff;
     box-sizing:border-box;
+
 }
 
 input[type=checkbox]:checked:after {

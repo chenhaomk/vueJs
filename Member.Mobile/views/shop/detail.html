@@ -28,16 +28,25 @@
             <a class="address"><span class="text-sl">{{shop.address}}</span></a>
         </section>
         
-        <section class="con discountPay" v-clock>
+        <section class="con discountPay" v-show="willShow">
             <h2>优惠买单</h2>
             <div class="discountPay" >
-                <p v-for="item in discountPay">
-                    <span class="disType">{{item.name}}</span>
+                <p v-show="discountShow">
+                    <span class="disType">{{discount}}</span>
                     <span class="payDis">
                         <span class="disMsg">
-                            {{item.num}}
+
                         </span>
-                        <span v-on:click="pay($event)" v-bind:data="item.id">去买单</span>
+                        <span v-on:click="pay($event)" v-bind:data=1>去买单</span>
+                    </span>
+                </p>
+                <p v-show="full_reduceShow">
+                    <span class="disType">满{{full_rule}}减{{full_reduce}},最高可减{{most_reduce}}</span>
+                    <span class="payDis">
+                        <span class="disMsg">
+                            已买100
+                        </span>
+                        <span v-on:click="pay($event)" v-bind:data=2>去买单</span>
                     </span>
                 </p>
             </div>
