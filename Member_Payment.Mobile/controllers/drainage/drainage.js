@@ -20,7 +20,7 @@ require(['config'], function () {
                 time: "",
                 willShow: true,
                 msgShow:false,
-                total:"120.00"
+                total:""
                 // willHide:false
             },
             methods: {
@@ -217,8 +217,17 @@ require(['config'], function () {
             vm.how = main.getSession("how");
             vm.b_n = decodeURI(main.getSession("b_n"));
         }
-        if(location.href.indexOf("paySucc.html") >= 0) {
+        if(location.href.indexOf("paySucc.html") >= 0) {//支付成功后领券
+            
             init();
+            var amount = main.getSession("amount")
+            if((amount+"").indexOf(".") == -1) {
+                vm.total = amount+".00"
+            }else {
+                vm.total = amount
+            }
+            
+            
         }
         setTimeout(function () {
             vm.willShow = false;

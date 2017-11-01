@@ -1,6 +1,6 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (axio, vue, mock, mockApi, main) {
-        var baseURL = 'http://192.168.0.229:8082/v1.0/';
+        var baseURL = 'http://192.168.0.119:8084/v1.0/';
         var vm = new vue({
             el: "#app",
             data: {
@@ -133,7 +133,7 @@ require(['config'], function () {
                             amount: 0.1,
                             member_id: 'd6c74ca9f49945c28c282e4a93def6c9',
                             business_id: '2c92f9245f5d0d46015f5d0e00f40002',
-                            pay_way: 'alipay_web',
+                            pay_way: 'alipay_web', //支付宝扫码打开
                             buyer_id: buyer_id
                         }, function (res) {
                             alert(res.data.status);

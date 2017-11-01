@@ -294,6 +294,8 @@ var bussinessID = "",
 	bussinessName = main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"),
 	couponID = main.getQueryString("c_id") == null ? main.getSession("c_id") : main.getQueryString("c_id"),
 	couponAID = main.getQueryString("c_a_id") == null ? main.getSession("c_a_id") : main.getQueryString("c_a_id");
+  var amount = main.getQueryString("amount")
+main.setSession("amount",amount)
 main.setSession("b_id", bussinessID);
 main.setSession("b_n", decodeURI(bussinessName));
 if (couponID != null)
@@ -308,7 +310,7 @@ if (main.getQueryString("img") != null && main.getSession("img") == null)
 main.setSession("img", imgurl);
 main.setSession("a_n", decodeURI(main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n")));
 main.setSession("c_n", decodeURI(main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n")).replace("%2F", "/"));
-
+debugger;
 function init() {
 	if (main.getSession("sn") == null) {
 		location.href = "/payment/views/payment/index.html";
@@ -332,7 +334,8 @@ function init() {
 						main.setSession("m_id", memberID);
 						location.href = "https://m.yingougou.com/";
 					} else
-						location.href = "../../payment/views/drainage/drainagenologin.html";
+						// location.href = "../../views/newDrainage/paySucc.html";
+            location.href =  "../../payment/views/newDrainage/paySucc.html";
 					main.clearSessionItem("sn");
 					return;
 				} else {
