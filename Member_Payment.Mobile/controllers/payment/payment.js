@@ -7,14 +7,13 @@ require(['config'], function () {
             main.setSession("img", "https://img.yingougou.com/" + decodeURI(main.getSession("img")));
         main.setSession("a_n", main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n"));
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
-
         var vm = new vue({
             el: "#app",
             data: {
                 isActive: false,
                 payNum: "",
                 payKind: 0,
-                merchant_name: main.getSession("b_n")
+                merchant_name: main.getSession("sn") ==null?main.getQueryString("b_n"):main.getSession("sn")
             },
             methods: {
                 selectedPayType: function (type) {
@@ -30,6 +29,7 @@ require(['config'], function () {
                     return;
                 },
                 keyWordsFunc: function (num) {
+
                     var payNum = vm.payNum;
                     if (isNaN(num))
                         return;
@@ -82,12 +82,17 @@ require(['config'], function () {
                         data.amount = payNum;
                         data.business_id = main.getSession("b_id");
                         data.pay_way = 'alipay_web';
+                        // var paySuccObj = {} //支付成功后，在成功页面需要的obj
+                        // paySuccObj.amount = payNum ;
+                        // paySuccObj.business_id = main.getSession("b_id");
+                        main.setSession("amount", payNum);
+                        main.setSession("business_id", main.getSession("b_id"));
                         main.post("/thirdPay/create_pay",
                             data,
                             function (res) {
                                 if (res.code == 2001) {
-                                    location.href = "../../views/newDrainage/drainageLogin.html";
-                                    main.clearSessionItem("sn");
+                                    location.href = "../../views/newDrainage/paySucc.html";
+                                    // main.clearSessionItem("sn");
                                     return;
                                 }
                                 if (res.status == 200) {
@@ -97,9 +102,9 @@ require(['config'], function () {
                                         return;
                                     }
                                     main.setSession("sn", data.orderNo);
+                                    // main.setSession("paySuccObj", paySuccObj);//传值支付成功的引流页面
                                     var url = data.credential.alipay_web.orderInfo;
-                                    // window.open()
-                                    location.href = url;
+                                    location.href = url
                                 }
                             });
                         return;
@@ -110,14 +115,14 @@ require(['config'], function () {
                 }
             }
         });
-
         function init() {
             if (main.getSession("sn") == null)
                 return;
             main.post("common/getOrdersStatus", {
-                    sn: main.getSession("sn")
+                    sn: main.getSession("sn") 
                 },
                 function (res) {
+                    alert(res.status)
                     if (res.status == 200) {
                         var data = res.data.data;
                         if (res == null) {
@@ -126,12 +131,12 @@ require(['config'], function () {
                         }
                         if (status == 1) {
                             //支付成功，引流
-                            location.href = "../../views/newDrainage/drainageLogin.html";
-                            main.clearSessionItem("sn");
+                            location.href = "../../views/newDrainage/paySucc.html";
+                            // main.clearSessionItem("sn");
                             return;
                         } else {
                             //支付失败
-                            main.clearSessionItem("sn");
+                            // main.clearSessionItem("sn");
                             main.prompt("支付失败");
                             return;
                         }

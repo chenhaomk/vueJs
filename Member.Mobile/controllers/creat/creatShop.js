@@ -656,7 +656,7 @@ require(['config'], function () {
             param.lng = vm.lng;
             param.member_id = ""
             axio.defaults.headers.admin_id = ygg.getCookie("admin_id");
-            ygg.ajax("/admin/business/addBusinessCheckTwo", param, function (data) {
+            ygg.ajax("/business/addBusinessCheckTwo", param, function (data) {
                 if (data.status == "error") {
                     ygg.prompt(data.msg);
                 } else if (data.status == "success") {
