@@ -7,7 +7,7 @@ require(['config'], function () {
         //获取门店列表 id 为管理员id
         function getMyShopList() { 
             $.fn.getData({
-                url: "/home/getAllBusiness",
+                url: "/business/getAllBusiness",
                 result: function (data) {
                     if(data.status == "success") {                        
                         examine_business_list = data.data.examine_business_list

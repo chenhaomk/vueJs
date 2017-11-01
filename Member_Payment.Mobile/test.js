@@ -115,7 +115,6 @@ require(['config'], function () {
             //     location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://store.nat300.top/index.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
             // }
             if (location.href.indexOf("auth_code") >= 0) {
-               
                 var code = main.getQueryString("auth_code");
                 if (code != null && code != "") {
                     //alert(main.getQueryString("code"));
@@ -123,12 +122,13 @@ require(['config'], function () {
                     main.post(baseURL + "pay/getBuyerId", {
                         code: code
                     }, function (res) {
+                        alert(code);
                         if (res.data.code != 200) {
                             main.prompt("支付失败");
                             return;
                         }
                         var buyer_id = res.data.data.buyer_id;
-                        alert(openID);
+                        alert(code);
                         main.post(baseURL + "pay/create_pay", {
                             amount: 0.1,
                             member_id: 'd6c74ca9f49945c28c282e4a93def6c9',
