@@ -7,7 +7,7 @@ define(function () {
             'mock': ['../../../plugins/mock/mock-min'],
             'mockApi': ['../../../plugins/mock/mock-test'],
             'axio': ['../../../plugins/axios/axios.min'],
-            'main': ['../../../assets/js/main']
+            'main': ['../../../assets/js/main'],
         },
         shim: {
 

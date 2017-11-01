@@ -53,6 +53,8 @@ require(['config'], function () {
                     });
                 },
                 verificationSubmit: function () {
+                    location.href = "../../views/newDrainage/payPage.html"
+                    return
                     if (this.phone == null || this.phone == "") {
                         main.prompt("请输入手机号"); //后期需要弹出效果
                         return;
