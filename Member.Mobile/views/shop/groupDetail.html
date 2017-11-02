@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../assets/css/select.css">
+
+</head>
+<body>
+    
+    <section id='app' class='discount shop has_head'>
+
+        <section class="head">
+            <a :href="returnUrl" class="back"></a>
+            <p>团购券详情</p>
+        </section>
+
+        <section class="header">
+            <img :src="shop.inner_imgs">
+        </section>
+
+        <section class="con shop_info" v-clock>
+            <p class="shop_name text-sl">店名一行显示多了就打省略号这样...</p>
+            <a class="phone" ></a>
+            <star :score='shop.star*10'></star>
+            <a class="address">
+                <span >地址</span>
+                <sapn class="com_fr">1.2km</sapn>
+            </a>
+        </section>
+        
+        <section class="con discount">
+            <h2>套餐内容</h2>
+            <h4 class="blockColor">这里是套餐内容balabalabalabalabala</h4>
+        </section>
+        <!--团购优惠-->
+        <section class="con discount">
+            <h2>使用规则</h2>
+            <p class="blockColor"><span class="symbol"></span>&emsp;有效期：</p>
+            <p class="blockColor"><span class="symbol"></span>&emsp;使用时间：全天可用</p>
+            <p class="blockColor"><span class="symbol"></span>&emsp;优惠券使用：每个账号最多使用1张</p>
+            <p class="blockColor"><span class="symbol"></span>&emsp;退货支持：本产品不支持退货</p>
+        </section>
+
+        <section class="bot_buy">
+            <section class="buy">
+                ￥<span>80</span><span class="com_fr buying">立即抢购</span>
+            </section>
+        </section>
+
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/shop/groupDetail.js"></script>
+<html>

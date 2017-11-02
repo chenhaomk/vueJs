@@ -107,7 +107,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .discount .bot_buy .buy{ width: 100%; height: 100%; border-top: 1px solid #e3e3e3; text-indent: 1.5rem; color: #ff6f3d; font-size: 1.4rem; background: white}
 .discount .bot_buy .buy span{ font-size: 2.5rem }
 .discount .bot_buy .buy a{ float: right; height: 100%; width: 14.8rem; background: #ff6f3d; color: white; text-align: center; line-height: 5rem; font-size: 1.6rem; text-indent: 0}
-.discount .con{ border-bottom: .5rem solid #f9f9f9; box-sizing: border-box; padding: 1.5rem }
+.discount .con{ border-bottom: .5rem solid #f9f9f9; box-sizing: border-box; padding: 1.5rem; padding-bottom: 1rem}
 .discount .con.title h2{ font-size: 2.3rem; color: #ff6f3d; font-weight: normal;}
 .discount .con.title h2 span{ font-size: 1.5rem; margin-left: .8rem; text-decoration: line-through; }
 .discount .con.title p{ font-size: 1.4rem; color: #1c1c1c }
@@ -129,7 +129,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 
 .shop_index .shop_list.empty{ padding-top: 10rem }
 .shop_index .shop_list.empty:after{ content: "暂时没有相关商家！"; display: block; text-align: center; }
-.shop_index .menu{ position: relative; width: 100%; height: 20rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
+.shop_index .menu{ position: relative; width: 100%; height: 4rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
 .shop_index .menu .border{border-bottom:none}
 .shop_index .menu a{ font-size:1.4rem; padding: 0 1.5rem; display: block; position: relative; }
 .shop_index .menu a.active{ color: #ff6f3d }
@@ -236,7 +236,11 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 /****************************************************************** my ******************************************************************/
 
 .order_dis .menu{ position: fixed; width: 100%; height: 4rem; border-bottom: 1px solid #e3e3e3; line-height: 4rem; top: 5rem; background: white; box-sizing: border-box; z-index: 10}
+<<<<<<< Updated upstream
 .order_dis .menu p{ float: left; width: calc(100% / 4 - 1px); text-align: center; }
+=======
+.order_dis .menu p{ float: left; width: calc(100% / 4); text-align: center; }
+>>>>>>> Stashed changes
 .order_dis .menu a{ font-size:1.4rem; width: 100%; display: inline-block; position: relative; }
 .order_dis .menu a.active{ color: #ff6f3d }
 .order_dis .menu a.active:after{ content: ""; position: absolute; bottom: 0; border-bottom: 2px solid #ff6f3d; width: 100%; left: 0 }
@@ -573,8 +577,8 @@ a.checkbox.none:before{ background: #fff}
 .shop_info .shop_name{ font-size: 1.6rem; line-height: 2}
 .shop_info .shop_name a{ color: #1c1c1c}
 .shop_info .phone{ float: right; background: url(../images/discount/ic_bg_phone_xxh.png) right center no-repeat; background-size: auto 50%; width: 4rem; height: 4.5rem; margin-top: -2.7rem}
-.shop_info .address,.shop_index .shop_list .address{ display: block; line-height: 1; background: url(../images/discount/ic_address_xxh.png) left center no-repeat; background-size: auto 100%; height: 1.4rem; font-size: 1.4rem; color: #5b5b5b; text-indent: 1.9rem; margin-top: 1.2rem}
-.shop_info span:first-child{ float: left; width: calc(100% - 4.5rem) }
+.shop_info .address,.shop_index .shop_list .address{width: 100%; display: block; line-height: 1; background: url(../images/discount/ic_address_xxh.png) left center no-repeat; background-size: auto 100%; height: 1.4rem; font-size: 1.4rem; color: #5b5b5b; text-indent: 1.9rem; margin-top: 1.2rem;font-weight: normal;overflow: hidden}
+.shop_info span:first-child{ float: left; }
 
 
 .discountPay p {border: 1px solid #f2f2f2;padding:1rem;margin-bottom: 1rem;border-radius: .5rem;overflow: hidden;}
@@ -592,17 +596,17 @@ a.checkbox.none:before{ background: #fff}
 
 .discount_group{ margin-top: .9rem }
 .discount_group.default{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
-.discount_group.default_z{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
+.discount_group.default_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
 .discount_group.rate{ background: url(../images/index/ic_bg_znormall_xxh.png); background-size: 100% 100% }
-.discount_group.rate_z{ background: url(../images/index/ic_bg_znormall_xxh.png); background-size: 100% 100% }
+.discount_group.rate_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
 .discount_group.dk{ background: url(../images/index/ic_bg_dknormall_xxh.png); background-size: 100% 100% }
-.discount_group.dk_z{ background: url(../images/index/ic_bg_dknormall_xxh.png); background-size: 100% 100% }
+.discount_group.dk_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
 .discount_group.expired.default,.discount_group.expired.default_z{ background: url(../images/discount/ic_bg_dpast_xxh.png); background-size: 100% 100% }
 .discount_group.expired.rate,.discount_group.expired.rate_z{ background: url(../images/discount/ic_bg_zpast_xxh.png); background-size: 100% 100% }
 .discount_group.expired.dk,.discount_group.expired.dk_z{ background: url(../images/discount/ic_bg_dkpast_xxh.png); background-size: 100% 100% }
 .discount_group.lqgl.dk_z{ background: url(../images/index/ic_bg_dkylq@3x.png); background-size: 100% 100% }
 .discount_group.lqgl.rate_z{ background: url(../images/index/ic_bg_zylq@3x.png); background-size: 100% 100% }
-.discount_group.lqgl.default_z{ background: url(../images/index/ic_bg_dylq@3x.png); background-size: 100% 100% }
+.discount_group.lqgl.default_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
 .discount_group.lqgl a.nohx p{ color: #ff6f3d }
 .discount_group .info{ float: left; width: 25.5rem; margin: 1.1rem 0 0 1.3rem}
 .discount_group .info .top img{ float: left; width: 5rem; height: 5rem; margin-right: .9rem; border-radius: 50%}
@@ -615,9 +619,9 @@ a.checkbox.none:before{ background: #fff}
 .discount_group .info .bot{ margin-top: 1rem; border-top: 1px dashed #9b999b; font-size: 1.1rem; color: #888; padding-top: .8rem; margin-bottom: .9rem}
 .discount_group .info .bot span:last-child{ float: right; max-width: 14rem; color: #1c1c1c }
 .discount_group .status{ float: right; width: 6.5rem}
-.discount_group .status a{ display: block; color: white; font-size: 1.6rem; line-height: 1.1; text-align: center; position: relative; height: 10.6rem}
+.discount_group .status a{ display: block; color: #fff; font-size: 1.6rem; line-height: 1.1; text-align: center; position: relative; height: 10.6rem}
 .discount_group .status a p{ position: absolute; width: 100%; top: 50%; margin-top: -1.7rem }
-.discount_group .status a.nohx p{ margin-top: -1.05rem }
+.discount_group .status a.nohx p{ margin-top: -1.05rem; color: #fff;}
 
 .dis_order_group{ border-bottom: 1rem solid #fafafa; padding: 1.5rem; position: relative; background: white }
 .dis_order_group>a{ color: #1c1c1c }

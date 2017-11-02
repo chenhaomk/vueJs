@@ -62,6 +62,7 @@ require(['config'],function(){
         function getList(cb){
             ygg.ajax('/member/getMemberOrder',obj,function(data){
                 data = data.data;
+<<<<<<< Updated upstream
                 var Obj = {
                      "need_use_total": 1,
                     "already_use_total": 0,
@@ -172,6 +173,9 @@ require(['config'],function(){
                     ]
                 }
                 data = Obj
+=======
+
+>>>>>>> Stashed changes
                 vm.$set(vm,"menu",["全部("+data.all_total+")","待支付("+data.need_pay_total+")","待使用("+data.need_use_total+")","已使用("+data.already_use_total+")"]);
                 vm.$set(vm,'now',data.now);
                 if(obj.page > data.pages && data.pages != 0){
