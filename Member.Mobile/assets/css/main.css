@@ -591,12 +591,15 @@ a.checkbox.none:before{ background: #fff}
 
 
 .discount_group{ margin-top: .9rem }
+.discount_group.fn-clear{background: url(../images/index/bg_click_quan_xxh.png); background-size: 100% 100%}
 .discount_group.default{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
 .discount_group.default_z{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
 .discount_group.rate{ background: url(../images/index/ic_bg_znormall_xxh.png); background-size: 100% 100% }
 .discount_group.rate_z{ background: url(../images/index/ic_bg_znormall_xxh.png); background-size: 100% 100% }
 .discount_group.dk{ background: url(../images/index/ic_bg_dknormall_xxh.png); background-size: 100% 100% }
 .discount_group.dk_z{ background: url(../images/index/ic_bg_dknormall_xxh.png); background-size: 100% 100% }
+.discount_group.tg {background: url(../images/index/ic_te_xxh.png); background-size: 100% 100% } /*团购券背景*/
+
 .discount_group.expired.default,.discount_group.expired.default_z{ background: url(../images/discount/ic_bg_dpast_xxh.png); background-size: 100% 100% }
 .discount_group.expired.rate,.discount_group.expired.rate_z{ background: url(../images/discount/ic_bg_zpast_xxh.png); background-size: 100% 100% }
 .discount_group.expired.dk,.discount_group.expired.dk_z{ background: url(../images/discount/ic_bg_dkpast_xxh.png); background-size: 100% 100% }
@@ -618,6 +621,15 @@ a.checkbox.none:before{ background: #fff}
 .discount_group .status a{ display: block; color: white; font-size: 1.6rem; line-height: 1.1; text-align: center; position: relative; height: 10.6rem}
 .discount_group .status a p{ position: absolute; width: 100%; top: 50%; margin-top: -1.7rem }
 .discount_group .status a.nohx p{ margin-top: -1.05rem }
+
+
+.discount_group .info .grupbot{margin-top: 1rem; border-top: 1px dashed #9b999b; font-size: 1.1rem; color: #888; padding-top: .8rem; margin-bottom: .9rem;overflow: hidden;}
+
+
+
+
+
+
 
 .dis_order_group{ border-bottom: 1rem solid #fafafa; padding: 1.5rem; position: relative; background: white }
 .dis_order_group>a{ color: #1c1c1c }

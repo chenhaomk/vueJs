@@ -23,7 +23,7 @@
                 <p class="priceTotal">消费总额</p>
                 <p class="money">
                     <span>¥</span>
-                    <input class="moneyInput" type="text" v-model="picked" v-on:input="disBefore" step="0.01">
+                    <input class="moneyInput" type="text" v-model="picked" v-on:input="disBefore" placeholder="消费总金额">
                     </p>
                 <p class="inputTxt">输入不参与优惠金额<span class="grayColor">（如酒水、套餐）</span></p>
                 <p class="money">
@@ -36,7 +36,7 @@
             <div class="priceBox">
                 <p class="payMoney" v-show="discountShow">
                     <img src="../../assets/images/shop/ic_selected_xxh.png" alt="">
-                    {{discount}}
+                    {{discount}}折
                     <span class="grayColor"></span>
                     <span class="com_fr orangeColor">-¥{{subMon}}</span>
                 </p>
@@ -53,7 +53,7 @@
                 </p>
             </div>
         </section>
-        <button class="ensureBuy"><a href="./groupCode.html">确认买单</a></button>
+        <button class="ensureBuy" v-on:click="toPayPage"> <span v-show="totalSp">¥{{total}}</span> 确认买单</button>
     </section>
 
 </body>

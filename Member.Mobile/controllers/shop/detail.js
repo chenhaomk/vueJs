@@ -1,12 +1,21 @@
 require(['config'],function(){
     require(['vue','main'],function (Vue,ygg) {
-
+        Vue.component('anchored-heading', {
+            template: '<>',
+            props: {
+                level:{
+                    type: Number,
+                    required: true
+                }
+            }
+        })
         var vm = new Vue({
             el : "#app",
             data : {
                 shop : {},
-                coupons : [],
+                coupons : [],//优惠券
                 comments : [],
+                group_dis:[], //团购券
                 disIsShow : 2,
                 moreIsShow : true,
                 businessId : "",
@@ -25,6 +34,7 @@ require(['config'],function(){
             },
             components : {
                 dis : ygg.template.discount,
+                gDis:ygg.template.groupDis,
                 star : ygg.template.star,
                 comment : ygg.template.comment
             },
@@ -85,27 +95,38 @@ require(['config'],function(){
 
             data = data.data;
             vm.$set(vm,"shop",data.business_details);
-            vm.$set(vm,"coupons",data.coupons);
+            data.coupons.map(function (item,index) {
+                if(item.type == 3) { //团购
+                    vm.group_dis.push(item)
+                }else {//优惠券
+                    vm.coupons.push(item)
+                }
+            })
+            console.log(vm.group_dis)
+            console.log(vm.coupons)
+
+
+            vm.$set(vm,"groupDis",vm.group_dis);
+            vm.$set(vm,"coupons",vm.coupons);//渲染优惠券
             vm.$set(vm,"comments",data.comments);
             ygg.setCookie('shopName',data.business_details.name)//保存商家名称
 
-
-            // if((data.sale_status == null || data.sale_status == undefined) && (data.reduce_status == null || data.reduce_status == undefined) ) {
-            //     vm.willShow = false
-            // }else {
-            //     if(data.sale_status  == null || data.sale_status  == undefined) {
-            //         vm.discountShow = false
-            //     }else {
-            //         vm.discount = data.discount*10
-            //     }
-            //     if(data.reduce_status  == null || data.reduce_status  == undefined) {
-            //         vm.full_reduceShow = false
-            //     }else {
-            //         vm.full_rule  = data.full_rule 
-            //         vm.full_reduce = data.full_reduce
-            //         vm.most_reduce  = data.most_reduce 
-            //     }
-            // }
+            if((data.sale_status == null || data.sale_status == undefined) && (data.reduce_status == null || data.reduce_status == undefined) ) {
+                vm.willShow = false
+            }else {
+                if(data.sale_status  == null || data.sale_status  == undefined) {
+                    vm.discountShow = false
+                }else {
+                    vm.discount = data.discount*10
+                }
+                if(data.reduce_status  == null || data.reduce_status  == undefined) {
+                    vm.full_reduceShow = false
+                }else {
+                    vm.full_rule  = data.full_rule 
+                    vm.full_reduce = data.full_reduce
+                    vm.most_reduce  = data.most_reduce 
+                }
+            }
 
             
 
