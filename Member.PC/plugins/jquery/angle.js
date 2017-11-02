@@ -627,7 +627,6 @@
                     that.children().eq(3).addClass('active').siblings().removeClass('active');
                 }
 
-
             });
 
         },
@@ -725,7 +724,6 @@
                     if (!d.returnPages == false) {
                         d.returnPages(data.pages);
                     }
-
                     that.html("");
                     $.fn.loading(false);
 
@@ -745,9 +743,9 @@
                 var span, a, url;
                 if (data[i].type == 0) {
                     if (data[i].is_share) {
-                        span = '<span class="p">' + data[i].discount + '</span><span class="pt">元共享券</span><span class="type dj">代金券</span>';
+                        span = '<span class="p">' + data[i].discount + '</span><span class="pt">元共享券</span>';
                     } else {
-                        span = '<span class="p">' + data[i].discount + '</span><span class="pt">元商家专属券</span><span class="type dj">代金券</span>';
+                        span = '<span class="p">' + data[i].discount + '</span><span class="pt">元商家专属券</span>';
                     }
                     if (data[i].coupon_activity_id) {
                         a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
@@ -756,20 +754,19 @@
                     }
                 } else if (data[i].type == 1) {
                     if (data[i].is_share) {
-                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折共享券</span><span class="type">折扣券</span>';
+                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折共享券</span>';
                     } else {
-                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折专属券</span><span class="type">折扣券</span>';
+                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折专属券</span>';
                     }
                     if (data[i].coupon_activity_id) {
                         a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
-                    } else {
-                        a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
+                    } else {a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
                     }
                 } else {
                     if (data[i].is_share) {
-                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元共享券</span><span class="type dk">抵扣券</span>';
+                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元共享券</span>';
                     } else {
-                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元专属券</span><span class="type dk">抵扣券</span>';
+                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元专属券</span>';
                     }
 
                     if (data[i].coupon_activity_id) {
@@ -787,22 +784,25 @@
                 data[i].coupon_activity_id ? cid = data[i].coupon_activity_id : cid = data[i].coupon_id;
                 $(this).append('\
                     <div class="group" data-id="' + cid + '">\
+                        <div class="triangle"><span class="special">特</span></div>\
                         <a href="' + url + '"><img src="' + data[i].img_path + '" class="fn-left" alt=""></a>\
                         <div class="text fn-left">\
                             <a href="' + url + '"><p class="t">' + span + '</p></a>\
                             <p class="cont">' + data[i].business_name + '</p>\
                             <p class="btn">\
-                                满' + data[i].min_price + '可用\
+                               <span>共享券</span>\
+                               <span>|</span>\
+                               <span> 满' + data[i].min_price + '可用</span>\
                                 ' + a + '\
                             </p>\
                         </div>\
                     </div>\
                 ');
                 if (data[i].already_get) $(this).find(".buy_coupon").addClass('lq_suc').text('已领取');
+                if (deta[i])$(this).find("buy_coupon").addClass('triangle')
             }
         },
         cqh: function (options) {
-
             var a = {
                 leftBtn: "",
                 rightBtn: "",
@@ -961,7 +961,6 @@
                     }
                 }
             }
-
         },
         tab: function (cb) {
             var that = $(this),
@@ -1089,25 +1088,25 @@
                 }
                 if ($("body>.ap_popup").length == 0) {
                     $("body").append('<div class="ap_popup popup">\
-                                        <a class="close"></a>\
-                                        <p class="title">申请成为商家发展人</p>\
-                                        <p class="text">返佣类型选择</p>\
-                                        <div class="form">\
-                                            <div class="form_group">\
-                                                <p class="radio">\
-                                                    <input type="radio" checked id="r1" name="rai">\
-                                                    <label for="r1">一次性返80元</label>\
-                                                </p>\
-                                                <p class="radio">\
-                                                    <input type="radio" id="r2" name="rai">\
-                                                    <label for="r2">永久返佣 (交易佣金的5%）</label>\
-                                                </p>\
-                                            </div>\
-                                            <div class="form_group submit">\
-                                                <a>提交申请</a>\
-                                            </div>\
-                                        </div>\
-                                    </div>');
+                        <a class="close"></a>\
+                        <p class="title">申请成为商家发展人</p>\
+                        <p class="text">返佣类型选择</p>\
+                        <div class="form">\
+                            <div class="form_group">\
+                                <p class="radio">\
+                                    <input type="radio" checked id="r1" name="rai">\
+                                    <label for="r1">一次性返80元</label>\
+                                </p>\
+                                <p class="radio">\
+                                    <input type="radio" id="r2" name="rai">\
+                                    <label for="r2">永久返佣 (交易佣金的5%）</label>\
+                                </p>\
+                            </div>\
+                            <div class="form_group submit">\
+                                <a>提交申请</a>\
+                            </div>\
+                        </div>\
+                    </div>');
                 }
                 $(".shadow,.ap_popup").fadeIn();
                 $('.ap_popup .close').click(function (event) {

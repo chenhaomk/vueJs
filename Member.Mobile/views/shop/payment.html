@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/swiper/swiper.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../assets/css/select.css">
+
+</head>
+<body>
+    
+    <section class="height"></section>
+    <section id='app' class='shop_index'>
+
+        <section class="head">
+            <a class="back" href="/"></a>
+            <p>商家名称</p>
+        </section>
+        <section class="storeName">
+          <section class="priceBox" >
+              <p class="priceTotal">消费总额</p>
+              <p class="money"><input class="moneyInput" type="text"></p>
+              <p class="inputTxt"><input type="checkbox" value="" />&emsp;输入不参与优惠金额<span class="grayColor">（如酒水、套餐）</span></p>
+              <p class="money"><input class="moneyInput" type="text" placeholder="请询问收银员后输入"></p>
+          </section>
+        </section>
+        <section class="discount">
+            <div class="priceBox">
+                <p class="payMoney">
+                    <input type="checkbox">&emsp;9折<span class="grayColor">(最高减100元)</span>
+                    <span class="com_fr orangeColor">-11</span>
+                </p>
+                <p class="payMoney">
+                    <span>实付金额</span>
+                    <span class="com_fr">-11</span>
+                </p>
+            </div>
+        </section>
+        <button class="ensureBuy"><a href="./groupCode.html">确认买单</a></button>
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/shop/payment.js"></script>
+<html>

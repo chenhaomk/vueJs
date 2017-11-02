@@ -55,6 +55,7 @@ require(['config'],function(){
                     }
                     $(".tab_menu a").eq(0).text("共享券("+data.share_coupon_total+")");
                     $(".tab_menu a").eq(1).text("商家专属券("+data.exclusive_coupon_total+")");
+                    $(".tab_menu a").eq(2).text("团购券("+data.group_coupon_total+")");
 
                     filterData.overdue = 1;
                     $.fn.getData({
@@ -62,7 +63,7 @@ require(['config'],function(){
                         data : filterData,
                         result : function(data){
                             data = data.data;
-                            
+
                             if(data.coupons.length == 0 && $("#list .discount").length == 0){
                                 $(".tab_group .group.active").addClass('empty');
                             }else if(data.coupons.length == 0){
@@ -86,21 +87,21 @@ require(['config'],function(){
             var span,status="待使用";
             if(data.type==0){
                 if(data.is_share){
-                    span = '<span>'+data.discount+'</span><span class="pt">元共享券</span><b class="type dj">代金券</b>';
+                    span = '<span>'+data.discount+'</span><span class="pt">元共享券</span>';
                 }else{
-                    span = '<span class="p">'+data.discount+'</span><span class="pt">元商家专属券</span><b class="type dj">代金券</b>';
+                    span = '<span class="p">'+data.discount+'</span><span class="pt">元商家专属券</span>';
                 }
             }else if(data.type==1){
                 if(data.is_share){
-                    span = '<span class="p">'+data.rate*10+'</span><span class="pt">折共享券</span><b class="type">折扣券</b>';
+                    span = '<span class="p">'+data.rate*10+'</span><span class="pt">折共享券</span>';
                 }else{
-                    span = '<span class="p">'+data.rate*10+'</span><span class="pt">折专属券</span><b class="type">折扣券</b>';
+                    span = '<span class="p">'+data.rate*10+'</span><span class="pt">折专属券</span>';
                 }
             }else{
                 if(data.is_share){
-                    span = '<span class="p">'+data.price+'</span><span class="pt">元抵'+data.discount+'元共享券</span><b class="type dk">抵扣券</b>';
+                    span = '<span class="p">'+data.price+'</span><span class="pt">元抵'+data.discount+'元共享券</span>';
                 }else{
-                    span = '<span class="p">'+data.price+'</span><span class="pt">元抵'+data.discount+'元专属券</span><b class="type dk">抵扣券</b>';
+                    span = '<span class="p">'+data.price+'</span><span class="pt">元抵'+data.discount+'元专属券</span>';
                 }
             }
             if(igGq == 'no'){

@@ -755,9 +755,9 @@
                     }
                 } else if (data[i].type == 1) {
                     if (data[i].is_share) {
-                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折共享券</span><span class="type">折扣券</span>';
+                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折共享券</span>';
                     } else {
-                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折专属券</span><span class="type">折扣券</span>';
+                        span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折专属券</span>';
                     }
                     if (data[i].coupon_activity_id) {
                         a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
@@ -766,9 +766,9 @@
                     }
                 } else {
                     if (data[i].is_share) {
-                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元共享券</span><span class="type dk">抵扣券</span>';
+                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元共享券</span>';
                     } else {
-                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元专属券</span><span class="type dk">抵扣券</span>';
+                        span = '<span class="p">' + data[i].price + '</span><span class="pt">元抵' + data[i].discount + '元专属券</span>';
                     }
 
                     if (data[i].coupon_activity_id) {

@@ -35,6 +35,7 @@ header>div {
     overflow: hidden;
     margin-bottom: 0.2rem;
     margin-top: .2rem;
+    padding-left: .2rem;
 }
 
 
@@ -57,7 +58,7 @@ header>div {
     font-size: 0.4rem;
     color: #000000;
     position: absolute;
-    left: 0.2rem;
+    left: 0.4rem;
     /*margin-top: -.25rem;*/
 }
 .main .payKind {

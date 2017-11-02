@@ -47,7 +47,7 @@ require(['config'],function(){
                     }else{
                         $("#t .explain").text("只能用于"+data.business_name);
                     }
-                    
+
                     $("#stime").text($.fn.getd("Y.m.d",data.begin_date / 1000) + "-" + $.fn.getd("Y.m.d",data.end_date / 1000));
                     $("#tj2").text('满'+data.min_price+"可用");
                     $("#introduction").text(data.introduction||"");
@@ -63,6 +63,8 @@ require(['config'],function(){
                     map.addOverlay(marker);
                 }
             });
+
+
         });
 
     });

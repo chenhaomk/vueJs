@@ -24,11 +24,11 @@
                 <a :class='[ind == index?"active":""]' v-on:click="menuSwitch(index)">{{a}}</a>
             </p>
         </section>
-        
+
         <section class="dis_list" :class="isNo">
             <dis v-for='a of discount' :is-my="'true'" :return-url="'/views/my/myDis.html'" :a='a'></dis>
             <section v-show="scrollIsShow" class="infinite-scroll-preloader">
-               <section class="preloader"></section>
+               <section class="preloader"></section >
             </section>
         </section>
         <a href="myExpiredDis.html" class="see_agin">查看过期优惠券</a>
