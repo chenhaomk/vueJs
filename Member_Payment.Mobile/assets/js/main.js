@@ -33,6 +33,7 @@ define([
     return Promise.reject(err);
   });
   var main = {};
+  main.baseUrl = "https://api.yingougou.com/v1.0/";
   main.post = function (url, data, sucBack, errBack) {
     var error = {},
       appid = "100";
@@ -47,8 +48,8 @@ define([
       sign = main.getMd5(appid + timestamp + token);
       axios.defaults.headers.token = token;
     }
-    axios.defaults.baseURL = "https://api.yingegou.com/v1.0/";
-    //axios.defaults.baseUrl = "http://192.168.1.130:8082/v1.0/";
+   axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
+    // axios.defaults.baseUrl = "http://119.23.10.30:9000/v1.0";
     axios.defaults.headers.appid = appid;
     axios.defaults.headers.sign = sign;
     axios.defaults.headers.timestamp = timestamp;
@@ -548,7 +549,7 @@ define([
             that.isClick = false;
           }
         }, 1000);
-        main.post('/common/sendVerificationCode', {
+        main.post('https://api.yingougou.com/v1.0/common/sendVerificationCode', {
           mobile: that.mobile,
           sms_type: that.sms_type
         }, function (data) {

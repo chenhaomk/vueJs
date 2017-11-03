@@ -42,8 +42,8 @@ header>div {
 
 .main .payInput input {
     height: 1.2rem;
-    width: 5.9rem;
-    font-size: 0.3rem;
+    width: 5.7rem;
+    font-size: 0.4rem;
     color: #000000;
     border: 1px solid #ff6c00;
     line-height: 1.2rem;
@@ -55,7 +55,7 @@ header>div {
 .main .payInput p {
     height: 1.22rem;
     line-height: 1.22rem;
-    font-size: 0.4rem;
+    font-size: 0.5rem;
     color: #000000;
     position: absolute;
     left: 0.4rem;

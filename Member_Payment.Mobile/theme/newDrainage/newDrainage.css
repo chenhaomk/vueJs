@@ -574,6 +574,7 @@ body {
     top: 50%;
     margin-top: -0.32rem;
     margin-left: 3.1rem;
+    z-index: 100;
 }
 .checkNum,.checkBtn {
     padding-top: 0.32rem;
@@ -678,7 +679,7 @@ body {
 .autoImg2 {
     position: absolute;
     right: 0;
-    top:4.7rem;
+    top:3rem;
     width: 1.3rem;
     height: 3.8rem;
     /*outline: 1px solid red;*/

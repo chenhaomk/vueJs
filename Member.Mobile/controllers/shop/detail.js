@@ -15,9 +15,11 @@ require(['config'],function(){
                 shop : {},
                 coupons : [],//优惠券
                 comments : [],
-                group_dis:[], //团购券
-                disIsShow : 2,
-                moreIsShow : true,
+                groupdis:[], //团购券
+                disIsShow1 : 2,
+                disIsShow2:2,
+                moreIsShow1 : true,
+                moreIsShow2:true,
                 businessId : "",
                 returnUrl : ygg.getQueryString("returnUrl"),
                 comIsShow : "",
@@ -33,21 +35,33 @@ require(['config'],function(){
 
             },
             components : {
-                dis : ygg.template.discount,
-                gDis:ygg.template.groupDis,
+                dis:ygg.template.discount,
+                gis:ygg.template.groupdis,
                 star : ygg.template.star,
                 comment : ygg.template.comment
             },
             methods : {
-                viewMore : function(){
-                    if(this.disIsShow >= this.coupons.length){
-                        this.disIsShow = this.coupons.length;
-                        this.moreIsShow = false;
+                viewMore1 : function(){
+                    if(this.disIsShow1 >= this.coupons.length){
+                        this.disIsShow1 = this.coupons.length;
+                        this.moreIsShow1 = false;
                     }else{
-                        this.disIsShow+=5;
-                        if(this.disIsShow >= this.coupons.length){
-                            this.disIsShow = this.coupons.length;
-                            this.moreIsShow = false;
+                        this.disIsShow1+=5;
+                        if(this.disIsShow1 >= this.coupons.length){
+                            this.disIsShow1 = this.coupons.length;
+                            this.moreIsShow1 = false;
+                        }
+                    }
+                },
+                viewMore2 : function(){
+                    if(this.disIsShow2 >= this.groupdis.length){
+                        this.disIsShow2 = this.groupdis.length;
+                        this.moreIsShow2 = false;
+                    }else{
+                        this.disIsShow2+=5;
+                        if(this.disIsShow2 >= this.groupdis.length){
+                            this.disIsShow2 = this.groupdis.length;
+                            this.moreIsShow2 = false;
                         }
                     }
                 },
@@ -97,16 +111,13 @@ require(['config'],function(){
             vm.$set(vm,"shop",data.business_details);
             data.coupons.map(function (item,index) {
                 if(item.type == 3) { //团购
-                    vm.group_dis.push(item)
+                    vm.groupdis.push(item)
                 }else {//优惠券
                     vm.coupons.push(item)
                 }
             })
-            console.log(vm.group_dis)
-            console.log(vm.coupons)
-
-
-            vm.$set(vm,"groupDis",vm.group_dis);
+            console.log(vm.groupdis)
+            vm.$set(vm,"groupdis",vm.groupdis);
             vm.$set(vm,"coupons",vm.coupons);//渲染优惠券
             vm.$set(vm,"comments",data.comments);
             ygg.setCookie('shopName',data.business_details.name)//保存商家名称

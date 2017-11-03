@@ -13,8 +13,8 @@ main.post = function (url, data, sucBack, errBack) {
 		sign = main.getMd5(appid + timestamp + token);
 		axios.defaults.headers.token = token;
 	}
-	axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
-	//axios.defaults.baseUrl = "http://192.168.1.133:8082/v1.0/";
+	//axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
+	axios.defaults.baseUrl = "https://api.yingougou.com/v1.0/";
 	axios.defaults.headers.appid = appid;
 	axios.defaults.headers.sign = sign;
 	axios.defaults.headers.timestamp = timestamp;
@@ -312,11 +312,12 @@ main.setSession("a_n", decodeURI(main.getQueryString("a_n") == null ? main.getSe
 main.setSession("c_n", decodeURI(main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n")).replace("%2F", "/"));
 function init() {
 	if (main.getSession("sn") == null) {
-		location.href = "/payment/views/payment/index.html";
+		// location.href = "/payment/views/payment/index.html";
+    location.href = "../../payment/views/newDrainage/payPage.html";
 		return;
 	}
   debugger
-	main.post("common/getOrdersStatus", {
+	main.post("https://api.yingougou.com/v1.0/common/getOrdersStatus", {
 			sn: main.getSession("sn")
 		},
 		function (res) {

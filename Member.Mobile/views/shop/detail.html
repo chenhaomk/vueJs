@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title></title>
 
     <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
@@ -53,14 +53,14 @@
         </section>
         <section class="con discount" v-clock>
             <h2>相关优惠（{{coupons.length}}）</h2>
-            <dis v-for='(a,index) of coupons' :return-url="'/views/shop/detail.html'" :a='a' v-show="index<disIsShow"></dis>
-            <a class="more" v-show="coupons.length > 2 && moreIsShow" @click='viewMore'>查看更多<img src="/assets/images/shop/ic_bg_more_xxh.png"></a>
+            <dis v-for='(a,index) of coupons' :return-url="'/views/shop/detail.html'" :a='a' v-show="index<disIsShow1"></dis>
+            <a class="more" v-show="coupons.length > 2 && moreIsShow1" @click='viewMore1'>查看更多<img src="/assets/images/shop/ic_bg_more_xxh.png"></a>
         </section>
         <!--团购优惠-->
         <section class="con discount" v-clock>
-            <h2 v-show="group_dis.length > 0">团购优惠（{{group_dis.length}}）</h2>
-            <gDis v-for='(a,index) of group_dis' :return-url="'/views/shop/detail.html'" :a='a' v-show="index<disIsShow"></gDis>
-            <a class="more" v-show="group_dis.length > 2 && moreIsShow" @click='viewMore'>查看更多<img src="/assets/images/shop/ic_bg_more_xxh.png"></a>
+            <h2 v-show="groupdis.length > 0">团购优惠（{{groupdis.length}}）</h2>
+            <gis  v-for='(a,index) of groupdis' :return-url="'/views/shop/detail.html'" :a='a' v-show="index<disIsShow2"></gis>
+            <a class="more" v-show="groupdis.length > 2 && moreIsShow2" @click='viewMore2'>查看更多<img src="/assets/images/shop/ic_bg_more_xxh.png"></a>
         </section>
 
         <!-- <section class="con comment_shop" v-clock v-show="comments.length != 0">
