@@ -16,7 +16,7 @@ require(['config'], function () {
                 ck: "",
                 account: "",
                 salesmanCode: "",
-                password : ""
+                password: ""
             },
             methods: {
                 register1: function (e) {
@@ -24,16 +24,16 @@ require(['config'], function () {
                     window.event.returnValue = false;
                     if (this.ck == "none") return;
                     var that = this;
-                    if (that.phone.length == 0 || that.vercode.length == 0) {
+                    if (that.phone.length == 0 || that.vercode.length == 0 || that.password.length == 0) {
                         ygg.prompt("请您仔细填写信息，不能有空哦！");
                         return;
                     }
-                    if(that.password.length>0){
-                    if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z`~!@#$%^&*()_+=-]{8,16}$/.test(that.password)) {
-                        ygg.prompt("密码8到16位，且必需带有字母");//文案有问题，根据web版本修改
-                        return;
+                    if (that.password.length > 0) {
+                        if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z`~!@#$%^&*()_+=-]{8,16}$/.test(that.password)) {
+                            ygg.prompt("密码8到16位，且必需带有字母"); //文案有问题，根据web版本修改
+                            return;
+                        }
                     }
-                }
                     var praram = {};
 
                     praram.mobile = that.phone;
@@ -48,7 +48,7 @@ require(['config'], function () {
                     if (mid != null || mid != "") {
                         praram.member_id = mid;
                     }
-                    ygg.ajax('/business/addBusinessCheckOne', praram, function (data) {///business/fastLogin
+                    ygg.ajax('/business/addBusinessCheckOne', praram, function (data) { ///business/fastLogin
                         if (data.status == "error") {
                             ygg.prompt(data.msg);
                         } else if (data.status == "success") {
