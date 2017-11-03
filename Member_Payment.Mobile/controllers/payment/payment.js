@@ -1,5 +1,8 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+        window.addEventListener('load', function() {
+          FastClick.attach(document.body);
+        }, false);
         var imgurl = decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A", ":");
         if (imgurl.indexOf("https") < 0)
             imgurl = "https://img.yingougou.com/" + imgurl;
@@ -28,8 +31,8 @@ require(['config'], function () {
                     location.href = "../../views/user/login.html";
                     return;
                 },
-                keyWordsFunc: function (num) {
-
+                keyWordsFunc: function (num,event) {
+                    event.preventDefault();
                     var payNum = vm.payNum;
                     if (isNaN(num))
                         return;

@@ -211,14 +211,26 @@ require(['config'], function () {
                 vm.b_n = decodeURI(bn);
             else if (bn_1 != null)
                 vm.b_n = decodeURI(bn_1);
+            if(vm.img.indexOf("https://img.yingougou.com/") != -1) {
+                main.post("/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
+                    vm.img= res.data.data.business_details.logo
+                    vm.b_n = res.data.data.business_details.name
+                })
+            }
         }
         if (location.href.indexOf("newDrainageSucc.html") >= 0) {
             vm.all = main.getSession("all");
             vm.how = main.getSession("how");
             vm.b_n = decodeURI(main.getSession("b_n"));
+            if(vm.img.indexOf("https://img.yingougou.com/") != -1) {
+                main.post("/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
+                    vm.img= res.data.data.business_details.logo
+                    vm.b_n = res.data.data.business_details.name
+                })
+            }
         }
         if(location.href.indexOf("paySucc.html") >= 0) {//支付成功后领券
-            
+
             init();
             var amount = main.getSession("amount")
             if((amount+"").indexOf(".") == -1) {
@@ -226,7 +238,12 @@ require(['config'], function () {
             }else {
                 vm.total = amount
             }
-            
+            if(vm.img.indexOf("https://img.yingougou.com/") != -1) {
+                main.post("/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
+                    vm.img= res.data.data.business_details.logo
+                    vm.b_n = res.data.data.business_details.name
+                })
+            }
             
         }
         setTimeout(function () {

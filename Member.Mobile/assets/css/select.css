@@ -1,3 +1,4 @@
+
 /*选择门店*/
 body{ background-color: #f3f5f9}
 .select_store_success .header{border-bottom: 0}
@@ -13,14 +14,12 @@ body{ background-color: #f3f5f9}
 .select_store_success .sc_b .select_store_con .store{float: left;}
 .select_store_success .sc_b  .mange{width:100%;height: 4rem;display:block;text-align: center;background-color: #fff;line-height: 4rem; color: #000;margin-top: 6rem}
 .select_store_success .add_store{  position: fixed;  width: 100%;  height: 5rem;  text-align: center;  font-size: 1.7rem;  line-height: 5rem;  box-sizing: border-box;  z-index: 10;  background-color: #ff6f3d;color: #fff;bottom: 0}
-/*.select_store_con img {width: }*/
 a:visited {color: #ff6f3d}	/* 已访问的链接 */
 a:link {color: #888}		/* 未访问的链接 */
 
 .btnList {overflow: hidden;width: 100%;}
 .btnList li {width: 33.33%;float: left;height: 4rem;line-height: 4rem;color: #888;background-color: #f3f5f9;text-align:center;}
 .btnList .active {color: #ff6f3d}
-/*.select_store_con {background: }*/
 .select_store_con li {position: relative;color: #888;padding: 1rem;}
 .select_store_con li:last-child {position: static;}
 .select_store_con li:after {position: absolute;bottom:0;left: 0;  content:"";height: .1rem;background-color: #888;width: 100%;}
@@ -48,17 +47,19 @@ a:link {color: #888}		/* 未访问的链接 */
 .bottomBorder{border-bottom: solid 1px #e3e3e3}
 .groupCon{width: 100%;height: 120px}
 .groupCon .groupImg{float: left;width: 80px;height: 80px;border-radius: 50%;margin-top: 2rem}
-.groupCon .groupTitle{float: left;padding-top: 3rem}
+.groupCon .groupTitle{float: left;padding-top: 3rem;font-size: 16px}
 .coupon{width: 90%;margin:0 auto;border-top:solid 1px #e3e3e3;overflow: hidden}
-.couponNum{padding-top: 10px}
+.couponNum{padding-top: 10px;font-size: 16px}
 .backIcon{float: right; margin-top: 4rem; width: 2rem; height: 2rem; margin-right: 3rem;background: url("../../assets/images/member/ic_bg_arrow_xxh.png") no-repeat;background-size: contain}
+
+
 
 .shopBox{width: 100%; height: 15rem;background-color: #fff;margin-top: 1rem;overflow: hidden}
 .shopCon{width: 90%;  margin:0 auto;}
-.shopName{float:left;height:13rem;padding: 2rem 0;font-size: 18px;}
+.shopName{float:left;height:13rem;padding: 2rem 0;font-size: 16px;}
 .shop{font-weight: bold;padding-bottom: 2px}
 .groupPhone{width: 40px;height: 40px;float: right;background: url("../../assets/images/icon/ic_bg_phone_xxh.png") no-repeat;background-size: cover;margin-top: 50px;}
-.grayColor{color: #ccc}
+.grayColor{color: #888888;}
 .ensureBuy{width: 90%;height:4rem;display:block;margin: 0 auto;background-color: #ff6f3d;color: #fff;font-size: 2rem;border-radius: 1rem;margin-top: 2rem}
 
 /* 团购券码*/
@@ -73,6 +74,7 @@ a:link {color: #888}		/* 未访问的链接 */
 .codeImg{margin: 2rem 0}
 a:visited {color: #fff;}
 
+<<<<<<< Updated upstream
 /*商家名称*/
 .storeName{ position: relative; width: 100%;margin-top: 5rem; box-sizing: border-box; z-index: 10;overflow: hidden;}
 .priceBox{width: 94%;margin:0 auto;overflow: hidden;}
@@ -82,7 +84,36 @@ a:visited {color: #fff;}
 .money span {display: block;float: left;width: 8%;text-align:center;}
 .money .moneyInput{display: block;float: left;width: 90%;height: 4rem;line-height: 4rem;}
 .discount{width: 100%;background-color: #fff;margin-top: 2rem;overflow: hidden}
-.payMoney{margin-bottom: 1rem;margin-left: 1rem;}
+.priceBox .payMoney{margin-top:.5rem;margin-left: 1rem;margin-bottom: .5rem;vertical-align:middle;}
+.priceBox .payMoney:last-child {
+    margin-left: 3rem;
+}
+.priceBox .payMoney span {vertical-align: middle;}
+.priceBox .payMoney img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+.priceBox .totalNum {
+    overflow: hidden;
+}
+.priceBox .totalNum span {
+    float: right;
+}
+.priceBox .totalNum span:last-child {
+    float: left;
+}
+=======
+/*支付*/
+.storeName{ position: relative; width: 100%;height: 18rem;margin-top: 5rem; box-sizing: border-box; z-index: 10}
+.priceBox{width: 90%;height:6rem;margin:2rem auto}
+.priceTotal{font-size: 16px;padding: 2rem 0;}
+.inputTxt{margin: 2rem 0}
+.money{width: 96%;height: 4rem;background-color: #fff;line-height: 4rem;}
+.moneyInput{width: 100%}
+.discount{width: 100%;background-color: #fff;overflow: hidden}/*margin-top: 5rem;*/
+.payMoney{margin-bottom: 2rem}
+>>>>>>> Stashed changes
 .orangeColor{color:#ff6f3d}
 
 /*单选按钮*/
@@ -96,6 +127,7 @@ input[type=checkbox] {
     outline: 0 !important;
     line-height: 20px;
     color: #d8d8d8;
+    margin-right: .5rem;
 }
 input[type=checkbox]:after {
     content: "";
@@ -110,6 +142,7 @@ input[type=checkbox]:after {
     border: 1px solid #ddd;
     background-color: #fff;
     box-sizing:border-box;
+
 }
 
 input[type=checkbox]:checked:after {
@@ -117,4 +150,26 @@ input[type=checkbox]:checked:after {
     transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
     border-color: #ff6f3d;
     background-color: #ff6f3d;
+}
+
+/*团购券详情*/
+.symbol{
+    font-size: 0;
+    border-radius: 20px;
+    border:3px solid #ccc;
+    vertical-align: middle;
+}
+
+.blockColor{
+    color: #1c1c1c;
+    font-weight: normal;
+}
+
+.buying{
+    width: 180px;
+    height: 100%;
+    background-color: rgba(255, 111, 61, 1);
+    color: #fff;
+    text-align: center;
+    font-weight: normal;
 }

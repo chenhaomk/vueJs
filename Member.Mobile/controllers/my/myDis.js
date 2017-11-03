@@ -4,7 +4,7 @@ require(['config'],function(){
     	var vm = new Vue({
             el : "#app",
             data : {
-                menu : ['共享券','商家专属券','团购券'],
+                menu : ['共享券','门店专属券','团购券'],
                 ind : 0,
                 discount : [],
                 scrollIsShow : true,
@@ -59,7 +59,7 @@ require(['config'],function(){
             ygg.ajax('/member/getMemberCoupon',obj,function(data){
                 data = data.data;
                     
-                vm.$set(vm,"menu",["共享券("+data.share_coupon_total+")","商家专属券("+data.exclusive_coupon_total+")","团购券("+data.exclusive_coupon_total+")"]);
+                vm.$set(vm,"menu",["共享券("+data.share_coupon_total+")","门店专属券("+data.exclusive_coupon_total+")","团购券("+data.group_coupon_total+")"]);
                 if(obj.page > data.pages && data.pages != 0){
                     vm.$set(vm,"scrollIsShow",false);
                     return;

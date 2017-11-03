@@ -484,7 +484,7 @@ body{ background: #f8f9fc }
 .shop_listd.empty:after{ content: "抱歉！暂无相关商铺"; background-image: url(../images/icon/shop_icon.png); margin: 40px auto }
 .wallet .balance table.empty:after{ content: "抱歉！暂无相关明细"; background-image: url(../images/icon/mx_icon.png);}
 .cl_search.coupon_list.empty:after{ margin-top: 80px; margin-bottom: 80px }
-.coupon_list .group{ float: left; width: 540px; height: 140px; background: white; border-radius: 3px; padding: 30px 20px; margin-right: 20px; margin-bottom: 20px }
+.coupon_list .group{ float: left; width: 540px; height: 140px; background: white; border-radius: 3px; padding: 30px 20px; margin-right: 20px; margin-bottom: 20px;position: relative }
 .coupon_list .group img{ float: left; width: 140px; height: 140px; border-radius: 50%; margin-right: 20px }
 .coupon_list .group .text{ float: left; width: 380px }
 .coupon_list .group .text .t{ height: 33px; line-height: 33px; font-size: 22px; color: #ff6f3d }
@@ -645,3 +645,23 @@ input:-webkit-autofill {
 	.r_top{ margin-left: 550px }
 }
 .yhxy{ cursor: pointer; }
+
+/*三角形*/
+.triangle{
+    width: 0;
+    height: 0;
+    border-width: 22px;
+    border-color: #ff6f3d transparent transparent #ff6f3d;
+    border-style: solid;
+    border-top-left-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.special{
+    top:-21px;
+    left:-16px;
+    position: absolute;
+    color: #fff;
+    transform:rotate(-44deg);
+}
