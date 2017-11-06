@@ -92,14 +92,14 @@
             } else {
                 sign = $.fn.getMd5(appid + timestamp);
             }
-            var admin_id =  $.fn.getCookie('admin_id')
+            var admin_id = $.fn.getCookie('admin_id')
             var headerObj = {
-                    appid: appid,
-                    sign: sign,
-                    timestamp: timestamp,
-                    token: token
-                }
-            if(admin_id != undefined) {
+                appid: appid,
+                sign: sign,
+                timestamp: timestamp,
+                token: token
+            }
+            if (admin_id != undefined) {
                 headerObj.admin_id = admin_id
             }
             $.ajax({
@@ -760,7 +760,8 @@
                     }
                     if (data[i].coupon_activity_id) {
                         a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
-                    } else {a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
+                    } else {
+                        a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
                     }
                 } else {
                     if (data[i].is_share) {
@@ -782,7 +783,9 @@
                 }
                 var cid;
                 data[i].coupon_activity_id ? cid = data[i].coupon_activity_id : cid = data[i].coupon_id;
-                $(this).append('\
+                //石迪飞
+                if (data[i].is_special) //检查是否是特价券
+                    $(this).append('\
                     <div class="group" data-id="' + cid + '">\
                         <div class="triangle"><span class="special">特</span></div>\
                         <a href="' + url + '"><img src="' + data[i].img_path + '" class="fn-left" alt=""></a>\
@@ -798,8 +801,25 @@
                         </div>\
                     </div>\
                 ');
+                else
+                    $(this).append('\
+                <div class="group" data-id="' + cid + '">\
+                    <a href="' + url + '"><img src="' + data[i].img_path + '" class="fn-left" alt=""></a>\
+                    <div class="text fn-left">\
+                        <a href="' + url + '"><p class="t">' + span + '</p></a>\
+                        <p class="cont">' + data[i].business_name + '</p>\
+                        <p class="btn">\
+                           <span>共享券</span>\
+                           <span>|</span>\
+                           <span> 满' + data[i].min_price + '可用</span>\
+                            ' + a + '\
+                        </p>\
+                    </div>\
+                </div>\
+            ');
+                //石迪飞
                 if (data[i].already_get) $(this).find(".buy_coupon").addClass('lq_suc').text('已领取');
-                if (deta[i])$(this).find("buy_coupon").addClass('triangle')
+                if (data[i]) $(this).find("buy_coupon").addClass('triangle');
             }
         },
         cqh: function (options) {
