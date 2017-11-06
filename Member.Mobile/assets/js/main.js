@@ -906,7 +906,7 @@ define(['axio', 'vue'], function (axio, Vue) {
         }
     });
         //团购列表
-    ygg.template.groupDis = Vue.extend({
+    ygg.template.groupdis = Vue.extend({
         props: {
             a: {
                 type: Object
@@ -934,7 +934,7 @@ define(['axio', 'vue'], function (axio, Vue) {
                 return u
             }
         },
-        template: '<section  class="discount_group fn-clear" :class="{default:tg:a.type==3 && a.is_special ,expired:isGq,lqcg:lqcg,lqgl:a.already_get || lqcg}">' +
+        template: '<section  class="discount_group fn-clear" :class="{tg:a.type==3 && a.is_special ,expired:isGq,lqcg:lqcg,lqgl:a.already_get || lqcg}">' +
             '<a :href="urlp">' +
             '<section class="info">' +
             '<section class="top fn-clear">' +
@@ -945,12 +945,12 @@ define(['axio', 'vue'], function (axio, Vue) {
             '<p class="title_n" v-else>{{a.name}}</p>'+
             '<p class="discounted" v-if="a.type == 0"><span>{{a.discount}}</span>元</p>' +
             '<p class="discounted" v-else-if="a.type == 1"><span>{{a.rate*10}}</span>折</p>' +
-            '<p class="discounted" v-else><span>{{a.price}}</span>元<b>{{a.discount}}元</b></p>' +
+            '<p class="discounted" v-else if="a.type == 3"><span>{{a.price}}</span>元</p>' +
             '</section>' +
             '</section>' +
             '<section class="bot">' +
-            '<span>满{{a.min_price}}可用</span>' +
-            '<span class="text-sl">{{a.business_name}}</span>' +
+            '<span></span>' +
+            '<span class="text-sl">已售{{a.sold_number}}</span>' +
             '</section>' +
             '</section>' +
             '</a>' +

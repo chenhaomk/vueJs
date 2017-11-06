@@ -36,7 +36,7 @@ require(['config'], function () {
                         main.prompt("手机号码有误，请重填");
                         return false;
                     }
-                    main.post("common/sendVerificationCode", {
+                    main.post(main.baseUrl+"common/sendVerificationCode", {
                         mobile: this.phone,
                         sms_type: "0009"
                     }, function (res) {
@@ -67,7 +67,7 @@ require(['config'], function () {
                     data.valid_code = vm.verificationCode;
                     if (main.getQueryString("m_id") != null)
                         data.member_id = main.getQueryString("m_id");
-                    main.post("common/shareTicket",
+                    main.post(main.baseUrl+"common/shareTicket",
                         data,
                         function (res) {
                             if (res.errCode < 0)
@@ -158,7 +158,7 @@ require(['config'], function () {
         }
 
         function init() {
-            main.post("common/getShareCouponActivity", {
+            main.post(main.baseUrl+"common/getShareCouponActivity", {
                 business_id: main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
             }, function (res) {
                 if (res.errCode < 0)
@@ -212,7 +212,7 @@ require(['config'], function () {
             else if (bn_1 != null)
                 vm.b_n = decodeURI(bn_1);
             if(vm.img.indexOf("https://img.yingougou.com/") != -1) {
-                main.post("/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
+                main.post(main.baseUrl+"/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
                     vm.img= res.data.data.business_details.logo
                     vm.b_n = res.data.data.business_details.name
                 })
@@ -223,14 +223,13 @@ require(['config'], function () {
             vm.how = main.getSession("how");
             vm.b_n = decodeURI(main.getSession("b_n"));
             if(vm.img.indexOf("https://img.yingougou.com/") != -1) {
-                main.post("/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
+                main.post(main.baseUrl+"/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
                     vm.img= res.data.data.business_details.logo
                     vm.b_n = res.data.data.business_details.name
                 })
             }
         }
         if(location.href.indexOf("paySucc.html") >= 0) {//支付成功后领券
-
             init();
             var amount = main.getSession("amount")
             if((amount+"").indexOf(".") == -1) {
@@ -239,7 +238,7 @@ require(['config'], function () {
                 vm.total = amount
             }
             if(vm.img.indexOf("https://img.yingougou.com/") != -1) {
-                main.post("/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
+                main.post(main.baseUrl+"/business/getBusinessDetails",{business_id:main.getSession("business_id")} , function (res) {
                     vm.img= res.data.data.business_details.logo
                     vm.b_n = res.data.data.business_details.name
                 })

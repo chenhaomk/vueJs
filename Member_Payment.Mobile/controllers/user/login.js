@@ -1,5 +1,6 @@
 require(['config'], function () {
-    require(['axio', 'vue', 'main'], function (axio, Vue, ygg) {
+    require(['axio', 'vue', 'main'], function (axio, Vue, main) {
+        var baseUrl = "http://api.yingegou.com/v1.0/";
         var docEl = document.documentElement,
             body = document.getElementsByTagName("body")[0],
             width = docEl.clientWidth,
@@ -39,7 +40,7 @@ require(['config'], function () {
                         main.prompt("请输入合理的手机号码！");
                         return
                     }
-                    ygg.post('passport/fastLogin', {
+                    main.post(main.baseUrl+'passport/fastLogin', {
                         mobile: that.phone,
                         verification_code: that.vercode
                     }, function (data) {
@@ -47,13 +48,13 @@ require(['config'], function () {
                             main.prompt(data.msg);
                         } else if (data.data.status == "success") {
                             data = data.data.data;
-                            ygg.setSession("m_id", data.member_id);
-                            ygg.setSession("m_n", data.mobile);
-                            ygg.setSession("phone", data.mobile);
-                            ygg.setSession("token", data.token);
-                            ygg.setSession("h_t", data.head_portrait);
-                            ygg.post('member/getPersonCenterInfo', {
-                                member_id: ygg.getSession("m_id")
+                            main.setSession("m_id", data.member_id);
+                            main.setSession("m_n", data.mobile);
+                            main.setSession("phone", data.mobile);
+                            main.setSession("token", data.token);
+                            main.setSession("h_t", data.head_portrait);
+                            main.post(main.baseUrl+'member/getPersonCenterInfo', {
+                                member_id: main.getSession("m_id")
                             }, function (data) {
                                 if (data.status == "error") {
                                     main.prompt(data.msg);
@@ -76,7 +77,7 @@ require(['config'], function () {
                         main.prompt("请您仔细填写信息，不能有空哦！");
                         return;
                     }
-                    ygg.post('passport/login', {
+                    main.post(main.baseUrl+'passport/login', {
                         mobile: that.userId,
                         password: that.pwd
                     }, function (data) {
@@ -87,13 +88,13 @@ require(['config'], function () {
                             }
                         } else if (data.data.status != "error") {
                             data = data.data;
-                            ygg.setSession("m_id", data.member_id);
-                            ygg.setSession("m_n", data.mobile);
-                            ygg.setSession("phone", data.mobile);
-                            ygg.setSession("token", data.token);
-                            ygg.setSession("h_t", data.head_portrait);
-                            ygg.post('member/getPersonCenterInfo', {
-                                member_id: ygg.getSession("m_id")
+                            main.setSession("m_id", data.data.member_id);
+                            main.setSession("m_n", data.data.mobile);
+                            main.setSession("phone", data.data.mobile);
+                            main.setSession("token", data.data.token);
+                            main.setSession("h_t", data.data.head_portrait);
+                            main.post(main.baseUrl+'member/getPersonCenterInfo', {
+                                member_id: main.getSession("m_id")
                             }, function (data) {
                                 data = data.data;
                                 if (data.status == "error") {
@@ -113,7 +114,7 @@ require(['config'], function () {
                 }
             },
             components: {
-                getVercode: ygg.template.getVercode
+                getVercode: main.template.getVercode
             }
         });
     });

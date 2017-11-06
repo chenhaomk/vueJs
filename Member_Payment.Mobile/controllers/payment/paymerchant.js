@@ -53,7 +53,7 @@ require(['config'], function () {
                     data.amount = vm.trueMoney;
                     data.business_id = main.getSession("b_id");
                     data.pay_way = 'alipay_web';
-                    main.post("/thirdPay/create_pay",
+                    main.post(main.baseUrl+"/thirdPay/create_pay",
                         data,
                         function (res) {
                             if (res.code == 2001) {
@@ -84,7 +84,7 @@ require(['config'], function () {
                         }
                         vm.actual = vm.trueMoney;
                         var bid = main.getSession("b_id");
-                        main.post("member/getPayRecommendCoupon", {
+                        main.post(main.baseUrl+"member/getPayRecommendCoupon", {
                                 member_id: main.getSession("m_id"),
                                 business_id: bid,
                                 price: vm.trueMoney
@@ -119,7 +119,7 @@ require(['config'], function () {
         function init() {
             if (main.getSession("sn") == null)
                 return;
-            main.post("common/getOrdersStatus", {
+            main.post(main.baseUrl+"common/getOrdersStatus", {
                     sn: main.getSession("sn")
                 },
                 function (res) {

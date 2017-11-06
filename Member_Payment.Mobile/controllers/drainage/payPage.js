@@ -11,7 +11,9 @@ require(['config'], function () {
         main.setSession("a_n", main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n"));
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
     	// var baseURL = 'http://192.168.0.228:8084/v1.0/';
-        var baseURL = "http://pay.yingegou.com:9000/v1.0/"
+
+
+        var baseURL = "https://api.yingougou.com/v1.0/"
                 //判断是否在微信浏览器
         function browserType() {
             var ua = window.navigator.userAgent.toLowerCase();
@@ -25,13 +27,13 @@ require(['config'], function () {
         }
         if(browserType() == "weixin") {
             if (location.href.indexOf("code") == -1) { 
-                var b_id = main.getQueryString("b_id")
-                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                var b_id = main.getSession("b_id")
+                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
             }
         }else if( browserType()== "alipay") {
             if(location.href.indexOf("auth_code") == -1){
-                var b_id = main.getQueryString("b_id")
-                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id 
+                var b_id = main.getSession("b_id")
+                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id 
             }
         }else {
 
@@ -48,6 +50,12 @@ require(['config'], function () {
                 merchant_name: "",
     		},
     		methods:{
+                loginByPhone: function () {
+                    //手机号登陆
+
+                    location.href = "../../views/user/login.html";
+                    return;
+                },
                 keyWordsFunc: function (num,event) {
                     event.preventDefault();
                     var payNum = vm.payNum;
@@ -88,7 +96,7 @@ require(['config'], function () {
                         // if (main.getSession("m_id") != null)
                             // data.member_id =  "0e5868ef81364eba95f4823d4538d241"//main.getSession("m_id");
                         data.amount = payNum;
-                        main.setSession("b_id",main.getQueryString("b_id"))
+                        main.setSession("b_id",main.getSession("b_id"))
                         data.business_id = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id");
                         main.setSession("amount", payNum);
                         main.setSession("business_id", data.business_id);
@@ -104,8 +112,9 @@ require(['config'], function () {
                 }
     		}
     	})
-        main.post(baseURL +"/business/getBusinessDetails",{business_id:main.getQueryString("b_id")} , function (res) {
+        main.post(baseURL +"/business/getBusinessDetails",{business_id:main.getSession("b_id")} , function (res) {
             vm.merchant_name = res.data.data.business_details.name
+            main.setSession("b_n",vm.merchant_name)
         })
         function payFn(browserType,data,baseURL,callBack) {//browserType为判断浏览器函数，data为支付接口参数对象,baseURL,callBack支付后的回调
             if(browserType() =="weixin") {//微信浏览器内
@@ -148,7 +157,7 @@ require(['config'], function () {
                                         paySign:res.data.data.paySign,
                                         success:function (res) {
                                             main.setSession("amount", data.amount);
-                                            main.setSession("business_id", data.business_id);
+                                            main.setSession("business_id", main.getQueryString("b_id"));
                                             callBack()
                                         }
                                     })
@@ -187,7 +196,7 @@ require(['config'], function () {
                                     }, function(result){
                                         if(result.resultCode == 9000) {
                                             main.setSession("amount", data.amount);
-                                            main.setSession("business_id", data.business_id);
+                                            main.setSession("business_id", main.getQueryString("b_id"));
                                             callBack()
                                         }else {
                                             alert("支付异常!")
@@ -207,9 +216,8 @@ require(['config'], function () {
                 data.pay_way = 'alipay_web';
                 main.post( baseURL+"pay/create_pay",
                         data,
-                    function (res) {
-
-                        
+                    function (res) { 
+                                          
                         if (res.code == 2001) {
                             location.href = "../../views/newDrainage/paySucc.html";
                             // main.clearSessionItem("sn");
@@ -222,8 +230,8 @@ require(['config'], function () {
                                 return;
                             }
                             main.setSession("amount", data.amount);
-                            main.setSession("business_id", data.business_id);
-                            debugger
+                            main.setSession("business_id", main.getQueryString("b_id"));
+                            // debugger
                             main.setSession("sn", data.orderNo);
                             // main.setSession("paySuccObj", paySuccObj);//传值支付成功的引流页面
                             var url = data.credential.alipay_web.orderInfo;
@@ -231,34 +239,6 @@ require(['config'], function () {
 
                         }
                 });
-                function init() {
-                    if (main.getSession("sn") == null)
-                        return;
-                    main.post("common/getOrdersStatus", {
-                            sn: main.getSession("sn") 
-                        },
-                        function (res) {
-                            if (res.status == 200) {
-                                var data = res.data.data;
-                                if (res == null) {
-                                    main.prompt("支付异常");
-                                    return;
-                                }
-                                if (status == 1) {
-                                    //支付成功，引流
-                                    location.href = "../../views/newDrainage/paySucc.html";
-                                    main.clearSessionItem("sn");
-                                    return;
-                                } else {
-                                    //支付失败
-                                    main.clearSessionItem("sn");
-                                    main.prompt("支付失败");
-                                    return;
-                                }
-                            }
-                        });
-                }
-                init();
             }
         }
     })
