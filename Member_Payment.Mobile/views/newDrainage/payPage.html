@@ -6,69 +6,76 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>银个购</title>
+<!--     <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/payment/payment.css"> -->
     <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
-    <link rel="stylesheet" href="../../theme/payment/payment.css">
-    <style>
-        .hed{
-            overflow: hidden;
-        }
-    </style>
+    <link rel="stylesheet" href="../../theme/newDrainage/payPage.css">
 </head>
-
 <body>
-        <div id="app" class="main">
-        <header class="hed">
-            <div v-text="merchant_name"></div>
-        </header>
-        <section>
-            <div class="payInput">
-                <p>￥</p>
-                <input type="text" min="0" placeholder="请输入支付金额" readonly="readonly" v-model="payNum" />
+    <div id="app" class="main">
+        <div class="header">
+            <div class="back" v-on:click="back">
+                <img src="../../assets/images/newDarinage/ic_bg_back_xxh.png" alt="">
             </div>
-            <div class="payKind">
-                <!-- <div class="payDiv" v-on:click="selectedPayType(0)">
-                    <img src="../../assets/images/payment/ic_wechat@2x.png" alt="">
-                    <p>微信支付</p>
-                    <div v-bind:class="{active:isActive}"></div>
-                </div> -->
-<!--                 <div class="payDiv" v-on:click="selectedPayType(1)">
-                    <img src="../../assets/images/payment/ic_zhi@2x.png" alt="">
-                    <p>支付宝支付</p>
-                    <div v-bind:class="{active:!isActive}"></div>
-                </div> -->
+            <span>{{merchant_name}}</span>
+           
+        </div>
+        <div class="content">
+            <div class="titel">
+                消费金额
             </div>
-            <div class="loginInGogo">
-<!--                 <p>登录INGO</p>
-                <a href="javascript:void(0)" v-on:click="loginByPhone()">手机号登录</a> -->
+            <div class="piircWarp">
+                <p>¥</p>
+                <input type="number" placeholder="请询问收银员后输入" v-model="picked" v-on:input="disBefore">
             </div>
-        </section>
-        <footer>
-            <div class="keywords">
-                <table>
-                    <tr>
-                        <td v-on:click="keyWordsFunc(1,event)">1</td>
-                        <td v-on:click="keyWordsFunc(2,event)">2</td>
-                        <td v-on:click="keyWordsFunc(3,event)">3</td>
-                        <td v-on:click="keyWordsFunc(-1,event)" colspan="2" rowspan="2" class="funcbtn"><img src="../../assets/images/payment/ic_delete@2x.png" alt=""></td>
-                    </tr>
-                    <tr>
-                        <td v-on:click="keyWordsFunc(4,event)">4</td>
-                        <td v-on:click="keyWordsFunc(5,event)">5</td>
-                        <td v-on:click="keyWordsFunc(6,event)">6</td>
-                    </tr>
-                    <tr>
-                        <td v-on:click="keyWordsFunc(7,event)">7</td>
-                        <td v-on:click="keyWordsFunc(8,event)">8</td>
-                        <td v-on:click="keyWordsFunc(9,event)">9</td>
-                        <td v-on:click="keyWordsFunc(10,event)" colspan="2" rowspan="2" class="funcbtnSbumit" >确定<br>支付</td>
-                    </tr>
-                    <tr>
-                        <td v-on:click="keyWordsFunc(0,event)" colspan="2">0</td>
-                        <td v-on:click="keyWordsFunc(11,event)">.</td>
-                    </tr>
-                </table>
+            <div class="checkWarp" >
+                <div>
+                    <img src="../../assets/images/newDarinage/ic_select1@3x.png" ref="ck" alt="" v-on:click="checkPrice">
+                    <span>输入不参与优惠金额</span>
+                </div>
+                <p>酒水除外</p>
             </div>
-        </footer>
+            <div class="checkInput" v-show="isDis">
+                <p>¥</p>
+                <input type="number" v-on:input="noDis" v-model="deDisPr"  placeholder="请询问收银员后输入">
+            </div>
+        </div>
+        <div class="zhekou">
+            <div class="mj" v-show="full_reduceShow">
+                <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="mj" v-on:click="mj">
+                <span>每满{{full_rule}}减{{full_reduce}}元</span>(最高减{{most_reduce}}元)
+                <div v-show="payType =='mj' ">
+                    <span>-¥{{subMon}}</span>
+                </div>
+            </div>
+            <div class="dz" v-show="discountShow">
+                <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="dz" v-on:click="dz">
+                <span>{{discount}}折</span>(最高减{{most_discount}}元)
+                
+                <div v-show="payType =='dz' ">
+                    <span>-¥{{subMon}}</span>
+                </div>
+            </div>
+            <div class="yhq" v-show="showYhq">
+                <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="yhq" v-on:click="yhq">
+                <span>可用优惠券</span>
+                <div >
+                    <span v-show="payType =='yhq' ">-¥{{subMon}}</span>
+                    <img src="../../assets/images/newDarinage/ic_arrow@3x.png" alt="" v-on:click="changeTic">
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="realityPrice">
+                实际金额
+                <span v-show=" total != null">¥{{total}}</span>
+            </div>
+            <div class="btn" v-on:click="checkPay">
+                <span v-show=" total != null">¥{{total}}</span>确认买单
+            </div>
+            <p>优惠买单仅限于到店消费，请确认金额后提交</p>
+        </div>
+
     </div>
 </body>
 <script type="text/javascript"  src="../../controllers/fastclick/fastclick.js" ></script>

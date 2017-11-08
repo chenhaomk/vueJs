@@ -27,7 +27,7 @@
             <star :score='shop.star*10'></star>
             <a class="address"><span class="text-sl">{{shop.address}}</span></a>
         </section>
-        
+<!--         
         <section class="con discountPay" v-show="willShow">
             <h2>优惠买单</h2>
             <div class="discountPay" >
@@ -50,7 +50,7 @@
                     </span>
                 </p>
             </div>
-        </section>
+        </section> -->
         <section class="con discount" v-clock>
             <h2>相关优惠（{{coupons.length}}）</h2>
             <dis v-for='(a,index) of coupons' :return-url="'/views/shop/detail.html'" :a='a' v-show="index<disIsShow1"></dis>
@@ -75,8 +75,8 @@
             </section>
         </section>
 
-        <section class="bot_buy gobuy" v-clock>
-            <a href="">去买单</a>
+        <section class="bot_buy gobuy" v-on:click="pay" >
+            <span>去买单</span>
         </section>
 
         <!-- <section class="sub_page" :class="comIsShow">

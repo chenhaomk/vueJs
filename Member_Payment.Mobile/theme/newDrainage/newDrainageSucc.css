@@ -19,10 +19,11 @@ body {
     z-index: 1;
 }
 .shopHdImg ,.deHeade{
+    height: 22%;
     overflow: hidden;
 }
 .warpBg {
-    background: url("../../assets/images/newDarinage/bg.png");
+    background: url("../../assets/images/newDarinage/bg2.png");
 }
 .dewarpBg {
     background: url("../../assets/images/newDarinage/bg2.png");
@@ -72,8 +73,9 @@ body {
 
 .shopSum {
     text-align: center;
-    margin-top: .6rem;
+    margin-top: 5%;
     overflow: hidden;
+    height: 60%;
 }
 .shopSum img {
     width: .44rem;
@@ -81,24 +83,53 @@ body {
 }
 .sumWarp {
     font-family: "shopcoupenFont";
-    height: 1.2rem;
-    line-height: 1.2rem;
-    width: 3.36rem;
+    height: 100%;
+    line-height: 100%;
+    width: 5.36rem;
 /*    font-size: 1.6rem;*/
     margin:0 auto;
     position: relative;
+    background-image: url(../../assets/images/newDarinage/quan.png);
+    background-size:100% 100%;
 }
 .sumWarp p {
-    font-size: 1.1rem;
+    color: #28427d;
+    height:2rem;
+    line-height: 2rem;
+    width: 2rem;
+    font-size: 1.3rem;
+    position: absolute;
+    top:50%;
+    margin-top: -1rem;
+    left:50%;
+    margin-left: -1rem;
+}
+.sumWarp p span {
+    color: #28427d;
+    font-size: .8rem;
+    position: absolute;
+    left: -.4rem;
+    top: -.2rem;
 }
 .sumWarp img {
     position: absolute;
     left: 0.1rem;
     top:0.15rem;
 }
-.sunfo p{
-    color: #cfc2c1;
+.sunfo {
+    text-align: center;
+    height: 35%;
+}
+.sunfo span{
+    /*color: #cfc2c1;*/
     font-size: 0.28rem;
+    vertical-align: middle;
+}
+.sunfo img{
+    width: .7rem;
+    height: .6rem;
+    vertical-align: middle;
+    margin-right: -.2rem;
 }
 .inputWarp {
     margin-top: 2rem
@@ -110,7 +141,7 @@ body {
     position: relative;
     z-index: 3;
     width: 100%;
-    /*height: 60%;*/
+     height: 32%;
 }
 
 .inputWarp {
@@ -200,4 +231,38 @@ body {
     height: 2rem;
     /*outline: 1px solid red;*/
     z-index: 20   
+}
+.footer {
+    height: 46%;
+    /*margin-top: 0.66rem;*/
+}
+.dowBg {
+    margin: 0 auto;
+    width: 90%;
+    height: 90%;
+    position: relative;
+}
+.dowBtn {
+    color: #ffffff;
+    border-radius: .44rem;
+    width: 4.4rem;
+    height: .88rem;
+    text-align: center;
+    line-height: 0.88rem;
+    font-size: 0.28rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -2.2rem;
+    margin-top:-.44rem;
+    z-index: 10
+}
+.dowBg img {
+    width: 100%;
+    height: 100%;
+}
+.footer p {
+    margin-top: .46rem;
+    font-size: 0.24rem;
+    color: #c7b8b6;
 }

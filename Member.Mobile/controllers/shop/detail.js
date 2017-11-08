@@ -29,6 +29,7 @@ require(['config'],function(){
                 discountShow:true,//是否有打折
                 full_reduceShow:true,//是否有满减
                 discount:"",
+                most_discount:"",
                 full_rule:"",
                 full_reduce:"",
                 most_reduce :""
@@ -80,20 +81,22 @@ require(['config'],function(){
                     });
                 },
                 pay:function (event) {//优惠买单跳转
-                    if(event.currentTarget.getAttribute("data") == 1) {//折扣买单
-                        window.location.href = "orderPay.html?discount" //结算页
-                        ygg.setCookie('discount',vm.discount); 
-                    }else { //满减买单
-                        window.location.href = "orderPay.html?full_reduce" //结算页
-                        ygg.setCookie('full_rule',vm.full_rule);
-                        ygg.setCookie('full_reduce',vm.full_reduce); 
-                        ygg.setCookie('most_reduce',vm.most_reduce);  
-                    }
-                    
+                    // if(event.currentTarget.getAttribute("data") == 1) {//折扣买单
+                    //     // window.location.href = "https://m.yingougou.com/payment/views/newDrainage/payPage.html" //结算页
+                    //     ygg.setCookie('discount',vm.discount);
+                    //     ygg.setCookie('most_discount',vm.most_discount); 
+                    // }else { //满减买单
+                    //     // window.location.href = "https://m.yingougou.com/payment/views/newDrainage/payPage.html" //结算页
+                    //     ygg.setCookie('full_rule',vm.full_rule);
+                    //     ygg.setCookie('full_reduce',vm.full_reduce); 
+                    //     ygg.setCookie('most_reduce',vm.most_reduce);  
+                    // }
+                    window.location.href = "http://localhost:8084/views/newDrainage/payPage.html" //本地跳转
                 }
             }
         }),
-        business_id = ygg.getQueryString("id"),
+        business_id = ygg.getQueryString("id");
+        ygg.setCookie('business_id',business_id)
         returnUrl = ygg.getQueryString("returnUrl");
 
         if(!business_id || !returnUrl)window.open("/","_self");
@@ -116,28 +119,29 @@ require(['config'],function(){
                     vm.coupons.push(item)
                 }
             })
-            console.log(vm.groupdis)
+            console.log(vm.coupons)
             vm.$set(vm,"groupdis",vm.groupdis);
             vm.$set(vm,"coupons",vm.coupons);//渲染优惠券
             vm.$set(vm,"comments",data.comments);
             ygg.setCookie('shopName',data.business_details.name)//保存商家名称
 
-            if((data.sale_status == null || data.sale_status == undefined) && (data.reduce_status == null || data.reduce_status == undefined) ) {
-                vm.willShow = false
-            }else {
-                if(data.sale_status  == null || data.sale_status  == undefined) {
-                    vm.discountShow = false
-                }else {
-                    vm.discount = data.discount*10
-                }
-                if(data.reduce_status  == null || data.reduce_status  == undefined) {
-                    vm.full_reduceShow = false
-                }else {
-                    vm.full_rule  = data.full_rule 
-                    vm.full_reduce = data.full_reduce
-                    vm.most_reduce  = data.most_reduce 
-                }
-            }
+            // if((data.sale_status == null || data.sale_status == undefined) && (data.reduce_status == null || data.reduce_status == undefined) ) {
+            //     vm.willShow = false
+            // }else {
+            //     if(data.sale_status  == null || data.sale_status  == undefined) {
+            //         vm.discountShow = false
+            //     }else {
+            //         vm.discount = data.discount*10
+            //         vm.most_discount = data.most_discount
+            //     }
+            //     if(data.reduce_status  == null || data.reduce_status  == undefined) {
+            //         vm.full_reduceShow = false
+            //     }else {
+            //         vm.full_rule  = data.full_rule 
+            //         vm.full_reduce = data.full_reduce
+            //         vm.most_reduce  = data.most_reduce 
+            //     }
+            // }
 
             
 

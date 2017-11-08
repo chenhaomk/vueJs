@@ -4,7 +4,7 @@ define(['axio', 'vue'], function (axio, Vue) {
         body = document.getElementsByTagName("body")[0],
         width = docEl.clientWidth,
         height = docEl.clientHeight,
-        appid = "101";
+        appid = "100";
 
     var size = 10 * (width / 375);
     var isdou = document.createElement('div');
@@ -842,22 +842,24 @@ define(['axio', 'vue'], function (axio, Vue) {
             }
         },
         template: '<section  class="discount_group fn-clear" :class="{default:a.type==0 && a.is_share,default_z:a.type==0 && !a.is_share,rate:a.type==1 && a.is_share,rate_z:a.type==1 && !a.is_share,dk:a.type==2 && a.is_share,dk_z:a.type==2 && !a.is_share,tg:a.type==3 && a.is_special ,expired:isGq,lqcg:lqcg,lqgl:a.already_get || lqcg}">' +
-            '<a :href="urlp">' +
+            '<a :href="urlp" class="router">' +
             '<section class="info">' +
             '<section class="top fn-clear">' +
             '<img :src="a.img_path">' +
             '<section class="text">' +
-            '<p class="title_n" v-if="!a.is_share && a.type != 3">专属券</p>' +
-            '<p class="title_n" v-else-if ="a.is_share && a.type != 3" >共享券</p>' +
-            '<p class="title_n" v-else>{{a.name}}</p>'+
-            '<p class="discounted" v-if="a.type == 0"><span>{{a.discount}}</span>元</p>' +
-            '<p class="discounted" v-else-if="a.type == 1"><span>{{a.rate*10}}</span>折</p>' +
-            '<p class="discounted" v-else><span>{{a.price}}</span>元<b>{{a.discount}}元</b></p>' +
+            '<p class="title_n">{{a.name}}</p>' +
+            '<p class="discounted" v-if="a.type == 0"><span>{{a.discount}}</span>元代金券</p>' +
+            '<p class="discounted" v-else-if="a.type == 1"><span>{{a.rate*10}}</span>折扣券</p>' +
+            '<p class="discounted" v-else-if="a.type == 2"><span>{{a.price}}</span>元抵扣券<b>{{a.discount}}元</b></p>' +
             '</section>' +
             '</section>' +
             '<section class="bot">' +
             '<span>满{{a.min_price}}可用</span>' +
-            '<span class="text-sl">{{a.business_name}}</span>' +
+            '<span class="text-sl">'+
+                '<p class="title_n" v-if="!a.is_share && a.type != 3">专属券</p>' +
+                '<p class="title_n" v-else-if ="a.is_share && a.type != 3" >共享券</p>' +
+                '<p class="title_n" v-else>{{a.name}}</p>'+
+            '</span>' +
             '</section>' +
             '</section>' +
             '</a>' +
@@ -925,8 +927,8 @@ define(['axio', 'vue'], function (axio, Vue) {
         },
         computed: {
             urlp: function () {
-                var u;
-                this.isMy ? u = this.url + this.a.coupon_activity_id : u = this.url + this.a.coupon_id
+                var u;//跳转链接
+                u = "/views/shop/ticketDetail.html?cid="+this.a.coupon_id
                 var bid = ygg.getQueryString("id");
                 if (bid) {
                     u += "&bid=" + this.a.business_id
@@ -935,7 +937,7 @@ define(['axio', 'vue'], function (axio, Vue) {
             }
         },
         template: '<section  class="discount_group fn-clear" :class="{tg:a.type==3 && a.is_special ,expired:isGq,lqcg:lqcg,lqgl:a.already_get || lqcg}">' +
-            '<a :href="urlp">' +
+            '<a :href="urlp" class="router">' +
             '<section class="info">' +
             '<section class="top fn-clear">' +
             '<img :src="a.img_path">' +
@@ -955,23 +957,8 @@ define(['axio', 'vue'], function (axio, Vue) {
             '</section>' +
             '</a>' +
             '<section class="status">' +
-            '<a v-if="isMy" :class="{nohx:isMy}">' +
-            '<p>待使用</p>' +
-            '</a>' +
-            '<a v-else-if="lqcg || a.already_get" class="nohx">' +
-            '<p>已领取</p>' +
-            '</a>' +
-            '<a v-else-if="isGq" :class="{nohx:isGq}">' +
-            '<p>已过期</p>' +
-            '</a>' +
-            '<a v-else-if="a.type==2 && !geting" :href="urlp">' +
+            '<a :href="urlp">' +
             '<p>立即<br>抢购</p>' +
-            '</a>' +
-            '<a v-else-if="a.type!=2 && !geting" @click="getc(this.isMy?a.coupon_activity_id:a.coupon_id)">' +
-            '<p>免费<br>领取</p>' +
-            '</a>' +
-            '<a v-else-if="success">' +
-            '<p>领取中<br><b>.</b><b>.</b><b>.</b></p>' +
             '</a>' +
             '</section>' +
             '</section>' ,

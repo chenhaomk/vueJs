@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title></title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/plugins/swiper/swiper.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../assets/css/ticketDetail.css">
+
+</head>
+<body>
+    
+    <section class="height"></section>
+    <section id='app' class='discount detail has_head'>
+        <section class="head" >
+            <a class="back" href="javascript:void(0)" v-on:click="back"></a>
+            <p>团购券详情</p>
+        </section>
+        <section class="header" >
+            <img :src="detail.img_path">
+        </section>
+        <section class="con shop_info" v-show="ttIsShow">
+            <p class="shop_name text-sl"><a href="">{{detail.business_name}}</a></p>
+            <a class="phone" :href="'tel:'+detail.business_phone"></a>
+            <star :score='detail.business_star'></star>
+            <a class="address"><span class="text-sl">{{detail.business_address}}</span></a>
+        </section>
+        <section class="ticketCont con">
+            <h3>套餐内容</h3>
+            {{detail.content}}
+        </section>
+        <section class="notice sy" v-show="ttIsShow">
+            <h3>使用规则</h3>
+            <ul>
+                <li>有效期：{{detail.stime}}</li>
+                <li>使用时间：{{detail.service_time}}</li>
+                <li>优惠券使用：{{detail.introduction}}</li>
+                <li>退货支持：随时退款</li>
+            </ul>
+        </section>
+        <div class="bot_buy bottom">
+            <div class="price">
+                <p>¥<span>{{detail.zs}}</span>.{{detail.xs}}</p>
+                
+            </div>
+            <div class="goBuy" v-on:click="goBuy">
+                立即抢购
+            </div>
+        </div>
+    </section>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="/controllers/shop/ticketDetail.js"></script>
+<html>

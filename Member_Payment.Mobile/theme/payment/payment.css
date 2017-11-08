@@ -602,3 +602,19 @@ footer .keywords table .funcbtnSbumit {
     margin-left: 0;
     color: #888888;
 }
+footer .keywords table tr td:nth-child(1) {
+    border-left: 1px solid #ffffff;
+}
+footer .keywords table .funcbtn, footer .keywords table .funcbtnSbumit {
+    border-right: 1px solid #ffffff;
+}
+footer .keywords table .funcbtnSbumit {
+    font-weight: normal;
+    color: #FFFFFF;
+    font-size: 0.3rem;
+    background-color: #FF6F3D;
+}
+
+
+/*.onLoad {position: absolute;left:0;top:0;width: 100%;height: 100%;z-index: 1000}
+.onLoad img {width: 100%;height: 100%;}*/

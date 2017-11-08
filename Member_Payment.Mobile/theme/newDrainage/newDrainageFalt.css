@@ -4,6 +4,7 @@ body {
     z-index: 1;
 }
 .shopHdImg ,.deHeade{
+    height: 22%;
     overflow: hidden;
 }
 .warpBg {
@@ -62,7 +63,8 @@ body {
     position: relative;
     z-index: 3;
     width: 100%;
-    /*height: 60%;*/
+    height: 32%;
+    overflow: hidden;
 }
 
 .main .content_cash {
@@ -78,14 +80,14 @@ body {
 
 .main .content_lau {
     width: 100%;
-    height: 20%;
+    /*height: 20%;*/
 }
 
 .main .content_lau img {
     width: 3.61rem;
-    height: 1.99rem;
+    height: 40%;
     z-index: 3;
-    margin: 0.8rem 0rem;
+    margin: 5% 0rem 5% 0;
 }
 .main .content .pay_success {
     height: 10%;
@@ -168,26 +170,28 @@ body {
     border-radius: 0.68rem;
 }
 .footer {
-    margin-top: 0.66rem;
+    height: 46%;
+    /*margin-top: 0.66rem;*/
 }
 .dowBg {
     margin: 0 auto;
-    width: 6.9rem;
-    height: 4.1rem;
+    width: 90%;
+    height: 90%;
     position: relative;
 }
 .dowBtn {
     color: #ffffff;
     border-radius: .44rem;
-    width: 5.4rem;
+    width: 4.4rem;
     height: .88rem;
     text-align: center;
     line-height: 0.88rem;
     font-size: 0.28rem;
     position: absolute;
-    bottom: 0.64rem;
+    top: 50%;
     left: 50%;
-    margin-left: -2.7rem;
+    margin-left: -2.2rem;
+    margin-top:-.44rem;
     z-index: 10
 }
 .dowBg img {

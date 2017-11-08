@@ -1,6 +1,7 @@
 require(['config'], function () {
     require(['axio', 'vue', 'main'], function (axio, Vue, main) {
-        var baseUrl = "http://api.yingegou.com/v1.0/";
+        // var baseUrl = "https://api.yingegou.com/v1.0/";
+        var baseUrl = "http://119.23.10.30:9000/v1.0/";
         var docEl = document.documentElement,
             body = document.getElementsByTagName("body")[0],
             width = docEl.clientWidth,
@@ -40,7 +41,7 @@ require(['config'], function () {
                         main.prompt("请输入合理的手机号码！");
                         return
                     }
-                    main.post(main.baseUrl+'passport/fastLogin', {
+                    main.post(baseUrl+'passport/fastLogin', {
                         mobile: that.phone,
                         verification_code: that.vercode
                     }, function (data) {
@@ -53,19 +54,21 @@ require(['config'], function () {
                             main.setSession("phone", data.mobile);
                             main.setSession("token", data.token);
                             main.setSession("h_t", data.head_portrait);
-                            main.post(main.baseUrl+'member/getPersonCenterInfo', {
-                                member_id: main.getSession("m_id")
-                            }, function (data) {
-                                if (data.status == "error") {
-                                    main.prompt(data.msg);
-                                } else if (data.status == "200") {
-                                    if (data.data.data.select_setting == 1)
-                                        location.href = "../../views/payment/paymerchantmanual.html";
-                                    else
-                                        location.href = "../../views/payment/paymerchant.html";
-                                    //获取用户设置信息 1-paymerchantmanual,0-paymerchant
-                                }
-                            });
+                            location.href = "../../views/payment/payChangeTic.html";
+                            
+                            // main.post(main.baseUrl+'member/getPersonCenterInfo', {
+                            //     member_id: main.getSession("m_id")
+                            // }, function (data) {
+                            //     if (data.status == "error") {
+                            //         main.prompt(data.msg);
+                            //     } else if (data.status == "200") {
+                            //         if (data.data.data.select_setting == 1)
+                            //             location.href = "../../views/payment/paymerchantmanual.html";
+                            //         else
+                            //             location.href = "../../views/payment/paymerchant.html";
+                            //         //获取用户设置信息 1-paymerchantmanual,0-paymerchant
+                            //     }
+                            // });
                         }
                     });
                 },
@@ -77,7 +80,7 @@ require(['config'], function () {
                         main.prompt("请您仔细填写信息，不能有空哦！");
                         return;
                     }
-                    main.post(main.baseUrl+'passport/login', {
+                    main.post(baseUrl+'passport/login', {
                         mobile: that.userId,
                         password: that.pwd
                     }, function (data) {
@@ -93,24 +96,28 @@ require(['config'], function () {
                             main.setSession("phone", data.data.mobile);
                             main.setSession("token", data.data.token);
                             main.setSession("h_t", data.data.head_portrait);
-                            main.post(main.baseUrl+'member/getPersonCenterInfo', {
-                                member_id: main.getSession("m_id")
-                            }, function (data) {
-                                data = data.data;
-                                if (data.status == "error") {
-                                    main.prompt(data.msg);
-                                } else if (data.status == "success") {
-                                    if (data.data.select_setting == 1)
-                                        location.href = "../../views/payment/paymerchantmanual.html";
-                                    else
-                                        location.href = "../../views/payment/paymerchant.html";
-                                    //获取用户设置信息 1-paymerchantmanual,0-paymerchant
-                                }
-                            });
+                            location.href = "../../views/payment/payChangeTic.html";
+                            // main.post(main.baseUrl+'member/getPersonCenterInfo', {
+                            //     member_id: main.getSession("m_id")
+                            // }, function (data) {
+                            //     data = data.data;
+                            //     if (data.status == "error") {
+                            //         main.prompt(data.msg);
+                            //     } else if (data.status == "success") {
+                            //         if (data.data.select_setting == 1)
+                            //             location.href = "../../views/payment/paymerchantmanual.html";
+                            //         else
+                            //             location.href = "../../views/payment/paymerchant.html";
+                            //         //获取用户设置信息 1-paymerchantmanual,0-paymerchant
+                            //     }
+                            // });
                         } else {
                             main.prompt(data.data.msg);
                         }
                     });
+                },
+                back:function () {
+                    window.history.go(-1);
                 }
             },
             components: {

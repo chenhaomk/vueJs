@@ -1,0 +1,7 @@
+#app{padding-bottom: 0rem;}
+.discount .sy {padding-bottom: 0;border-bottom: 10rem solid #f9f9f9;}
+.discount .bottom {border: none;overflow: hidden;background-color: white;border-top:1px solid #dedede;}
+.discount .bottom .price{float: left;width: 60%;height: 5rem;line-height: 5rem;}
+.discount .bottom .price p {margin-left: 2rem;color: #ff6f3d;font-size: 2.4rem;}
+.discount .bottom .price p span{font-size: 3rem;}
+.discount .bottom .goBuy {float:left;width: 40%;height: 5rem;background-color:#ff6f3d;color: white;text-align:center;font-size:2rem;}

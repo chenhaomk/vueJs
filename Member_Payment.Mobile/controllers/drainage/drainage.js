@@ -248,7 +248,7 @@ require(['config'], function () {
         setTimeout(function () {
             vm.willShow = false;
             // vm.willHide = true
-        }, 1000)
+        }, 2000)
 
     });
 

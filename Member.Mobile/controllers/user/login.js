@@ -1,6 +1,7 @@
 require(['config'],function(){
     require(['axio','vue','main'],function (axio,Vue,ygg) {
-
+                // var baseUrl = "https://api.yingegou.com/v1.0/";
+        var baseUrl = "http://119.23.10.30:9000/v1.0";
         var vm = new Vue({
             el : "#app",
             data : {
@@ -29,7 +30,7 @@ require(['config'],function(){
                         ygg.prompt("请输入合理的手机号码！");
                         return
                     }
-                    ygg.ajax('/passport/fastLogin',{
+                    ygg.ajax(baseUrl+'/passport/fastLogin',{
                         mobile : that.phone,
                         verification_code : that.vercode
                     },function(data){
@@ -60,7 +61,7 @@ require(['config'],function(){
 
                     if(this.vshow)return;
 
-                    ygg.ajax('/passport/login',{
+                    ygg.ajax(baseUrl+'/passport/login',{
                         mobile : that.userId,
                         password : that.pwd
                     },function(data){

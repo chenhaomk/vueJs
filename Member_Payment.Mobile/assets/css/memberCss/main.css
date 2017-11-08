@@ -428,7 +428,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .head{ position: fixed; background: white; top: 0; width: 100%; height: 5rem; border-bottom: 1px solid #e3e3e3; text-align: center; font-size: 1.7rem; line-height: 5rem; box-sizing: border-box; z-index: 10}
 .head .back{ position: absolute; width: 5rem; height: 5rem; background: url(/assets//images/member/ic_bg_back_xxh.png) center center no-repeat; background-size: .9rem auto; z-index: 2; left: 0 }
 .head .com{ position: absolute; width: 5rem; height: 5rem; padding-right: 1.5rem; line-height: 5rem; text-align: right; top: 0; color: #ff6f3d; font-size: 1.5rem; z-index: 2; right: 0 }
-.head .close{ position: absolute; width: 4.5rem; height: 5rem; top: 0; z-index: 2; right: 0; background: url("/assets/images/member/ic_bg_delete_xxh.png") center center no-repeat; background-size: 1.5rem auto; }
+.head .close{ position: absolute; width: 4.5rem; height: 5rem; top: 0; z-index: 2; left: 0; background: url("/assets/images/newDarinage/ic_bg_back_xxh.png") center center no-repeat; background-size: 1.2rem auto; }
 #app.has_head{ padding-top: 5rem }
 #app{ padding-bottom: 2rem }
 .shadow{ position: fixed; top: 0; background: black; opacity: .7; z-index: 100; width: 100%; height: 100%; display: none;}

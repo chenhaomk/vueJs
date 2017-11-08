@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/payment/payChangeTic.css">
+</head>
+<body>
+    <div id="app" class="main">
+        <div class="header">
+            <div class="back" v-on:click="back">
+                <img src="../../assets/images/newDarinage/ic_bg_back_xxh.png" alt="">
+            </div>
+            <span>{{merchant_name}}</span>           
+        </div>
+        <div class="content">
+            <div class="showRecommend" v-show="showRecommend">
+                <p class="childP">系统推荐最优券</p>
+                <div v-show="index<disIsShow2" v-for="(dis,index) in recommend_coupon" class="discount_group">
+                    <div class="disLeft">
+                        <div class="info">
+                            <img :src="dis.img_path" alt="">
+                            <div class="shopName">
+                                <p>{{dis.business_name}}</p>
+                                <p class="discounted" v-if="dis.type == 0">
+                                    <span>{{dis.discount}}</span>元<span>代金券</span>
+                                </p>
+                                <p class="discounted" v-else-if="dis.type == 1"><span>{{dis.rate*10}}</span><span>折扣券</span></p>
+                                <p class="discounted" v-else-if="dis.type == 2"><span>{{dis.price}}</span>元<span>抵扣券</span><b>{{dis.discount}}元</b></p>
+                            </div>
+                        </div>
+                        <div class="bot">
+                            <div class="botL">
+                                <span>满{{dis.min_price}}可用</span>
+                            </div>
+                            <div class="botR">
+                                <span v-if="!dis.is_share && dis.type != 3">专属券</span>
+                                <span v-if="dis.is_share && dis.type != 3">共享券</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disRight">
+                        <span v-on:click="useTic(dis)">
+                            立即</br>
+                            使用
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="myDis" v-show="discount_list.length > 0">
+                <p class="childP">我的可用优惠券</p>
+                <div v-show="index<disIsShow2" v-for="(dis,index) in discount_list" class="discount_group">
+                    <div class="disLeft">
+                        <div class="info">
+                            <img :src="dis.img_path" alt="">
+                            <div class="shopName">
+                                <p>{{dis.business_name}}</p>
+                                <p class="discounted" v-if="dis.type == 0">
+                                    <span>{{dis.discount}}</span>元
+                                    <span>代金券</span>
+                                </p>
+                                <p class="discounted" v-else-if="dis.type == 1"><span>{{dis.rate*10}}</span><span>折扣券，最多优惠{{dis.max_price}}元</span></p>
+                                <p class="discounted" v-else-if="dis.type == 2"><span>{{dis.price}}</span>元<span>抵扣券</span><b>{{dis.discount}}元</b></p>
+                            </div>
+                        </div>
+                        <div class="bot">
+                            <div class="botL">
+                                <span>满{{dis.min_price}}可用</span>
+                            </div>
+                            <div class="botR">
+                                <span v-if="!dis.is_share && dis.type != 3">专属券</span>
+                                <span v-if="dis.is_share && dis.type != 3">共享券</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disRight">
+                        <span v-on:click="useTic(dis)">
+                            立即</br>
+                            使用
+                        </span>
+                    </div>
+                </div>
+                <a class="more" v-show="discount_list.length > 2 && moreIsShow2" @click='viewMore2'>查看更多<img src="../../assets/images/newDarinage/ic_bg_more_xxh.png"></a>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/payment/payChangeTic.js"></script>
+</html>

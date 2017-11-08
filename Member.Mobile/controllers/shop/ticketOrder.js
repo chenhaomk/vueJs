@@ -29,7 +29,7 @@ require(['config'],function(){
             area_id : ygg.getCookie('area_id')
         };
 
-        if(!getListObj.area_id)window.open("/index.html","_self");
+        // if(!getListObj.area_id)window.open("/index.html","_self");
 
         ygg.ajax('/business/getAllIndustry',{},function(data){
             data = data.data;

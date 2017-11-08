@@ -41,15 +41,15 @@ define([
       return;
     if (data == null || data.length <= 0)
       return;
-    var token = this.getSession("token");
+    var token = this.getSession("token")?this.getSession("token"):this.getCookie("token");
     var timestamp = (new Date()).valueOf();
     var sign = main.getMd5(appid + timestamp);
     if (token != null) {
       sign = main.getMd5(appid + timestamp + token);
       axios.defaults.headers.token = token;
     }
-   axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
-    // axios.defaults.baseUrl = "http://119.23.10.30:9000/v1.0";
+   // axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
+    axios.defaults.baseUrl = "http://119.23.10.30:9000/v1.0";
     axios.defaults.headers.appid = appid;
     axios.defaults.headers.sign = sign;
     axios.defaults.headers.timestamp = timestamp;
@@ -116,6 +116,29 @@ define([
     if (sessionStorage != null)
       sessionStorage.clear();
   };
+  // ----------开始--------ch-use:用于payPage页面获取由h5店铺详情点击优惠买单时设置的cookie
+  main.getCookie = function (name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) {
+      return unescape(arr[2]);
+    } else {
+      return null;
+    }
+  }
+  main.setCookie = function (name, value) {
+    var Days = 365;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
+  }
+  main.delCookie = function (name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = main.getCookie(name);
+    if (cval != null)
+      document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + ";path=/";
+  }
+    // ---------结束---------ch-use:用于payPage页面获取由h5店铺详情点击优惠买单时设置的cookie
   main.getQueryString = function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
@@ -549,7 +572,7 @@ define([
             that.isClick = false;
           }
         }, 1000);
-        main.post('https://api.yingougou.com/v1.0/common/sendVerificationCode', {
+        main.post('http://119.23.10.30:9000/v1.0/common/sendVerificationCode', {
           mobile: that.mobile,
           sms_type: that.sms_type
         }, function (data) {
