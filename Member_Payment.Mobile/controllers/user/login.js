@@ -54,7 +54,8 @@ require(['config'], function () {
                             main.setSession("phone", data.mobile);
                             main.setSession("token", data.token);
                             main.setSession("h_t", data.head_portrait);
-                            location.href = "../../views/payment/payChangeTic.html";
+                            var str = window.location.search
+                            location.href = "../../views/newDrainage/payGroupTic.html"+str;
                             
                             // main.post(main.baseUrl+'member/getPersonCenterInfo', {
                             //     member_id: main.getSession("m_id")
@@ -96,7 +97,8 @@ require(['config'], function () {
                             main.setSession("phone", data.data.mobile);
                             main.setSession("token", data.data.token);
                             main.setSession("h_t", data.data.head_portrait);
-                            location.href = "../../views/payment/payChangeTic.html";
+                                                       var str = window.location.search
+                            location.href = "../../views/newDrainage/payGroupTic.html"+str;
                             // main.post(main.baseUrl+'member/getPersonCenterInfo', {
                             //     member_id: main.getSession("m_id")
                             // }, function (data) {

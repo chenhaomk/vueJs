@@ -865,7 +865,7 @@ define(['axio', 'vue'], function (axio, Vue) {
             '</a>' +
             '<section class="status">' +
             '<a v-if="isMy" :class="{nohx:isMy}">' +
-            '<p>待使用</p>' +
+            '<p>立即</br>使用</p>' +
             '</a>' +
             '<a v-else-if="lqcg || a.already_get" class="nohx">' +
             '<p>已领取</p>' +
@@ -874,7 +874,7 @@ define(['axio', 'vue'], function (axio, Vue) {
             '<p>已过期</p>' +
             '</a>' +
             '<a v-else-if="a.type==2 && !geting" :href="urlp">' +
-            '<p>立即<br>抢购</p>' +
+            '<p>立即</br>抢购</p>' +
             '</a>' +
             '<a v-else-if="a.type!=2 && !geting" @click="getc(this.isMy?a.coupon_activity_id:a.coupon_id)">' +
             '<p>免费<br>领取</p>' +

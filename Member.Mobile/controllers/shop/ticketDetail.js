@@ -13,7 +13,8 @@ require(['config'],function(){
             },
             methods : {
                 goBuy:function () {
-                    
+                    var str = window.location.search
+                    window.location.href = "http://localhost:8084/views/newDrainage/payGroupTic.html"+str //本地跳转
                 },
                 back:function () {
                     window.history.go(-1);
@@ -28,6 +29,7 @@ require(['config'],function(){
                 coupon_id:ticketId,
             },function(data){
                 data = data.data;
+                console.log(data)
                 if ((data.price+"").indexOf() == -1) {
                     data.zs = data.price
                     data.xs = "00"

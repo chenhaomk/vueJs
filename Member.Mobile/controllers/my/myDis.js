@@ -16,7 +16,13 @@ require(['config'],function(){
             methods : {
                 menuSwitch : function(index){
                     this.ind = index;
-                    index == 0?obj.coupon_type = 1:obj.coupon_type = 0;
+                    if(index == 0) {
+                        obj.coupon_type = 1
+                    }else if(index == 1) {
+                        obj.coupon_type = 0
+                    }else {
+                        obj.coupon_type = 2
+                    }
                     obj.page = 1;
                     flag = false;
                     window.scrollTo(0,0);

@@ -19,7 +19,7 @@
             <p>我的优惠券</p>
         </section>
         
-        <section class="menu">
+        <section class="ticmenu">
             <p v-for="(a,index) of menu">
                 <a :class='[ind == index?"active":""]' v-on:click="menuSwitch(index)">{{a}}</a>
             </p>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title></title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../assets/css/payGroupTic.css">
+
+</head>
+<body>
+    <div id='app' class='warp'>
+        <div class="header">
+            <img src="../../assets/images/newDarinage/ic_bg_back_xxh.png" alt="" v-on:click="back">
+            <span>团购券码</span>
+        </div>
+        <div class="content">
+            <div class="ticWarp">
+                <div>
+                    <img :src="detail.img_path" alt="">
+                </div>
+                
+                <span class="prWarp">
+                    <p>{{detail.name}}</p>
+                    <p>¥<span>{{detail.zs}}</span>.{{detail.xs}}</p>
+                </span>
+            </div>
+            <div class="numWarp">
+                <div class="wL">
+                    数量
+                </div>
+                <div class="wR">
+                    <span v-on:click="del" class="del"></span>
+                    <input v-on:input="input" type="text" v-model="total">
+                    <span v-on:click="add" class="add"></span>
+                </div>
+            </div>
+            <div class="totalWarp">
+                <div class="totalL">
+                    总价
+                </div>
+                <div class="totalR">
+                    ¥{{toPrice}}
+                </div>
+            </div>
+        </div>
+        <div class="footBtn">
+            <div v-on:click="checkPay">
+                ¥{{toPrice}}确认买单
+            </div>
+
+        </div>
+    </div>
+
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="../../controllers/drainage/payGroupTic.js"></script>
+<html>

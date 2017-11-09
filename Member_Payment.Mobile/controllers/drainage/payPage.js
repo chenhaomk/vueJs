@@ -73,6 +73,7 @@ require(['config'], function () {
                 subMon:0,//计算后的优惠金额
                 deDisPr:"",//为不参与折扣金额
                 showYhq:false,//判断用户是否登录过，没有就不显示可用优惠券
+                groupWarp:false,//用于显示购买团购券时的界面
     		},
     		methods:{
                 back:function () {

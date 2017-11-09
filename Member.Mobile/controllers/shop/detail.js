@@ -109,7 +109,7 @@ require(['config'],function(){
             business_id : business_id,
             member_id : ygg.getCookie('member_id')
         },function(data){
-
+            console.log(data.data)
             data = data.data;
             vm.$set(vm,"shop",data.business_details);
             data.coupons.map(function (item,index) {
