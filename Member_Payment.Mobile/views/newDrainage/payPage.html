@@ -9,12 +9,13 @@
 <!--     <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
     <link rel="stylesheet" href="../../theme/payment/payment.css"> -->
     <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <script src="../../assets/js/autosize.js "></script>
     <link rel="stylesheet" href="../../theme/newDrainage/payPage.css">
 </head>
 <body>
     <div id="app" class="main">
         <div class="header">
-            <div class="back" v-on:click="back">
+            <div class="back" v-on:click="back" v-show="showYhq">
                 <img src="../../assets/images/newDarinage/ic_bg_back_xxh.png" alt="">
             </div>
             <span>{{merchant_name}}</span>
@@ -24,7 +25,7 @@
             <div class="titel">
                 消费金额
             </div>
-            <div class="piircWarp">
+            <div class="piircWarp" id="piircWarp">
                 <p>¥</p>
                 <input type="number" placeholder="请询问收银员后输入" v-model="picked" v-on:input="disBefore">
             </div>
@@ -43,14 +44,14 @@
         <div class="zhekou">
             <div class="mj" v-show="full_reduceShow">
                 <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="mj" v-on:click="mj">
-                <span>每满{{full_rule}}减{{full_reduce}}元</span>(最高减{{most_reduce}}元)
+                <span>每满{{full_rule}}减{{full_reduce}}元</span><span v-show="most_reduce <10000000">(最高减{{most_reduce}}元)</span>
                 <div v-show="payType =='mj' ">
                     <span>-¥{{subMon}}</span>
                 </div>
             </div>
             <div class="dz" v-show="discountShow">
                 <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="dz" v-on:click="dz">
-                <span>{{discount}}折</span>(最高减{{most_discount}}元)
+                    <span>{{discount}}折</span><span v-show="most_discount <10000000">(最高减{{most_discount}}元)</span>   
                 
                 <div v-show="payType =='dz' ">
                     <span>-¥{{subMon}}</span>

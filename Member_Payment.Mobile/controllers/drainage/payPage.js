@@ -1,8 +1,13 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
-        var payType = location.search.split("?")[1]//折扣买单还是满减买单
+        var b_id = location.search.split("&")[0].split("=")[1]
+        var userId
+        if(location.search.indexOf("userId") != -1) {
+            userId  = location.search.split("&")[1].split("=")[1]
+        }
+         
         var busDteObj = {} //ch-use:获取商家详情请求参数
-
+        
         window.addEventListener('load', function() {
           FastClick.attach(document.body);
         }, false);
@@ -19,8 +24,8 @@ require(['config'], function () {
     	// var baseURL = 'http://192.168.0.228:8084/v1.0/'; //本机测试地址
 
 
-        // var baseURL = "https://api.yingougou.com/v1.0/"
-        var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
+        var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
+        // var baseURL = 'http://pay.yingegou.com:9000/v1.0/'; //本机测试地址
                 //判断是否在微信浏览器
         function browserType() {
             var ua = window.navigator.userAgent.toLowerCase();
@@ -34,24 +39,27 @@ require(['config'], function () {
         }
         if(browserType() == "weixin") {
             if (location.href.indexOf("code") == -1) { 
-                var b_id = main.getSession("b_id")
+                var b_id = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
                 var u = navigator.userAgent;
                 if(u.indexOf('iPhone') > -1) {
-                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                    main.newPrompt("页面跳转中...",30000);
+                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
                 }else {
-                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                    main.newPrompt("页面跳转中...",30000);
+                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
                 }
                 
             }
         }else if( browserType()== "alipay") {
             if(location.href.indexOf("auth_code") == -1){
-                var b_id = main.getSession("b_id")
-                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id 
+                var b_id = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
+                main.newPrompt("页面跳转中...",30000);
+                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id 
             }
         }else {
 
         }
-
+        main.loading(true)
     	var vm = new vue({
     		el:"#app",
     		data:{
@@ -61,10 +69,11 @@ require(['config'], function () {
                 merchant_name: "",
                 isDis:false, //ch-use:用于判断是否有不参与优惠的金额
                 payType:"nothing",//ch-use:优惠方式（满减，打折，优惠券，或者没有任何优惠）
-                discountShow:true,//是否显示折扣
-                discount:"0.9",//几折
+                discountShow:false,//是否显示折扣
+                discount:"0.9",//用于显示的折扣
+                discountS:0,//用于计算的折扣
                 most_discount:25,//折扣最高优惠
-                full_reduceShow:true,//是否有满减 
+                full_reduceShow:false,//是否有满减 
                 full_rule:"100",//买单满减条件，每满100减10元最高40元，条件是100元
                 full_reduce:"20",//买单满减金额，每满100减10元最高40元，优惠金额是10元
                 most_reduce:"60",//买单满减金额，每满100减10元最高40元，最高金额是40元
@@ -142,7 +151,8 @@ require(['config'], function () {
                         if(this.deDisPr >= 0 ) {
                             main.setSession("deDisPr", this.deDisPr);//用于选券页面计算优惠金额，不参与优惠金额
                         }
-                        window.location.href = "../../views/user/login.html";
+                        var str = window.location.search
+                        window.location.href = "../../views/newDrainage/payChangeTic.html"+str;
                         // if(main.getSession("token") != null || main.getSession("token") != undefined || main.getSession("token") != "") {//ch-use;判断用户是否登录过
                         //     location.href = "../../views/payment/payChangeTic.html";
                         // }else {
@@ -153,19 +163,21 @@ require(['config'], function () {
                     }else {
                         main.prompt("请先输入有效金额");
                     }
-                    
                 },
                 disBefore:function (event) {//原总金额
+                    event.target.value = event.target.value.replace(/[^\d.]/g,'')
+                    // event.target.=value.replace(/[^\d.]/g,'')
                     this.countFn()
                 },
                 noDis:function (event) { //输入未参与折扣金额
+                    event.target.value = event.target.value.replace(/[^\d.]/g,'')
                     this.countFn()
                 },
                 countFn:function () { //计算实际支付金额函数
                     if(this.isDis == false && this.deDisPr == 0) { //在没有参与优惠金额时
                         this.picked = charAtNum(this.picked)
                         if(this.payType == "dz") {
-                            this.subMon = (this.picked *(1-this.discount)).toFixed(2)
+                            this.subMon = (this.picked *(1-this.discountS)).toFixed(2)
                             if(this.most_discount < this.subMon) {//是否超过最高优惠
                                 this.subMon = this.most_discount
                             }                            
@@ -184,21 +196,20 @@ require(['config'], function () {
                         this.deDisPr = charAtNum(this.deDisPr)
                         if(this.payType == "dz") {//打折优惠
                             if(this.deDisPr >= this.picked) { //不参与优惠大于总消费时，该情况可能是用户误输入,则按不参与消费金额为0处理
-                                this.subMon = (this.picked*(1-this.discount)).toFixed(2)
+                                this.subMon = (this.picked*(1-this.discountS)).toFixed(2)
                                 if(this.most_discount < this.subMon) {//是否超过最高优惠
                                     this.subMon = this.most_discount
                                 }  
                             }else {//不参与消费金额不为0时
-                                this.subMon = ((this.picked*(1-this.discount)).toFixed(2) - this.deDisPr*(1-Number(this.discount))).toFixed(2)
+                                this.subMon = ((this.picked*(1-this.discountS)).toFixed(2) - this.deDisPr*(1-Number(this.discountS))).toFixed(2)
                                 if(this.most_discount < this.subMon) {//是否超过最高优惠
                                     this.subMon = this.most_discount
                                 }   
                             }
                         }else if(this.payType == "mj") {//满减优惠
                             if(this.picked-this.deDisPr >= this.full_rule) {//当总消费去不参与优惠金额的差大于优惠规则金额时
-                                this.subMon = parseInt(this.picked/this.full_rule)*this.full_reduce
+                                this.subMon = parseInt((this.picked-this.deDisPr)/this.full_rule)*this.full_reduce
                             }else {//小于则按不满足优惠条件处理
-
                                 this.subMon = 0
                             }
                         }else if(this.payType == "yhq") {
@@ -216,7 +227,7 @@ require(['config'], function () {
                         if(this.deDisPr >= 0 ) {
                             main.setSession("deDisPr", this.deDisPr);//用于选券页面计算优惠金额，不参与优惠金额
                         }
-                        location.href = "../../views/payment/payChangeTic.html";
+                        location.href = "../../views/newDrainage/payChangeTic.html";
                         // if(main.getSession("token") != null && main.getSession("token") != undefined && main.getSession("token") != "null") {//ch-use;判断用户是否登录过
                         //     location.href = "../../views/payment/payChangeTic.html";
                         // }else {
@@ -250,8 +261,12 @@ require(['config'], function () {
                         data.type = 2
                         data.no_sale_amount = this.deDisPr ==""?0:this.deDisPr
                     }
-                    console.log(data)
-                    // payFn(browserType,data,baseURL,ck)
+                    if(this.total > 0) {
+                        payFn(browserType,data,baseURL,ck)
+                    }else {
+                        main.prompt("请先输入有效金额");
+                    }
+                    
                     function ck() {
                         location.href = "../../views/newDrainage/paySucc.html";
                     }
@@ -259,27 +274,32 @@ require(['config'], function () {
                 }
     		}
     	})
-        //ch-use:用来判断是从哪个页面返回的支付界面，可能是买团购券，可能是在选取用户的优惠券后
-        if(main.getSession("disBefore") != null ) { //main.getSession("disBefore")在选取优惠券页面保存，则从选取优惠券页面返回
-            vm.picked = main.getSession("parOrderTotal") //填充表单
-            if((main.getSession("deDisPr") != null || main.getSession("deDisPr") != undefined || main.getSession("deDisPr") != "") && main.getSession("deDisPr") > 0) {
-                vm.isDis = true;
-                vm.deDisPr = main.getSession("deDisPr");
-                vm.$refs.ck.setAttribute("src","../../assets/images/newDarinage/ic_selected1_xxh.png");
-            }
-            vm.$refs.yhq.setAttribute("src","../../assets/images/newDarinage/ic_selected@3x.png");
-            vm.subMon = vm.picked - main.getSession("disBefore")
-            vm.total = main.getSession("disBefore")
-            vm.payType = "yhq"
-        }
+        // //ch-use:用来判断是从哪个页面返回的支付界面，可能是买团购券，可能是在选取用户的优惠券后
+        // if(main.getSession("disBefore") != null ) { //main.getSession("disBefore")在选取优惠券页面保存，则从选取优惠券页面返回
+        //     vm.picked = main.getSession("parOrderTotal") //填充表单
+        //     if((main.getSession("deDisPr") != null || main.getSession("deDisPr") != undefined || main.getSession("deDisPr") != "") && main.getSession("deDisPr") > 0) {
+        //         vm.isDis = true;
+        //         vm.deDisPr = main.getSession("deDisPr");
+        //         vm.$refs.ck.setAttribute("src","../../assets/images/newDarinage/ic_selected1_xxh.png");
+        //     }
+        //     vm.$refs.yhq.setAttribute("src","../../assets/images/newDarinage/ic_selected@3x.png");
+        //     vm.subMon = vm.picked - main.getSession("disBefore")
+        //     vm.total = main.getSession("disBefore")
+        //     vm.payType = "yhq"
+        // }
         //ch-use:用于判断用户是否登录过
-        if(main.getCookie("token") != null && main.getCookie("token") != undefined && main.getCookie("token") != "null") {//ch-use;判断用户是否登录过
+        debugger
+        if(userId != undefined || userId != null) {//ch-use;判断用户是否登录过
             vm.showYhq = true
         }else {
             vm.showYhq = false
         }
-        busDteObj.business_id = main.getSession("b_id")?main.getSession("b_id"):main.getQueryString("id") 
-        console.log(main.getSession("b_id") == "null")
+        if(b_id != undefined || b_id != null ) {
+            busDteObj.business_id = b_id
+        }else {
+            busDteObj.business_id = main.getSession("b_id")?main.getSession("b_id"):main.getQueryString("b_id") 
+        }
+        
         if(main.getSession("b_id") && main.getSession("b_id") != "null") {//ch-use:扫码支付时从index.js获取session
             busDteObj.business_id = main.getSession("b_id")
         }else if(main.getQueryString("id") && main.getQueryString("id") != "null") {
@@ -287,16 +307,21 @@ require(['config'], function () {
         }else if(main.getCookie('business_id') && main.getCookie('business_id') != "null") {//ch-use:从商店详情去买单时获取cookie
             busDteObj.business_id = main.getCookie('business_id')
         }
-        if(main.getCookie('member_id')) {
-            busDteObj.member_id = main.getCookie('member_id')
+        if(userId != undefined || userId != null) {
+            busDteObj.member_id = userId
         }
-        main.post(baseURL +"business/getBusinessDetails",busDteObj , function (res) {//获取商家详情            
+        
+        main.post(baseURL +"business/getBusinessDetails",busDteObj , function (res) {//获取商家详情 
+            console.log(res)           
             vm.merchant_name = res.data.data.business_details.name //商家名
             main.setSession("b_n",vm.merchant_name)//用于引流页面获取商家名
             data = res.data.data.business_details
-            if(data.sale_status  != false) {
+            console.log(data)
+            main.loading(false)
+            if(data.sale_status  != false && data.discount) {
                 vm.discountShow = true
                 vm.discount = data.discount*10
+                vm.discountS = data.discount
                 if(data.most_discount == -1) {//商家最高优惠没有限制时
                     vm.most_discount = 10000000 
                 }else {

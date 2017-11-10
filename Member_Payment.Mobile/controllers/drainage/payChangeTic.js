@@ -1,8 +1,9 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
-    	var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
+    	// var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // main.post.
+        var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
     	var vm = new vue({
     		el:"#app",
     		data:{
@@ -83,6 +84,7 @@ require(['config'], function () {
                 price:Number(main.getSession("parOrderTotal")),
                 no_sale_price:main.getSession("deDisPr")?Number(main.getSession("deDisPr")):0,
             }, function (res) {
+                console.log(res)
                 var data = res.data.data
                 if(res.data.status == "success") {
                     if(data.recommend_coupon.name != null ||data.recommend_coupon.name != undefined ||data.recommend_coupon.name != "") {

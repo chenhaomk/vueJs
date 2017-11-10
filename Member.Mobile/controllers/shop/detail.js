@@ -91,7 +91,12 @@ require(['config'],function(){
                     //     ygg.setCookie('full_reduce',vm.full_reduce); 
                     //     ygg.setCookie('most_reduce',vm.most_reduce);  
                     // }
-                    window.location.href = "http://localhost:8084/views/newDrainage/payPage.html" //本地跳转
+                    if(ygg.getCookie('member_id') != null || ygg.getCookie('member_id') != undefined || ygg.getCookie('member_id') != "") {
+                        window.location.href = "http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+ygg.getQueryString("id")+"&userId="+ygg.getCookie('member_id')+"&tk="+ygg.getCookie('token') //本地跳转
+                    }else {
+                        window.location.href = "http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+ygg.getQueryString("id")
+                    }
+                    
                 }
             }
         }),

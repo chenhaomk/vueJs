@@ -3,10 +3,10 @@ define([
 ], function (axios, Vue) {
   'use strict';
 
-
-  var html = document.documentElement;
-  var windowwidth = html.clientWidth;
-  html.style.fontSize = windowwidth / 7.5 + "px";
+  var body = document.getElementsByTagName("body")[0];
+  // var html = document.documentElement;
+  // var windowwidth = html.clientWidth;
+  // html.style.fontSize = windowwidth / 7.5 + "px";
   // document.getElementById("body").style.height = window.innerHeight + "px";
 
   // 添加一个请求拦截器
@@ -41,7 +41,15 @@ define([
       return;
     if (data == null || data.length <= 0)
       return;
+    var tk
+    if(location.search.indexOf("user") != -1) {
+      tk = location.search.split("&")[2].split("=")[1]
+    }
+    
     var token = this.getSession("token")?this.getSession("token"):this.getCookie("token");
+    if(tk != null || tk != undefined) {
+      token = tk
+    }
     var timestamp = (new Date()).valueOf();
     var sign = main.getMd5(appid + timestamp);
     if (token != null) {
@@ -672,6 +680,66 @@ define([
       dom.setAttribute("class", "prompt hide")
     }, 2000);
   };
+  main.loading = function (con) {
+    if (con) {
+            body.setAttribute("class", body.getAttribute("class") + " loading");
+        } else {
+            body.setAttribute("class", (body.getAttribute("class")).replace("loading"));
+    }
+  }
+    main.newPrompt = function (t,timer) {
+    var dom = document.getElementById("prompt");
+    if (!dom) {
+      var prompt = document.createElement("section"),
+        shadow_b = document.createElement("section"),
+        text = document.createElement("section"),
+        p = document.createElement("p"),
+        span = document.createElement("span");
 
+      prompt.setAttribute("id", "prompt");
+      prompt.setAttribute("class", "prompt");
+      shadow_b.setAttribute("class", "shadow_b");
+      text.setAttribute("class", "text");
+      span.innerText = t;
+      prompt.appendChild(shadow_b);
+      prompt.appendChild(text);
+      text.appendChild(p);
+      p.appendChild(span);
+      document.getElementsByTagName("body")[0].appendChild(prompt);
+      dom = document.getElementById("prompt");
+    } else {
+      dom.childNodes[1].childNodes[0].childNodes[0].innerText = t;
+    }
+    dom.setAttribute("class", "prompt show");
+      setTimeout(function () {
+        dom.setAttribute("class", "prompt hide")
+      }, timer);
+
+  };
+  main.loadingImg = function () {
+    var dom = document.getElementById("prompt");
+    if (!dom) {
+      var prompt = document.createElement("section"),
+        shadow_b = document.createElement("section"),
+        text = document.createElement("section"),
+        p = document.createElement("p"),
+        img = document.createElement("img");
+
+      prompt.setAttribute("id", "prompt");
+      prompt.setAttribute("class", "prompt");
+      shadow_b.setAttribute("class", "shadow_b");
+      text.setAttribute("class", "text");
+      img.setAttribute("src","../../assets/images/loading-go.gif")
+      prompt.appendChild(shadow_b);
+      prompt.appendChild(text);
+      text.appendChild(p);
+      p.appendChild(img);
+      document.getElementsByTagName("body")[0].appendChild(prompt);
+      dom = document.getElementById("prompt");
+    } else {
+      dom.childNodes[1].childNodes[0].childNodes[0].innerText = t;
+    }
+    dom.setAttribute("class", "prompt show");
+  };
   return main;
 });
