@@ -9,6 +9,7 @@ require(['config'], function () {
             $.fn.getData({
                 url: "/business/getAllBusiness",
                 result: function (data) {
+                    console.log(data)
                     if(data.status == "success") {                        
                         examine_business_list = data.data.examine_business_list
                         finish_business_list = data.data.finish_business_list

@@ -22,7 +22,6 @@ html,body,button, input, select, textarea {font: 14px/1.5 "Microsoft YaHei",taho
 	margin-top: .3rem;
     box-shadow: 0 0 5px 3px #f7f7f8;
     background-color: white;
-    z-index: 100;
 }
 body .checkInput input,body .piircWarp input{
 	background-color: white;

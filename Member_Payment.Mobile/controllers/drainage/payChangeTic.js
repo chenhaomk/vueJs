@@ -68,32 +68,41 @@ require(['config'], function () {
                             main.prompt("不满足该券使用条件!");
                         }
                     }
-                    main.setSession("disBefore",disBefore)//保存在选取优惠券的页面计算的用券优惠后的金额，在支付界面直接获取显示对应券的优惠幅度（只在支付界面使用，其余界面清空）
-                    main.setSession("c_id",date.coupon_id)//保存优惠券id,用于支付界面
-                    window.location.href = "../../views/newDrainage/payPage.html"
+                    console.log(disBefore)
+                    //当前选择的优惠券时该店的优惠券时
+                    // if(window.location.search.split("&")[0].split("=")[1] == date.business_id) {
+                    //     main.setSession("coupon_activity_id",date.coupon_activity_id)
+                    // }else {
+                        main.setSession("c_id",date.coupon_id)//保存优惠券id,用于支付界面
+                    // }
+                    main.setSession("disBefore",disBefore)//保存在选取优惠券的页面计算的用券优惠后的金额，在支付界面直接获取显示对应券的优惠幅度（只在支付界面使用，其余界面清空）                    
+                    window.location.href = "../../views/newDrainage/payPage.html"+window.location.search
                 }   
     		},
 
     	})
-
         getUserTicInfo()//获取用户在该商店已领优惠券列表
         function getUserTicInfo() {//获取用户优惠券详情
             main.post(baseURL+'member/getCanUseCoupon', {
-                member_id: main.getCookie("member_id"),
-                business_id:main.getCookie('business_id'),
+                member_id:window.location.search.split("&")[1].split("=")[1],
+                business_id:window.location.search.split("&")[0].split("=")[1],
                 price:Number(main.getSession("parOrderTotal")),
                 no_sale_price:main.getSession("deDisPr")?Number(main.getSession("deDisPr")):0,
             }, function (res) {
                 console.log(res)
                 var data = res.data.data
                 if(res.data.status == "success") {
-                    if(data.recommend_coupon.name != null ||data.recommend_coupon.name != undefined ||data.recommend_coupon.name != "") {
+                    console.log(data.recommend_coupon.name)
+                    if(data.recommend_coupon.name != null ||data.recommend_coupon.name != undefined ||data.recommend_coupon.name != undefined) {
                         vm.showRecommend = true
                         vm.recommend_coupon.push(data.recommend_coupon)
                     }
-                    vm.discount_list = data.discount_list
-
-                    console.log(vm.discount_list)
+                    if(data.discount_list.length > 0 ) {
+                        vm.discount_list = data.discount_list
+                    }
+                    if(data.discount_list.length == 0 && data.recommend_coupon.name == undefined) {
+                        main.prompt("暂无可用优惠券!")
+                    }
                 }else {
                     main.prompt("请求失败!")
                 }

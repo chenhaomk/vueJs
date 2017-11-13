@@ -118,7 +118,7 @@
                         map.addOverlay(lastMarker);
                         console.log(point)
                         $.ajax({
-                            url: "http://restapi.amap.com/v3/assistant/coordinate/convert?locations=" + point.lng + "," + point.lat + "&coordsys=baidu&output=JSON&key=9781ab13347d6669085c90a7db3809e6",
+                            url: "https://restapi.amap.com/v3/assistant/coordinate/convert?locations=" + point.lng + "," + point.lat + "&coordsys=baidu&output=JSON&key=9781ab13347d6669085c90a7db3809e6",
                             beforeSend: function () {
                                 $.fn.loading(true);
                             },

@@ -42,10 +42,9 @@ define([
     if (data == null || data.length <= 0)
       return;
     var tk
-    if(location.search.indexOf("user") != -1) {
+    if(location.search.indexOf("userId") != -1) {
       tk = location.search.split("&")[2].split("=")[1]
     }
-    
     var token = this.getSession("token")?this.getSession("token"):this.getCookie("token");
     if(tk != null || tk != undefined) {
       token = tk

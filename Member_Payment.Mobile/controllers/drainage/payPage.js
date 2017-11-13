@@ -23,8 +23,8 @@ require(['config'], function () {
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
     	// var baseURL = 'http://192.168.0.228:8084/v1.0/'; //本机测试地址
 
-
-        var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
+        var baseURL = "https://api.yingougou.com/v1.0/"
+        // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
         // var baseURL = 'http://pay.yingegou.com:9000/v1.0/'; //本机测试地址
                 //判断是否在微信浏览器
         function browserType() {
@@ -43,10 +43,10 @@ require(['config'], function () {
                 var u = navigator.userAgent;
                 if(u.indexOf('iPhone') > -1) {
                     main.newPrompt("页面跳转中...",30000);
-                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
                 }else {
                     main.newPrompt("页面跳转中...",30000);
-                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
                 }
                 
             }
@@ -54,7 +54,7 @@ require(['config'], function () {
             if(location.href.indexOf("auth_code") == -1){
                 var b_id = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
                 main.newPrompt("页面跳转中...",30000);
-                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id 
+                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id 
             }
         }else {
 
@@ -165,12 +165,13 @@ require(['config'], function () {
                     }
                 },
                 disBefore:function (event) {//原总金额
-                    event.target.value = event.target.value.replace(/[^\d.]/g,'')
+                    // event.target.value = event.target.value.replace(/[^\d.]/g,'')
+                    event.target.value = charAtNum(event.target.value)
                     // event.target.=value.replace(/[^\d.]/g,'')
                     this.countFn()
                 },
                 noDis:function (event) { //输入未参与折扣金额
-                    event.target.value = event.target.value.replace(/[^\d.]/g,'')
+                    event.target.value = charAtNum(event.target.value)
                     this.countFn()
                 },
                 countFn:function () { //计算实际支付金额函数
@@ -208,7 +209,12 @@ require(['config'], function () {
                             }
                         }else if(this.payType == "mj") {//满减优惠
                             if(this.picked-this.deDisPr >= this.full_rule) {//当总消费去不参与优惠金额的差大于优惠规则金额时
-                                this.subMon = parseInt((this.picked-this.deDisPr)/this.full_rule)*this.full_reduce
+                                if(parseInt((this.picked-this.deDisPr)/this.full_rule) > parseInt(this.most_reduce/this.full_reduce) ) {
+                                    this.subMon = this.most_reduce
+                                }else {
+                                    this.subMon = parseInt((this.picked-this.deDisPr)/this.full_rule)*this.full_reduce
+                                }
+                                
                             }else {//小于则按不满足优惠条件处理
                                 this.subMon = 0
                             }
@@ -227,7 +233,8 @@ require(['config'], function () {
                         if(this.deDisPr >= 0 ) {
                             main.setSession("deDisPr", this.deDisPr);//用于选券页面计算优惠金额，不参与优惠金额
                         }
-                        location.href = "../../views/newDrainage/payChangeTic.html";
+                        var str = window.location.search
+                        location.href = "../../views/newDrainage/payChangeTic.html"+str;
                         // if(main.getSession("token") != null && main.getSession("token") != undefined && main.getSession("token") != "null") {//ch-use;判断用户是否登录过
                         //     location.href = "../../views/payment/payChangeTic.html";
                         // }else {
@@ -244,11 +251,7 @@ require(['config'], function () {
                 checkPay: function (event) {
                     event.preventDefault();
                     var data = {}
-                    if (main.getSession("c_id") != null)
-                        data.coupon_id = main.getSession("c_id");
-                    if (main.getSession("c_a_id") != null)
-                        data.coupon_activity_id = main.getSession("c_a_id");
-                    data.amount = this.total;
+                    data.amount = this.picked;
                     main.setSession("b_id",main.getSession("b_id"))
                     data.business_id = busDteObj.business_id
                     main.setSession("amount", this.total);
@@ -257,10 +260,17 @@ require(['config'], function () {
                     if(this.payType == "dz") {
                         data.type = 1
                         data.no_sale_amount = this.deDisPr ==""?0:this.deDisPr
+                        data.coupon_id
                     }else if(this.payType == "mj") {
                         data.type = 2
                         data.no_sale_amount = this.deDisPr ==""?0:this.deDisPr
+                    }else {
+                        if (main.getSession("c_id") != null)
+                            data.coupon_id = main.getSession("c_id");
+                        if (main.getSession("c_a_id") != null)
+                            data.coupon_activity_id = main.getSession("c_a_id");
                     }
+                    console.log(data)
                     if(this.total > 0) {
                         payFn(browserType,data,baseURL,ck)
                     }else {
@@ -288,8 +298,7 @@ require(['config'], function () {
         //     vm.payType = "yhq"
         // }
         //ch-use:用于判断用户是否登录过
-        debugger
-        if(userId != undefined || userId != null) {//ch-use;判断用户是否登录过
+        if( userId != "null" && userId != undefined && userId != "undefined") {//ch-use;判断用户是否登录过
             vm.showYhq = true
         }else {
             vm.showYhq = false
@@ -310,7 +319,20 @@ require(['config'], function () {
         if(userId != undefined || userId != null) {
             busDteObj.member_id = userId
         }
-        
+        //判断是否去过选择优惠券页面
+        if(main.getSession("parOrderTotal")) {
+            vm.picked = main.getSession("parOrderTotal")
+            //判断用户是否选择过优惠券
+            if(main.getSession("disBefore")) {
+                vm.deDisPr = main.getSession("deDisPr")?main.getSession("deDisPr"):0
+                vm.isDis = true 
+                vm.$refs.ck.setAttribute("src","../../assets/images/newDarinage/ic_selected1_xxh.png");
+                vm.payType = "yhq"
+                vm.subMon = vm.picked - main.getSession("disBefore");
+                vm.$refs.yhq.setAttribute("src","../../assets/images/newDarinage/ic_selected@3x.png");
+            }
+            vm.total = vm.picked-vm.subMon
+        }
         main.post(baseURL +"business/getBusinessDetails",busDteObj , function (res) {//获取商家详情 
             console.log(res)           
             vm.merchant_name = res.data.data.business_details.name //商家名
@@ -356,7 +378,6 @@ require(['config'], function () {
         }
         function payFn(browserType,data,baseURL,callBack) {//browserType为判断浏览器函数，data为支付接口参数对象,baseURL,callBack支付后的回调
             if(browserType() =="weixin") {//微信浏览器内
-                // if (location.href.indexOf("code") >= 0) {
                     var code = main.getQueryString("code");
                     if (code != null && code != "") {
                         main.setSession("code");
@@ -404,13 +425,7 @@ require(['config'], function () {
                         });
                         return;
                     }
-                // }else {
-                //     var b_id = main.getQueryString("b_id")
-                //     location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
-                // }
             }else if(browserType() =="alipay") {//支付宝扫码进入
-
-                // if (location.href.indexOf("auth_code") >= 0) {    
                     var code = main.getQueryString("auth_code");
                     if (code != null && code != "") {
                         main.setSession("auth_code");
@@ -446,16 +461,12 @@ require(['config'], function () {
                         });
                         return;
                     }
-                // } else {
-                //     var b_id = main.getQueryString("b_id")
-                //     location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=http://pay.yingegou.com/payment/views/newDrainage/payPage.html?b_id="+b_id 
-                // }
             }else {//普通浏览器扫码进入
                 data.pay_way = 'alipay_web';
                 main.post( baseURL+"pay/create_pay",
                         data,
                     function (res) { 
-                                          
+                         console.log(res)                 
                         if (res.code == 2001) {
                             location.href = "../../views/newDrainage/paySucc.html";
                             // main.clearSessionItem("sn");
