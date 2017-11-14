@@ -73,4 +73,3 @@ input,select,textarea{-webkit-appearance:none} */
 .prompt .text{ position: absolute; z-index: 2; top: 4.4rem; text-align: center; width: 100% }
 .prompt .text p{ display: inline-block; background: white; border-radius: .1rem; line-height: .5rem; padding: .3rem .8rem; font-size: 0.32rem; max-width: calc(100% - 2.2rem)}
 
-

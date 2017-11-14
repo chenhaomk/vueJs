@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <script src="../../assets/js/autosize.js "></script>
+    <link rel="stylesheet" href="../../theme/newDrainage/newDrainage.css">
+</head>
+
+<body>
+    <div id="app" class="main warpBg">
+		<div class="shopHdImg">
+            <div class="headeImg">
+                <div class="imgWarp">
+                    <img v-bind:src="img" alt="title">
+                </div>
+                <div class="shopName" v-text="b_n"></div>
+            </div>
+            <div class="shopSum">
+                <div class="con">
+                    <p>评分</p>
+                    <p><img class="address" src="../../assets/images/freeCoupons/ic_bg_address_xxh.png">成都市武侯区复城国际T2-202</p>
+                    <p><img class="phone" src="../../assets/images/freeCoupons/ic_bg_phone_xxh.png" />028-8723098</p>
+
+                </div>
+            </div>
+            <div class="sunfo">
+                <p>{{all}}</p>
+            </div>
+        </div>
+        <div class=" contentFree">
+            <div class="inputWarp">
+                <span class="discount">相关优惠</span>
+                <div class="discountBox">
+                    <div class="content">
+                        <p class="freeImg">
+                            <img src="../../assets/images/freeCoupons/11.png"/>
+                        </p>
+                        <p>20元代金券</p>
+                        <p class="money">¥2.2</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="freeBtn">免费领券</div>
+        <div class="explain">
+            <!-- <p>活动说明</p> -->
+        </div>
+    </div>
+</body>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/drainage/drainage.js "></script>
+</html>
