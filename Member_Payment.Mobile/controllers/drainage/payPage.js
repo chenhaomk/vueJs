@@ -5,7 +5,9 @@ require(['config'], function () {
         if(location.search.indexOf("userId") != -1) {
             userId  = location.search.split("&")[1].split("=")[1]
         }
-         
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; 
+        // if(isAndroid) {}
         var busDteObj = {} //ch-use:获取商家详情请求参数
         
         window.addEventListener('load', function() {
@@ -59,7 +61,7 @@ require(['config'], function () {
         }else {
 
         }
-        main.loading(true)
+        // main.loading(true)
     	var vm = new vue({
     		el:"#app",
     		data:{
@@ -83,6 +85,7 @@ require(['config'], function () {
                 deDisPr:"",//为不参与折扣金额
                 showYhq:false,//判断用户是否登录过，没有就不显示可用优惠券
                 groupWarp:false,//用于显示购买团购券时的界面
+                isAndroid:isAndroid,//判断是否是安卓手机
     		},
     		methods:{
                 back:function () {
@@ -165,12 +168,22 @@ require(['config'], function () {
                     }
                 },
                 disBefore:function (event) {//原总金额
+                    if(event.target.value.length > 0) {
+                        this.$refs.inputO.style.fontSize = "0.4rem"
+                    }else {
+                        this.$refs.inputO.style.fontSize = "0.3rem"
+                    }
                     // event.target.value = event.target.value.replace(/[^\d.]/g,'')
                     event.target.value = charAtNum(event.target.value)
                     // event.target.=value.replace(/[^\d.]/g,'')
                     this.countFn()
                 },
                 noDis:function (event) { //输入未参与折扣金额
+                    if(event.target.value.length > 0) {
+                        this.$refs.inputT.style.fontSize = "0.4rem"
+                    }else {
+                        this.$refs.inputT.style.fontSize = "0.3rem"
+                    }
                     event.target.value = charAtNum(event.target.value)
                     this.countFn()
                 },
@@ -230,7 +243,7 @@ require(['config'], function () {
                 changeTic:function () {
                     if(this.picked > 0 ) {
                         main.setSession("parOrderTotal", this.picked);//用于选券页面计算优惠金额，消费总额
-                        if(this.deDisPr >= 0 ) {
+                        if(this.deDisPr > 0 ) {
                             main.setSession("deDisPr", this.deDisPr);//用于选券页面计算优惠金额，不参与优惠金额
                         }
                         var str = window.location.search
@@ -278,12 +291,13 @@ require(['config'], function () {
                     }
                     
                     function ck() {
-                        location.href = "../../views/newDrainage/paySucc.html";
+                        location.href = "../../views/newDrainage/paySucc.html"+window.location.search;
                     }
                 
                 }
     		}
     	})
+        vm.isAndroid = isAndroid ;
         // //ch-use:用来判断是从哪个页面返回的支付界面，可能是买团购券，可能是在选取用户的优惠券后
         // if(main.getSession("disBefore") != null ) { //main.getSession("disBefore")在选取优惠券页面保存，则从选取优惠券页面返回
         //     vm.picked = main.getSession("parOrderTotal") //填充表单
@@ -324,23 +338,26 @@ require(['config'], function () {
             vm.picked = main.getSession("parOrderTotal")
             //判断用户是否选择过优惠券
             if(main.getSession("disBefore")) {
-                vm.deDisPr = main.getSession("deDisPr")?main.getSession("deDisPr"):0
-                vm.isDis = true 
-                vm.$refs.ck.setAttribute("src","../../assets/images/newDarinage/ic_selected1_xxh.png");
                 vm.payType = "yhq"
                 vm.subMon = vm.picked - main.getSession("disBefore");
                 vm.$refs.yhq.setAttribute("src","../../assets/images/newDarinage/ic_selected@3x.png");
+            }else {
+                vm.subMon = 0
+            }
+            if(main.getSession("deDisPr")) {
+                vm.deDisPr = main.getSession("deDisPr")
+                vm.isDis = true
+                vm.$refs.ck.setAttribute("src","../../assets/images/newDarinage/ic_selected1_xxh.png");
             }
             vm.total = vm.picked-vm.subMon
         }
-        main.post(baseURL +"business/getBusinessDetails",busDteObj , function (res) {//获取商家详情 
-            console.log(res)           
+        main.post(baseURL +"business/getBusinessDetails",busDteObj , function (res) {//获取商家详情      
             vm.merchant_name = res.data.data.business_details.name //商家名
             main.setSession("b_n",vm.merchant_name)//用于引流页面获取商家名
             data = res.data.data.business_details
             console.log(data)
-            main.loading(false)
-            if(data.sale_status  != false && data.discount) {
+            if(data.sale_status  == true && data.discount != null) {
+                console.log(23123)
                 vm.discountShow = true
                 vm.discount = data.discount*10
                 vm.discountS = data.discount
@@ -351,7 +368,8 @@ require(['config'], function () {
                 }
                 
             }
-            if(data.reduce_status  != false ) {
+            
+            if(data.reduce_status  == true ) {
                 vm.full_reduceShow = true
                 vm.full_rule  = data.full_rule 
                 vm.full_reduce = data.full_reduce
@@ -362,7 +380,7 @@ require(['config'], function () {
                     vm.most_reduce  = data.most_reduce 
                 }
             }
-            
+            main.loading(false)
         })
 
         function charAtNum(num) {//ch-use:限制输入框输入类型

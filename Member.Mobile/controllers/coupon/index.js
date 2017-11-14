@@ -34,6 +34,8 @@ require(['config'], function () {
                         });
                     },
                     buyCoupon: function () {
+                        ygg.prompt("暂不支持该功能，请在APP上购买!");
+                        return
                         //sdf-立即抢购
                         //判断是否可以下单
                         if(!ygg.getCookie("member_id"))window.open("/views/user/login.html","_self");

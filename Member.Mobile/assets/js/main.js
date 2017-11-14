@@ -873,7 +873,7 @@ define(['axio', 'vue'], function (axio, Vue) {
             '<a v-else-if="isGq" :class="{nohx:isGq}">' +
             '<p>已过期</p>' +
             '</a>' +
-            '<a v-else-if="a.type==2 && !geting" :href="urlp">' +
+            '<a v-else-if="a.type==2 && !geting" @click="msg">' +
             '<p>立即</br>抢购</p>' +
             '</a>' +
             '<a v-else-if="a.type!=2 && !geting" @click="getc(this.isMy?a.coupon_activity_id:a.coupon_id)">' +
@@ -904,6 +904,9 @@ define(['axio', 'vue'], function (axio, Vue) {
                     }
 
                 });
+            },
+            msg:function () {
+                ygg.prompt("暂时不支持该功能,请在APP上购买!");
             }
         }
     });
@@ -934,7 +937,8 @@ define(['axio', 'vue'], function (axio, Vue) {
                     u += "&bid=" + this.a.business_id
                 }
                 return u
-            }
+            },
+
         },
         template: '<section  class="discount_group fn-clear" :class="{tg:a.type==3 && a.is_special ,expired:isGq,lqcg:lqcg,lqgl:a.already_get || lqcg}">' +
             '<a :href="urlp" class="router">' +
@@ -957,8 +961,8 @@ define(['axio', 'vue'], function (axio, Vue) {
             '</section>' +
             '</a>' +
             '<section class="status">' +
-            '<a :href="urlp">' +
-            '<p>立即<br>抢购</p>' +
+            '<a >' +
+            '<p @click="msg">立即<br>抢购</p>' +
             '</a>' +
             '</section>' +
             '</section>' ,
@@ -982,6 +986,9 @@ define(['axio', 'vue'], function (axio, Vue) {
                     }
 
                 });
+            },
+            msg:function () {
+                ygg.prompt("暂时不支持该功能,请在APP上购买!");
             }
         }
     });

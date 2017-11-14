@@ -7,17 +7,17 @@ input, select, textarea {
 }
 html,body,button, input, select, textarea {font: 14px/1.5 "Microsoft YaHei",tahoma, Srial, helvetica, sans-serif; outline:none; color: #1c1c1c;background-color: #fafafa;}
 .main {position: relative;padding-top: 1rem;}
-.header span {position: absolute;left: 50%;width: 4.6rem;margin-left: -2rem; text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-.header{height:1rem;line-height:1rem;position: fixed;top:0;text-align: center;font-size: .34rem;width: 100%;background-color: white;z-index: 2}
-.header .back {position: absolute;left:0;height: 1.4rem;top:50%;margin-top: -.7rem;width: 1.2rem;}
-.header .back img {position: absolute;left: 50%;top:50%;width: .26rem;height: .46rem;margin-top: -.23rem;margin-left: -.13rem;}
+.header span {position: absolute;left: 50%;width: 4.6rem;margin-left: -2.3rem; text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.header{height:.9rem;line-height:.9rem;position: fixed;top:0;text-align: center;font-size: .32rem;width: 100%;background-color: white;z-index:2;border-bottom:1px solid #e7e7e7}
+.header .back {position: absolute;left:0;height: .9rem;top:50%;margin-top: -.45rem;width: .9rem;}
+.header .back img {position: absolute;left: 50%;top:50%;width: .2rem;height: .3rem;margin-top: -.15rem;margin-left: -.1rem;}
 .content {padding:.3rem;
 	/*background-color: #fafafa;*/
 	 }
-.titel {font-size: .32rem;}
+.titel {font-size: .3rem;}
 .piircWarp,.checkInput {
 	width: 100%;
-	height: 1.2rem;
+	height: 1.1rem;
 	position: relative;
 	margin-top: .3rem;
     box-shadow: 0 0 5px 3px #f7f7f8;
@@ -27,23 +27,37 @@ body .checkInput input,body .piircWarp input{
 	background-color: white;
 }
 .piircWarp p,.checkInput p {
+	
 	text-align: center;
 	width: 8%;
-	height: 1.2rem;
+	height: 1.1rem;
 	position: absolute;
 	left: 0;
-	line-height: 1.2rem;
-	font-size: .4rem;
+	line-height: 1.1rem;
+	font-size: .26rem;
+}
+.piircWarp p img,.checkInput p img {
+	width: 0.18rem;
+	height: 0.26rem;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -0.13rem;
+	margin-left: -0.09rem;
+
 }
 .piircWarp input,.checkInput input {
+	padding:.3rem 0; 
+	height: .5rem;
+	line-height:.5rem;
 	font-size: .3rem;
 	display: block;
 	width: 92%;
 	padding-left: 8%;
-	height: 1.2rem;
+	
 }
 .checkWarp {
-	margin-top: .3rem;
+	margin-top: .4rem;
 	overflow: hidden;
 
 }
@@ -51,13 +65,13 @@ body .checkInput input,body .piircWarp input{
 	overflow: hidden;
 }
 .checkWarp div img{
-	width: .4rem;
-	height: .4rem;
+	width: .3rem;
+	height: .3rem;
 	float: left;
 }
 .checkWarp div  span {
-	height: .4rem;
-	line-height: .4rem;
+	height: .3rem;
+	line-height: .3rem;
 	float: left;
 	display: inline-block;
 	margin-left: .2rem;
@@ -71,36 +85,58 @@ body .checkInput input,body .piircWarp input{
 }
 .mj,.dz,.yhq {
 	padding:0 .3rem;
-	height: 1.2rem;
-	line-height: 1.2rem;
+	height: .9rem;
+	line-height: .9rem;
 	border-bottom: 1px solid #f2f2f2;
 	position: relative;
 }
 .mj,.dz {color: #888888;}
 .mj img,.dz img ,.yhq img {
-	width: .4rem;
-	height: .4rem;
+	margin-top: .3rem;
+	float: left;
+	width: .3rem;
+	height: .3rem;
+	vertical-align: middle;
+}
+.mj span img,.dz  span img ,.yhq span img {
+	margin-top: .35rem;
+	width: .15rem;
+	height: .2rem;
 	vertical-align: middle;
 }
 .mj span,.dz span ,.yhq span {
+	float: left;
 	color: black;
 	vertical-align: middle;
+	margin-left: .2rem;
 }
 .yhq div,.mj div,.dz div {
 	position: absolute;
 	right: 0.3rem;
 	top: 50%;
-	height: 1.2rem;
-	margin-top: -.6rem;
+	height:.9rem;
+	margin-top: -.45rem;
 }
 .yhq div img {
-	width: .26rem;
-	height: .36rem;
+	width: .2rem;
+	height: .3rem;
+	vertical-align: middle;
+}
+.yhq div .fnImg {
+	margin-top: .35rem;
+	width: .15rem;
+	height: .2rem;
 	vertical-align: middle;
 }
 .yhq div span ,.mj div span ,.dz div span  {
 	vertical-align: middle;
 	color: #ff6f3d;
+	margin-right: 0.1rem;
+}
+.yhq div span span,.mj div span span,.dz div span span {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0;
 }
 .footer {
 	background-color: #fafafa;
@@ -109,26 +145,47 @@ body .checkInput input,body .piircWarp input{
 }
 .realityPrice {
 	background-color: white;
-	height: 1.2rem;
-	line-height: 1.2rem;
+	height: .9rem;
+	line-height: .9rem;
 	padding: 0 .3rem;
 	margin-top: .3rem;
 	overflow: hidden;
 }
 .realityPrice span {
+	
 	float: right;
 }
+.realityPrice .tt img {
+	width: .15rem;
+	height: .2rem;
+	/*vertical-align: middle;*/
+}
+.tt span {
+	display: inline-block;
+	vertical-align: middle;
+}
 .btn {
-	margin:.45rem .3rem  .4rem .3rem;
-	height: 1.2rem;
-	line-height: 1.2rem;
+	margin:.45rem .3rem  .3rem .3rem;
+	height: 1rem;
+	line-height: 1rem;
 	text-align: center;
 	color: white;
 	background-color: #ff6f3d;
-	border-radius: .1rem; 
+	border-radius: .1rem;
+	font-size: .3rem; 
+}
+.btn span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.btn img{
+	/*margin-top: 0.0rem;*/
+	width: .2rem;
+	height: .24rem;
+	vertical-align: middle;
 }
 .footer p {
 	margin-left: .3rem;
-	font-size: .24rem;
+	font-size: .22rem;
 	color: #888888;
 }

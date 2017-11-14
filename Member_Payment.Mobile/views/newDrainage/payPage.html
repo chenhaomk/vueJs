@@ -26,19 +26,23 @@
                 消费金额
             </div>
             <div class="piircWarp" id="piircWarp">
-                <p>¥</p>
-                <input type="number" placeholder="请询问收银员后输入" v-model="picked" v-on:input="disBefore">
+                <p><img src="../../assets/images/newDarinage/fotbg.png" alt=""></p>
+                <input type="text" v-if="isAndroid" ref="inputO" placeholder="请询问收银员后输入" v-model="picked" v-on:input="disBefore">
+                <input type="number" v-else placeholder="请询问收银员后输入" ref="inputO" v-model="picked" v-on:input="disBefore">
             </div>
             <div class="checkWarp" >
                 <div>
                     <img src="../../assets/images/newDarinage/ic_select1@3x.png" ref="ck" alt="" v-on:click="checkPrice">
                     <span>输入不参与优惠金额</span>
                 </div>
-                <p>酒水除外</p>
+                <!-- <p>酒水除外</p> -->
             </div>
             <div class="checkInput" v-show="isDis">
-                <p>¥</p>
-                <input type="number" v-on:input="noDis" v-model="deDisPr"  placeholder="请询问收银员后输入">
+                <p>
+                    <img src="../../assets/images/newDarinage/fotbg.png" alt="">
+                </p>
+                <input type="text" v-on:input="noDis" ref="inputT" v-if="isAndroid" v-model="deDisPr"  placeholder="请询问收银员后输入">
+                <input type="number" v-on:input="noDis" ref="inputT" v-else v-model="deDisPr"  placeholder="请询问收银员后输入">
             </div>
         </div>
         <div class="zhekou">
@@ -46,7 +50,7 @@
                 <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="mj" v-on:click="mj">
                 <span>每满{{full_rule}}减{{full_reduce}}元</span><span v-show="most_reduce <10000000">(最高减{{most_reduce}}元)</span>
                 <div v-show="payType =='mj' ">
-                    <span>-¥{{subMon}}</span>
+                    <span><span class="d">-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt="">{{subMon}}</span>
                 </div>
             </div>
             <div class="dz" v-show="discountShow">
@@ -54,14 +58,14 @@
                     <span>{{discount}}折</span><span v-show="most_discount <10000000">(最高减{{most_discount}}元)</span>   
                 
                 <div v-show="payType =='dz' ">
-                    <span>-¥{{subMon}}</span>
+                    <span><span>-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt="">{{subMon}}</span>
                 </div>
             </div>
             <div class="yhq" v-show="showYhq">
                 <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="yhq" v-on:click="yhq">
                 <span>可用优惠券</span>
                 <div >
-                    <span v-show="payType =='yhq' ">-¥{{subMon}}</span>
+                    <span v-show="payType =='yhq' "><span>-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt="">{{subMon}}</span>
                     <img src="../../assets/images/newDarinage/ic_arrow@3x.png" alt="" v-on:click="changeTic">
                 </div>
             </div>
@@ -69,10 +73,10 @@
         <div class="footer">
             <div class="realityPrice">
                 实际金额
-                <span v-show=" total != null">¥{{total}}</span>
+                <span class="tt" v-show=" total != null"><img src="../../assets/images/newDarinage/fotbg.png" alt=""><sapn>{{total}}</sapn></span>
             </div>
             <div class="btn" v-on:click="checkPay">
-                <span v-show=" total != null">¥{{total}}</span>确认买单
+                <img src="../../assets/images/newDarinage/fontBg3.png" alt=""><span v-show=" total != null">{{total}}确认买单</span>
             </div>
             <p>优惠买单仅限于到店消费，请确认金额后提交</p>
         </div>

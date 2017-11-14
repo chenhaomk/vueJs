@@ -722,3 +722,83 @@ body {
 .pau_succ span {
     vertical-align: middle;
 }
+
+/*dxf*/
+.freeBg{
+    background: url("../../assets/images/freeCoupons/bg.png");
+}
+
+.con{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 30px;
+}
+.con .add,.con .tel{
+    margin-top:.4rem; 
+}
+.add .address{
+    width: .24rem;
+    height: .28rem;
+    vertical-align: middle;
+    padding-right: 8px;
+}
+.tel .phone{
+    width: .36rem;
+    height:.36rem;
+    vertical-align: middle;
+    padding-right: .1rem;
+}
+.tel span,.add span {
+    display: inline-block;
+    /*vertical-align: middle;*/
+    
+    font-size: .28rem;
+}
+
+.discount{
+    font-size: 20px;
+    line-height: 36px;
+    color: #5b5b5b;
+    display: block;
+    margin: 20px 0 10px;
+}
+
+.discountBox{
+    width: 78%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.discountBox .content{
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    float: left;
+    padding-right: 2%;
+}
+
+.discountBox .content p{
+    font-size: 16px;
+    margin-top: 8px;
+    color: #5b5b5b;
+}
+
+.discountBox .content .money{
+    color: #ff6f3d;
+}
+
+.freeBtn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: .96rem;
+    line-height:.96rem;
+    background-color: rgba(255, 136, 95, 1);
+    color: #fff;
+    font-size: .32rem;
+}
+.contentFree .tet {
+    margin-top: .54rem;
+    margin-bottom: .42rem;
+    font-size: .3rem;
+    color: #5b5b5b;
+}

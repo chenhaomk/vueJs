@@ -8,7 +8,7 @@
     <title>银个购</title>
     <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
     <script src="../../assets/js/autosize.js "></script>
-    <link rel="stylesheet" href="../../theme/newDrainage/newDrainage.css">
+    <link rel="stylesheet" href="../../theme/newDrainage/freeCoupons.css">
 </head>
 
 <body>
@@ -22,37 +22,21 @@
             </div>
             <div class="shopSum">
                 <div class="con">
-                    <p>评分</p>
-                    <p><img class="address" src="../../assets/images/freeCoupons/ic_bg_address_xxh.png">成都市武侯区复城国际T2-202</p>
-                    <p><img class="phone" src="../../assets/images/freeCoupons/ic_bg_phone_xxh.png" />028-8723098</p>
-
+                    <star :score='star*10'></star>
+                    <div class="add"><img class="address" src="../../assets/images/freeCoupons/ic_bg_address_xxh.png"><span>成都市武侯区复城国际T2-202</span></div>
+                    <div class="tel"><img class="phone" src="../../assets/images/freeCoupons/ic_bg_phone_xxh.png" /><span>18380465617</span></div>
                 </div>
             </div>
             <div class="sunfo">
-                <p>{{all}}</p>
+                <!-- <p>{{all}}</p> -->
             </div>
         </div>
         <div class=" contentFree">
-            <div class="inputWarp">
-                <span class="discount">相关优惠</span>
-                <div class="discountBox">
-                    <div class="content">
-                        <p class="freeImg">
-                            <img src="../../assets/images/freeCoupons/11.png"/>
-                        </p>
-                        <p>20元代金券</p>
-                        <p class="money">¥2.2</p>
-                    </div>
-
-                </div>
-            </div>
+            <div class="tet">相关优惠</div>
         </div>
         <div class="freeBtn">免费领券</div>
-        <div class="explain">
-            <!-- <p>活动说明</p> -->
-        </div>
     </div>
 </body>
 <script data-main=" ../../config" src="../../plugins/require/require.js "></script>
-<script src="../../controllers/drainage/drainage.js "></script>
+<script src="../../controllers/drainage/freeCoupons.js"></script>
 </html>

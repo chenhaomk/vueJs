@@ -3,7 +3,8 @@ require(['config'], function () {
     	// var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // main.post.
-        var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
+        var baseURL = "https://api.yingougou.com/v1.0/"
+        // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
     	var vm = new vue({
     		el:"#app",
     		data:{
@@ -31,7 +32,7 @@ require(['config'], function () {
                     }
                 },
                 useTic:function (date) {//ch-use:立即使用优惠券
-                    
+                    console.log(date)
                     var picked = main.getSession("parOrderTotal") // 从获取支付界面存的支付总金额
                     var deDisPr  = main.getSession("deDisPr") //不参与优惠金额
                     var disBefore // 折扣后的金额

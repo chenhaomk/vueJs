@@ -609,25 +609,22 @@ a.checkbox.none:before{ background: #fff}
 
 
 
-.discount_group{ margin-top: .9rem;overflow: hidden; }
+.discount_group{ margin-top: .9rem;overflow: hidden;width: 100%; }
 .discount_group .router{display: block;overflow: hidden;float:left;width: 81%;}
 .discount_group.fn-clear{background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100%}
 .discount_group.default{ background: url(../images/index/ic_bg_dknormal_xxh.png); background-size: 100% 100% }
-.discount_group.default_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
+.discount_group.default_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100%; }
 .discount_group.rate{ background: url(../images/index/ic_bg_znormall_xxh.png); background-size: 100% 100% }
 .discount_group.rate_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
 .discount_group.dk{ background: url(../images/index/ic_bg_dknormall_xxh.png); background-size: 100% 100% }
 .discount_group.dk_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
 .discount_group.tg {background: url(../images/index/ic_te_xxh.png); background-size: 100% 100% } /*团购券背景*/
-/*
-=======
-.discount_group.dk_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
->>>>>>> e2d2c4169775d877a24d12e880881cd7f3355e3a*/
+
 .discount_group.expired.default,.discount_group.expired.default_z{ background: url(../images/discount/ic_bg_dpast_xxh.png); background-size: 100% 100% }
 .discount_group.expired.rate,.discount_group.expired.rate_z{ background: url(../images/discount/ic_bg_zpast_xxh.png); background-size: 100% 100% }
 .discount_group.expired.dk,.discount_group.expired.dk_z{ background: url(../images/discount/ic_bg_dkpast_xxh.png); background-size: 100% 100% }
 .discount_group.lqgl.dk_z{ background: url(../images/index/ic_bg_dkylq@3x.png); background-size: 100% 100% }
-/*.discount_group.lqgl.rate_z{ background: url(../images/index/ic_bg_zylq@3x.png); background-size: 100% 100% }*/
+
 .discount_group.lqgl.default_z{ background: url(../images/index/ic_bg_xxh.png); background-size: 100% 100% }
 .discount_group.lqgl a.nohx p{ color: #ff6f3d }
 .discount_group .info{ margin: 1.1rem 1rem 0 1rem}

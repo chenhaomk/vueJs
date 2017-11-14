@@ -344,7 +344,7 @@ function init() {
 					main.clearSessionItem("sn");
 					if (memberID != "" && memberID != null) {
 						main.setSession("m_id", memberID);
-						location.href = "/payment/views/payment/paymerchant.html";
+						location.href = "/payment/views/newDrainage/payPage.html";
 					} else
 						location.href = "/payment/views/payment/index.html";
 					//main.prompt("支付失败");

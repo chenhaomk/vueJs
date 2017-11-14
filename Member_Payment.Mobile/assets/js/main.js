@@ -650,7 +650,38 @@ define([
       }
     }
   });
+  //评分星级
+  main.template.star = Vue.extend({
+        props: {
+            score: Number
+        },
+        template: '<div class="score_star">\
+                        <a v-for="a of aScore"><b :style="{width:a}"></b></a>\
+                        <span>{{score}}分</label>\
+                    </div>',
+        computed: {
+            aScore: function () {
+                if (!this.score) {
+                    this.score = 0;
+                } else {
+                    this.score = this.score / 10;
+                }
+                var arr = new Array(5),
+                    sco = this.score;
+                for (var i = 0; i < arr.length; i++) {
+                    if (i + 1 <= sco) {
+                        arr[i] = 1 * 100 + "%";
+                    } else if (i + 1 > sco && i < sco) {
+                        arr[i] = sco % 1 * 100 + "%";
+                    } else {
+                        arr[i] = 0;
+                    }
+                }
 
+                return arr;
+            }
+        }
+    });
   main.prompt = function (t) {
     var dom = document.getElementById("prompt");
     if (!dom) {

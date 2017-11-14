@@ -30,7 +30,7 @@
                                 <p class="discounted" v-if="dis.type == 0">
                                     <span>{{dis.discount}}</span>元<span>代金券</span>
                                 </p>
-                                <p class="discounted" v-else-if="dis.type == 1"><span>{{dis.rate*10}}</span><span>折扣券</span></p>
+                                <p class="discounted" v-else-if="dis.type == 1"><span>{{dis.rate*10}}</span><span>折扣券,最多优惠{{dis.max_price}}元</span></p>
                                 <p class="discounted" v-else-if="dis.type == 2"><span>{{dis.price}}</span>元<span>抵扣券</span><b>{{dis.discount}}元</b></p>
                             </div>
                         </div>
