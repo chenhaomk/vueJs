@@ -19,10 +19,10 @@ body {
     z-index: 1;
 }
 .shopHdImg ,.deHeade{
-    height: 22%;
+    /*height: 22%;*/
     overflow: hidden;
 }
-.warpBg {
+body,.warpBg {
     background: url("../../assets/images/newDarinage/bg2.png");
 }
 .dewarpBg {
@@ -73,9 +73,9 @@ body {
 
 .shopSum {
     text-align: center;
-    margin-top: 5%;
+    /*margin-top:.2rem;*/
     overflow: hidden;
-    height: 60%;
+    height:2.2rem;
 }
 .shopSum img {
     width: .44rem;
@@ -118,7 +118,8 @@ body {
 }
 .sunfo {
     text-align: center;
-    height: 35%;
+    overflow: hidden;
+    margin-top: -.32rem;
 }
 .sunfo span{
     /*color: #cfc2c1;*/
@@ -126,8 +127,8 @@ body {
     vertical-align: middle;
 }
 .sunfo img{
-    width: .7rem;
-    height: .6rem;
+    width: .5rem;
+    height: .46rem;
     vertical-align: middle;
     margin-right: -.2rem;
 }
@@ -141,7 +142,7 @@ body {
     position: relative;
     z-index: 3;
     width: 100%;
-     height: 32%;
+     /*height: 32%;*/
 }
 
 .inputWarp {
@@ -233,13 +234,13 @@ body {
     z-index: 20   
 }
 .footer {
-    height: 46%;
-    /*margin-top: 0.66rem;*/
+    /*height: 46%;*/
+    margin-top:-.2rem;
 }
 .dowBg {
     margin: 0 auto;
-    width: 90%;
-    height: 90%;
+    width: 6.4rem;
+    height:5.rem;
     position: relative;
 }
 .dowBtn {
@@ -251,10 +252,10 @@ body {
     line-height: 0.88rem;
     font-size: 0.28rem;
     position: absolute;
-    top: 50%;
+    top:2.4rem;
     left: 50%;
     margin-left: -2.2rem;
-    margin-top:-.44rem;
+    /*margin-top:-.44rem;*/
     z-index: 10
 }
 .dowBg img {

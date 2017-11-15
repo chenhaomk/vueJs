@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div id="app" class="main warpBg">
+    <div id="app" class="main newWarpBg">
 		<div class="shopHdImg">
             <div class="headeImg">
                 <div class="imgWarp">
@@ -23,8 +23,8 @@
             <div class="shopSum">
                 <div class="con">
                     <star :score='star*10'></star>
-                    <div class="add"><img class="address" src="../../assets/images/freeCoupons/ic_bg_address_xxh.png"><span>成都市武侯区复城国际T2-202</span></div>
-                    <div class="tel"><img class="phone" src="../../assets/images/freeCoupons/ic_bg_phone_xxh.png" /><span>18380465617</span></div>
+                    <div class="add"><img class="address" src="../../assets/images/freeCoupons/ic_bg_address_xxh.png"><span>{{add}}</span></div>
+                    <div class="tel"><img class="phone" src="../../assets/images/freeCoupons/ic_bg_phone_xxh.png" /><a v-bind:href="'tel:'+telNum" >{{telNum}}</a></div>
                 </div>
             </div>
             <div class="sunfo">
@@ -33,8 +33,19 @@
         </div>
         <div class=" contentFree">
             <div class="tet">相关优惠</div>
+            <div class="disList">
+                <div v-for="item in arr" class="item">
+                    <img :src="item.img_path" alt="" class="tetImg">
+                    <p>
+                        {{item.discount}}元<span v-if="item.type == 0">代金券</span>
+                        <span v-else-if="item.type == 1">折扣券</span>
+                        <span v-else="item.type == 3">抵扣券</span>
+                    </p>
+                    <p><img src="../../assets/images/newDarinage/fontBg2.png" alt="" class="rmb"><span class="price">{{item.price?item.price:0}}</span></p>
+                </div>
+            </div>
         </div>
-        <div class="freeBtn">免费领券</div>
+        <div class="freeBtn" v-on:click="btn">免费领券</div>
     </div>
 </body>
 <script data-main=" ../../config" src="../../plugins/require/require.js "></script>

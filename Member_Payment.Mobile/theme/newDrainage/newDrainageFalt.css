@@ -10,7 +10,7 @@ body {
 .warpBg {
     background: url("../../assets/images/newDarinage/bg.png");
 }
-.dewarpBg {
+.dewarpBg,body {
     background: url("../../assets/images/newDarinage/bg2.png");
 }
 .warpBg,.dewarpBg {
@@ -121,10 +121,10 @@ body {
 }
 
 .main .content .pay_fault p:nth-child(1) {
-    font-size: 0.3rem;
+    font-size: 0.22rem;
 }
 .main .content .pay_fault p:nth-child(2) {
-    font-size: 0.36rem;
+    font-size: 0.26rem;
 }
 
 @font-face {
@@ -170,13 +170,14 @@ body {
     border-radius: 0.68rem;
 }
 .footer {
-    height: 46%;
-    /*margin-top: 0.66rem;*/
+    /*height: 43%;*/
+    overflow: hidden;
+    /*padding-top:.1rem;*/
 }
 .dowBg {
     margin: 0 auto;
-    width: 90%;
-    height: 90%;
+    width: 6.4rem;
+    height: 5.3rem;
     position: relative;
 }
 .dowBtn {
@@ -188,10 +189,10 @@ body {
     line-height: 0.88rem;
     font-size: 0.28rem;
     position: absolute;
-    top: 50%;
+    top:2.4rem;
     left: 50%;
     margin-left: -2.2rem;
-    margin-top:-.44rem;
+    /*margin-top:-.44rem;*/
     z-index: 10
 }
 .dowBg img {

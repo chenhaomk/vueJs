@@ -3,19 +3,28 @@ require(['config'], function () {
     	// var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // main.post.
-        // var baseURL = "https://api.yingougou.com/v1.0/"
+        main.loading(true)
+        var baseURL = "https://api.yingougou.com/v1.0/"
         // 2c92f9245f5bf7b7015f5c69e068001f
-        var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
+        var bid = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
+        // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
     	var vm = new vue({
     		el:"#app",
     		data:{
                 star : "",
                 img:"",
-                b_n:"测试",
-                all:"22"
+                b_n:"",
+                all:"22",
+                arr:[],
+                add:"",
+                telNum:"",
+                
     		},
     		methods:{
-
+                btn:function() {
+                    // window.location.href = "../../payment/views/newDrainage/freeCoupons.html"
+                    window.location.href = "../../views/newDrainage/drainageLogin.html"
+                }
     		},
             components : {
                 star:main.template.star,
@@ -25,12 +34,34 @@ require(['config'], function () {
         getBusinessDetil()
         function getBusinessDetil() {
             main.post(baseURL+'business/getBusinessDetails',{
-                business_id:"2c92f9245f5bf7b7015f5c69e068001f"
+                business_id:bid
             },function (res) {
-                console.log(res)
+               
                 data = res.data.data;
+                console.log(data)
+                vm.b_n = data.business_details.name
+                vm.telNum = data.business_details.phone
+                vm.add = data.business_details.address
+                main.setSession("b_n",data.business_details.name)
+                main.setSession("img",data.business_details.logo)
+                main.setSession("b_id",data.business_details.business_id)
+                vm.img = data.business_details.logo
                 vm.$set(vm,"star",data.business_details.star);
-                
+                data.coupons.map(function (item,index) {
+                    if(item.type != 3) { //团购
+                        vm.arr.push(item)
+                    }
+                })
+                console.log(vm.arr)
+                if(vm.arr.length == 0) {
+                    // window.location.href = "../../payment/views/newDrainage/newDrainagefalt.html"
+                    window.location.href = "../../views/newDrainage/newDrainagefalt.html"
+                }
+                if(vm.arr.length >3) {
+                    var arr = []
+                    arr = vm.arr.splice(3,vm.arr.length-3)
+                }
+                 main.loading(false)
             })
         }
     })

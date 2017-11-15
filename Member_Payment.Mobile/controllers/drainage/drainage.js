@@ -70,8 +70,9 @@ require(['config'], function () {
                     main.post(main.baseUrl+"common/shareTicket",
                         data,
                         function (res) {
-                            if (res.errCode < 0)
+                            if (res.errCode < 0){
                                 main.prompt(res.errMsg);
+                            }
                             var data = res.data;
                             if (data == null || data.code != 200) {
                                 //main.prompt("数据有误"); //此类提示较为后台化，可根据实际情况修改与用户的会话
@@ -83,23 +84,33 @@ require(['config'], function () {
                              var pram
 
                             if (data.data != null) {
-                                if (data.data[1001] != null)
+                                if (data.data[1001] != null) {
                                     main.prompt(data.data[1001]);
-                                if (data.data[9009] != null)
+                                }
+                                if (data.data[9009] != null){
                                     pram = "newUser"
+                                }
+                                    
                                     // main.prompt(data.data[9009]);
-                                if (data.data[9012] != null)
+                                if (data.data[9012] != null) {
                                     main.prompt(data.data[9012]);
-                                if (data.data[9013] != null)
+                                }
+                                if (data.data[9013] != null) {
                                     main.prompt(data.data[9013]);
-                                if (data.data[9015] != null)
+                                }
+                                if (data.data[9015] != null) {
                                     main.prompt(data.data[9015]);
-                                if (data.data[9016] != null)
+                                }
+                                if (data.data[9016] != null) {
                                     main.prompt(data.data[9016]);
-                                if (data.data[9017] != null)
+                                }
+                                if (data.data[9017] != null) {
                                     main.prompt(data.data[9017]);
-                                if(data.data[9010] != null)
+                                }
+                                if(data.data[9010] != null) {
                                     pram = "newUser"
+                                }
+                                    
                                     // main.prompt(data.data[9010]);
 
                                 
@@ -117,7 +128,10 @@ require(['config'], function () {
                                 main.setSession("b_n", main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"));
                                 location.href = "newDrainageSucc.html?"+pram;
                             }else {
-                                location.href = "newDrainagefalt.html?"+pram;
+
+                                setTimeout(function(){
+                                    location.href = "newDrainagefalt.html?"+pram;
+                                },3000)
                             }
                         });
                 },
