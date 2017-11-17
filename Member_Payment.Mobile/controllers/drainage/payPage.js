@@ -9,7 +9,6 @@ require(['config'], function () {
         var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; 
         // if(isAndroid) {}
         var busDteObj = {} //ch-use:获取商家详情请求参数
-        
         window.addEventListener('load', function() {
           FastClick.attach(document.body);
         }, false);
@@ -61,7 +60,7 @@ require(['config'], function () {
         }else {
 
         }
-        // main.loading(true)
+        main.loading(true)
     	var vm = new vue({
     		el:"#app",
     		data:{
