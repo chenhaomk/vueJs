@@ -930,3 +930,83 @@ padding-top: 1.3rem;
 } */
 
 .groupImg{width: 40px;height: 40px;border-radius: 50%}
+
+.download{
+  width: 100%;
+  position: fixed;
+  bottom:0;
+  left: 0;
+	height: 4.9rem;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.download  .log{
+  float: left;
+  width: 3.3rem;
+	height: 3.3rem;
+	background-color: #ffffff;
+  border-radius: 0.5rem;
+  background: url("../images/download/ic_logo_xxh.png");
+  background-size: 3.3rem 3.3rem;
+  margin:0.8rem 0 0 1.5rem;
+}
+
+.download  .font_logo
+{
+	font-family: PingFangSC-Semibold;
+	font-size: 1.5rem;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 1.8rem;
+	letter-spacing: 0px;
+  color: #ffffff;
+  margin:0.8rem 0 0 0.85rem;
+  width: 10rem;
+  float: left;
+}
+.download  .font_text
+{
+	font-family: PingFangSC-Semibold;
+	font-size:  1.1rem;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 1.8rem;
+	letter-spacing: 0px;
+  color: #ffffff;
+  margin:0.1rem 0 0 0;
+  float: left;
+}
+
+.download  .downbtn
+{
+  float: left;
+  width: 7.5rem;
+	height: 3rem;
+	background-color: #ff6f3d;
+  border-radius: 0.4rem;
+  position: absolute;
+  top:0.95rem;
+  right:1.5rem;
+
+}
+.download .downbtn p{
+  font-family: PingFangSC-Regular;
+	font-size: 1.4rem;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 1rem;
+	letter-spacing: 0px;
+	color: #ffffff;
+  margin: 1rem 0 0 2.4rem;
+  width: 3rem;
+  height: 1.35rem;
+}
+.download  .close
+{
+  float: left;
+  width: 1.7rem;
+	height: 1.7rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  background: url("../images/download/ic_delete_xxh.png");
+  background-size: 1.7rem 1.7rem;
+}

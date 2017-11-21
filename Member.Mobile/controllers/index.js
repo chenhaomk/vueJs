@@ -1,26 +1,26 @@
 require(['config'], function () {
     require(['vue', 'main', 'swiper'], function (Vue, ygg, Swiper) {
 
-    function browserRedirect() {
-        var sUserAgent= navigator.userAgent.toLowerCase();
-        var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
-        var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
-        var bIsMidp= sUserAgent.match(/midp/i) == "midp";
-        var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-        var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
-        var bIsAndroid= sUserAgent.match(/android/i) == "android";
-        var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
-        var bIsWM= sUserAgent.match(/windows mobile/i) == "windows mobile";
-        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-            //手机跳转
-            // window.location.href= 'http://m.baidu.com';
-             // window.location= 'https://m.yingougou.com';
-        } else {
-            //pc跳转
-            window.location= 'https://www.yingougou.com';
+        function browserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+            if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                //手机跳转
+                // window.location.href= 'http://m.baidu.com';
+                // window.location= 'https://m.yingougou.com';
+            } else {
+                //pc跳转
+                window.location = 'https://www.yingougou.com';
+            }
         }
-    }
-    // browserRedirect();
+        // browserRedirect();
         var vm = new Vue({
                 el: "#app",
                 data: {
@@ -49,7 +49,9 @@ require(['config'], function () {
                     shopList: [],
                     scrollIsShow2: false,
                     isSS: true,
-                    isEmpty: ""
+                    isEmpty: "",
+                    downLoadType: "",
+                    showDown: true
                 },
                 components: {
                     my: ygg.template.my,
@@ -57,6 +59,40 @@ require(['config'], function () {
                     list: ygg.template.shopList
                 },
                 methods: {
+                    closeDownLoad: function () {
+                        if (this.showDown)
+                            this.showDown = false;
+                    },
+                    isWeixin: function () { //判断是否是微信
+                        var ua = navigator.userAgent.toLowerCase();
+                        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
+                    downApp: function () {
+                        if (this.isWeixin()) {
+                            (document.getElementsByTagName("body")[0]).setAttribute("class", "isWx");
+                        } else if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+                            var loadDateTime = new Date();
+                            window.setTimeout(function () {
+                                    var timeOutDateTime = new Date();
+                                    if (timeOutDateTime - loadDateTime < 5000) {
+                                        window.location = "https://itunes.apple.com/cn/app/id1273704196";
+                                    } else {
+                                        window.close();
+                                    }
+                                },
+                                25);
+                            window.location = "YPB://";
+                        } else if (navigator.userAgent.match(/android/i)) {
+                            if (vm.downLoadType == "打开")
+                                window.location = "YPB://";
+                            else
+                                window.location = "https://dl.yingougou.com/Android/ygg_app-release.apk";
+                        }
+                    },
                     openMenu: function () {
                         this.openUser = this.openShadow = "show";
                     },
@@ -480,5 +516,25 @@ require(['config'], function () {
                 }
             }
         }
+
+        function testApp() {
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+                vm.downLoadType = "下载";
+            } else if (navigator.userAgent.match(/android/i)) {
+                var state = null;
+                try {
+                    state = window.open("YPB://");
+                    window.close();
+                } catch (e) {}
+                if (state) {
+                    vm.downLoadType = "打开";
+                    return;
+                } else {
+                    vm.downLoadType = "下载";
+                    return;
+                }
+            }
+        }
+        testApp();
     });
 });
