@@ -87,10 +87,18 @@ require(['config'], function () {
                                 25);
                             window.location = "YPB://";
                         } else if (navigator.userAgent.match(/android/i)) {
-                            if (vm.downLoadType == "打开")
+                            var state = null;
+                            try {
+                                state = window.open("YPB://");
+                                window.close();
+                            } catch (e) {}
+                            if (state) {
                                 window.location = "YPB://";
-                            else
-                                window.location = "https://dl.yingougou.com/Android/ygg_app-release.apk";
+                                return;
+                            } else {
+                                window.location = "https://dl.yingougou.com/Android/app-release.apk";
+                                return;
+                            }
                         }
                     },
                     openMenu: function () {
@@ -518,22 +526,22 @@ require(['config'], function () {
         }
 
         function testApp() {
-            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-                vm.downLoadType = "下载";
-            } else if (navigator.userAgent.match(/android/i)) {
-                var state = null;
-                try {
-                    state = window.open("YPB://");
-                    window.close();
-                } catch (e) {}
-                if (state) {
-                    vm.downLoadType = "打开";
-                    return;
-                } else {
-                    vm.downLoadType = "下载";
-                    return;
-                }
-            }
+            // if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+            vm.downLoadType = "下载";
+            // } else if (navigator.userAgent.match(/android/i)) {
+            //     var state = null;
+            //     try {
+            //         state = window.open("YPB://");
+            //         window.close();
+            //     } catch (e) {}
+            //     if (state) {
+            //         vm.downLoadType = "打开";
+            //         return;
+            //     } else {
+            //         vm.downLoadType = "下载";
+            //         return;
+            //     }
+            // }
         }
         testApp();
     });
