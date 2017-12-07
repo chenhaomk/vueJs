@@ -140,7 +140,7 @@ require(['config'], function () {
                     if (/iphone|ipad|ipod/.test(ua)) {
                         window.open("https://itunes.apple.com/cn/app/id1273704196");
                     } else if (/android/.test(ua)) {
-                        window.open("https://dl.yingougou.com/Android/ygg_app-release.apk");
+                        window.open("https://dl.yingougou.com/Android/app-release.apk");
                     }
                     //m.yingougou.com/download.html 
                 },
@@ -149,7 +149,7 @@ require(['config'], function () {
                     if (/iphone|ipad|ipod/.test(ua)) {
                         window.open("https://itunes.apple.com/cn/app/id1273704196");
                     } else if (/android/.test(ua)) {
-                        window.open("https://dl.yingougou.com/Android/ygg_app-release.apk");
+                        window.open("https://dl.yingougou.com/Android/app-release.apk");
                     }
                 }
             }
