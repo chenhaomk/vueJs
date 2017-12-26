@@ -38,7 +38,7 @@ require(['config'],function(){
         }),su = false,
         member_id = ygg.getCookie("member_id"),
         isSub = false;
-        if(!member_id)window.open("/index.html","_self");
+        if(!member_id)window.open("/index11.html","_self");
 
         ygg.getClient(OSS);
 

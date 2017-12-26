@@ -71,7 +71,7 @@ require(['config'], function () {
             bid = ygg.getQueryString("bid"),
             returnUrl = ygg.getQueryString("returnUrl");
 
-        if (!coupon_id || !returnUrl) window.open("/index.html", "_self");
+        if (!coupon_id || !returnUrl) window.open("/index11.html", "_self");
 
         if (returnUrl != '/') {
             returnUrl += "?returnUrl=/&id=" + bid;

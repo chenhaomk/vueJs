@@ -41,7 +41,7 @@ require(['config'],function(){
                             ygg.setCookie("member_id",data.member_id);
                             ygg.setCookie("mobile",data.mobile);
                             ygg.setCookie("token",data.token);
-                            window.open("/index.html","_self");
+                            window.open("/index11.html","_self");
                         }
                     });
                 },
@@ -75,7 +75,7 @@ require(['config'],function(){
                             ygg.setCookie("member_id",data.member_id);
                             ygg.setCookie("mobile",data.mobile);
                             ygg.setCookie("token",data.token);
-                            window.open("/index.html","_self");
+                            window.open("/index11.html","_self");
                         }
                     });
                 },

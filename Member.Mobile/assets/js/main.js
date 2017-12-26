@@ -827,7 +827,7 @@ define(['axio', 'vue'], function (axio, Vue) {
                 geting: false,
                 success: false,
                 lqcg: false,
-                url: "/views/coupon/index.html?returnUrl=" + this.returnUrl + "&id="
+                url: "/views/coupon/index11.html?returnUrl=" + this.returnUrl + "&id="
             }
         },
         computed: {
@@ -925,7 +925,7 @@ define(['axio', 'vue'], function (axio, Vue) {
                 geting: false,
                 success: false,
                 lqcg: false,
-                url: "/views/coupon/index.html?returnUrl=" + this.returnUrl + "&id="
+                url: "/views/coupon/index11.html?returnUrl=" + this.returnUrl + "&id="
             }
         },
         computed: {

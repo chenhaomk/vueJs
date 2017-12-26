@@ -22,7 +22,7 @@ require(['config'],function(){
             size : 10
         };
 
-        if(!business_id)window.open("/index.html","_self");
+        if(!business_id)window.open("/index11.html","_self");
         obj.business_id = business_id;
         vm.$set(vm,"businessId",business_id);
 
