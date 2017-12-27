@@ -1,0 +1,340 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+ul,li,dl,dt,dd{
+    list-style: none;
+}
+
+/*banner*/
+.banner_img{
+    background: url(../../assets/images/investment/bg.png) no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 670px;
+    margin: 0 auto;
+}
+/*返回*/
+.back {
+    width: 140px;
+    height: 48px;
+    border-radius: 24px 24px 24px 24px;
+    border: solid 1px rgba(255, 255, 255, 1);
+    position: absolute;
+    left: 15%;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.back p {
+    width: 63px;
+    height: 16px;
+    font-family: PingFangSC-Medium;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22.00209px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    margin: 13px 39px;
+}
+
+/*banner内容*/
+.banner_con{
+    padding: 62px 0 0 0;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.center-heading {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: PingFangSC-Medium;
+    font-size: 30px;
+    font-weight:bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22.00209px;
+    letter-spacing: 0px;
+    color: #ffffff;margin-top:80px
+}
+.center-heading h2{
+    padding-top:50px;
+    font-size: 50px;
+    font-weight: normal;
+    font-family: PingFangSC-Light;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22.00209px;
+    letter-spacing: 4.5px;
+    color: #ffffff;margin-top:110px
+}
+
+/*项目介绍*/
+.con_bg {
+    background-image: linear-gradient(90deg,
+    rgba(255, 148, 51, 1) 0%,
+    rgba(255, 112, 99, 1) 100%,
+    rgba(143, 99, 133, 1) 100%,
+    rgba(30, 86, 166, 1) 100%),
+    linear-gradient(
+    rgba(255, 122, 50, 1),
+    rgba(255, 122, 50, 1));
+    background-blend-mode: normal, normal;
+    padding:0;
+    height:280px
+}
+.container{
+    width: 60%;
+    /*height: 288px;*/
+    margin: 0 auto;
+    /*background: #0a8ddf;*/
+}
+
+.compareLog {
+    height: 19px;
+    font-family: PingFangSC-Semibold;
+    font-size: 28px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 9px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    margin-top: 51px;
+    padding: 38px 0 20px;
+    text-align: center;
+}
+
+.container .content {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 28.00209px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    /*margin-top: 35px;*/
+    text-align: center;
+}
+
+/*合作模式*/
+
+/*区域标题*/
+.sec_title{
+    padding: 57px 0 30px;/*也可设置3个值，左侧样式等同于右侧*/
+    text-align: center;
+}
+.sec_title h3{
+    font-weight: normal;
+    font-size: 32px;
+    color:#263445;
+    margin-bottom: 7px;
+}
+.sec_title p small{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+}
+.sec_title p small::before, .sec_title p small::after{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    top: 15px;
+    background-color: #999;
+}
+.sec_title p small::before{
+    left: -40px;
+    background: #fe7d5c;
+}
+.sec_title p small::after{
+    right: -40px;
+    background: #fe7d5c;
+}
+.sec_title p small span{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    vertical-align: middle;
+    background: url("../../assets/images/investment/figure.png") no-repeat;
+}
+/*内容*/
+.public_box{
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    /*height: 100px;*/
+    /*margin-bottom: 300px;*/
+}
+.cooperation{
+    text-align: center;
+    margin: 0 16px 0;
+    box-shadow:0 2px 20px 0 #eeeeee;
+    border-radius:8px;
+}
+.cooperation_con1 {
+    flex: 1;
+    width:320px;
+    height:490px;
+}
+
+.model{
+    width: 80%;
+    margin: 26px auto ;
+    color:#a4aab2;
+    font-size: 14px;
+}
+.text_left{
+    text-align: left;
+}
+.model span {
+    color:#263445;
+    line-height: 22px;
+}
+
+.model_title{
+    font-size:24px;
+    color:#263445;
+    margin-bottom: 36px;
+}
+.triangle{
+    display: inline-block;
+    width: 11px;
+    height: 12px;
+    background: url("../../assets/images/investment/triangle.png") no-repeat;
+    background-size: contain;
+    padding-left: 10px;
+}
+.cooperation_con2 {
+    flex: 1;
+    width:320px;
+    height:490px;
+    background: palegreen;
+
+}
+.cooperation_con3 {
+    flex: 1;
+    width:320px;
+    height:490px;
+    background: palegreen;
+
+}
+
+/*合作收益*/
+.income_box{
+    background:#fafbfc;
+    width: 100%;
+    height:580px;
+    margin-top: 108px;
+}
+.income{
+    text-align: center;
+}
+.income_con1 {
+    flex: 1;
+    overflow: hidden;
+}
+.income_con2 {
+    flex: 1;
+
+}
+.income_con3 {
+    flex: 1;
+
+}
+.income_con4 {
+    flex: 1;
+
+}
+.income_con5 {
+    flex: 1;
+
+}
+
+.bank_img{
+    float: left;
+}
+.bank_txt{
+    margin: 18px 65px 0;
+    font-size:18px;
+    color:#666666;
+}
+
+
+
+
+
+
+
+/*项目优势*/
+/*内容1*/
+.con_box{
+    width: 100%;
+    /*height: 800px;*/
+    /*background: palegreen;*/
+    margin: 0 auto;
+}
+
+.con_box .trend_con{
+    width: 70%;
+    margin: 0 auto;
+    /*height: 116px;*/
+    /*background: #ccc;*/
+    overflow: hidden;
+}
+/*左边*/
+.con_left{
+    width: 288px;
+    /*height: 200px;*/
+    float: left;
+}
+.con_title{
+}
+
+.radius{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    /*background-color: #efefef; !* Can be set to transparent *!*/
+    border: 2px #fe755e solid;
+    -webkit-border-radius: 100px;
+}
+.con_text{
+    font-size:22px;
+    color:#263445;
+    margin-left: 1px;
+}
+.content{
+    font-size:14px;
+    color:#a4aab2;
+    margin-left: 27px;
+}
+/*右边*/
+.con_right{
+    width: 288px;
+    /*height: 200px;*/
+    float: right;
+}
+
+/*内容2*/
+
+.con_box .trend_con2{
+    width: 80%;
+    margin: 0 auto;
+    /*height: 116px;*/
+    /*background: #ccc;*/
+    overflow: hidden;
+    margin-top: 60px;
+}
+.con_center{
+    width: 200px;
+    height: 200px;
+    /*text-align: center;*/
+    margin-left: 120px;
+}
