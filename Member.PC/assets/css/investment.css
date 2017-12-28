@@ -1,10 +1,18 @@
-*{
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
-ul,li,dl,dt,dd{
-    list-style: none;
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0; padding:0; -webkit-tap-highlight-color:transparent}
+body, h1, h2, h3, h4, h5, h6, hr, p,blockquote,dl, dt, dd, ul, ol, li,pre,form, fieldset, legend, button,input, textarea,th, td,img{border:medium none;margin: 0;padding: 0; outline:none;}
+body,button, input, select, textarea {font: 16px/1.5 "微软雅黑",tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif; outline:none; -webkit-font-smoothing: antialiased; color: #1c1c1c}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+em{font-style:normal;}
+ul, ol,li { list-style: none; }
+a { text-decoration: none; color: #1c1c1c}
+a:hover{ outline:none; color: #ff6f3d}
+
+@font-face {
+    font-family: PingFangSC-Medium;
+    src: url(../../assets/fonts/PingFang-Medium.ttf);
 }
 
 /*banner*/
@@ -14,6 +22,18 @@ ul,li,dl,dt,dd{
     /*width: 100%;*/
     height: 670px;
     margin: 0 auto;
+}
+.line{
+    /*font-size: 48px;*/
+    /*color: #979797;*/
+    display: inline-block;
+    width:29px;
+    height:61px;
+    background: url("../../assets/images/investment/line.png") no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right: 10px;
+    /*margin-right: 5px;*/
 }
 /*返回*/
 .back {
@@ -58,8 +78,9 @@ ul,li,dl,dt,dd{
     font-style: normal;
     font-stretch: normal;
     line-height: 22.00209px;
-    letter-spacing: 0px;
-    color: #ffffff;margin-top:80px
+    letter-spacing: 0;
+    color: #ffffff;
+    margin-top:20px
 }
 .center-heading h2{
     padding-top:50px;
@@ -124,7 +145,6 @@ ul,li,dl,dt,dd{
     line-height: 26.00209px;
     letter-spacing: 0px;
     color: #ffffff;
-    /*margin-top: 35px;*/
     text-align: center;
 }
 
@@ -182,18 +202,15 @@ ul,li,dl,dt,dd{
     box-shadow:0 2px 20px 0 #eeeeee;
     border-radius:8px;
     position: relative;
+    height: 450px;
+    width: 320px;
 }
 .cooperation_con1 {
     flex: 1;
-    width:320px;
-    height:490px;
+    /*width:320px;*/
+    /*height:490px;*/
 }
 /*合作模图片*/
-.cooperation_con1 {
-    flex: 1;
-    width:320px;
-    height:490px;
-}
 .marginTop{
     margin-top: 100px;
 }
@@ -234,17 +251,10 @@ ul,li,dl,dt,dd{
 }
 .cooperation_con2 {
     flex: 1;
-    width:320px;
-    height:490px;
-    /*background: palegreen;*/
 
 }
 .cooperation_con3 {
     flex: 1;
-    width:320px;
-    height:490px;
-    /*background: palegreen;*/
-
 }
 
 /*合作收益*/
@@ -301,7 +311,7 @@ ul,li,dl,dt,dd{
 }
 
 .con_box .trend_con{
-    width: 66%;
+    width: 58%;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -328,7 +338,7 @@ ul,li,dl,dt,dd{
 .content{
     font-size:14px;
     color:#a4aab2;
-    margin-left: 27px;
+    margin: 10px 27px 0;
 }
 /*右边*/
 .con_right{
@@ -340,7 +350,7 @@ ul,li,dl,dt,dd{
 /*内容2*/
 
 .trend_con2{
-    width: 74%;
+    width: 68%;
     margin: 70px auto 60px;
     /*overflow: hidden;*/
 }
@@ -348,12 +358,13 @@ ul,li,dl,dt,dd{
 .trend_con2  .trend_left{
     width: 288px;
     float: left;
+    margin-top: 26px;
 }
 
 .trend_con2  .trend_right{
     width: 288px;
     float: right;
-    margin-top: -120px;
+    margin-top: -140px;
 }
 
 .con_center{
@@ -380,7 +391,6 @@ ul,li,dl,dt,dd{
 }
 .item-1 {
     flex: 1;
-    /*background: palegoldenrod;*/
     overflow: hidden;
 }
 .item-2 {
