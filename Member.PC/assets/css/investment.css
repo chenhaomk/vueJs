@@ -1,0 +1,565 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+ul,li,dl,dt,dd{
+    list-style: none;
+}
+
+/*banner*/
+.banner_img{
+    background: url(../../assets/images/investment/bg.png) no-repeat;
+    background-size: cover;
+    /*width: 100%;*/
+    height: 670px;
+    margin: 0 auto;
+}
+/*返回*/
+.back {
+    width: 140px;
+    height: 48px;
+    border-radius: 24px 24px 24px 24px;
+    border: solid 1px rgba(255, 255, 255, 1);
+    position: absolute;
+    left: 15%;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.back p {
+    width: 63px;
+    height: 16px;
+    font-family: PingFangSC-Medium;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22.00209px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    margin: 13px 39px;
+}
+
+/*banner内容*/
+.banner_con{
+    padding: 62px 0 0 0;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.center-heading {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: PingFangSC-Medium;
+    font-size: 24px;
+    /*font-weight:bold;*/
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22.00209px;
+    letter-spacing: 0px;
+    color: #ffffff;margin-top:80px
+}
+.center-heading h2{
+    padding-top:50px;
+    font-size: 50px;
+    font-weight: normal;
+    font-family: PingFangSC-Light;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22.00209px;
+    letter-spacing: 4.5px;
+    color: #ffffff;margin-top:110px
+}
+
+/*项目介绍*/
+.con_bg {
+    background-image: linear-gradient(90deg,
+    rgba(255, 148, 51, 1) 0%,
+    rgba(255, 112, 99, 1) 100%,
+    rgba(143, 99, 133, 1) 100%,
+    rgba(30, 86, 166, 1) 100%),
+    linear-gradient(
+    rgba(255, 122, 50, 1),
+    rgba(255, 122, 50, 1));
+    background-blend-mode: normal, normal;
+    padding:0;
+    height:280px
+}
+.container{
+    width: 60%;
+    /*height: 288px;*/
+    margin: 0 auto;
+    /*background: #0a8ddf;*/
+}
+
+.compareLog {
+    height: 19px;
+    font-family: PingFangSC-Semibold;
+    font-size: 28px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 9px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    /*margin-top: 51px;*/
+    padding: 38px 0 20px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.compareLog span img{
+    width: 54px;
+    height: 49px;
+    vertical-align: middle;
+    margin-right: 46px;
+}
+.container .content {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 26.00209px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    /*margin-top: 35px;*/
+    text-align: center;
+}
+
+/*合作模式*/
+
+/*区域标题*/
+.sec_title{
+    padding: 57px 0 30px;/*也可设置3个值，左侧样式等同于右侧*/
+    text-align: center;
+}
+.sec_title h3{
+    font-weight: normal;
+    font-size: 32px;
+    color:#263445;
+    margin-bottom: 7px;
+}
+.sec_title p small{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+}
+.sec_title p small::before, .sec_title p small::after{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    top: 15px;
+    background-color: #999;
+}
+.sec_title p small::before{
+    left: -40px;
+    background: #fe7d5c;
+}
+.sec_title p small::after{
+    right: -40px;
+    background: #fe7d5c;
+}
+.sec_title p small span{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    vertical-align: middle;
+    background: url("../../assets/images/investment/figure.png") no-repeat;
+}
+/*内容*/
+.public_box{
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+}
+.cooperation{
+    text-align: center;
+    margin: 0 16px 0;
+    box-shadow:0 2px 20px 0 #eeeeee;
+    border-radius:8px;
+    position: relative;
+}
+.cooperation_con1 {
+    flex: 1;
+    width:320px;
+    height:490px;
+}
+/*合作模图片*/
+.cooperation_con1 {
+    flex: 1;
+    width:320px;
+    height:490px;
+}
+.marginTop{
+    margin-top: 100px;
+}
+.img_box{
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    top: -80px;
+    left: 120px;
+}
+
+.model{
+    width: 80%;
+    margin: 26px auto ;
+    color:#a4aab2;
+    font-size: 14px;
+}
+.text_left{
+    text-align: left;
+}
+.model span {
+    color:#263445;
+    line-height: 22px;
+}
+
+.model_title{
+    font-size:24px;
+    color:#263445;
+    margin-bottom: 36px;
+}
+.triangle{
+    display: inline-block;
+    width: 11px;
+    height: 12px;
+    background: url("../../assets/images/investment/triangle.png") no-repeat;
+    background-size: contain;
+    padding-left: 10px;
+}
+.cooperation_con2 {
+    flex: 1;
+    width:320px;
+    height:490px;
+    /*background: palegreen;*/
+
+}
+.cooperation_con3 {
+    flex: 1;
+    width:320px;
+    height:490px;
+    /*background: palegreen;*/
+
+}
+
+/*合作收益*/
+.income_box{
+    background:#fafbfc;
+    /*width: 100%;*/
+    height:530px;
+    margin-top: 108px;
+}
+.income{
+    text-align: center;
+    margin: 0 10px 0;
+}
+.income_con1 {
+    flex: 1;
+    overflow: hidden;
+    width:320px;
+}
+.title{
+    margin: 10px;
+    font-size:16px;
+    color:#263445;
+}
+.con{
+    font-size:14px;
+    color:#78808b;
+}
+
+.income_con2 {
+    flex: 1;
+
+}
+.income_con3 {
+    flex: 1;
+
+}
+.income_con4 {
+    flex: 1;
+
+}
+.income_con5 {
+    flex: 1;
+
+}
+
+.bank_img{
+    float: left;
+}
+
+/*项目优势*/
+/*内容1*/
+.con_box{
+    margin: 0 auto;
+}
+
+.con_box .trend_con{
+    width: 66%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+/*左边*/
+.con_left{
+    width: 288px;
+    float: left;
+}
+.con_title{
+}
+
+.radius{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px #fe755e solid;
+    -webkit-border-radius: 100px;
+}
+.con_text{
+    font-size:22px;
+    color:#263445;
+    margin-left: 1px;
+}
+.content{
+    font-size:14px;
+    color:#a4aab2;
+    margin-left: 27px;
+}
+/*右边*/
+.con_right{
+    width: 288px;
+    /*height: 200px;*/
+    float: right;
+}
+
+/*内容2*/
+
+.trend_con2{
+    width: 74%;
+    margin: 70px auto 60px;
+    /*overflow: hidden;*/
+}
+
+.trend_con2  .trend_left{
+    width: 288px;
+    float: left;
+}
+
+.trend_con2  .trend_right{
+    width: 288px;
+    float: right;
+    margin-top: -120px;
+}
+
+.con_center{
+    width: 278px;
+    height: 326px;
+    background: url("../../assets/images/investment/pic.png") no-repeat;
+    background-size: contain;
+    margin: -138px auto;
+}
+
+.clear{
+    clear: both;
+}
+/*战略合作伙伴*/
+.partner_box{
+    display: flex;
+    width: 80%;
+    height: 100px;
+    margin-left: 230px;
+}
+.item{
+    text-align: center;
+    width: 200px;
+}
+.item-1 {
+    flex: 1;
+    /*background: palegoldenrod;*/
+    overflow: hidden;
+}
+.item-2 {
+    flex: 1;
+}
+.item-3 {
+    flex: 1;
+}
+.item-4 {
+    flex: 1;
+}
+.item-5 {
+    flex: 1;
+}
+
+.bank_img{
+    margin-left: 80px;
+    padding-right: 18px;
+}
+.bank_img img{
+    width: 49px;
+    height: 49px;
+}
+
+
+.bank_txt{
+    font-size:18px;
+    color:#666666;
+    margin-top: 10px;
+    text-align: left;
+    margin-right: 4px;
+}
+
+/*底部*/
+.footer_img{
+    /*width: 100%;*/
+    margin: 50px auto 0;
+    height: 90px;
+    background: url("../../assets/images/investment/footerImg.png") no-repeat;
+    background-size: cover;
+
+}
+
+/*底部信息*/
+.footer {
+    height: 300px;
+    background-image:linear-gradient(-180deg, #283245 0%, #0d1222 100%);
+}
+
+.footer .foot {
+    width: 80%;
+    margin: auto;
+}
+
+.footer .foot .left {
+    float: left;
+    margin-top: 44px;
+}
+.footer .foot .left .btns {
+    margin: 50px 0;
+    height: 16px;
+    line-height: 16px;
+}
+
+.footer .foot .left .btns a {
+    float: left;
+    margin-right: 60px;
+    cursor: pointer;
+    color:#ffffff;
+}
+.footer .foot .left .btns a:after {
+    content: "";
+    float: right;
+    height: 16px;
+    margin-right: -30px;
+    border-right: 1px solid #cecece;
+}
+a {
+    text-decoration: none;
+    color: #1c1c1c;
+}
+.footer .foot .left .contact .text {
+    font-size: 12px;
+    color: #888;
+}
+.contact p {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #fff;
+}
+.tel{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url("../../assets/images/investment/phone.png") no-repeat;
+    background-size: contain;
+    padding-left: 20px;
+}
+.footer .foot .left .contact .text span {
+    font-size:16px;
+    color:#ffffff;
+    margin-right: 5px;
+}
+.contact p {
+    margin-bottom: 10px;
+}
+
+/*二维码*/
+.code{
+    float: right;
+    width: 600px;
+    /*height: 200px;*/
+    /*background: palegreen;*/
+    overflow: hidden;
+    margin-top: 40px;
+}
+.code_box{
+    float: left;
+    width: 210px;
+    height: 110px;
+    background: #fff;
+    margin-top: 72px;
+}
+
+.footer .foot .code p, .head .cen .code {
+    float: left;
+    margin-top: 30px;
+    margin-left: 30px;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    padding: 28px;
+}
+.footer .foot .code p img {
+    float: right;
+    width: 106px;
+    height: 104px;
+}
+.WeChat{
+    width: 20px;
+    color: #ccc;
+}
+img {
+    border: 0;
+}
+.footer .foot .code p.f span {
+    margin-top: 24px;
+    /*width: 30px;*/
+}
+.footer .foot .code p span{
+    display: inline-block;
+    vertical-align: middle;
+    /*width: 14px;*/
+    font-size: 14px;
+    color: #6e6e6e;
+    line-height: 1;
+    text-align: center;
+    margin-left: 28px;
+}
+
+.footer .foot .code p{
+    float: left;
+    margin-top: 30px;
+    margin-left: 30px;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    padding: 28px;
+    width: 172px;
+    height: 96px;
+}
+/*版权*/
+.Copyright{
+    width: 100%;
+    height: 60px;
+    background:#0c1120;
+}
+.Copyright p{
+    opacity:0.5;
+    font-size:12px;
+    color:#ffffff;
+    text-align:center;
+    line-height: 60px;
+}
