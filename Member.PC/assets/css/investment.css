@@ -465,7 +465,7 @@ a:hover{ outline:none; color: #ff6f3d}
     margin-right: -30px;
     border-right: 1px solid #cecece;
 }
-
+.footer .foot .left .btns a.last:after{ display: none; }
 .footer .foot .left .btns a:hover{
     color: #ff6f3d;
 }
@@ -500,8 +500,6 @@ a:hover{ outline:none; color: #ff6f3d}
 .code{
     float: right;
     width: 600px;
-    /*height: 200px;*/
-    /*background: palegreen;*/
     overflow: hidden;
     margin-top: 40px;
 }
