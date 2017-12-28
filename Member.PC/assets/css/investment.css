@@ -64,10 +64,6 @@ a:hover{ outline:none; color: #ff6f3d}
 .banner_con{
     padding: 62px 0 0 0;
 }
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
-}
 
 .center-heading {
     text-align: center;
@@ -201,27 +197,27 @@ a:hover{ outline:none; color: #ff6f3d}
     margin: 0 16px 0;
     box-shadow:0 2px 20px 0 #eeeeee;
     border-radius:8px;
-    position: relative;
     height: 450px;
     width: 320px;
 }
 .cooperation_con1 {
     flex: 1;
-    /*width:320px;*/
-    /*height:490px;*/
+
 }
 /*合作模图片*/
 .marginTop{
     margin-top: 100px;
 }
 .img_box{
+
     width: 160px;
     height: 160px;
-    position: absolute;
-    top: -80px;
-    left: 120px;
-}
+    background: url("../../assets/images/investment/circle1.png");
+    background-size: contain;
+    margin: -182px auto 0 auto;
+    vertical-align: middle;
 
+}
 .model{
     width: 80%;
     margin: 26px auto ;
@@ -382,8 +378,9 @@ a:hover{ outline:none; color: #ff6f3d}
 .partner_box{
     display: flex;
     width: 80%;
+    margin: 0 auto;
     height: 100px;
-    margin-left: 230px;
+    /*margin-left: 230px;*/
 }
 .item{
     text-align: center;
