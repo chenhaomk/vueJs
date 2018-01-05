@@ -74,6 +74,10 @@ require(['config'], function () {
                             }
                             ygg.loading(false);
                         });
+                    },
+                    goDetail:function () {
+                        var str = window.location.search.split("&")[2].split("=")[1]
+                        window.location = "/views/shop/detail.html?returnUrl=/&id="+str+""
                     }
                 }
             }),

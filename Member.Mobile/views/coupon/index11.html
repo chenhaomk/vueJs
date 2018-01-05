@@ -28,7 +28,7 @@
             <p>{{gz}}</p>
         </section>
 
-        <section class="con shop_info" v-show="ttIsShow">
+        <section class="con shop_info" v-show="ttIsShow" v-on:click="goDetail()"> 
             <h3>发布商家</h3>
             <p class="shop_name text-sl"><a href="">{{detail.business_name}}</a></p>
             <a class="phone" :href="'tel:'+detail.business_phone"></a>

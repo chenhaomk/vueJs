@@ -25,7 +25,7 @@ body {
     height: 47%;
 }
 .warpBg {
-    background: url("../../assets/images/newDarinage/bg.png");
+    background: url("../../assets/images/newDarinage/newbg.png");
 }
 .dewarpBg {
     background: url("../../assets/images/newDarinage/bg2.png");
@@ -84,6 +84,13 @@ body {
 .shopSum img {
     width: .44rem;
     height: .44rem;
+}
+.sup {
+    text-align: center;
+}
+.sup img {
+    width: 4.7rem;
+    height: 3.42rem;
 }
 .sumWarp {
     font-family: "shopcoupenFont";
