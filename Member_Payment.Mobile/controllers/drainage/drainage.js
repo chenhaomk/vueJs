@@ -121,11 +121,11 @@ require(['config'], function () {
                                 }else {
                                     isSuc=false;
                                 }
-
                             }
                             if(isSuc) {
                                 main.setSession("img", decodeURI(main.getQueryString("img") == null ? main.getSession("img") : main.getQueryString("img")).replace("%2F", "/").replace("%2F", "/").replace("%3A", ":"));
                                 main.setSession("b_n", main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n"));
+
                                 location.href = "newDrainageSucc.html?"+pram;
                             }else {
 
@@ -257,7 +257,6 @@ require(['config'], function () {
                     vm.b_n = res.data.data.business_details.name
                 })
             }
-            
         }
         setTimeout(function () {
             vm.willShow = false;

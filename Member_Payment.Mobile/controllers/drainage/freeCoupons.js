@@ -4,10 +4,10 @@ require(['config'], function () {
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // main.post.
         main.loading(true)
-        var baseURL = "https://api.yingougou.com/v1.0/"
+        // var baseURL = "https://api.yingougou.com/v1.0/"
         // 2c92f9245f5bf7b7015f5c69e068001f
         var bid = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
-        // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
+        var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
     	var vm = new vue({
     		el:"#app",
     		data:{
