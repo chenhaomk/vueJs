@@ -10,7 +10,8 @@ require(['config'], function () {
                     gz: "全平台商户共享使用",
                     money: [1, 2],
                     btnIsShow: true,
-                    ttIsShow : false
+                    ttIsShow : false,
+                    business_id:''
                 },
                 components: {
                     star: ygg.template.star
@@ -76,7 +77,14 @@ require(['config'], function () {
                         });
                     },
                     goDetail:function () {
-                        var str = window.location.search.split("&")[2].split("=")[1]
+                        var str
+                        if(window.location.search.split("&").length == 2) {
+                            str = vm.business_id
+                        }else if(window.location.search.split("&").length == 3) {
+                            str = window.location.search.split("&")[2].split("=")[1]
+                        }
+                        // var str = window.location.search.split("&")[2].split("=")[1]
+                        // window.location = "/views/shop/detail.html?returnUrl=/&id="+str+""
                         window.location = "/views/shop/detail.html?returnUrl=/&id="+str+""
                     }
                 }
@@ -99,7 +107,7 @@ require(['config'], function () {
             member_id: ygg.getCookie("member_id")
         }, function (data) {
             data = data.data;
-
+            vm.business_id = data.business_id
             if (!data.is_share) {
                 vm.$set(vm, 'gz', "只能用于" + data.business_name);
             }

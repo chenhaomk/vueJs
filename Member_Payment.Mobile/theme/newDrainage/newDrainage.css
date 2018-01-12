@@ -25,7 +25,8 @@ body {
     height: 47%;
 }
 .warpBg {
-    background: url("../../assets/images/newDarinage/newbg.png");
+    /* background: url("../../assets/images/newDarinage/newbg.png"); */
+    background: url("../../assets/images/newDarinage/bg.png");
 }
 .dewarpBg {
     background: url("../../assets/images/newDarinage/bg2.png");

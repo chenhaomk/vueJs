@@ -52,10 +52,9 @@ require(['config'], function () {
                         vm.arr.push(item)
                     }
                 })
-                console.log(vm.arr)
                 if(vm.arr.length == 0) {
                     // window.location.href = "../../payment/views/newDrainage/newDrainagefalt.html"
-                    window.location.href = "../../views/newDrainage/newDrainagefalt.html"
+                    window.location.href = "../../views/newDrainage/drainageNewUser.html"
                 }
                 if(vm.arr.length >3) {
                     var arr = []
