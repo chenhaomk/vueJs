@@ -89,8 +89,7 @@ require(['config'], function () {
                                 }
                                 if (data.data[9009] != null){
                                     pram = "newUser"
-                                }
-                                    
+                                }                                   
                                     // main.prompt(data.data[9009]);
                                 if (data.data[9012] != null) {
                                     main.prompt(data.data[9012]);

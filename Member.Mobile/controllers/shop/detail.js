@@ -99,17 +99,17 @@ require(['config'],function(){
                     
                 }
             }
-        }),
+        })
         business_id = ygg.getQueryString("id");
         ygg.setCookie('business_id',business_id)
         returnUrl = ygg.getQueryString("returnUrl");
-
+        
         if(!business_id || !returnUrl)window.open("/","_self");
         if(returnUrl == 'index')returnUrl='http://'+window.location.host;
 
         vm.$set(vm,'businessId',business_id);
         vm.$set(vm,'returnUrl',returnUrl);
-
+        
         ygg.ajax('/business/getBusinessDetails',{
             business_id : business_id,
             member_id : ygg.getCookie('member_id')
