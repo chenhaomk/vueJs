@@ -399,8 +399,7 @@
                                 yyzz_img.splice(index, 1);
                                 hasYzi = false;
                             },
-                            om: styz,
-                            maxSize: 2
+                            om: styz
                         });
 
                         $("#userName").val(data.real_name);
