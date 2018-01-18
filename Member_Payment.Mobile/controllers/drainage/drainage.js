@@ -65,8 +65,9 @@ require(['config'], function () {
                     data.business_id = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id");
                     data.phone = vm.phone;
                     data.valid_code = vm.verificationCode;
-                    if (main.getQueryString("m_id") != null)
-                        data.member_id = main.getQueryString("m_id");
+                    var m_id =  main.getQueryString("m_id") == null ? main.getSession("m_id") : main.getQueryString("m_id");
+                    if (m_id) 
+                        data.member_id = m_id
                     main.post(main.baseUrl+"common/shareTicket",
                         data,
                         function (res) {
@@ -77,7 +78,7 @@ require(['config'], function () {
                             if (data == null || data.code != 200) {
                                 //main.prompt("数据有误"); //此类提示较为后台化，可根据实际情况修改与用户的会话
                                 main.prompt(data.msg);
-                                location.href = "newDrainagefalt.html";
+                                // location.href = "newDrainagefalt.html";
                                 return;
                             }
                              var isSuc=true;
@@ -86,25 +87,32 @@ require(['config'], function () {
                             if (data.data != null) {
                                 if (data.data[1001] != null) {
                                     main.prompt(data.data[1001]);
+                                    return
                                 }
                                 if (data.data[9009] != null){
+                                    main.prompt('领券成功！打开APP可查看');
                                     pram = "newUser"
-                                }                                   
-                                    // main.prompt(data.data[9009]);
+                                    return
+                                }      
                                 if (data.data[9012] != null) {
-                                    main.prompt(data.data[9012]);
+                                    location.href = "newDrainagefalt.html?"+pram;
+                                    // main.prompt(data.data[9012]);
                                 }
                                 if (data.data[9013] != null) {
-                                    main.prompt(data.data[9013]);
+                                    location.href = "newDrainagefalt.html?"+pram;
+                                    // main.prompt(data.data[9013]);
                                 }
                                 if (data.data[9015] != null) {
-                                    main.prompt(data.data[9015]);
+                                    location.href = "newDrainagefalt.html?"+pram;
+                                    // main.prompt(data.data[9015]);
                                 }
                                 if (data.data[9016] != null) {
-                                    main.prompt(data.data[9016]);
+                                    location.href = "newDrainagefalt.html?"+pram;
+                                    // main.prompt(data.data[9016]);
                                 }
                                 if (data.data[9017] != null) {
                                     main.prompt(data.data[9017]);
+                                    return
                                 }
                                 if(data.data[9010] != null) {
                                     pram = "newUser"
@@ -115,8 +123,9 @@ require(['config'], function () {
                                 
 
 
-                                if(data.data[9010] != null||data.data[9011] != null||data.data[9014] != null) {
+                                if(data.data[9010] != null||data.data[9011] != null||data.data[9014] != null ) {
                                     isSuc=true;
+
                                 }else {
                                     isSuc=false;
                                 }
@@ -128,9 +137,9 @@ require(['config'], function () {
                                 location.href = "newDrainageSucc.html?"+pram;
                             }else {
 
-                                setTimeout(function(){
-                                    location.href = "newDrainagefalt.html?"+pram;
-                                },3000)
+                                // setTimeout(function(){
+                                //     location.href = "newDrainagefalt.html?"+pram;
+                                // },3000)
                             }
                         });
                 },
@@ -169,7 +178,6 @@ require(['config'], function () {
                 clearInterval(time);
             }
         }
-
         function init() {
             main.post(main.baseUrl+"common/getShareCouponActivity", {
                 business_id: main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
@@ -205,7 +213,6 @@ require(['config'], function () {
                 }else {
                     vm.all = "满" +data.min_price+ "可用";
                 }
-                
                 main.setSession("how", vm.how );
                 main.setSession("all", vm.all );
                 vm.time = main.getd('y.m.d', data.begin_date / 1000) + "-" + main.getd('y.m.d', data.end_date / 1000);
