@@ -290,7 +290,7 @@ require(['config'], function () {
                     }
                     
                     function ck() {
-                        location.href = "../../views/newDrainage/paySucc.html"+window.location.search;
+                        location.href = "../../views/newDrainage/freeCoupons.html"+window.location.search;
                     }
                 
                 }
@@ -485,7 +485,7 @@ require(['config'], function () {
                     function (res) { 
                          console.log(res)                 
                         if (res.code == 2001) {
-                            location.href = "../../views/newDrainage/paySucc.html";
+                            location.href = "../../views/newDrainage/freeCoupons.html";
                             // main.clearSessionItem("sn");
                             return;
                         }
