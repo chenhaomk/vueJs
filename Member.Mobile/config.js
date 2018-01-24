@@ -16,6 +16,8 @@ define(function(){
             'gaode' : ["https://webapi.amap.com/maps?v=1.3&key=a9506f1b1e66b4e85d7e15c8461ca4d4&plugin=AMap.CitySearch"],
             'imgup' : ["https://gosspublic.alicdn.com/aliyun-oss-sdk-4.3.0.min"],
             "qrcode" : ['qrcode'],
+            "croppie" : ['croppie/croppie'],
+            "jquery" : ['jquery/jquery-3.2.1.min'],
         },
         shim : {
             'city-picker' : {

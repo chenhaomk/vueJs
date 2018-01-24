@@ -1010,3 +1010,50 @@ padding-top: 1.3rem;
   background: url("../images/download/ic_delete_xxh.png");
   background-size: 1.7rem 1.7rem;
 }
+/* -----------裁剪图片框样式 */
+.croppieWarp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 100;
+  overflow: hidden;
+}
+.imgWarp {
+  height: 92%
+}
+.imgHide,.appHide {
+  display: none
+}
+.bodyHide {
+  overflow: hidden;
+}
+.checkBtn {
+  height: 8%;
+  width: 100%;
+  position: static;
+  bottom: 0;
+  left: 0;
+  background-color: #333333;
+  overflow: hidden;
+  color: white;
+  position: relative
+}
+.checkBtnL {
+  height: 3rem;
+  line-height: 3rem;
+  position: absolute;
+  left: 1rem;
+  top:50%;
+  margin-top: -1.5rem;
+}
+.checkBtnR {
+  height: 3rem;
+  line-height: 3rem;
+  position: absolute;
+  right: 1rem;
+  top:50%;
+  margin-top: -1.5rem;
+}

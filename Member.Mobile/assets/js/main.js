@@ -1,4 +1,4 @@
-define(['axio', 'vue'], function (axio, Vue) {
+define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
 
     var docEl = document.documentElement,
         body = document.getElementsByTagName("body")[0],
@@ -1096,6 +1096,9 @@ define(['axio', 'vue'], function (axio, Vue) {
             getFile: function (e) {
                 var that = this;
                 for (var i = 0; i < e.target.files.length; i++) {
+                    $('.croppieWarp').removeClass('imgHide')//显示裁剪框
+                    $('.bg').addClass('bodyHide')//取消滚动条
+                    $('#app').addClass('appHide')
                     if (!/\.(gif|jpg|jpeg|bmp|png|GIF|JPG|JPEG|PNG|BMP)$/.test((e.target.files[i].name).substring((e.target.files[i].name).lastIndexOf(".")))) {
                         ygg.prompt("图片格式不正确!");
                         ygg.loading(false);
@@ -1111,23 +1114,64 @@ define(['axio', 'vue'], function (axio, Vue) {
                         ygg.loading(false);
                         return;
                     }
-                    this.uFiles.push(file);
+                    // this.uFiles.push(file);
                     var reader = new FileReader();
                     reader.readAsDataURL(file);
+                    var c
                     reader.onload = function (e) {
-                        var img = new Image();
-                        img.src = this.result;
-                        img.onload = function () {
-                            that.addImg({
-                                src: this.src,
-                                width: this.width,
-                                height: this.height
-                            });
-                        }
+                        c = new Croppie(document.getElementById('imgWarp'), {
+                            url:  this.result,
+                            viewport: { width: 320, height: 227 },
+                            showZoomer: false,
+                        });
+                        // var img = new Image();
+                        // img.src = this.result;
+                        // img.onload = function () {
+                            // that.addImg({
+                            //     src: this.src,
+                            //     width: this.width,
+                            //     height: this.height
+                            // });
+                        // }
                     }
-                    if (this.uFiles.length >= this.maxLength) this.isAdd = false;
+                    $('.checkBtnL').off()
+                    $('.checkBtnL').on('click',function() {
+                        $('.cr-slider-wrap').remove()
+                        $('.cr-boundary').remove()
+                        $('.croppieWarp').addClass('imgHide')
+                        $('.bg').removeClass('bodyHide')
+                        $('#app').removeClass('appHide')
+                        e.target.value = "";
+                        // this.uFiles = []
+                        // e.target.outerHTML  = e.target.outerHTML
+                    })
+                    $('.checkBtnR').off()
+                    $('.checkBtnR').on('click',function() {
+                        c.result('blob').then(function(blob) {
+                            var a = new FileReader();
+                            a.onload = function (e) { 
+                                var img = new Image();
+                                img.src = this.result;
+                                img.onload = function () {
+                                    that.addImg({
+                                        src: this.src,
+                                        width: this.width,
+                                        height: this.height
+                                    });
+                                }
+                             }
+                            a.readAsDataURL(blob)
+                        });
+                        $('.cr-slider-wrap').remove()
+                        $('.cr-boundary').remove()
+                        $('.croppieWarp').addClass('imgHide')
+                        $('.bg').removeClass('bodyHide')
+                        $('#app').removeClass('appHide')
+                        if (that.uFiles.length >= this.maxLength) that.isAdd = false;
+                    })
+                    // if (this.uFiles.length >= this.maxLength) this.isAdd = false;
                 }
-                e.target.value = "";
+                // e.target.value = "";
             },
             addImg: function (a) {
                 var bool = (this.imgs).isHav(a);
