@@ -1096,79 +1096,85 @@ define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
             getFile: function (e) {
                 var that = this;
                 for (var i = 0; i < e.target.files.length; i++) {
-                    $('.croppieWarp').removeClass('imgHide')//显示裁剪框
-                    $('.bg').addClass('bodyHide')//取消滚动条
-                    $('#app').addClass('appHide')
-                    if (!/\.(gif|jpg|jpeg|bmp|png|GIF|JPG|JPEG|PNG|BMP)$/.test((e.target.files[i].name).substring((e.target.files[i].name).lastIndexOf(".")))) {
-                        ygg.prompt("图片格式不正确!");
-                        ygg.loading(false);
-                        return;
-                    }
-                    if (this.isOne) {
-                        if (i > 0) return;
-                    }
-                    if (this.uFiles.length >= this.maxLength) return;
-                    var file = e.target.files[i];
-                    if (file.size > ygg.maxImgSize) {
-                        ygg.prompt("图片大于10M，请压缩后再上传！");
-                        ygg.loading(false);
-                        return;
-                    }
-                    // this.uFiles.push(file);
-                    var reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    var c
-                    reader.onload = function (e) {
-                        c = new Croppie(document.getElementById('imgWarp'), {
-                            url:  this.result,
-                            viewport: { width: 320, height: 227 },
-                            showZoomer: false,
-                        });
-                        // var img = new Image();
-                        // img.src = this.result;
-                        // img.onload = function () {
-                            // that.addImg({
-                            //     src: this.src,
-                            //     width: this.width,
-                            //     height: this.height
-                            // });
-                        // }
-                    }
-                    $('.checkBtnL').off()
-                    $('.checkBtnL').on('click',function() {
-                        $('.cr-slider-wrap').remove()
-                        $('.cr-boundary').remove()
-                        $('.croppieWarp').addClass('imgHide')
-                        $('.bg').removeClass('bodyHide')
-                        $('#app').removeClass('appHide')
-                        e.target.value = "";
-                        // this.uFiles = []
-                        // e.target.outerHTML  = e.target.outerHTML
-                    })
-                    $('.checkBtnR').off()
-                    $('.checkBtnR').on('click',function() {
-                        c.result('blob').then(function(blob) {
-                            var a = new FileReader();
-                            a.onload = function (e) { 
-                                var img = new Image();
-                                img.src = this.result;
-                                img.onload = function () {
-                                    that.addImg({
-                                        src: this.src,
-                                        width: this.width,
-                                        height: this.height
-                                    });
+                    if(i == 0) {
+                        $('.croppieWarp').removeClass('imgHide')//显示裁剪框
+                        $('.bg').addClass('bodyHide')//取消滚动条
+                        $('#app').addClass('appHide')
+                        if (!/\.(gif|jpg|jpeg|bmp|png|GIF|JPG|JPEG|PNG|BMP)$/.test((e.target.files[i].name).substring((e.target.files[i].name).lastIndexOf(".")))) {
+                            ygg.prompt("图片格式不正确!");
+                            ygg.loading(false);
+                            return;
+                        }
+                        if (this.isOne) {
+                            if (i > 0) return;
+                        }
+                        if (this.uFiles.length >= this.maxLength) return;
+                        var file = e.target.files[i];
+                        if (file.size > ygg.maxImgSize) {
+                            ygg.prompt("图片大于10M，请压缩后再上传！");
+                            ygg.loading(false);
+                            return;
+                        }
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        var c
+                        reader.onload = function (e) {
+                            c = new Croppie(document.getElementById('imgWarp'), {
+                                url:  this.result,
+                                viewport: { width: 320, height: 227 },
+                                showZoomer: false,
+                            });
+                            // var img = new Image();
+                            // img.src = this.result;
+                            // img.onload = function () {
+                                // that.addImg({
+                                //     src: this.src,
+                                //     width: this.width,
+                                //     height: this.height
+                                // });
+                            // }
+                        }
+                        $('.checkBtnL').off()
+                        $('.checkBtnL').on('click',function() {
+                            $('.cr-slider-wrap').remove()
+                            $('.cr-boundary').remove()
+                            $('.croppieWarp').addClass('imgHide')
+                            $('.bg').removeClass('bodyHide')
+                            $('#app').removeClass('appHide')
+                            e.target.value = "";
+                            that.uFiles = []
+                            // e.target.outerHTML  = e.target.outerHTML
+                        })
+                        $('.checkBtnR').off()
+                        $('.checkBtnR').on('click',function() {
+
+                            // that.uFiles.push(file);
+                            c.result('blob').then(function(blob) {
+                                var aafile = new File([blob ], file.name);
+                                that.uFiles.push(aafile);
+                                var a = new FileReader();
+                                a.onload = function (e) { 
+                                    var img = new Image();                             
+                                    img.src = this.result;
+                                    img.onload = function () {
+                                        e.target.value = this
+                                        that.addImg({
+                                            src: this.src,
+                                            width: this.width,
+                                            height: this.height
+                                        });
+                                    }
                                 }
-                             }
-                            a.readAsDataURL(blob)
-                        });
-                        $('.cr-slider-wrap').remove()
-                        $('.cr-boundary').remove()
-                        $('.croppieWarp').addClass('imgHide')
-                        $('.bg').removeClass('bodyHide')
-                        $('#app').removeClass('appHide')
-                        if (that.uFiles.length >= this.maxLength) that.isAdd = false;
-                    })
+                                a.readAsDataURL(blob)
+                            });
+                            $('.cr-slider-wrap').remove()
+                            $('.cr-boundary').remove()
+                            $('.croppieWarp').addClass('imgHide')
+                            $('.bg').removeClass('bodyHide')
+                            $('#app').removeClass('appHide')
+                            if (that.uFiles.length >= this.maxLength) that.isAdd = false;
+                        })
+                    }
                     // if (this.uFiles.length >= this.maxLength) this.isAdd = false;
                 }
                 // e.target.value = "";
