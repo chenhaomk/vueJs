@@ -812,7 +812,7 @@ define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
         }
     });
 
-    //优惠券列表
+    //优惠券列表(详情页显示优惠券名字，在首页显示店铺名字)
     ygg.template.discount = Vue.extend({
         props: {
             a: {
@@ -827,7 +827,7 @@ define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
                 geting: false,
                 success: false,
                 lqcg: false,
-                url: "/views/coupon/index11.html?returnUrl=" + this.returnUrl + "&id="
+                url: "/views/coupon/index.html?returnUrl=" + this.returnUrl + "&id="
             }
         },
         computed: {
@@ -910,6 +910,104 @@ define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
             }
         }
     });
+    //首页调用
+    ygg.template.discountHomePage = Vue.extend({
+        props: {
+            a: {
+                type: Object
+            },
+            returnUrl: "",
+            isMy: false,
+            isGq: false
+        },
+        data: function () {
+            return {
+                geting: false,
+                success: false,
+                lqcg: false,
+                url: "/views/coupon/index.html?returnUrl=" + this.returnUrl + "&id="
+            }
+        },
+        computed: {
+            urlp: function () {
+                var u;
+                this.isMy ? u = this.url + this.a.coupon_activity_id : u = this.url + this.a.coupon_id
+                var bid = ygg.getQueryString("id");
+                if (bid) {
+                    u += "&bid=" + this.a.business_id
+                }
+                return u
+            }
+        },
+        template: '<section  class="discount_group fn-clear" :class="{default:a.type==0 && a.is_share,default_z:a.type==0 && !a.is_share,rate:a.type==1 && a.is_share,rate_z:a.type==1 && !a.is_share,dk:a.type==2 && a.is_share,dk_z:a.type==2 && !a.is_share,tg:a.type==3 && a.is_special ,expired:isGq,lqcg:lqcg,lqgl:a.already_get || lqcg}">' +
+            '<a :href="urlp" class="router">' +
+            '<section class="info">' +
+            '<section class="top fn-clear">' +
+            '<img :src="a.img_path">' +
+            '<section class="text">' +
+            '<p class="title_n">{{a.business_name}}</p>' +
+            '<p class="discounted" v-if="a.type == 0"><span>{{a.discount}}</span>元代金券</p>' +
+            '<p class="discounted" v-else-if="a.type == 1"><span>{{a.rate*10}}</span>折扣券</p>' +
+            '<p class="discounted" v-else-if="a.type == 2"><span>{{a.price}}</span>元抵扣券<b>{{a.discount}}元</b></p>' +
+            '</section>' +
+            '</section>' +
+            '<section class="bot">' +
+            '<span>满{{a.min_price}}可用</span>' +
+            '<span class="text-sl">'+
+                '<p class="title_n" v-if="!a.is_share && a.type != 3">专属券</p>' +
+                '<p class="title_n" v-else-if ="a.is_share && a.type != 3" >共享券</p>' +
+                '<p class="title_n" v-else>{{a.name}}</p>'+
+            '</span>' +
+            '</section>' +
+            '</section>' +
+            '</a>' +
+            '<section class="status">' +
+            '<a v-if="isMy" :class="{nohx:isMy}">' +
+            '<p>立即</br>使用</p>' +
+            '</a>' +
+            '<a v-else-if="lqcg || a.already_get" class="nohx">' +
+            '<p>已领取</p>' +
+            '</a>' +
+            '<a v-else-if="isGq" :class="{nohx:isGq}">' +
+            '<p>已过期</p>' +
+            '</a>' +
+            '<a v-else-if="a.type==2 && !geting" @click="msg">' +
+            '<p>立即</br>抢购</p>' +
+            '</a>' +
+            '<a v-else-if="a.type!=2 && !geting" @click="getc(this.isMy?a.coupon_activity_id:a.coupon_id)">' +
+            '<p>免费<br>领取</p>' +
+            '</a>' +
+            '<a v-else-if="success">' +
+            '<p>领取中<br><b>.</b><b>.</b><b>.</b></p>' +
+            '</a>' +
+            '</section>' +
+            '</section>' ,
+        methods: {
+            getc: function (id) {
+                this.$set(this, "geting", true);
+                this.$set(this, "success", true);
+                var that = this;
+                ygg.loading(true);
+                if (!ygg.getCookie("member_id")) window.open("/views/user/login.html", "_self");
+                ygg.ajax('/thirdPay/create_coupon_order', {
+                    coupon_id: id,
+                    member_id: ygg.getCookie("member_id")
+                }, function (data) {
+                    ygg.loading(false);
+                    if (data.status == 'error') {
+                        ygg.prompt(data.msg);
+                        that.$set(that, "geting", false);
+                    } else if (data.status == 'success') {
+                        that.$set(that, "lqcg", true);
+                    }
+
+                });
+            },
+            msg:function () {
+                ygg.prompt("暂时不支持该功能,请在APP上购买!");
+            }
+        }
+    });
         //团购列表
     ygg.template.groupdis = Vue.extend({
         props: {
@@ -925,7 +1023,7 @@ define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
                 geting: false,
                 success: false,
                 lqcg: false,
-                url: "/views/coupon/index11.html?returnUrl=" + this.returnUrl + "&id="
+                url: "/views/coupon/index.html?returnUrl=" + this.returnUrl + "&id="
             }
         },
         computed: {

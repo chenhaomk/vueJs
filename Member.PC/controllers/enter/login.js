@@ -31,7 +31,7 @@ require(['config'], function () {
             }
 
             $.fn.getData({
-                url: "/business/businessFastLogin",
+                url: "/business/fastLogin",
                 data: {
                     mobile: $("#tel").val(),
                     verification_code: $("#yzm").val()

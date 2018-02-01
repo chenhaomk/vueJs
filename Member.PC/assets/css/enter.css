@@ -81,6 +81,28 @@ body.bg{ background: url(../images/enter/register_bg.jpg) center top no-repeat }
 .enter .popup .btn.confi_bind.none,#th.none{ background: #888; cursor: default; }
 .enter form.last .form_group label{ width: 112px; margin-left: -127px }
 .enter .form_group .prompt{ margin: -10px 0 -40px 0 }
+/*密码登录*/
+.pwd{
+    overflow: hidden;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.line{
+    color: #d3d3d3;
+    padding: 0 5px 0;
+    font-style: normal;
+}
+.grayColor{
+    color: #ccc!important;
+}
+
+.marginTop{
+    margin-top: 42px;
+}
 
 .before .tt{ height: 130px; line-height: 130px; text-align: center; font-size: 22px }
 .before .tt span{ display: inline-block; height: 43px; line-height: 43px; padding: 0 8px; background: #fbf1f0 }
@@ -113,7 +135,7 @@ body.bg{ background: url(../images/enter/register_bg.jpg) center top no-repeat }
 #container {float: left;margin-top: 10px;height: 170px;border: 1px solid #edeff5;width: 100%;}
 
 
-.register .form form .form_group.submit input{ display: block; width: 140px; height: 46px; line-height: 46px; color: white; background: #ff6f3d; font-size: 20px; text-align: center; margin: auto; border-radius: 5px; cursor: pointer; }
+.register .form form .form_group.submit input{ display: block; width: 140px; height: 46px; line-height: 46px; color: white; background: #ff6f3d; font-size: 20px; text-align: center; border-radius: 5px; cursor: pointer;margin: 0 auto }
 .register .form form .form_group.submit input.no{ background: #888888; cursor: default; }
 .register.login .form form .form_group.submit a{ margin-top: 40px }
 

@@ -55,7 +55,7 @@ require(['config'], function () {
                 },
                 components: {
                     my: ygg.template.my,
-                    dis: ygg.template.discount,
+                    dis: ygg.template.discountHomePage,
                     list: ygg.template.shopList
                 },
                 methods: {
@@ -225,7 +225,6 @@ require(['config'], function () {
                     getTopData(data.business_id);
                     getFilter();
                     getCoupons(function (d) {
-                        console.dir(data)
                         vm.$set(vm, "discount", d);
                     });
 
@@ -350,7 +349,7 @@ require(['config'], function () {
                     </header>',
                     cols: [{
                         textAlign: 'center',
-                        values: ['全部', '专属券', '共享券']
+                        values: ['全部', '专属券', '共享券','团购券']
                     }],
                     onOpen: function (p) {
                         vm.openShadow = "show";

@@ -91,7 +91,7 @@ require(['config'], function () {
                 }
             },
             components: {
-                uploader: ygg.template.uploader
+                uploader2: ygg.template.uploader2
             }
         });
         var su = true,

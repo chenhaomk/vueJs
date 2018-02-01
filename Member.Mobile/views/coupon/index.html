@@ -32,7 +32,7 @@
             <h3>发布商家</h3>
             <p class="shop_name text-sl"><a href="">{{detail.business_name}}</a></p>
             <a class="phone" :href="'tel:'+detail.business_phone"></a>
-            <star :score='detail.business_star'></star>
+            <star :score='detail.business_star*10'></star>
             <a class="address"><span class="text-sl">{{detail.business_address}}</span></a>
         </section>
 

@@ -65,14 +65,14 @@
                 <p class="label">
                     <label>身份证正面照</label>
                 </p>
-                <uploader :get-file-han="getPositive" :old-imgs="postive_img" :max-length='1'></uploader>
+                <uploader2 :get-file-han="getPositive" :old-imgs="postive_img" :max-length='1'></uploader2>
 
             </section>
             <section class="positive" style="background-image: url(/assets/images/icon/icon_card2.png) ;background-repeat: no-repeat;">
                 <p class="label">
                     <label>身份证反面照</label>
                 </p>
-                <uploader :get-file-han="getOther" :old-imgs="other_img" :max-length='1'></uploader>
+                <uploader2 :get-file-han="getOther" :old-imgs="other_img" :max-length='1'></uploader2>
 
             </section>
             <a class="btn_submit" v-on:click="next">下一步</a>
