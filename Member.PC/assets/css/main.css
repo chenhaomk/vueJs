@@ -616,6 +616,11 @@ a.lq_suc{ cursor: default !important; background: #ffe7df !important; color: #ff
 .footer .foot .ewm p.f span{ margin-top: 24px; width: 30px }
 .footer .foot .ewm p img,.head .cen .ewm img{ float: right; width: 94px; height: 94px }
 .footer .foot .bq{ font-size: 14px; color: #888; text-align: center; padding-top: 30px }
+.footer .foot .bq a{font-size: 14px; color: #888;}
+.footer .foot .bq a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
 .head .cen .ewm{ width: 140px }
 .head .cen .ewm img{ margin-top: 10px }
 
