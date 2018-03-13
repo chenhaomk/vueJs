@@ -25,7 +25,7 @@ define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
         }
     }, 1);
 
-    axio.defaults.baseURL = 'http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0';
+    axio.defaults.baseURL = 'http://119.23.10.30:9000/ygg_api_dev_1.5.2_201803131320/v1.0';
     // axio.defaults.baseURL = 'https://api.yingougou.com/v1.0';
     var ygg = {};
     ygg.maxImgSize = 10485760;

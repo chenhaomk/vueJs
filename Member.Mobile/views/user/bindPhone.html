@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>绑定手机号</title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+
+<section id='app' class='member bindPhone has_head'>
+
+    <section class="head">
+        <a href="/index.html?my=show" class="back"></a>
+        <p>绑定手机号</p>
+    </section>
+
+    <section class="tab_con">
+        <form>
+            <section class="tab_group" :class='[active==0?"active":""]'>
+                <section class="form_group">
+                    <p class="icon icon_phone">
+                        <input v-model="phone" type="number" placeholder="请输入手机号码">
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p class="icon icon_vercode">
+                        <input v-model="vercode" type="number" placeholder="请输入验证码">
+                        <get-vercode :mobile="phone" :sms_type="'0001'"></get-vercode>
+                    </p>
+                </section>
+                <section class="form_group">
+                    <p class="submit">
+                        <input type="submit" @click="login1($event)" value="提交">
+                    </p>
+                </section>
+            </section>
+        </form>
+    </section>
+
+</section>
+
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/user/login.js"></script>
+<html>

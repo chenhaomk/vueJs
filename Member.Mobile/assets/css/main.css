@@ -158,12 +158,18 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .member .tab_con .tab_group{ display: none; margin: 0 1.5rem}
 .member .tab_con .tab_group.active{ display: block; }
 .member .form_group{ margin-top: .7rem }
-.member .login_other{ position: absolute; bottom: 0; height: 9rem; width: 100%; box-sizing: border-box; padding: 0 1.5rem; text-align: center; }
-.member .login_other:before{ content: ""; border-top: 1px solid #e3e3e3; width: 100%; left: 0; margin-bottom: -.7rem; display: block;}
-.member .login_other .title{ color: #a2a2a2; font-size: 1.4rem; line-height: 1.4rem; width: 8.5rem; background: white; margin: auto; position: relative; z-index: 2 }
-.member .login_other .list a{ float: left; height: 7rem; margin-top: .9rem; width: calc(100% / 3 - 1px); background:url(../images/member/ic_bg_wechat_xxh.png) center center no-repeat; background-size: auto 2rem }
+.member .login_other{ position: absolute; bottom: 0; height: 9rem; width: 100%; box-sizing: border-box; padding: 0 1.5rem; text-align: center; top:10rem; }
+.login_other .title {text-align: center; font-size: 1.6rem; }
+.login_other .title:after,.login_other .title:before{content: ""; border-top: 1px solid #e3e3e3; display: block;position: absolute;width: 10%; top: 1.1rem;margin-bottom: -.7rem; }
+.login_other .title:before {left: 25%;}
+.login_other .title:after {right: 25%;}
+
+/*.member .login_other:before{ content: ""; border-top: 1px solid #e3e3e3; width: 75%; left: 0; margin-bottom: -.7rem; display: block;}*/
+/*.member .login_other .title{ color: #a2a2a2; font-size: 1.4rem; line-height: 1.4rem; width: 8.5rem; background: white; margin: auto; position: relative; z-index: 2 }*/
+.member .login_other .list a{ float: left; height: 5rem; margin-top: 3rem; width: calc(100% / 2 - 1px); background:url(../images/member/ic_wei_xxh.png) center center no-repeat; background-size: contain; }
 .member .login_other .list a.qq{ background-image: url(../images/member/ic_bg_qq_xxh.png) }
 .member .login_other .list a.weibo{ background-image: url(../images/member/ic_bg_weibo_xxh.png) }
+.member .login_other .list a.alipay{ background-image: url(../images/member/ic_zhi_xxh.png) }
 .member .agreement{ position: absolute; bottom: 0; width: 100%; height: 4rem; line-height: 1.3rem; text-align: center; color: #888888 }
 .member .agreement a:last-child{ color: #ff6f3d; text-decoration: underline; }
 .member.login .ver{ position: fixed; z-index: 1001; background: white; width: 26.7rem; height: 19rem; border-radius: .5rem; left: 50%; top: 50%; margin: -9.5rem -13.35rem; box-sizing: border-box; padding: 1rem 1.5rem }
@@ -524,7 +530,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 
 .popup{ position: fixed; z-index: 101; width: 24.5rem; left: 50%; margin-left: -12.25rem; top: 50%; background: white; border-radius: .5rem; height: auto; text-align: center; font-size: 1.4rem; margin-top: -6.7rem}
 .popup p{ margin: 3rem 1.5rem; text-align: center; line-height: 2 }
-.popup .btns{ border-top: 1px solid #d8d8d8; height: 4.5rem; line-height: 4.5rem; color: #ff6f3d; line-height: 4.5rem }
+.popup .btns{ border-top: 1px solid #d8d8d8; height: 4.5rem; line-height: 4.5rem; color: #ff6f3d; }
 .popup .btns a{ display: block; }
 .popup.double .btns a{ float: left; width: 50% }
 .popup.double .btns a:first-child{ box-sizing: border-box; border-right: 1px solid #d8d8d8 }
@@ -532,7 +538,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .head{ position: fixed; background: white; top: 0; width: 100%; height: 5rem; border-bottom: 1px solid #e3e3e3; text-align: center; font-size: 1.7rem; line-height: 5rem; box-sizing: border-box; z-index: 10}
 .head .back,.reback{ position: absolute; width: 5rem; height: 5rem; background: url(../images/member/ic_bg_back_xxh.png) center center no-repeat; background-size: .9rem auto; z-index: 2; left: 0 ; top: 0}
 .head .com{ position: absolute; width: 5rem; height: 5rem; padding-right: 1.5rem; line-height: 5rem; text-align: right; top: 0; color: #ff6f3d; font-size: 1.5rem; z-index: 2; right: 0 }
-.head .close{ position: absolute; width: 4.5rem; height: 5rem; top: 0; z-index: 2; right: 0; background: url(../images/member/ic_bg_delete_xxh.png) center center no-repeat; background-size: 1.5rem auto; }
+.head .close{ position: absolute; width: 4.5rem; height: 5rem; top: 0; z-index: 2; right: 0;color: #ff6f3d; }
 #app.has_head{ padding-top: 5rem }
 #app{ padding-bottom: 2rem;margin-bottom:5rem; }
 .shadow{ position: fixed; top: 0; background: black; opacity: .7; z-index: 100; width: 100%; height: 100%; display: none;}
@@ -577,6 +583,9 @@ a.checkbox.none:before{ background: #fff}
 .form_group .submit input{ background: #ff6f3d; font-size: 1.6rem; text-align: center; border-radius: .6rem; color: white}
 .form_group .submit input.none{ background: #888 }
 .form_group .other a{ color: #ff6f3d; font-size: 1.6rem; text-align: center; display: block; height: 4.8rem; margin-top: .5rem ;border-width: 1px; border-color: rgb(255, 111, 61); border-style: solid; border-radius: .6rem; background-color: rgb(255, 255, 255);}
+.form_group .other_login a{ color: #fff; font-size: 1.6rem; text-align: center; display: block; height: 4.8rem; margin-top: 3rem ; border-radius: .6rem; background: #ff6f3d;}
+.login_other .other_login a{ color: #fff; font-size: 1.6rem; text-align: center; display: block; height: 4.8rem; line-height: 4.8rem; margin-top: 15rem ; border-radius: .6rem; background: #ff6f3d;}
+
 
 .uploader{ clear: both; padding: 0 1.5rem }
 .uploader>section{ float: left; width: calc((100% - 4.5rem) / 4 - 1px); height: 7.5rem; position: relative; margin-bottom: 1.5rem; margin-right: 1.5rem }
@@ -1059,4 +1068,27 @@ padding-top: 1.3rem;
   right: 1rem;
   top:50%;
   margin-top: -1.5rem;
+}
+
+
+
+/*账号管理*/
+.accountInfo{
+    background: white;
+    border-bottom: 1px solid #e3e3e3;
+}
+.accountInfo .group{ border-bottom: 1px solid #e3e3e3; margin: 0 1.5rem; height: 5rem; line-height: 5rem; font-size: 1.5rem}
+.accountInfo .group:last-child{ border: 0 }
+.accountInfo .group a{ display: block; height: 100%; position: relative; }
+/*.accountInfo .group a:before,.home .my .menu a:before,.creat_shop .creat_brand .form_group .sel_text:before{ content: ""; float: right; width: 1.5rem; height: 100%; background: url(../images/member/ic_bg_arrow_xxh.png) right center no-repeat; background-size: .65rem auto }*/
+.accountInfo .group label{  color: #1c1c1c }
+.accountInfo .group p{float: right; height: 100%;  color: #ff6f3d; }
+.accountInfo .group p img{ border-radius: 50%; width: 4rem; height: 4rem; margin-top: .5rem }
+.accountInfo .group .update_photo{ position: absolute; width:100%; height: 100%; opacity: 0; z-index: 2 }
+
+.accountInfo .group a img{
+    width: 3rem;
+    height: 3rem;
+    vertical-align: middle;
+    margin-right: 1rem;
 }
