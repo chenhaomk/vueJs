@@ -8,6 +8,7 @@ require(['config'],function(){
                 nickName : "",
                 nkShow : "",
                 telShow : "",
+                bindPhone : "",
                 hasTelShow : "",
                 vercode : "",
                 phone : "",
