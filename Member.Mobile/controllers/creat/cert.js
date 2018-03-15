@@ -1,5 +1,5 @@
 require(['config'], function () {
-    require(['vue', 'main', 'imgup'], function (Vue, ygg, OSS) {
+    require(['vue', 'main', 'imgup','axio', 'city-picker-area'], function (Vue, ygg, OSS,axio) {
 
         var vm = new Vue({
             el: "#app",
