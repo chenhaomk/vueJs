@@ -3,11 +3,11 @@ require(['config'], function () {
     	// var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // main.post.
-        main.loading(true)
+        // main.loading(true)
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // 2c92f9245f5bf7b7015f5c69e068001f
         var bid = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
-        var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
+        var baseURL = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0/"//测试服
     	var vm = new vue({
     		el:"#app",
     		data:{
@@ -27,7 +27,7 @@ require(['config'], function () {
                 }
     		},
             components : {
-                star:main.template.star,
+                star:main.template.newStar,
             },
 
     	})
@@ -37,7 +37,6 @@ require(['config'], function () {
             main.post(baseURL+'business/getBusinessDetails',{
                 business_id:bid
             },function (res) {
-               
                 data = res.data.data;
                 vm.b_n = data.business_details.name
                 vm.telNum = data.business_details.phone
@@ -57,13 +56,14 @@ require(['config'], function () {
                     // window.location.href = "../../payment/views/newDrainage/newDrainagefalt.html"
                     // window.location.href = "../../views/newDrainage/drainageNewUser.html"
                 }
+                // vm.arr = vm.arr.concat(vm.arr)
+                // vm.arr = vm.arr.concat(vm.arr)
                 if(vm.arr.length >3) {
                     var arr = []
                     arr = vm.arr.splice(3,vm.arr.length-3)
                 }
-                
-                 
-                 fn()
+
+                //  fn()
             })
         }
         function fn() {
