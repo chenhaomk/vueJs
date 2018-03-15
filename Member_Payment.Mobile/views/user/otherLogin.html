@@ -5,21 +5,22 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>其他登录方式</title>
 
-    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+    <link href="/assets/css/memberCss/main.css" rel='stylesheet' type="text/css">
 
 </head>
 <body>
 
-<section id='app' class='member accountMange has_head'>
+<section id='app' class='member login has_head'>
     <section class="head">
         <p>登录</p>
-        <a class="close" href="/index.html"></a>
+        <span v-on:click="back" class="close" href="/payment/views/payment/index.html"></span>
     </section>
+
     <section class="login_other">
         <p class="title">推荐登录方式</p>
         <section class="list">
-            <a class="wechat" @click="wechatLogin($event)"></a>
-            <a class="alipay" @click="alipayLogin($event)"></a>
+            <a class="wechat"></a>
+            <a class="alipay"></a>
         </section>
         <p class="other_login">
             <a href="login.html">其他登录方式</a>
@@ -29,5 +30,5 @@
 
 </body>
 <script data-main="/config" src="/plugins/require/require.js"></script>
-<script src="/controllers/user/otherLogin.js"></script>
+<script src="/controllers/user/login.js"></script>
 <html>

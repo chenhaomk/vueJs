@@ -58,6 +58,7 @@ define([
     }
    // axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
     axios.defaults.baseUrl = "http://119.23.10.30:9000/v1.0";
+   //    axios.defaults.baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
     axios.defaults.headers.appid = appid;
     axios.defaults.headers.sign = sign;
     axios.defaults.headers.timestamp = timestamp;
