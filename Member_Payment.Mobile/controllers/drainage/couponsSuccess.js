@@ -47,13 +47,12 @@ require(['config'], function () {
                 vm.img = data.business_details.logo
                 vm.$set(vm,"star",data.business_details.star);
                 data.coupons.map(function (item,index) {
-                    debugger
                     if(item.type != 3) { //团购
                         vm.arr.push(item)
                     }
                 })
                 if(vm.arr.length == 0) {
-
+                    
                     // window.location.href = "../../payment/views/newDrainage/newDrainagefalt.html"
                     // window.location.href = "../../views/newDrainage/drainageNewUser.html"
                 }
@@ -62,7 +61,6 @@ require(['config'], function () {
                 if(vm.arr.length >3) {
                     var arr = []
                     arr = vm.arr.splice(3,vm.arr.length-3)
-                    vm.arr.push(arr)
                 }
 
                 //  fn()
