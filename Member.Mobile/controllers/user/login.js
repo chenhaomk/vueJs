@@ -65,18 +65,19 @@ require(['config'],function(){
                         mobile : that.userId,
                         password : that.pwd
                     },function(data){
-                        if(data.status == "error"){
-                            ygg.prompt(data.msg);
-                            if(data.code == "1001"){
-                                that.cs++;
-                            }
-                        }else if(data.status == "success"){
-                            data = data.data;
-                            ygg.setCookie("member_id",data.member_id);
-                            ygg.setCookie("mobile",data.mobile);
-                            ygg.setCookie("token",data.token);
-                            window.open("/index11.html","_self");
-                        }
+                        console.log(data)
+                        // if(data.status == "error"){
+                        //     ygg.prompt(data.msg);
+                        //     if(data.code == "1001"){
+                        //         that.cs++;
+                        //     }
+                        // }else if(data.status == "success"){
+                        //     data = data.data;
+                        //     ygg.setCookie("member_id",data.member_id);
+                        //     ygg.setCookie("mobile",data.mobile);
+                        //     ygg.setCookie("token",data.token);
+                        //     window.open("/index11.html","_self");
+                        // }
                     });
                 },
                 blurTip : function(s,t,r){
