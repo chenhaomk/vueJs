@@ -34,7 +34,7 @@ define([
   });
   var main = {};
   // main.baseUrl = "https://api.yingougou.com/v1.0/";
-  main.baseUrl = "http://119.23.10.30:9000/v1.0/";
+  main.baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
   main.post = function (url, data, sucBack, errBack) {
     var error = {},
       appid = "100";
@@ -43,11 +43,11 @@ define([
     if (data == null || data.length <= 0)
       return;
     var tk
-    if(location.search.indexOf("userId") != -1) {
+    if (location.search.indexOf("userId") != -1) {
       tk = location.search.split("&")[2].split("=")[1]
     }
-    var token = this.getSession("token")?this.getSession("token"):this.getCookie("token");
-    if(tk != null || tk != undefined) {
+    var token = this.getSession("token") ? this.getSession("token") : this.getCookie("token");
+    if (tk != null || tk != undefined) {
       token = tk
     }
     var timestamp = (new Date()).valueOf();
@@ -56,9 +56,9 @@ define([
       sign = main.getMd5(appid + timestamp + token);
       axios.defaults.headers.token = token;
     }
-   // axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
-    axios.defaults.baseUrl = "http://119.23.10.30:9000/v1.0";
-   //    axios.defaults.baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
+    // axios.defaults.baseURL = "https://api.yingougou.com/v1.0/";
+    axios.defaults.baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
+
     axios.defaults.headers.appid = appid;
     axios.defaults.headers.sign = sign;
     axios.defaults.headers.timestamp = timestamp;
@@ -147,7 +147,7 @@ define([
     if (cval != null)
       document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + ";path=/";
   }
-    // ---------结束---------ch-use:用于payPage页面获取由h5店铺详情点击优惠买单时设置的cookie
+  // ---------结束---------ch-use:用于payPage页面获取由h5店铺详情点击优惠买单时设置的cookie
   main.getQueryString = function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
@@ -654,36 +654,66 @@ define([
   });
   //评分星级
   main.template.star = Vue.extend({
-        props: {
-            score: Number
-        },
-        template: '<div class="score_star">\
+    props: {
+      score: Number
+    },
+    template: '<div class="score_star">\
                         <a v-for="a of aScore"><b :style="{width:a}"></b></a>\
                         <span>{{score}}分</label>\
                     </div>',
-        computed: {
-            aScore: function () {
-                if (!this.score) {
-                    this.score = 0;
-                } else {
-                    this.score = this.score / 10;
-                }
-                var arr = new Array(5),
-                    sco = this.score;
-                for (var i = 0; i < arr.length; i++) {
-                    if (i + 1 <= sco) {
-                        arr[i] = 1 * 100 + "%";
-                    } else if (i + 1 > sco && i < sco) {
-                        arr[i] = sco % 1 * 100 + "%";
-                    } else {
-                        arr[i] = 0;
-                    }
-                }
-
-                return arr;
-            }
+    computed: {
+      aScore: function () {
+        if (!this.score) {
+          this.score = 0;
+        } else {
+          this.score = this.score / 10;
         }
-    });
+        var arr = new Array(5),
+          sco = this.score;
+        for (var i = 0; i < arr.length; i++) {
+          if (i + 1 <= sco) {
+            arr[i] = 1 * 100 + "%";
+          } else if (i + 1 > sco && i < sco) {
+            arr[i] = sco % 1 * 100 + "%";
+          } else {
+            arr[i] = 0;
+          }
+        }
+
+        return arr;
+      }
+    }
+  });
+  main.template.newStar = Vue.extend({
+    props: {
+      score: Number
+    },
+    template: '<div class="new_star">\
+                <div  v-for="a of aScore" class="star_num" ><div class="star_model"  :style="{width:a}"></div><div class="star_img" ></div> </div><span>{{score}}分\
+                    </div>',
+    computed: {
+      aScore: function () {
+        if (!this.score) {
+          this.score = 0;
+        } else {
+          this.score = this.score / 10;
+        }
+        var arr = new Array(5),
+          sco = this.score;
+        for (var i = 0; i < arr.length; i++) {
+          if (i + 1 <= sco) {
+            arr[i] = 1 * 100 + "%";
+          } else if (i + 1 > sco && i < sco) {
+            arr[i] = sco % 1 * 100 + "%";
+          } else {
+            arr[i] = 0;
+          }
+        }
+
+        return arr;
+      }
+    }
+  })
   main.prompt = function (t) {
     var dom = document.getElementById("prompt");
     if (!dom) {
@@ -714,12 +744,12 @@ define([
   };
   main.loading = function (con) {
     if (con) {
-            body.setAttribute("class", body.getAttribute("class") + " loading");
-        } else {
-            body.setAttribute("class", (body.getAttribute("class")).replace("loading"));
+      body.setAttribute("class", body.getAttribute("class") + " loading");
+    } else {
+      body.setAttribute("class", (body.getAttribute("class")).replace("loading"));
     }
   }
-    main.newPrompt = function (t,timer) {
+  main.newPrompt = function (t, timer) {
     var dom = document.getElementById("prompt");
     if (!dom) {
       var prompt = document.createElement("section"),
@@ -743,9 +773,9 @@ define([
       dom.childNodes[1].childNodes[0].childNodes[0].innerText = t;
     }
     dom.setAttribute("class", "prompt show");
-      setTimeout(function () {
-        dom.setAttribute("class", "prompt hide")
-      }, timer);
+    setTimeout(function () {
+      dom.setAttribute("class", "prompt hide")
+    }, timer);
 
   };
   main.loadingImg = function () {
@@ -761,7 +791,7 @@ define([
       prompt.setAttribute("class", "prompt");
       shadow_b.setAttribute("class", "shadow_b");
       text.setAttribute("class", "text");
-      img.setAttribute("src","../../assets/images/loading-go.gif")
+      img.setAttribute("src", "../../assets/images/loading-go.gif")
       prompt.appendChild(shadow_b);
       prompt.appendChild(text);
       text.appendChild(p);
