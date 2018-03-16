@@ -14,9 +14,8 @@
 
     <section class="head">
         <p>完善信息</p>
-        <a class="close" href="/index.html">跳过</a>
+        <a class="jump_over" href="/index.html">跳过</a>
     </section>
-
     <section class="tab_con">
         <form>
             <section class="tab_group" :class='[active==0?"active":""]'>
@@ -33,7 +32,7 @@
                 </section>
                 <section class="form_group">
                     <p class="submit">
-                        <input type="submit" @click="login1($event)" value="提交">
+                        <input type="submit" @click="bingPhone($event)" value="提交">
                     </p>
                 </section>
             </section>
@@ -44,5 +43,5 @@
 
 </body>
 <script data-main="/config" src="/plugins/require/require.js"></script>
-<script src="/controllers/user/login.js"></script>
+<script src="/controllers/user/perfectInfo.js"></script>
 <html>

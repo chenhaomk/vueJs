@@ -16,7 +16,13 @@ require(['config'],function(){
                 pwdShow : "",
                 pwd : "",
                 rpwd : "",
-                isOk : false
+				isOk : false,
+				isBindWx:'绑定',
+				isBindZfb:'绑定',
+				isBindPhone:'绑定',
+				wxImg:'../../assets/images/member/no_wx.png',
+				zfbImg:'../../assets/images/member/no_zfb.png',
+				phImg:'../../assets/images/member/ic_phone1_xxh.png'
             },
             methods : {
                 updatePhoto : function(e){
@@ -85,7 +91,7 @@ require(['config'],function(){
 			        	if(data.status == "success"){
 			        		data = data.data;
 			        		vm.$set(vm.user,"mobile",that.phone);
-			        		ygg.prompt("修改成功！");
+			        		ygg.prompt("手机号修改成功！");
 			        	}else if(data.status == "error"){
 			        		ygg.prompt(data.msg);
 			        	}
@@ -129,14 +135,47 @@ require(['config'],function(){
                 },
                 blurTip : function(s,t,r){
                     this.isOk = ygg.verify(s,t,r);
-                }
+				},
+				bindwx:function () {
+					console.log(11)
+				},
+				bindzfb:function () {
+					var baseUrl = "http://192.168.0.110:8082/v1.0";
+					event.preventDefault();
+                    window.event.returnValue = false;
+                    var that = this;
+                    ygg.ajax(baseUrl+'/passport/thirdZfbLoginGetUrl',{
+                        zfb_openid:that.zfb_openid,
+                        nick_name:that.nick_name
+                    },function(data){
+                        var url = data.data.url
+                        if(data.status == "error"){
+                            ygg.prompt(data.msg);
+                        }else if(data.status == "success"){
+                            window.location.href=url;
+                        }
+                    });
+				},
+				bindph:function () {
+					if(this.isBindPhone == '绑定') {
+						this.bindPhone = 'show'
+					}else {
+						this.telShow = 'show'
+					}
+				},
+				setpwd:function () {
+					if(this.isBindPhone == '绑定') {
+						this.bindPhone = 'show'
+					}else {
+						this.pwdShow = 'show'
+					}
+				}
             },
             components : {
                 getVercode : ygg.template.getVercode 
             }
         }),
         member_id = ygg.getCookie("member_id");
-
         if(!member_id)window.open('http://'+window.location.host,"_self");
         ygg.getClient(OSS);
     	
@@ -144,12 +183,32 @@ require(['config'],function(){
             member_id : member_id
         },function(data){
 
-            data = data.data;
-
+			data = data.data;
             vm.$set(vm,"user",data);
             vm.$set(vm,"nickName",data.nick_name);
-
-        });
-
+			if(data.zfb_openid != null) {
+				vm.isBindWx = '更换'
+				vm.wxImg='../../assets/images/member/ic_wei_xxh.png'
+			}
+			if(data.wx_openid != null) {
+				vm.isBindWx = '更换'
+				vm.zfbImg = '../../assets/images/member/ic_zhi_xxh.png'
+			}
+			if(data.mobile != null) {
+				vm.isBindPhone = '更换'
+				vm.phImg = '../../assets/images/member/yes_phone.png'
+			}
+			// vm.hasTelShow = 'show'
+		});
+		/**
+		 * 用户登录后根据用户微信，手机号，支付宝绑定状态显示对应页面
+		 * 不能直接在‘getPersonCenterInfo’接口返回数据里判断，会导致每次进入用户详情页都有跳转
+		 */
+		hasTelShow ()
+		function hasTelShow () {
+			if(ygg.getCookie("zfb_is_bind") == 'false' || ygg.getCookie("wx_is_bind") == 'false' ) {
+				vm.hasTelShow = 'show' //显示账号管理
+			}
+		}
     });
 });

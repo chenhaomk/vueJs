@@ -523,7 +523,7 @@ require(['config'], function () {
                 }
             }
         }
-
+        
         function testApp() {
             // if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
             vm.downLoadType = "下载";
@@ -542,6 +542,37 @@ require(['config'], function () {
             //     }
             // }
         }
+        
         testApp();
+        /**
+         * 1.5.2 版本第三方登录，微信支付默认授权回调域名为首页
+         * 所以在此添加判断函数，获取首页url参数，调登录接口获取用户信息
+         */
+        function thirdLogin() {
+            var url = location.search
+            if(url.indexOf('app') != -1) {//通过支付宝授权
+                ygg.ajax('/home/getCouponHomeScreen', {
+                    app_id:url.split('&')[0].split('=')[1],
+                    auth_code:url.split('&')[3].split('=')[1]
+                }, function (data) {
+                    if(data.status == "error"){
+                        ygg.prompt(data.msg);
+                    }else if(data.status == "success"){
+                        data = data.data;
+                        ygg.setCookie("member_id",data.member_id);
+                        ygg.setCookie("mobile",data.mobile);
+                        ygg.setCookie("token",data.token);
+                        if(data.mobile != null) {//判读用户是否绑定手机号
+                            window.open("/index.html","_self");
+                        }else {
+                            window.open("/perfectInfo.html");
+                        }
+                    }
+                });
+            }else {//微信授权
+                
+            }
+        }
+
     });
 });

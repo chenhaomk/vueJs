@@ -21,27 +21,23 @@ require(['config'],function(){
                     event.preventDefault();
                     window.event.returnValue = false;
                     var that = this;
-                    var param=location.href.split("?")[1];
-                    var url=encodeURIComponent("https://api.yingougou.com?"+param);
+                    // var param=location.href.split("?")[1];
+                    var url=encodeURIComponent("https://m.yingougou.com?");
+                    // console.log(param)
                     ygg.ajax(baseUrl+'/passport/thirdWxLogin',{
-                        wx_openid:'wx123456',
+                        wx_openid:'wx1234567',
                         nick_name:'ttt'
                     },function(data){
-                        console.log(data)
+                        console.log(data,11)
                         if(data.status == "error"){
                             ygg.prompt(data.msg);
                         }else if(data.status == "success"){
-                            // window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx123456&redirect_uri="+
-                            //     url+"&response_type=code&scope=snsapi_userinfo&"+param+"#wechat_redirect";
-
-
+                            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx123456&redirect_uri="+
+                                url+"&response_type=code&scope=snsapi_userinfo&"+param+"#wechat_redirect";
                         }
                     });
 
                 },
-
-
-
                 //支付宝登录
                 alipayLogin : function(e){
                     event.preventDefault();
@@ -51,9 +47,7 @@ require(['config'],function(){
                         zfb_openid:that.zfb_openid,
                         nick_name:that.nick_name
                     },function(data){
-                        // console.log(data)
                         var url = data.data.url
-                        // console.log(url);
                         if(data.status == "error"){
                             ygg.prompt(data.msg);
                         }else if(data.status == "success"){
@@ -63,9 +57,6 @@ require(['config'],function(){
 
 
                 },
-
-
-
                 blurTip : function(s,t,r){
                     ygg.verify(s,t,r);
                 },

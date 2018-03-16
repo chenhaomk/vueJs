@@ -1,7 +1,7 @@
 require(['config'],function(){
     require(['axio','vue','main'],function (axio,Vue,ygg) {
                 // var baseUrl = "https://api.yingegou.com/v1.0/";
-        var baseUrl = "http://119.23.10.30:9000/v1.0";
+        var baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
         var vm = new Vue({
             el : "#app",
             data : {
@@ -41,7 +41,11 @@ require(['config'],function(){
                             ygg.setCookie("member_id",data.member_id);
                             ygg.setCookie("mobile",data.mobile);
                             ygg.setCookie("token",data.token);
-                            window.open("/index.html","_self");
+                            if(data.wx_openid == ''   || data.zfb_openid  == '' ) {
+                                window.open("/views/user/bindUser.html","_self");
+                            }else {
+                                window.open("/index.html","_self");
+                            }
                         }
                     });
                 },
@@ -65,19 +69,22 @@ require(['config'],function(){
                         mobile : that.userId,
                         password : that.pwd
                     },function(data){
-                        console.log(data)
-                        // if(data.status == "error"){
-                        //     ygg.prompt(data.msg);
-                        //     if(data.code == "1001"){
-                        //         that.cs++;
-                        //     }
-                        // }else if(data.status == "success"){
-                        //     data = data.data;
-                        //     ygg.setCookie("member_id",data.member_id);
-                        //     ygg.setCookie("mobile",data.mobile);
-                        //     ygg.setCookie("token",data.token);
-                        //     window.open("/index11.html","_self");
-                        // }
+                        if(data.status == "error"){
+                            ygg.prompt(data.msg);
+                            if(data.code == "1001"){
+                                that.cs++;
+                            }
+                        }else if(data.status == "success"){
+                            data = data.data;
+                            ygg.setCookie("member_id",data.member_id);
+                            ygg.setCookie("mobile",data.mobile);
+                            ygg.setCookie("token",data.token);
+                            if(data.wx_openid == ''   || data.zfb_openid  == '' ) {
+                                window.open("/views/user/userinfo.html","_self");
+                            }else {
+                                window.open("/index.html","_self");
+                            }
+                        }
                     });
                 },
                 blurTip : function(s,t,r){
