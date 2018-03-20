@@ -788,7 +788,7 @@ define(['axio', 'vue','croppie'], function (axio, Vue,croppie) {
           '</section>' +
           '<section class="btns" v-show="!user.nickName">' +
           '<a href="/views/user/otherLogin.html">登录</a>' +
-          '<a href="/views/user/register.html">注册</a>' +
+        //   '<a href="/views/user/register.html">注册</a>' +
           '</section>' +
           '</section>' +
           '<section class="menu">' +

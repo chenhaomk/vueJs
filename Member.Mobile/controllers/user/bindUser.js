@@ -139,13 +139,13 @@ require(['config'], function () {
                         this.isOk = ygg.verify(s, t, r);
                     },
                     bindwx: function () {
-                        console.log(11)
+                        window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxb8605b32e044c45b&redirect_uri=http%3a%2f%2fm.yingougou.com&response_type=111&scope=snsapi_login&state=222#wechat_redirect'
                     },
                     bindzfb: function () {
                         event.preventDefault();
                         window.event.returnValue = false;
                         var that = this;
-                        var baseUrl = "http://192.168.0.110:8082/v1.0";
+                        var baseUrl = "http://192.168.0.99:8082/v1.0";
                         ygg.ajax(baseUrl + '/passport/thirdZfbLoginGetUrl', {
                             zfb_openid: that.zfb_openid,
                             nick_name: that.nick_name
@@ -171,6 +171,9 @@ require(['config'], function () {
                         } else {
                             this.pwdShow = 'show'
                         }
+                    },
+                    back:function () {
+                        window.open("/views/user/userinfo.html","_self");
                     }
                 },
                 components: {

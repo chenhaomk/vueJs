@@ -1,5 +1,5 @@
 require(['config'], function () {
-    require(['vue', 'main', 'swiper'], function (Vue, ygg, Swiper) {
+    require(['vue', 'main', 'swiper', 'axio'], function (Vue, ygg, Swiper, axio) {
 
         function browserRedirect() {
             var sUserAgent = navigator.userAgent.toLowerCase();
@@ -349,7 +349,7 @@ require(['config'], function () {
                     </header>',
                     cols: [{
                         textAlign: 'center',
-                        values: ['全部', '专属券', '共享券','团购券']
+                        values: ['全部', '专属券', '共享券', '团购券']
                     }],
                     onOpen: function (p) {
                         vm.openShadow = "show";
@@ -523,7 +523,7 @@ require(['config'], function () {
                 }
             }
         }
-        
+
         function testApp() {
             // if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
             vm.downLoadType = "下载";
@@ -542,35 +542,68 @@ require(['config'], function () {
             //     }
             // }
         }
-        
+
         testApp();
         /**
+         *
          * 1.5.2 版本第三方登录，微信支付默认授权回调域名为首页
          * 所以在此添加判断函数，获取首页url参数，调登录接口获取用户信息
          */
+        thirdLogin()
         function thirdLogin() {
             var url = location.search
-            if(url.indexOf('app') != -1) {//通过支付宝授权
-                ygg.ajax('/home/getCouponHomeScreen', {
-                    app_id:url.split('&')[0].split('=')[1],
-                    auth_code:url.split('&')[3].split('=')[1]
+            if (url.indexOf('auth_code') != -1) { //通过支付宝授权
+                var app_id =  url.split('&')[0].split('=')[1]
+                var auth_code = url.split('&')[3].split('=')[1]
+                ygg.ajax('/passport/thirdZfbLogin', {
+                    app_id: app_id,
+                    auth_code:auth_code
                 }, function (data) {
-                    if(data.status == "error"){
-                        ygg.prompt(data.msg);
-                    }else if(data.status == "success"){
+                    if (data.status == "error") {
+                        ygg.prompt('发生系统错误，请返回登录页重新登录！');
+                    } else if (data.status == "success") {
                         data = data.data;
-                        ygg.setCookie("member_id",data.member_id);
-                        ygg.setCookie("mobile",data.mobile);
-                        ygg.setCookie("token",data.token);
-                        if(data.mobile != null) {//判读用户是否绑定手机号
-                            window.open("/index.html","_self");
-                        }else {
+                        ygg.setCookie("member_id", data.member_id);
+                        ygg.setCookie("mobile", data.mobile);
+                        ygg.setCookie("token", data.token);
+                        if (data.mobile != null) { //判读用户是否绑定手机号
+                            window.open("/index.html", "_self");
+                        } else {
                             window.open("/perfectInfo.html");
                         }
                     }
                 });
-            }else {//微信授权
-                
+            } else if (url.indexOf('code') != -1) { //微信授权,获取code
+                var code = url.split('&')[0].split('=')[1]
+                if (code != undefined) {
+                    ygg.ajax('/passport/getWxUnionId',{
+                        code:code
+                    },function(data){
+                        if(data.status == 'error') {
+                            ygg.prompt('发生系统错误，请返回登录页重新登录！');
+                        }else if(data.status == 'success') {
+                            var obj = {
+                                wx_unionid:data.data.unionid,
+                                nick_name : data.data.nick_name,
+                                openid : data.data.openid
+                            }
+                            ygg.ajax('passport/thirdWxLogin',obj,function(data){
+                                if(data.status == "error"){
+                                    ygg.prompt(data.msg)
+                                }else if(data.status == "success"){
+                                    ygg.setCookie("member_id",data.member_id);
+                                    ygg.setCookie("mobile",data.mobile);
+                                    ygg.setCookie("token",data.token);
+                                    if (data.mobile != null) { //判读用户是否绑定手机号
+                                        window.open("/index.html", "_self");
+                                    } else {
+                                        window.open("/perfectInfo.html");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
             }
         }
 

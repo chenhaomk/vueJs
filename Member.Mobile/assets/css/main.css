@@ -81,7 +81,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .home .my .top .btns{ text-align: center; }
 .home .my .top .info{ text-align: center; }
 .home .my .top .btns a{ display: inline-block; position: relative; height: 4rem; line-height: 4rem; color: #ff6f3d; font-size: 1.6rem; padding: 0 3rem }
-.home .my .top .btns a:first-child:before{ content: ""; position: absolute; height: 1.6rem; right: 0; top: 50%; margin-top: -.7rem; border-right: 1px solid #535353 }
+/* .home .my .top .btns a:first-child:before{ content: ""; position: absolute; height: 1.6rem; right: 0; top: 50%; margin-top: -.7rem; border-right: 1px solid #535353 } */
 .home .my .menu a{ display: block; margin: 0 1.5rem; height: 5rem; line-height: 5rem; font-size: 1.5rem; text-indent: 2.8rem; border-bottom: 1px solid #e3e3e3; color: #1c1c1c; position: relative; background-repeat: no-repeat; background-position: left center; background-size: 1.8rem auto }
 .home .my .menu a:nth-child(1){ background-image:url(../images/index/index_m_icon1.png) }
 .home .my .menu a:nth-child(2){ background-image:url(../images/index/index_m_icon2.png) }
