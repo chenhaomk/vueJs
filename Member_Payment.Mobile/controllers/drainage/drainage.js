@@ -40,6 +40,7 @@ require(['config'], function () {
                         mobile: this.phone,
                         sms_type: "0009"
                     }, function (res) {
+                        console.log(res)
                         if (res.errCode < 0)
                             main.prompt(res.errMsg);
                         var data = res.data;
@@ -91,7 +92,9 @@ require(['config'], function () {
                                 }
                                 if (data.data[9009] != null){
                                     main.prompt('领券成功！打开APP可查看');
+                                    // window.location.href = "../../views/newDrainage/couponsSuccess.html"
                                     pram = "newUser"
+
                                     return
                                 }      
                                 if (data.data[9012] != null) {

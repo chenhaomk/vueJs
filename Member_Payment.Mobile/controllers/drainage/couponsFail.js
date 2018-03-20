@@ -11,8 +11,6 @@ require(['config'], function () {
     	var vm = new vue({
     		el:"#app",
     		data:{
-                star : "",
-                img:"",
                 b_n:"",
                 all:"22",
                 arr:[],
@@ -23,7 +21,7 @@ require(['config'], function () {
     		},
     		methods:{
                 checkBtn:function() {
-                    alert(111)
+                    alert(222)
                     // window.location.href = "../../payment/views/newDrainage/freeCoupons.html"
                     // window.location.href = "../../views/newDrainage/drainageLogin.html"
                 }

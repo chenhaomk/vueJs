@@ -14,15 +14,15 @@
 <body>
     <div id='app' class="main new_shopbg">
         <div class='receive_fail'>
-            <div class="shop_fail" >必胜客银泰城店</div>
+            <div class="shop_fail" v-text="b_n"></div>
             <div class="fail_txt">领取失败</div>
             <div class="receive_repeat">不可重复领用</div>
-            <div class="get_ticket">
+            <div class="get_ticket" v-on:click="checkBtn">
                 查看我的优惠券
             </div>
         </div>
     </div>
 </body>
 <script data-main=" ../../config" src="../../plugins/require/require.js "></script>
-<script src="../../controllers/drainage/couponsSuccess.js"></script>
+<script src="../../controllers/drainage/couponsFail.js"></script>
 </html>

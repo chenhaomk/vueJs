@@ -1,7 +1,7 @@
 require(['config'], function () {
     require(['axio', 'vue', 'main'], function (axio, Vue, main) {
         // var baseUrl = "https://api.yingegou.com/v1.0/";
-        var baseUrl = "http://119.23.10.30:9000/v1.0/";
+        var baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
         var docEl = document.documentElement,
             body = document.getElementsByTagName("body")[0],
             width = docEl.clientWidth,
@@ -45,6 +45,7 @@ require(['config'], function () {
                         mobile: that.phone,
                         verification_code: that.vercode
                     }, function (data) {
+                        console.log(data)
                         if (data.data.status == "error") {
                             main.prompt(data.msg);
                         } else if (data.data.status == "success") {

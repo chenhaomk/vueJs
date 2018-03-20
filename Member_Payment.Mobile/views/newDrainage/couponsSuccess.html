@@ -12,67 +12,17 @@
 </head>
 
 <body>
-    <!-- <div id="app" class="main newWarpBg">
-		<div class="shopHdImg">
-            <div class="headeImg">
-                <div class="imgWarp">
-                    <img v-bind:src="img" alt="title">
-                </div>
-                <div class="shopName" v-text="b_n"></div>
-            </div>
-            <div class="shopSum">
-                <div class="con">
-                    <star :score='star*10'></star>
-                    <div class="add"><img class="address" src="../../assets/images/freeCoupons/ic_bg_address_xxh.png"><span>{{add}}</span></div>
-                    <div class="tel"><img class="phone" src="../../assets/images/freeCoupons/ic_bg_phone_xxh.png" /><a v-bind:href="'tel:'+telNum" >{{telNum}}</a></div>
-                </div>
-            </div>
-            <div class="sunfo">
-                <p>{{all}}</p>
-            </div>
-        </div>
-        <div class=" contentFree">
-            <div class="tet">相关优惠</div>
-            <div class="disList">
-                <div v-for="item in arr" class="item">
-                    <img :src="item.img_path" alt="" class="tetImg">
-                    <p>
-                        {{item.discount}}元<span v-if="item.type == 0">代金券</span>
-                        <span v-else-if="item.type == 1">折扣券</span>
-                        <span v-else="item.type == 3">抵扣券</span>
-                    </p>
-                    <p><img src="../../assets/images/newDarinage/fontBg2.png" alt="" class="rmb"><span class="price">{{item.price?item.price:0}}</span></p>
-                </div>
-            </div>
-        </div>
-        <div class="freeBtn" v-on:click="btn">免费领券</div>
-    </div> -->
     <div id='app' class="main new_shopbg">
         <div class='ad_warp'>
-            <div class="shop_name" >必胜客银泰城店</div>
+            <div class="shop_name" v-text="b_n"></div>
             <!--<div class="shop_name" v-text="b_n">-->
-            <div class="free_price" >￥50.00</div>
+            <div class="free_price" >￥{{how}}</div>
             <div class="receive_success">领取成功</div>
-            <a class="get_ticket" >
-            查看我的优惠券
+            <a class="get_ticket" v-on:click="checkBtn">
+                查看我的优惠券
             </a>
 
         </div>
-    </div>
-        <!--<div class=" contentFree">-->
-            <!--<div class="tet">相关优惠</div>-->
-            <!--<div class="disList">-->
-                <!--<div v-for="item in arr" class="item">-->
-                    <!--<img :src="item.img_path" alt="" class="tetImg">-->
-                    <!--<p>-->
-                        <!--{{item.discount}}元<span v-if="item.type == 0">代金券</span>-->
-                        <!--<span v-else-if="item.type == 1">折扣券</span>-->
-                        <!--<span v-else="item.type == 3">抵扣券</span>-->
-                    <!--</p>-->
-                    <!--<p><img src="../../assets/images/newDarinage/fontBg2.png" alt="" class="rmb"><span class="price">{{item.price?item.price:0}}</span></p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </body>
 <script data-main=" ../../config" src="../../plugins/require/require.js "></script>
