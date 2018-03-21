@@ -1,5 +1,22 @@
 require(['config'], function () {
     require(['vue', 'main', 'imgup'], function (Vue, ygg, OSS) {
+        var member_id,
+            auth_code,
+            app_id,
+            code,
+            bType
+
+        function browserType() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return "weixin"
+            } else if (ua.match(/Alipay/i) == "alipay") {
+                return "alipay";
+            } else {
+                return "other"
+            }
+        }
+        bType = browserType()
         var vm = new Vue({
                 el: "#app",
                 data: {
@@ -138,25 +155,17 @@ require(['config'], function () {
                     blurTip: function (s, t, r) {
                         this.isOk = ygg.verify(s, t, r);
                     },
-                    bindwx: function () {
-                        window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxb8605b32e044c45b&redirect_uri=http%3a%2f%2fm.yingougou.com&response_type=111&scope=snsapi_login&state=222#wechat_redirect'
+                    bindwx: function (e) {
+                        e.preventDefault();
+                        if (bType == 'weixin') {
+                            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+                        } else {
+                            window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxb8605b32e044c45b&redirect_uri=https%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect'
+                        }
                     },
                     bindzfb: function () {
                         event.preventDefault();
-                        window.event.returnValue = false;
-                        var that = this;
-                        var baseUrl = "http://192.168.0.99:8082/v1.0";
-                        ygg.ajax(baseUrl + '/passport/thirdZfbLoginGetUrl', {
-                            zfb_openid: that.zfb_openid,
-                            nick_name: that.nick_name
-                        }, function (data) {
-                            var url = data.data.url
-                            if (data.status == "error") {
-                                ygg.prompt(data.msg);
-                            } else if (data.status == "success") {
-                                window.location.href = url;
-                            }
-                        });
+                        window.location.href = 'alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2018030802337414%26scope%3Dauth_user%26redirect_uri%3Dhttps%3A%2F%2Fm.yingougou.com'
                     },
                     bindph: function () {
                         if (this.isBindPhone == '绑定') {
@@ -172,35 +181,130 @@ require(['config'], function () {
                             this.pwdShow = 'show'
                         }
                     },
-                    back:function () {
-                        window.open("/views/user/userinfo.html","_self");
+                    back: function () {
+                        window.open("/views/user/userinfo.html", "_self");
                     }
                 },
                 components: {
                     getVercode: ygg.template.getVercode
                 }
             }),
-            member_id = ygg.getCookie("member_id");
-        if (!member_id) window.open('http://' + window.location.host, "_self");
-        ygg.getClient(OSS);
-        ygg.ajax('/member/getPersonCenterInfo', {
-            member_id: member_id
-        }, function (data) {
-            data = data.data;
-            vm.$set(vm, "user", data);
-            vm.$set(vm, "nickName", data.nick_name);
-            if (data.zfb_openid != null) {
-                vm.isBindWx = '更换'
-                vm.wxImg = '../../assets/images/member/ic_wei_xxh.png'
-            }
-            if (data.wx_openid != null) {
-                vm.isBindWx = '更换'
-                vm.zfbImg = '../../assets/images/member/ic_zhi_xxh.png'
-            }
-            if (data.mobile != null) {
-                vm.isBindPhone = '更换'
-                vm.phImg = '../../assets/images/member/yes_phone.png'
-            }
-        });
+        auth_code = ygg.getQueryString("auth_code")
+        app_id = ygg.getQueryString("app_id")
+        code = ygg.getQueryString("code")
+        member_id = ygg.getCookie("member_id");
+        if (auth_code != null && app_id != null) { //用户在当前页面绑定支付宝或者更换支付宝账号授权后的回调参数
+            ygg.ajax('/passport/getZfbUserInfo', { //通过回调code先获取要更换的支付宝账户信息
+                app_id: app_id,
+                auth_code: auth_code
+            }, function (data) {
+                if (data.status == "error") {
+                    ygg.prompt(data.msg);
+                } else if (data.status == "success") {
+                    var params = {
+                        user_id: data.data.user_id,
+                        member_id: member_id
+                    }
+                    ygg.ajax('/member/bindOrChangeZfb', params, function (data) { //更换支付宝
+                        var msg = data.msg
+                        if (data.status == "error") {
+                            ygg.prompt(data.msg);
+                        } else if (data.status == "success") {
+                            ygg.ajax('/member/getPersonCenterInfo', {
+                                member_id: member_id
+                            }, function (data) {
+                                data = data.data;
+                                vm.$set(vm, "user", data);
+                                vm.$set(vm, "nickName", data.nick_name);
+                                if (data.zfb_openid != null) {
+                                    vm.isBindWx = '更换'
+                                    vm.wxImg = '../../assets/images/member/ic_wei_xxh.png'
+                                }
+                                if (data.wx_openid != null) {
+                                    vm.isBindWx = '更换'
+                                    vm.zfbImg = '../../assets/images/member/ic_zhi_xxh.png'
+                                }
+                                if (data.mobile != null) {
+                                    vm.isBindPhone = '更换'
+                                    vm.phImg = '../../assets/images/member/yes_phone.png'
+                                }
+                                ygg.prompt(msg);
+                                // vm.hasTelShow = 'show'
+                            });
+                        }
+                    });
+                }
+            });
+        } else if (code != null) { //用户通过微信授权
+            ygg.ajax('/passport/getWxUnionId', {
+                code: code
+            }, function (data) {
+                if (data.status == 'error') {
+                    ygg.prompt('请重新更换');
+                } else if (data.status == 'success') {
+                    var obj = {
+                        wx_unionid: data.data.unionid,
+                        member_id: member_id,
+                        wx_openid: data.data.openid
+                    }
+                    ygg.ajax('/member/bindOrChangeWx', obj, function (data) { //更换微信
+                        var msg = data.msg
+                        if (data.status == 'error') {
+                            ygg.prompt(data.msg);
+                        } else if (data.status == 'success') {
+                            var obj = {
+                                wx_unionid: data.data.unionid,
+                                nick_name: data.data.nick_name,
+                                openid: data.data.openid
+                            }
+                            ygg.ajax('/member/getPersonCenterInfo', {
+                                member_id: member_id
+                            }, function (data) {
+                                data = data.data;
+                                vm.$set(vm, "user", data);
+                                vm.$set(vm, "nickName", data.nick_name);
+                                if (data.zfb_openid != null) {
+                                    vm.isBindWx = '更换'
+                                    vm.wxImg = '../../assets/images/member/ic_wei_xxh.png'
+                                }
+                                if (data.wx_openid != null) {
+                                    vm.isBindWx = '更换'
+                                    vm.zfbImg = '../../assets/images/member/ic_zhi_xxh.png'
+                                }
+                                if (data.mobile != null) {
+                                    vm.isBindPhone = '更换'
+                                    vm.phImg = '../../assets/images/member/yes_phone.png'
+                                }
+                                ygg.prompt(msg);
+                                // vm.hasTelShow = 'show'
+                            });
+                        }
+                    })
+                }
+            })
+        } else { //用户正常进入页面
+            if (!member_id) window.open('http://' + window.location.host, "_self");
+            ygg.getClient(OSS);
+            ygg.ajax('/member/getPersonCenterInfo', {
+                member_id: member_id
+            }, function (data) {
+                data = data.data;
+                vm.$set(vm, "user", data);
+                vm.$set(vm, "nickName", data.nick_name);
+                if (data.wx_openid != null) {
+                    vm.isBindWx = '更换'
+                    vm.wxImg = '../../assets/images/member/ic_wei_xxh.png'
+                }
+                if (data.zfb_openid != null) {
+                    vm.isBindZfb = '更换'
+                    vm.zfbImg = '../../assets/images/member/ic_zhi_xxh.png'
+                }
+                if (data.mobile != null) {
+                    vm.isBindPhone = '更换'
+                    vm.phImg = '../../assets/images/member/yes_phone.png'
+                }
+                // vm.hasTelShow = 'show'
+            });
+        }
     });
 });

@@ -131,18 +131,18 @@
                 <form>
                     <section class="form_group">
                         <p>
-                            <input v-model='phone' type="number" placeholder="请输入手机号">
+                            <input v-model='bdphone' type="number" placeholder="请输入手机号">
                         </p>
                     </section>
                     <section class="form_group nobor">
                         <p class="vercode">
-                            <input v-model='newVercode' type="number" placeholder="请输入验证码">
-                            <get-vercode :mobile="phone" :sms_type="'0004'"></get-vercode>
+                            <input v-model='bindVercode' type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="bdphone" :sms_type="'0008'"></get-vercode>
                         </p>
                     </section>
                     <section class="form_group">
                         <p class="submit">
-                            <input type="submit" @click="updatePhone($event)" value="提交">
+                            <input type="submit" @click="bpCommit($event)" value="提交">
                         </p>
                     </section>
                 </form>

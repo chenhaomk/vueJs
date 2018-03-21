@@ -553,6 +553,7 @@ require(['config'], function () {
         function thirdLogin() {
             var url = location.search
             if (url.indexOf('auth_code') != -1) { //通过支付宝授权
+                ygg.loading(true);
                 var app_id =  url.split('&')[0].split('=')[1]
                 var auth_code = url.split('&')[3].split('=')[1]
                 ygg.ajax('/passport/thirdZfbLogin', {
@@ -563,17 +564,35 @@ require(['config'], function () {
                         ygg.prompt('发生系统错误，请返回登录页重新登录！');
                     } else if (data.status == "success") {
                         data = data.data;
+                        var member_id = data.member_id
                         ygg.setCookie("member_id", data.member_id);
                         ygg.setCookie("mobile", data.mobile);
                         ygg.setCookie("token", data.token);
                         if (data.mobile != null) { //判读用户是否绑定手机号
-                            window.open("/index.html", "_self");
+                            ygg.ajax('/member/getPersonCenterInfo', {
+                                member_id: member_id
+                            }, function (data) {
+                                ygg.loading(false);
+                                data = data.data;
+                                vm.$set(vm.user, "photo", data.head_portrait);
+                                vm.$set(vm.user, "nickName", data.nick_name);
+                                vm.$set(vm.user, "coupon_total", data.coupon_total);
+                                vm.$set(vm.user, "is_expand", data.is_expand);
+                                getTopData(data.business_id);
+                                getFilter();
+                                getCoupons(function (d) {
+                                    vm.$set(vm, "discount", d);
+                                });            
+                                ygg.setCookie("select_setting", data.select_setting);
+            
+                            });
                         } else {
                             window.open("/perfectInfo.html");
                         }
                     }
                 });
             } else if (url.indexOf('code') != -1) { //微信授权,获取code
+                ygg.loading(true);
                 var code = url.split('&')[0].split('=')[1]
                 if (code != undefined) {
                     ygg.ajax('/passport/getWxUnionId',{
@@ -591,14 +610,33 @@ require(['config'], function () {
                                 if(data.status == "error"){
                                     ygg.prompt(data.msg)
                                 }else if(data.status == "success"){
-                                    ygg.setCookie("member_id",data.member_id);
-                                    ygg.setCookie("mobile",data.mobile);
-                                    ygg.setCookie("token",data.token);
-                                    if (data.mobile != null) { //判读用户是否绑定手机号
-                                        window.open("/index.html", "_self");
+                                    var member_id = data.data.member_id
+                                    ygg.setCookie("member_id",data.data.member_id);
+                                    ygg.setCookie("mobile",data.data.mobile);
+                                    ygg.setCookie("token",data.data.token);
+                                    if (data.data.mobile != null) { //判读用户是否绑定手机号
+                                        // window.open("/index.html", "_self");
                                     } else {
-                                        window.open("/perfectInfo.html");
+                                        window.open("/perfectInfo.html","_self");
                                     }
+                                    ygg.ajax('/member/getPersonCenterInfo', {
+                                        member_id: member_id
+                                    }, function (data) {
+                                        ygg.loading(false);
+                                        data = data.data;
+                                        vm.$set(vm.user, "photo", data.head_portrait);
+                                        vm.$set(vm.user, "nickName", data.nick_name);
+                                        vm.$set(vm.user, "coupon_total", data.coupon_total);
+                                        vm.$set(vm.user, "is_expand", data.is_expand);
+                    
+                                        ygg.setCookie("select_setting", data.select_setting);
+                                        getTopData(data.business_id);
+                                        getFilter();
+                                        getCoupons(function (d) {
+                                            vm.$set(vm, "discount", d);
+                                        });
+                    
+                                    });
                                 }
                             });
                         }

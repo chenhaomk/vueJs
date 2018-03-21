@@ -4,7 +4,7 @@ require(['config'],function(){
 			auth_code,
 			app_id,
 			code,
-			bType,
+			bType
 		function browserType() {
 			var ua = window.navigator.userAgent.toLowerCase();
 			if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -26,8 +26,10 @@ require(['config'],function(){
                 bindPhone : "",
                 hasTelShow : "",
                 vercode : "",
-                phone : "",
-                newVercode : "",
+				phone : "",
+				bdphone:"",
+				newVercode : "",
+				bindVercode:"",
                 pwdShow : "",
                 pwd : "",
                 rpwd : "",
@@ -147,36 +149,61 @@ require(['config'],function(){
 
 			        });
 
-                },
+				},
+				bpCommit:function (e) {//绑定手机
+					e.preventDefault();
+					if(this.bdphone.length == 0 || this.bindVercode.length == 0){
+                        ygg.prompt("请您仔细填写信息，不能有空哦！");
+                        return;
+					}
+					var that = this
+					ygg.loading(true);
+                    ygg.ajax('/member/bindMemberAccount',{
+			            member_id : member_id,
+						mobile: that.bdphone,
+						verification_code:that.bindVercode
+			        },function(data){
+			        	ygg.loading(false);
+			        	if(data.status == "success"){
+							ygg.prompt("手机号绑定成功!");
+							vm.$set(vm.user,"mobile",that.bdphone);
+							vm.isBindPhone = '更换'
+							vm.phImg = '../../assets/images/member/yes_phone.png'
+			        	}else if(data.status == "error"){
+			        		ygg.prompt(data.msg);
+			        	}
+
+			        });
+				},
                 blurTip : function(s,t,r){
                     this.isOk = ygg.verify(s,t,r);
 				},
-				bindwx:function () {
-					if(this.isBindWx == '绑定') {
+				bindwx:function (e) {
+					e.preventDefault();
+					// if(this.isBindWx == '绑定') {
+					// 	if(bType == 'weixin') {
+					// 		window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+					// 	}else {
+					// 		window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxb8605b32e044c45b&redirect_uri=https%3a%2f%2fm.yingougou.com&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect'
+					// 	}
+					// }else {
 						if(bType == 'weixin') {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-						}else {
-							window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxb8605b32e044c45b&redirect_uri=https%3a%2f%2fm.yingougou.com&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect'
-						}
-					}else {
-						if(bType == 'weixin') {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 						}else {
 							window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxb8605b32e044c45b&redirect_uri=https%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect'
 						}
-					}
+					// }
 
 				},
 				bindzfb:function (e) {
 					e.preventDefault();
-					var that = this;
 					// window.location.href = 'alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2018030802337414%26scope%3Dauth_user%26redirect_urihttps%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html'
-					
-					if(that.isBindZfb == '绑定') {
-						window.location.href = 'alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2018030802337414%26scope%3Dauth_user%26redirect_uri%3Dhttps%3A%2F%2Fm.yingougou.com'
-					}else {
-						window.location.href = 'alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2018030802337414%26scope%3Dauth_user%26redirect_urihttps%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html'
-					}
+					window.location.href = 'alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2018030802337414%26scope%3Dauth_user%26redirect_uri%3Dhttps%3A%2F%2Fm.yingougou.com'
+					// if(that.isBindZfb == '绑定') {
+					// 	window.location.href = 'alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2018030802337414%26scope%3Dauth_user%26redirect_urihttps%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html'
+					// }else {
+					// 	window.location.href = 'alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2018030802337414%26scope%3Dauth_user%26redirect_urihttps%3a%2f%2fm.yingougou.com%2fviews%2fuser%2fuserinfo.html'
+					// }
 				},
 				bindph:function () {
 					if(this.isBindPhone == '绑定') {
@@ -197,12 +224,11 @@ require(['config'],function(){
                 getVercode : ygg.template.getVercode 
             }
 		}),
-		auth_code = main.getQueryString("auth_code")
-		app_id = main.getQueryString("app_id")
-		code = main.getQueryString("code")
+		auth_code = ygg.getQueryString("auth_code")
+		app_id = ygg.getQueryString("app_id")
+		code = ygg.getQueryString("code")
 		member_id = ygg.getCookie("member_id");
-		
-		if(auth_code != undefined && app_id != undefined ) {//用户在当前页面绑定支付宝或者更换支付宝账号授权后的回调参数
+		if(auth_code != null && app_id != null ) {//用户在当前页面绑定支付宝或者更换支付宝账号授权后的回调参数
 			ygg.ajax('/passport/getZfbUserInfo', {//通过回调code先获取要更换的支付宝账户信息
 				app_id: app_id,
 				auth_code:auth_code
@@ -244,7 +270,7 @@ require(['config'],function(){
 					});
 				}
 			});
-		}else if(code != undefined) {//用户通过微信授权
+		}else if(code != null) {//用户通过微信授权
 			ygg.ajax('/passport/getWxUnionId',{
 				code:code
 			},function(data){
@@ -297,16 +323,15 @@ require(['config'],function(){
 			ygg.ajax('/member/getPersonCenterInfo',{
 				member_id : member_id
 			},function(data){
-	
 				data = data.data;
 				vm.$set(vm,"user",data);
 				vm.$set(vm,"nickName",data.nick_name);
-				if(data.zfb_openid != null) {
+				if(data.wx_openid != null) {
 					vm.isBindWx = '更换'
 					vm.wxImg='../../assets/images/member/ic_wei_xxh.png'
 				}
-				if(data.wx_openid != null) {
-					vm.isBindWx = '更换'
+				if(data.zfb_openid != null) {
+					vm.isBindZfb = '更换'
 					vm.zfbImg = '../../assets/images/member/ic_zhi_xxh.png'
 				}
 				if(data.mobile != null) {
