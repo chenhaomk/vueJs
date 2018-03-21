@@ -23,9 +23,9 @@ require(['config'], function () {
     		},
     		methods:{
                 checkBtn:function() {
-                    alert(111)
-                    // window.location.href = "../../payment/views/newDrainage/freeCoupons.html"
-                    // window.location.href = "../../views/newDrainage/drainageLogin.html"
+                    // alert(111)
+                    main.setSession('m_id',main.getQueryString("m_id"));
+                    window.location.href="https://m.yingougou.com/views/my/myDis.html"
                 }
     		},
             components : {

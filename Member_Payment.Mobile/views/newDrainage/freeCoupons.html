@@ -65,25 +65,19 @@
                 </div>
             </div>
             <div class="tel"><img class="phone" src="../../assets/images/freeCoupons/ic_bg_phone_xxh.png" /><a v-bind:href="'tel:'+telNum" >{{telNum}}</a></div>
-            <div class="get_ticket">
+            <div class="get_ticket" v-on:click="freeCouponBtn">
                 免费领券
             </div>
         </div>
         <div class=" contentFree">
             <div class="tet">相关优惠</div>
-            <!--<div v-if="Math.random() > 0.5">-->
-                <!--Now you see me-->
-            <!--</div>-->
-            <!--<div v-else>-->
-                <!--Now you don't-->
-            <!--</div>-->
             <div class="disList">
                 <div v-for="item in arr" class="item">
                     <img :src="item.img_path" alt="" class="tetImg">
                     <p>
                         {{item.discount}}元<span v-if="item.type == 0">代金券</span>
                         <span v-else-if="item.type == 1">折扣券</span>
-                        <span v-else="item.type == 2">抵扣券</span>
+                        <span v-else="item.type == 3">抵扣券</span>
                     </p>
                     <p><img src="../../assets/images/newDarinage/fontBg2.png" alt="" class="rmb"><span class="price">{{item.price?item.price:0}}</span></p>
                 </div>
