@@ -3,12 +3,17 @@ require(['config'], function () {
     	var vm = new vue({
     		el:"#app",
     		data:{
+                b_n:"",
+                all:"22",
+                arr:[],
+                add:"",
+                telNum:"",
                 how: ""
-                
-    		},
+            },
     		methods:{
-                Btn:function() {
-                    location.href ='https://m.yingougou.com/views/my/myDis.html'
+                checkBtn:function() {
+                    main.setSession('m_id',main.getQueryString("m_id"));
+                    window.location.href="https://m.yingougou.com/views/my/myDis.html"
                 }
     		},
             components : {
