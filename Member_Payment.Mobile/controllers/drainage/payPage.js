@@ -24,7 +24,8 @@ require(['config'], function () {
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
     	// var baseURL = 'http://192.168.0.228:8084/v1.0/'; //本机测试地址
 
-        var baseURL = "https://api.yingougou.com/v1.0/"
+        var baseURL = "http://119.23.10.30:9000/v1.1/"
+        // var baseURL = "https://api.yingougou.com/v1.0/"
         // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
         // var baseURL = 'http://pay.yingegou.com:9000/v1.0/'; //本机测试地址
                 //判断是否在微信浏览器
@@ -561,7 +562,6 @@ require(['config'], function () {
                                                                 }else {
                                                                     location.href ='https://m.yingougou.com/views/my/purHistory.html' //没有就跳转h5的消费记录页
                                                                 }
-                                                                
                                                             }
                                                         });
                                                     }

@@ -3,17 +3,13 @@ require(['config'], function () {
     	var vm = new vue({
     		el:"#app",
     		data:{
-                b_n:"",
-                all:"22",
-                arr:[],
-                add:"",
-                telNum:"",
+                b_n: decodeURI(main.getQueryString("b_n") == null ? main.getSession("b_n") : main.getQueryString("b_n")),
                 how: ""
-            },
+
+    		},
     		methods:{
-                checkBtn:function() {
-                    main.setSession('m_id',main.getQueryString("m_id"));
-                    window.location.href="https://m.yingougou.com/views/my/myDis.html"
+                Btn:function() {
+                    location.href ='https://m.yingougou.com/views/my/myDis.html'
                 }
     		},
             components : {
@@ -23,4 +19,4 @@ require(['config'], function () {
         })
         vm.how = main.getQueryString("amount");
     })
- })   
+ })
