@@ -29,7 +29,8 @@ require(['config'],function(){
         }else {
 
         }
-        var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
+        // var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
+        var baseURL = "https://api.yingougou.com/v1.1/"
         var ticketId = window.location.search.split("&")[0].split("=")[1] //团购券id
         var bid = window.location.search.split("&")[1].split("=")[1] //商家id
     	var vm = new Vue({

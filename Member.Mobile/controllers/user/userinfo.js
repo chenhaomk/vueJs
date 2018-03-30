@@ -271,8 +271,15 @@ require(['config'],function(){
 				}
 			});
 		}else if(code != null) {//用户通过微信授权
+			var wx_type
+			if(bType == 'weixin') {
+				wx_type = 0
+			}else {
+				wx_type = 1
+			}
 			ygg.ajax('/passport/getWxUnionId',{
-				code:code
+				code:code,
+				wx_type:wx_type
 			},function(data){
 				if(data.status == 'error') {
 					ygg.prompt('请重新更换');

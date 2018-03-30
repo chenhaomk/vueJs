@@ -3,7 +3,8 @@ require(['config'], function () {
     	var vm = new vue({
     		el:"#app",
     		data:{
-                how: ""
+                how: "",
+                b_n:main.getSession("b_n")
                 
     		},
     		methods:{

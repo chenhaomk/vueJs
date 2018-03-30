@@ -1,6 +1,16 @@
 require(['config'], function () {
     require(['vue', 'main', 'swiper', 'axio'], function (Vue, ygg, Swiper, axio) {
-
+        function browserType() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return "weixin"
+            } else if(ua.match(/Alipay/i)=="alipay"){
+                return "alipay";
+            }else {
+                return "other"
+            }
+        }
+        var bType = browserType() //判断浏览器
         function browserRedirect() {
             var sUserAgent = navigator.userAgent.toLowerCase();
             var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
@@ -561,6 +571,7 @@ require(['config'], function () {
                     auth_code:auth_code
                 }, function (data) {
                     if (data.status == "error") {
+                        ygg.loading(false);
                         ygg.prompt('发生系统错误，请返回登录页重新登录！');
                     } else if (data.status == "success") {
                         data = data.data;
@@ -594,11 +605,20 @@ require(['config'], function () {
             } else if (url.indexOf('code') != -1) { //微信授权,获取code
                 ygg.loading(true);
                 var code = url.split('&')[0].split('=')[1]
+                var code = ygg.getQueryString('code')
                 if (code != undefined) {
+                    var wx_type
+                    if(bType == 'weixin') {
+                        wx_type = 0
+                    }else {
+                        wx_type = 1
+                    }
                     ygg.ajax('/passport/getWxUnionId',{
-                        code:code
+                        code:code,
+                        wx_type:wx_type, //0是公众号,1是开放平台
                     },function(data){
                         if(data.status == 'error') {
+                            ygg.loading(false);
                             ygg.prompt('发生系统错误，请返回登录页重新登录！');
                         }else if(data.status == 'success') {
                             var obj = {
