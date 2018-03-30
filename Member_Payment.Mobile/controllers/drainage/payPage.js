@@ -23,9 +23,17 @@ require(['config'], function () {
         main.setSession("a_n", main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n"));
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
 
+<<<<<<< HEAD
         var baseURL = "https://api.yingougou.com/v1.1/"
         // var baseURL = "http://apis.yingegou.com/v1.1/"//测试
         //判断是否在微信浏览器
+=======
+        var baseURL = "http://119.23.10.30:9000/v1.1/"
+        // var baseURL = "https://api.yingougou.com/v1.0/"
+        // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
+        // var baseURL = 'http://pay.yingegou.com:9000/v1.0/'; //本机测试地址
+                //判断是否在微信浏览器
+>>>>>>> b39fd8c89a83ecafae6a4ab168e4bc2249ae5b72
         function browserType() {
             var ua = window.navigator.userAgent.toLowerCase();
             if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -527,6 +535,7 @@ require(['config'], function () {
                     }
                 });
             }else if(browserType() =="alipay") {//支付宝扫码进入
+<<<<<<< HEAD
                 data.buyer_id = zfb_openid
                 data.pay_way ='alipay_csb'
                 main.post(baseURL + "pay/create_pay",data , function (res) {
@@ -551,6 +560,81 @@ require(['config'], function () {
                                         data = data.data
                                         if(data.status == "error") {
                                             main.prompt(data.msg)
+=======
+                    var code = main.getQueryString("auth_code");
+                    if (code != null && code != "") {
+                        main.setSession("auth_code");
+                        main.post(baseURL + "pay/getBuyerId", {
+                            code: code
+                        }, function (res) {
+                            if (res.data.code != 200) {
+                                main.prompt("支付失败");
+                                return;
+                            }
+                            var zfb_openid = res.data.data.buyer_id //获取支付宝openid
+                            var buyer_id = res.data.data;
+                            data.buyer_id = buyer_id
+
+                            data.pay_way ='alipay_csb'
+                            main.post(baseURL + "pay/create_pay",data , function (res) {
+                                if (res.data.code == 200) {
+                                    //调用官方公众号接口
+                                    var tradeNo = res.data.data.tradeNO;
+                                    main.setSession("tradeNO", tradeNo);
+                                    AlipayJSBridge.call("tradePay",{
+                                        tradeNO: main.getSession("tradeNO")
+                                    }, function(result){
+                                        if(result.resultCode == 9000) {
+                                            main.setSession("amount", data.amount);
+                                            main.setSession("business_id", main.getQueryString("b_id"));
+                                            if(vm.showYhq) {
+                                                callBack()
+                                            }else {
+                                                main.post(baseURL + "passport/zfbRegister",{
+                                                    zfb_openid:zfb_openid,
+                                                    nick_name:''
+                                                } , function (data) {//如果该用户没注册就注册，注册过就返回用户详情
+                                                    if(data.status == "error") {
+                                                        main.prompt(data.msg)
+                                                    }else {
+                                                        //保存用户登录信息
+                                                        var member_id = data.data.member_id
+                                                        main.setCookie("member_id",data.data.member_id);
+                                                        main.setCookie("mobile",data.data.mobile);
+                                                        main.setCookie("token",data.data.token);
+                                                        if(data.data.business_id == null || data.data.business_id == undefined) {
+                                                            main.post(baseURL + "common/getRebuyCoupon",{//绑定该商户原缀会员
+                                                                member_id:member_id,
+                                                                business_id:b_id
+                                                            },function (data) {
+                                                                
+                                                            })
+                                                        }
+                                                        main.post(baseURL + "common/getRebuyCoupon",{//获取复购券详情，判断店铺是否有复购券
+                                                            order_id:orderId,
+                                                            business_id:b_id
+                                                        } , function (data) {
+                                                            if(data.status == "error") {
+                                                                main.prompt(data.msg)
+                                                            }else {
+                                                                if(data.data != unll || data.data != undefined) {//有复购券
+                                                                    var amount = data.data.discount //折扣金额
+                                                                    var coupon_activity_id = data.data.coupon_id  //复购券id
+                                                                    main.post(baseURL + "common/receiveRebuyCoupon",{//领取复购券
+                                                                        member_id:member_id,
+                                                                        coupon_activity_id:coupon_activity_id
+                                                                    } , function (data) {
+                                                                        location.href = "../../views/newDrainage/couponsSuccess.html?amount="+amount+"";
+                                                                    })
+                                                                }else {
+                                                                    location.href ='https://m.yingougou.com/views/my/purHistory.html' //没有就跳转h5的消费记录页
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+>>>>>>> b39fd8c89a83ecafae6a4ab168e4bc2249ae5b72
                                         }else {
                                             if(data.data.coupon  ) {//有复购券
                                                 var amount = data.data.coupon.discount //折扣金额

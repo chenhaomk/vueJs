@@ -31,54 +31,7 @@ require(['config'], function () {
             },
 
     	})
-        getBusinessDetil()
-        main.setSession('m_id',main.getQueryString("m_id"))
-        function getBusinessDetil() {
-            main.post(baseURL+'business/getBusinessDetails',{
-                business_id:bid
-            },function (res) {
-                data = res.data.data;
-                vm.b_n = data.business_details.name
-                vm.telNum = data.business_details.phone
-                vm.add = data.business_details.address
-                main.setSession("b_n",data.business_details.name)
-                main.setSession("img",data.business_details.logo)
-                main.setSession("b_id",data.business_details.business_id)
-                vm.img = data.business_details.logo
-                vm.$set(vm,"star",data.business_details.star);
-                data.coupons.map(function (item,index) {
-                    if(item.type != 3) { //团购
-                        vm.arr.push(item)
-                    }
-                })
-                if(vm.arr.length == 0) {
-                    
-                    // window.location.href = "../../payment/views/newDrainage/newDrainagefalt.html"
-                    // window.location.href = "../../views/newDrainage/drainageNewUser.html"
-                }
-                // vm.arr = vm.arr.concat(vm.arr)
-                // vm.arr = vm.arr.concat(vm.arr)
-                if(vm.arr.length >3) {
-                    var arr = []
-                    arr = vm.arr.splice(3,vm.arr.length-3)
-                }
 
-                //  fn()
-            })
-        }
-        function fn() {
-            main.post(baseURL+'common/getShareCouponActivity',{
-                business_id:bid
-            },function (res) {
-                main.loading(false)
-                if(res.data.data.coupon_id) {
-                    if(res.data.data.count == 0) {
-                        window.location.href = "../../views/newDrainage/drainageNewUser.html"
-                    }
-                }else {
-                    window.location.href = "../../views/newDrainage/drainageNewUser.html"
-                }
-            })
-        }
+
     })
  })   

@@ -3,7 +3,12 @@ require(['config'], function () {
     	// var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // main.post.
+<<<<<<< HEAD
         var baseURL = "https://api.yingougou.com/v1.1/"
+=======
+        var baseURL = "http://119.23.10.30:9000/v1.1/
+        // var baseURL = "https://api.yingougou.com/v1.0/"
+>>>>>>> b39fd8c89a83ecafae6a4ab168e4bc2249ae5b72
         // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
     	var vm = new vue({
     		el:"#app",

@@ -19,4 +19,4 @@ require(['config'], function () {
         })
         vm.how = main.getQueryString("amount");
     })
- })   
+ })
