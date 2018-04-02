@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div id='app' class="main new_shopbg">
+    <div id='app' class="main new_shopbg" v-cloak>
         <div class='ad_warp'>
             <div class="shop_name" v-text="b_n"></div>
             <!--<div class="shop_name" v-text="b_n">-->
@@ -21,7 +21,9 @@
             <a class="get_ticket" v-on:click="Btn">
                 查看我的优惠券
             </a>
-
+        </div>
+        <div class="msg" v-on:click='showMsg' >
+            使用条件
         </div>
     </div>
 </body>

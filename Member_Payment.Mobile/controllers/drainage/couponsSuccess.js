@@ -3,13 +3,16 @@ require(['config'], function () {
     	var vm = new vue({
     		el:"#app",
     		data:{
-                how: "",
+                how: main.getSession("how"),
                 b_n:main.getSession("b_n")
-                
     		},
     		methods:{
                 Btn:function() {
                     location.href ='https://m.yingougou.com/views/my/myDis.html'
+                },
+                showMsg :function () {
+                    var msg = main.getSession("all")
+                    main.prompt(msg);
                 }
     		},
             components : {
@@ -17,6 +20,6 @@ require(['config'], function () {
             },
 
         })
-        vm.how = main.getQueryString("amount");
+        // vm.how = main.getQueryString("amount");
     })
  })

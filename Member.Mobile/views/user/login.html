@@ -15,7 +15,7 @@
         <section class="head">
             <p>登录</p>
             <a class="close" href="/index.html"></a>
-            <a href="/views/user/otherLogin.html" class="back"></a>
+            <span v-on:click='back' class="back"></span>
         </section>
 
         <section class="tab">
@@ -94,7 +94,7 @@
             <p class="t">请输入图形验证码</p>
             <p class="inp">
                 <input type="number" v-model="ver" placeholder="按右图输入">
-                <img src="/assets/images/index/demo1.jpg" alt="">
+                <!-- <img src="/assets/images/index/demo1.jpg" alt="" /> -->
             </p>
             <a class="sub" @click="yzm">确定</a>
         </section>
