@@ -1,16 +1,13 @@
 /* ------1.5.2----- */
 @font-face {
-    font-family: PingFangSC-Medium;
-    src: url('../../assets/fonts/DINPro-CondBold.otf');
+    font-family:'PingFang-Semibold';
+    src: url('../../assets/fonts/PingFang-Semibold.otf') format("OpenType");
 }
 @font-face {
-    font-family: PingFangSC-Regular;
-    src: url('../../assets/fonts/LeagueGothic-Regular.otf');
+    font-family: 'DINPro-CondensedBol';
+    src: url('../../assets/fonts/DINPro-CondBold.otf') format("OpenType");
 }
-@font-face {
-    font-family: PingFangSC-Semibold;
-    src: url('../../assets/fonts/PingFang-Semibold.otf');
-}
+
 .contentFree {
     overflow: hidden;
     position: fixed;
@@ -104,23 +101,23 @@
     background-size: 100% 100%;
 }
 .ad_warp {
-    width: 6rem;
-    height: 9.8rem;
+    width: 5.9rem;
+    height: 8.18rem;
     background: url("../../assets/images/freeCoupons/img_redpacket1.png")  no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    top: 1.22rem;
+    top: 1.7rem;
     left: 50%;
-    margin-left: -3rem;
+    margin-left: -2.95rem;
 }
 
-.shop_name {
+.shop_name,.shop_fail {
     font-family:PingFangSC-Medium;
-    font-size:.32rem;
-    height: .45rem;
+    font-size:.28rem;
+    height: .4rem;
     width: 3.5rem;
-    line-height: .45rem;
-    margin: .8rem auto .2rem;
+    line-height: .4rem;
+    margin: .63rem auto 0;
     text-align: center;
     text-overflow: ellipsis;
     white-space:nowrap;
@@ -131,7 +128,7 @@
 .get_ticket {
     width: 4.42rem;
     height: .89rem;
-    padding-bottom:0.2rem;
+    /* padding-bottom:0.2rem; */
     text-align: center;
     line-height: .89rem;
     background: url("../../assets/images/freeCoupons/btn.png") no-repeat;
@@ -139,38 +136,41 @@
     font-family:PingFangSC-Medium;
     font-size:.32rem;
     color:#ffffff;
+    margin-top: 1.02rem;
     margin-left: .79rem;
     display: block;
 }
 
 
 .free_price{
-    font-family:DINPro-CondensedBold;
+    font-family:DINPro-CondensedBol;
     font-size: .85rem;
     color:#bc333a;
     text-align: center;
-    margin-left: -.1rem;
+    height: 1.19rem;
+    line-height: 1.19rem;
 }
 .receive_success{
     font-family:PingFangSC-Semibold;
     font-size: .6rem;
     color:#fffaee;
     text-align:center;
-    margin: 2rem 0 1.05rem;
+    margin: 1.93rem 0 1.05rem;
+    text-shadow: .05rem .05rem .05rem #bc333a;
 }
 
 /*领取失败*/
 .receive_fail{
-    width: 6rem;
-    height: 9.8rem;
+    width: 5.9rem;
+    height: 8.18rem;
     background: url("../../assets/images/freeCoupons/img_redpacket2.png")  no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    top: 1.22rem;
+    top: 1.7rem;
     left: 50%;
-    margin-left: -3rem;
+    margin-left: -2.95rem;
 }
-.shop_fail{
+/* .shop_fail{
     font-family:PingFangSC-Medium;
     font-size:.32rem;
     height: .45rem;
@@ -182,22 +182,36 @@
     white-space:nowrap;
     overflow: hidden;
     color:#7a5f46;
-}
+} */
 .fail_txt{
     font-family:PingFangSC-Semibold;
     font-size:.4rem;
     color:#fffaee;
+    height: .64rem;
     line-height: .64rem;
     text-align:center;
-    margin: 3rem 0 .3rem;
+    margin: 2.73rem 0 .3rem;
 }
 .receive_repeat{
     font-family:PingFangSC-Regular;
+    height: .42rem;
+    line-height: .42rem;
     font-size: .3rem;
     color:#fffaee;
     text-align:center;
-    margin-bottom: 1.02rem;
+    margin-top: .2rem;
     /*font-weight: bold;*/
     text-overflow: ellipsis;
     white-space:nowrap;
+}
+.msg {
+    width: 100%;
+    position: absolute;
+    bottom: 0.45rem;
+    left: 0;
+    font-size: .3rem;
+    color: white;
+    text-align: center;
+    font-family:PingFangSC-Semibold;
+    font-size:.28rem;
 }

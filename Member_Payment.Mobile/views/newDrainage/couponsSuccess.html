@@ -16,7 +16,8 @@
         <div class='ad_warp'>
             <div class="shop_name" v-text="b_n"></div>
             <!--<div class="shop_name" v-text="b_n">-->
-            <div class="free_price" >￥{{how}}</div>
+            <div class="free_price" v-show='!show_d' >￥{{how}}</div>
+            <div class="free_price" v-show='show_d' >{{how}}</div>
             <div class="receive_success">领取成功</div>
             <a class="get_ticket" v-on:click="Btn">
                 查看我的优惠券

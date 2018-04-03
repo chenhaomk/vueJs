@@ -25,29 +25,32 @@ require(['config'], function () {
         var bty = browserType()
         if(bty == 'weixin') {
             if(location.href.indexOf("code") == -1) {
-                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"; 
+                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; 
             }else {//授权登录
                 var code = main.getQueryString("code");
-                main.post("/passport/getWxUnionId", {//获取微信unionId
+                main.post("passport/getWxUnionId", {//获取微信unionId
                     code: code,
-                    wx_type:0,
+                    wx_type:0,//0是公众号,1是开放平台
                 },function (data) {
-                    if(data.data.status == 'error') {
-                        ygg.prompt(data.msg);
-                    }else if(data.data.status == 'success') {
+                    data = data.data
+                    if(data.status == 'error') {
+                        main.prompt(data.msg);
+                    }else if(data.status == 'success') {
                         var obj = {
                             wx_unionid:data.data.unionid,
                             nick_name : data.data.nick_name,
                             openid : data.data.openid
                         }
-                        ygg.ajax('passport/thirdWxLogin',obj,function(data){//登录
+                        main.post('passport/thirdWxLogin',obj,function(data){//登录
+                            data = data.data
                             if(data.status == "error"){
-                                ygg.prompt(data.msg)
+                                main.prompt(data.msg)
                             }else if(data.status == "success") {
+                                
                                 var member_id = data.data.member_id
-                                ygg.setCookie("member_id",data.data.member_id);
-                                ygg.setCookie("mobile",data.data.mobile);
-                                ygg.setCookie("token",data.data.token);
+                                main.setCookie("member_id",data.data.member_id);
+                                main.setCookie("mobile",data.data.mobile);
+                                main.setCookie("token",data.data.token);
                                 if(data.data.business_id == '' || data.data.business_id == undefined) {
                                     main.post(baseURL + "member/bindBusiness",{//绑定该商户原缀会员
                                         member_id:member_id,
@@ -100,7 +103,7 @@ require(['config'], function () {
                 })
             }
         }else {
-            // window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
+            window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
         }
         // window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
     	var vm = new vue({
@@ -109,7 +112,7 @@ require(['config'], function () {
                 star : "",
                 img:"",
                 b_n:"",
-                all:"22",
+                all:"",
                 arr:[],
                 add:"",
                 telNum:"",
@@ -137,11 +140,11 @@ require(['config'], function () {
                         business_id:bid,
                         login_type:login_type
                     } , function (data) {
-
+                        data = data.data
                         if(data.data[1001]) {
                             main.prompt(data.data[1001]);
                             return
-                        }else if(data.data[9009] != null || data.data[9013] || data.data[9015] ||data.data[9012] || data.data[9016] || data.data[9017]) {
+                        }else if(data.data[9009] != null || data.data[9013] != null || data.data[9015] != null ||data.data[9012] != null || data.data[9016] != null || data.data[9017] != null) {
                             location.href = "../../views/newDrainage/couponsFail.html"; // 领取过
                         }else {
                             location.href = "../../views/newDrainage/couponsSuccess.html?amount="+this.how+"";
@@ -164,20 +167,20 @@ require(['config'], function () {
                 main.prompt(data.msg);
             }else if(data.status == 'success') {
                 if(data.data.coupon_id) {//有引流券
-                    if (data.type == 0) {
-                        vm.how =  data.discount+"";
+                    if (data.data.type == 0) {
+                        vm.how = data.data.discount+"";
                         if(vm.how.indexOf(".") == -1) {
-                            vm.how =  data.discount+".00";
+                            vm.how =  data.data.discount+".00";
                         }else {
-                            vm.how =  data.discount;
+                            vm.how =  data.data.discount;
                         }
-                    }else if (data.type == 1) {
-                        vm.how = data.rate * 10 + "折";
+                    }else if (data.data.type == 1) {
+                        vm.how = data.data.rate * 10 + "折";
                     }
-                    if((data.min_price+"").indexOf(".") ==-1) {
-                        vm.all = "满" +data.min_price+ ".00可用";
+                    if((data.data.min_price+"").indexOf(".") ==-1) {
+                        vm.all = "满" +data.data.min_price+ ".00可用";
                     }else {
-                        vm.all = "满" +data.min_price+ "可用";
+                        vm.all = "满" +data.data.min_price+ "可用";
                     }
                     main.setSession("how", vm.how );
                     main.setSession("all", vm.all );

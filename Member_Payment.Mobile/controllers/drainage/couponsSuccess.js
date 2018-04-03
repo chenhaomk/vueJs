@@ -1,10 +1,12 @@
 require(['config'], function () {
     require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+        var str = main.getSession("how")
     	var vm = new vue({
     		el:"#app",
     		data:{
-                how: main.getSession("how"),
-                b_n:main.getSession("b_n")
+                how:main.getSession("how"),
+                b_n:main.getSession("b_n"),
+                show_d:false
     		},
     		methods:{
                 Btn:function() {
@@ -16,10 +18,13 @@ require(['config'], function () {
                 }
     		},
             components : {
-
+                
             },
 
         })
+        if(str.indexOf('折') != -1) {
+            vm.show_d=true
+        }
         // vm.how = main.getQueryString("amount");
     })
  })
