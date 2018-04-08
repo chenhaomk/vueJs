@@ -33,8 +33,8 @@ define([
     return Promise.reject(err);
   });
   var main = {};
-  main.baseUrl = "https://api.yingougou.com/v1.1/";
-  // main.baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
+  // main.baseUrl = "https://api.yingougou.com/v1.1/";
+  main.baseUrl = "http://119.23.10.30:9000/v1.1/";
   main.post = function (url, data, sucBack, errBack) {
     var error = {},
       appid = "100";
