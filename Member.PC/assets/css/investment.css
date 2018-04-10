@@ -562,10 +562,14 @@ img {
     height: 60px;
     background:#0c1120;
 }
-.Copyright p{
+.Copyright p,.Copyright a{
     opacity:0.5;
     font-size:12px;
     color:#ffffff;
     text-align:center;
     padding-top: 12px;
+}
+.Copyright a:hover {
+    cursor: pointer;
+	text-decoration: underline;   
 }
