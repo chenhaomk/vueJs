@@ -82,6 +82,7 @@ require(['config'], function () {
                         }
                     },
                     downApp: function () {
+
                         if (this.isWeixin()) {
                             (document.getElementsByTagName("body")[0]).setAttribute("class", "isWx");
                         } else if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
@@ -102,7 +103,8 @@ require(['config'], function () {
                                 state = window.open("YPB://");
                                 window.close();
                             } catch (e) {}
-                            if (state) {
+                            if (!state) {
+
                                 window.location = "YPB://";
                                 return;
                             } else {
@@ -535,6 +537,7 @@ require(['config'], function () {
         }
 
         function testApp() {
+
             // if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
             vm.downLoadType = "下载";
             // } else if (navigator.userAgent.match(/android/i)) {
