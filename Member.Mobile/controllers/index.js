@@ -36,6 +36,9 @@ require(['config'], function () {
                 data: {
                     banner: [],
                     shop: [],
+                    recommendArr:[],//专题推荐
+                    recommend_today:{},//今日推荐
+                    advertising:'',//广告
                     discount: [],
                     user: {
                         photo: "/assets/images/index/ic_bg_user_xxh.png"
@@ -162,6 +165,13 @@ require(['config'], function () {
                                 vm.$set(vm, "isSS", true);
                             }
                         });
+                    },
+                    use_item:function (value) {
+                        ygg.indexPrompt('1111')
+                    },
+                    filter_item:function (val) {
+                        ygg.setCookie("filter_item",val)
+                        window.location.href = '/views/shop/index.html'
                     }
                 }
             }),
@@ -193,6 +203,7 @@ require(['config'], function () {
 
         var citysearch = new AMap.CitySearch();
         citysearch.getLocalCity(function (status, result) {
+            console.log(result)
             vm.city = (result.city).replace("市", "");
             $("#city-picker").val("成都市");
             //$("#city-picker").val(result.province+" "+result.city);
@@ -221,12 +232,14 @@ require(['config'], function () {
                     });
                 }
             });
-            filterData.area_id = result.adcode;
+            filterData.area_id =510100 result.adcode;
             searchData.area_id = result.adcode;*/
-            filterData.area_id = "510100";
-            searchData.area_id = "510100";
+            filterData.area_id = result.adcode;
             ygg.setCookie('area_id', filterData.area_id);
-
+            if(result.rectangle) {
+                ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
+                ygg.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
+            }
             if (filterData.member_id) {
                 ygg.ajax('/member/getPersonCenterInfo', {
                     member_id: filterData.member_id
@@ -254,6 +267,7 @@ require(['config'], function () {
                 getCoupons(function (data) {
                     vm.$set(vm, "discount", data);
                 });
+                getSpecialList()
             }
 
         });
@@ -313,7 +327,6 @@ require(['config'], function () {
                         loop: true
                     });
                 }, 1);
-
                 vm.$set(vm, "shop", data.hot_business);
                 setTimeout(function () {
                     new Swiper('.swiper-shop', {
@@ -333,7 +346,6 @@ require(['config'], function () {
                 }
             });
         }
-
         var height = document.getElementsByClassName('height')[0].clientHeight,
             flag = true;
         window.onscroll = function (e) {
@@ -347,7 +359,17 @@ require(['config'], function () {
                 });
             }
         }
-
+        
+        function getSpecialList () {
+            ygg.ajax('/home/getHomeBottom', {
+                area_id:filterData.area_id
+            },function (data) {
+                if(data.code == 200 ) {
+                    vm.$set(vm, "recommendArr", data.data.special_subjects);
+                    vm.recommend_today = data.data.recommend_today[0]
+                }
+            })
+        }
         function getFilter() {
             ygg.ajax('/home/getHomeCenter', {
                 area_id: filterData.area_id

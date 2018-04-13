@@ -225,9 +225,11 @@ require(['config'], function () {
                             if (result && result.city && result.bounds) {
                                 var cityinfo = result.city;
                                 var citybounds = result.bounds;
-                                main.post('/home/getHomeTop', {
+                                main.post('/home/getCouponHomeScreen', {
                                     area_id: result.adcode,
-                                    business_id: bid
+                                    member_id: '',
+                                    page:1,
+                                    size:10
                                 }, function (data) {
                                     data = data.data.data
                                     vm.hotBus = true
