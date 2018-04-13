@@ -15,30 +15,27 @@
 <section id='app' class='shop_index'>
     <section class="head">
         <a class="back" href="/"></a>
-        <p>专题</p>
+        <p>{{title}}</p>
     </section>
     <section class="subject">
         <section class="margin_top">
-            <section class="special_img"></section>
+            <img :src="banner"class="special_img" alt=""> 
+            <!-- <img src="https://img.yingougou.com/yggm10215223791873916057.png" class="special_img" alt="">  -->
         </section>
-        <section class="special_txt">闹市中的静谧空间，生机环境唤醒味觉体验，创意餐点搭配，呈现艺术美学，意大利进口咖啡机，经典咖啡与无咖啡因热饮皆可选，3款清新气泡水，挑战你的味蕾。</section>
+        <section class="special_txt">{{msg}}</section>
         <section class="preferred">
             <section class="special_title">为你优选</section>
         </section>
     </section>
-
-    <section class="shop_list" :class="isKong">
+    <section class="s_shop_list" v-show="shopList.length > 0" >
         <ul>
             <list v-for='a of shopList' return-url="/views/shop/index.html" :a='a'></list>
         </ul>
-        <!--<section v-show="scrollIsShow" class="infinite-scroll-preloader">-->
-           <!--<section class="preloader"></section>-->
-        <!--</section>-->
     </section>
 
 </section>
 
 </body>
     <script data-main="/config" src="/plugins/require/require.js"></script>
-    <script src="/controllers/shop/index.js"></script>
+    <script src="/controllers/shop/specialDetail.js"></script>
 <html>

@@ -26,17 +26,17 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .isdou{ position: fixed; opacity: 0; z-index: -1; width: 1rem }
 
 .home{ padding-bottom: 2rem }
-.home .header{ margin: 0 1.5rem ; position: absolute; z-index: 2; margin-top: .8rem; width: calc(100% - 3rem); height: 3rem}
+.home .header{ position: absolute; z-index: 2;width:100%; height: 4.4rem;border-bottom: 0.05rem solid #e3e3e3}
 .home .header section{ float: left; }
-.home .header .address{ width: 5.4rem; height: 3rem; line-height: 3rem; color:white; font-size:1.5rem; position: relative; margin-right: 1.5rem; overflow: hidden;}
+.home .header .address{ width: 5.4rem; height: 4.4rem; line-height: 4.4rem; color:#1c1c1c; font-size:1.5rem; position: relative; margin-right: 1.5rem;margin-left: 1.5rem; overflow: hidden;}
 .home .header .address p{ width: 4.5rem }
 .home .header .address input{ position: absolute; z-index: 2; opacity: 0; height: 3rem }
-.home .header .address:after{ content: ""; position: absolute; right: 0; border: 4px solid transparent; border-top: 7px solid white; top: 50%; margin-top: -3px }
-.home .header .search{ width: 23rem; height: 3rem; position: relative;}
-.home .header .search:before{ content: ""; width: 100%; height: 100%; position: absolute; background: white; opacity: .9; border-radius: 25px}
+.home .header .address:after{ content: ""; position: absolute; right: 0; border: 4px solid transparent; border-top: 7px solid #888888; top: 50%; margin-top: -3px }
+.home .header .search{ width: 23rem; height: 3rem; position: relative;margin-top: .7rem}
+.home .header .search:before{ content: ""; width: 100%; height: 100%; position: absolute; background: #fafafa; opacity: .9; border-radius: 25px}
 .home .header .search input{ width: 20rem }
 .home .header .search input,.search_p .top input{ position: relative; z-index: 2; margin-left: 1.3rem; line-height: 3rem; height: 3rem; font-size: 1.4rem; background:url(../images/icon/ic_search_xxh.png) left center no-repeat; background-color: transparent; padding-left:1.8rem; background-size : 1.3rem auto }
-.home .header .user{ float: right; width: 3rem; height: 3rem; background:url(../images/icon/ic_user_xxh.png) center center no-repeat; background-size: auto 2rem}
+.home .header .user{ float: right; width: 3rem; height: 3rem; background:url(../images/index/ic_user@2x.png) center center no-repeat; background-size: auto 2rem;margin-top: .7rem;margin-right: 1.5rem}
 .home .banner{ height: 15rem }
 .home .banner img{ width: 100%; height: 100% }
 .home .banner.swiper-container-horizontal .swiper-slide a{ position: relative; display: block; width: 100%; height: 100%}
@@ -45,7 +45,15 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .home .banner.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{ width: .7rem; height: .7rem; margin: 0 .45rem; background: white; opacity: .5}
 .home .banner.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet-active{ opacity: 1 }
 .home .main{ padding: 0 1.5rem }
-.home .main .title,.shop .shop_detail h3{ margin: 2.5rem 0 1.5rem; font-size: 2rem; line-height: 2rem; color: #1c1c1c }
+.new_banner {margin-top: 6.25rem}
+.home .main .title,.shop .shop_detail h3{ height: 2rem; font-size: 2rem; line-height: 2rem; color: #1c1c1c;padding-top: 2.5rem;padding-bottom: 2rem }
+.home .hot_discount {
+  margin-top: 5.05rem
+}
+.title_border {  border-top:0.05rem solid #e3e3e3;}
+.home .main .hot_title {  padding-bottom: 1.1rem }
+.today_rec {height: 11.5rem;padding-bottom: 2.52rem}
+.today_rec img {height: 100%;width: 100%;}
 .home .main .title .more,.shop .comment_shop .more{ float: right; font-size: 1.4rem; color: #ff6f3d; padding-right: 1.05rem; background:url(../images/icon/ic_arrow_xxh.png) right center no-repeat; background-size: .55rem auto}
 .home .main .shop .hot{ height: 17rem ; position: relative; margin-bottom: 1.5rem; background:url(../images/index/ic_mrpic2_xxh.png) center center no-repeat #f4f7fc; background-size:5.5rem 3.8rem;}
 .home .main .shop .hot img{ box-sizing: border-box; border: 1px solid #dddddd; width: 100%; height: 100% ; border-radius: 3px}
@@ -54,9 +62,17 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .home .main .shop .hot.none *{ display: none; }
 .home .main .shop .hot.none:after{ content: "暂时没有相关商家~"; font-size: 1.3rem; display: inline-block; color: #888; background: url(../images/index/hot_none.png) left 1rem no-repeat; height: 1.3rem; line-height: 1; padding: 1rem 0 1rem 2rem; background-size: auto 1.3rem }
 .home .main .shop .hot.none:before{ display: none; }
-.home .main .shop .hot .text{ position: absolute; width: 100%; z-index: 3; margin-top: 13.7rem; top: 0; height: 2.7rem; line-height: 2.7rem; color: white; font-size: 1.6rem}
-.home .main .shop .hot .text img{ float: left; width: 2.7rem; height: 2.7rem; box-sizing: border-box; border-radius: 50%; margin-right: .7rem; margin-left: 1.2rem}
-.home .main .shop .hot .text p{ float: left; width: 24.5rem}
+/* .home .main .shop .hot .text{ position: absolute; width: 100%; z-index: 3; margin-top: 13.7rem; top: 0; height: 2.7rem; line-height: 2.7rem; color: white; font-size: 1.6rem} */
+/* 1.6 */
+.home .main .shop .hot .text{ position: absolute; ;z-index: 3;width:100%; margin-top: 14.5rem; top: 0; height: 4.5rem; line-height:4.5rem; color: white; font-size: 1.6rem;background-image: url('../images/index/bg_yzbg_xxh.png');background-repeat: no-repeat;background-size: 100% 100% } 
+.home .main .shop .hot .text img{ float: left; width: 2.7rem; height: 2.7rem; box-sizing: border-box; border-radius: 50%; margin-right: .7rem; margin-left: 2rem;margin-top: .9rem}
+
+
+
+
+/* 1.6 */
+/* .home .main .shop .hot .text img{ float: left; width: 2.7rem; height: 2.7rem; box-sizing: border-box; border-radius: 50%; margin-right: .7rem; margin-left: 1.2rem} */
+.home .main .shop .hot .text p{ float: left; width: 20.5rem;color: #1c1c1c}
 .home .main .shop .hot .text span{ float: right; font-size: 1.2rem; margin-right: 1.2rem; line-height: 1.2rem; margin-top: 1rem}
 .home .main .shop .swiper-shop,.comment_success .like .swiper-shop{ height: 11.3rem ; overflow: hidden; margin-bottom: 1.5rem; width: calc(100% + 3rem); margin-left: -1.5rem}
 .home .main .shop .shop_list,.comment_success .like .shop_list{ overflow: hidden; width: 12.5rem; position: relative; background:url(../images/index/ic_mrpic2_xxh.png) center center no-repeat #f4f7fc; background-size:3.3rem 2.7rem;}
@@ -73,6 +89,16 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .home .main .discount .list{ position: relative; width: 100%}
 .home .main .discount .list .content{ position: relative; }
 .home .main .discount .list.none:before{ content: "抱歉！暂无优惠，为您推荐些热门优惠券吧~"; display: block; height: 1.3rem; line-height: 1.3rem; font-size: 1.3rem; color: #888; text-indent: 2rem; background: url(../images/index/coupon_none.png) left center no-repeat; background-size: auto 100%; margin: 2.1rem 0 }
+.home .main .filter {overflow: hidden;padding-top: 2.7rem;padding-bottom: 1.6rem;border-bottom:0.1rem solid #e3e3e3}
+.home .main .filter .filter_item {float:left; width: calc(100% / 5);text-align: center;font-size: 0}
+.home .main .filter .filter_item img {width: 2.9rem;height: 2.9rem;}
+.home .main .filter .filter_item span {font-size: 1.4rem;color: #4f4f4f;display:block;margin-top: .6rem; }
+.home .main .use_type {overflow: hidden;padding-top: 1.4rem;padding-bottom: 1rem}
+.home .main .use_type .use_item {float:left; width: calc(100% / 5);text-align: center;font-size: 0}
+.home .main .use_type .use_item img {width: 4.5rem;height: 4.5rem;}
+.home .main .use_type .use_item p {font-size: 1.4rem;color: #4f4f4f;margin-top: .6rem;}
+
+
 .home .my{ position: fixed; width: 27.8rem; height: 100%; right: -27.8rem; -webkit-transition:all .5s;transition:all .5s; background: white; z-index: 101; top: 0 }
 .home .my.show{ right: 0 }
 .home .my .top{ height: 13.5rem; width: 100%; background: #f1f3fb; padding-top: 3.5rem }
@@ -93,6 +119,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .home .my .ot a{ display: block; margin:0 1.5rem 1.5rem; border: 1px solid #ff6f3d; border-radius: .5rem; height: 4.5rem; line-height: 4.5rem; text-indent: 4.5rem; font-size: 1.4rem; color: #1c1c1c; background: url(../images/index/index_m_icon6.png) 1.5rem center no-repeat; background-size: 1.8rem auto; position: relative; }
 .home .my .ot a:after{ content: ""; border: .3rem solid transparent; border-left: .55rem solid #ff6f3d; position: absolute; right: 1.5rem; top: 50%; margin-top: -.3rem }
 .home .my .ot a:last-child{ background-image:url(../images/index/index_m_icon7.png)}
+
 
 /****************************************************************** discount ******************************************************************/
 
@@ -542,7 +569,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .head .close{ position: absolute; width: 4.5rem; height: 5rem; top: 0; z-index: 2; right: 0;color: #ff6f3d; background: url(../images/member/ic_bg_delete_xxh.png) center center no-repeat; background-size: 1.5rem 1.5rem;}
 .head .jump_over{ position: absolute; width: 4.5rem; height: 5rem; top: 0; z-index: 2; right: 0;color: #ff6f3d; background-size: 1.5rem 1.5rem;}
 #app.has_head{ padding-top: 5rem }
-#app{ padding-bottom: 2rem;margin-bottom:5rem; }
+#app{ padding-bottom: 2rem;margin-bottom:5rem;overflow: hidden; }
 .shadow{ position: fixed; top: 0; background: black; opacity: .7; z-index: 100; width: 100%; height: 100%; display: none;}
 .shadow.show{ display: block;}
 .btn_submit{ position: fixed; bottom: 0; width: 100%; background: #ff6f3d; color: white; height: 5rem; font-size: 1.6rem; z-index: 10; line-height: 5rem; text-align: center; }
@@ -701,14 +728,21 @@ a.checkbox.none:before{ background: #fff}
 .comment_list .info{ float: left; width: calc(100% - 4.7rem) }
 .comment_list .info .time{ float: right; color: #888; font-size: 1.2rem }
 .comment_list .info .name{ font-size: 1.3rem; line-height: 2 }
-.comment_list .info .content{ padding-top: .5rem; line-height: 1.5; font-size: 1.4rem }
+.comment_list .info .content{ padding-top: .5rem; line-height: 1.5; font-size: 1.4rem}
 
 .prompt{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 11000; display: none;opacity:0;-webkit-transform: translate3d(0, 0, 0) scale(1.185);transform: translate3d(0, 0, 0) scale(1.185);-webkit-transition-property: -webkit-transform, opacity;transition-property: transform, opacity; }
 .prompt.show{ opacity:1; display:block;-webkit-transition-duration: 400ms;transition-duration: 400ms;-webkit-transform: translate3d(0, 0, 0) scale(1);transform: translate3d(0, 0, 0) scale(1); }
 .prompt.hide{ display: none;opacity: 0;z-index: 10999;-webkit-transition-duration: 400ms;transition-duration: 400ms;-webkit-transform: translate3d(0, 0, 0) scale(0.815);transform: translate3d(0, 0, 0) scale(0.815); }
 .prompt .shadow_b{ position: absolute; width: 100%; height: 100%; background: black; opacity: .5 }
+
 .prompt .text{ position: absolute; z-index: 2; top: 22rem; text-align: center; width: 100% }
 .prompt .text p{ display: inline-block; background: white; border-radius: .5rem; line-height: 2.5rem; padding: 1.5rem 4rem; font-size: 1.6rem; max-width: calc(100% - 11rem)}
+.prompt .text1 {position: absolute; z-index: 2; top: 15rem; text-align: center; width: 100%}
+.prompt .text1 .index_div { display: inline-block; background: white; border-radius: .5rem; line-height: 2.5rem; padding:2.3rem 0 2.5rem; font-size: 0;width: 26.7rem;}
+.prompt .text1 .index_div .index_rocket {width: 6rem;height: 6rem;}
+.prompt .text1 .index_div .index_span {display: block;color: #1c1c1c;font-size: 1.6rem;padding: 0 6rem;}
+.prompt .text1 .index_div .btn {width: 23.5rem;height: 4.4rem;display: inline-block;font-size:1.6rem;color: #ffffff;background-color: #ff6f3d;border-radius: .5rem;line-height: 4.4rem;margin-top: 2.2rem;}
+
 
 .score_star{ line-height: 1.5rem; font-size: 1.2rem; color: #888 }
 .score_star a{ width: 1.5rem; height: 1.5rem; float: left; margin-right: 5px; background: url(../images/discount/ic_bg_gstar_xxh.png); background-size: 100% 100% }
@@ -1100,11 +1134,11 @@ padding-top: 1.3rem;
     overflow: hidden;
 }
 .special{
-    width: 48%;
+    width:calc((100% - 0.9rem) / 2);
     float: left;
 }
 .special:nth-child(even){
-    padding-left: 4%;
+    margin-left:.9rem;
 }
 .special a img{
     width: 100%;
@@ -1120,47 +1154,97 @@ padding-top: 1.3rem;
 }
 /*专题详情*/
 .margin_top{
-    margin-top: 6rem;
+  height: 17.25rem;
+  width: 100%;
 }
 .subject{
+  margin-top: 6.5rem;
     padding: 0 1.5rem;
 }
 .special_img{
-    height: 15rem;
-    background: paleturquoise;
+  height: 100%;
+  width: 100%;
+    /* background: paleturquoise; */
 }
 .special_txt{
-    margin-top: 1rem;
+    margin-top:2rem;
     color: #555;
+    font-size: 1.6rem
 }
 .preferred{
-    position: relative;
-    bottom: 0;
-    height: 0;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 1.5rem;
-    text-align: center;
-    top: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  top: 2rem;
 }
 .preferred .special_title{
-    text-align: center;
-    font-size: 1.6rem;
-    color: #2c2c2c;
-    font-family: PingFangSC-Regular;
+  position: relative;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #2c2c2c;
+  height: 1.6rem;
+  line-height: 1.6rem;
 }
 .preferred .special_title:after,.preferred .special_title:before{
     content: "";
-    border-top: solid 1px #e3e3e3;
+    height: 0.05rem;
+    background-color: #e3e3e3;
     display: block;
     position: absolute;
-    width: 7rem;
-    top: 1.1rem;
-    margin-bottom: -.7rem;
+    width: 7.5rem;
+    top: .75rem;
 }
 .preferred .special_title:before {
-    left: 10%;
+    left: 2rem;
 }
 .preferred .special_title:after {
-    right: 10%;
+    right:2rem;
+}
+.s_shop_list li{
+  box-sizing: border-box;
+  padding: 1.5rem;
+  height: 12rem;
+}
+.s_shop_list li .text {
+  float: left;
+  width: calc(100% - 13.7rem);
+  height: 100%;
+  position: relative;
+}
+.s_shop_list li img {
+  float: left;
+  height: 100%;
+  width: 12.5rem;
+  margin-right: 1.2rem;
+}
+.s_shop_list li .text .title {
+  font-size: 1.6rem;
+  line-height: 2rem;
+  margin-bottom: .4rem;
+  color: #1c1c1c;
+}
+.s_shop_list .address {
+  width: 100%;
+  display: block;
+  line-height: 1;
+  background: url(../images/discount/ic_address_xxh.png) left center no-repeat;
+  background-size: auto 100%;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  font-size: 1.4rem;
+  color: #5b5b5b;
+  text-indent: 1.9rem;
+  margin-top: 1.2rem;
+  font-weight: normal;
+  overflow: hidden;
+}
+.s_shop_list li .text .address {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.2rem;
+}
+.s_shop_list li .text .text-r {
+  float: right;
 }

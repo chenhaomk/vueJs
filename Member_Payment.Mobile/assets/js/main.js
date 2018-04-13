@@ -34,7 +34,7 @@ define([
   });
   var main = {};
   // main.baseUrl = "https://api.yingougou.com/v1.1/";
-  main.baseUrl = "http://119.23.10.30:9000/v1.1/";
+  main.baseUrl = "http://119.23.10.30:9000/v1.2/";
   main.post = function (url, data, sucBack, errBack) {
     var error = {},
       appid = "100";

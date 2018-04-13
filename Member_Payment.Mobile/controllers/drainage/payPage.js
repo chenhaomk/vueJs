@@ -23,8 +23,8 @@ require(['config'], function () {
         main.setSession("a_n", main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n"));
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
 
-        // var baseURL = "https://api.yingougou.com/v1.1/"
-        var baseURL = "https://paytest.yingougou.com/v1.1/"//测试
+        var baseURL = "http://119.23.10.30:9000/v1.2/"//测试
+        // var baseURL = "https://paytest.yingougou.com/v1.1/"
         //判断是否在微信浏览器
         function browserType() {
             var ua = window.navigator.userAgent.toLowerCase();
