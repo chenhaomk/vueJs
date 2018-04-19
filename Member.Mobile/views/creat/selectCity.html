@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title>定位</title>
+
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+
+</head>
+<body>
+    <section class="height"></section>
+    <section id='app' class='home select_city'>
+        <section class="head">
+            <a class="back" href="/"></a>
+            <p>定位</p>
+        </section>
+        <section class="select_main">
+            <section class="now_city">
+                <p>
+                    <b>当前：{{city}}</b>
+                </p>
+            </section>
+            <section class="poi_city">
+                <section class="position">
+                    <p>定位</p>
+                    <div @click='position_city'>
+                        <img src="../../assets/images/creat/bg_ad_xxh.png" alt="">
+                        {{position}}
+                    </div>
+                </section>
+                <section class="opencity">
+                    <p>已开通城市</p>
+                    <section class="clock_height">
+                        <section v-for="list in open_city">
+                            <div @click='change_city(list)'>
+                                <p>{{list.name}}</p>
+                                <img  :src="list.open_img" alt="">
+                            </div>
+                        </section>
+                    </section>
+                    
+                    
+                </section>
+            </section>
+        </section>
+
+    </section>
+</body>
+    <script data-main="/config" src="/plugins/require/require.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.3&key=a9506f1b1e66b4e85d7e15c8461ca4d4&plugin=AMap.CitySearch"></script>
+    <script src="/controllers/creat/selectCity.js"></script>
+    
+<html>

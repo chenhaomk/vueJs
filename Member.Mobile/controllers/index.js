@@ -72,6 +72,11 @@ require(['config'], function () {
                     list: ygg.template.shopList
                 },
                 methods: {
+                    
+                    selectCity: function(){
+                       window.location.href="/views/creat/selectCity.html?city="+encodeURIComponent(this.city);
+                    },
+
                     closeDownLoad: function () {
                         if (this.showDown)
                             this.showDown = false;
@@ -204,8 +209,8 @@ require(['config'], function () {
         var citysearch = new AMap.CitySearch();
         citysearch.getLocalCity(function (status, result) {
             console.log(result)
-            vm.city = (result.city).replace("市", "");
-            $("#city-picker").val("成都市");
+            vm.city = result.city;
+            $("#city-picker").val(vm.city);
             //$("#city-picker").val(result.province+" "+result.city);
             /*$("#city-picker").cityPicker({
                 toolbarTemplate: '<header class="bar bar-nav">\
@@ -234,7 +239,13 @@ require(['config'], function () {
             });
             filterData.area_id =510100 result.adcode;
             searchData.area_id = result.adcode;*/
-            filterData.area_id = result.adcode;
+            if(window.location.href.indexOf("?")!=-1){
+                filterData.area_id=window.location.href.split("?")[1].split("&")[0].split("=")[1]
+                vm.city=decodeURIComponent(window.location.href.split("?")[1].split("&")[1].split("=")[1])
+            }else{
+                filterData.area_id = result.adcode;
+            }
+            console.log(filterData.area_id)
             ygg.setCookie('area_id', filterData.area_id);
             if(result.rectangle) {
                 ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
@@ -294,7 +305,7 @@ require(['config'], function () {
                     }, {
                         member_id: ygg.getCookie('member_id'),
                         page: 1,
-                        area_id: "510100",
+                        area_id: filterData.area_id,
                         size: 10
                     });
                     defaultCoupons = true;
@@ -316,6 +327,9 @@ require(['config'], function () {
                 business_id: bid
             }, function (data) {
                 data = data.data;
+                if(!data) {
+                    return
+                }
                 vm.$set(vm, "banner", data.adverts);
                 setTimeout(function () {
                     new Swiper('.banner', {
@@ -366,7 +380,9 @@ require(['config'], function () {
             },function (data) {
                 if(data.code == 200 ) {
                     vm.$set(vm, "recommendArr", data.data.special_subjects);
-                    vm.recommend_today = data.data.recommend_today[0]
+                    if(data.data.recommend_today[0]) {
+                        vm.recommend_today = data.data.recommend_today[0]
+                    }
                 }
             })
         }
@@ -375,7 +391,9 @@ require(['config'], function () {
                 area_id: filterData.area_id
             }, function (data) {
                 data = data.data;
-
+                if(!data) {
+                    return
+                }
                 $("#filter_type").picker({
                     toolbarTemplate: '<header class="bar bar-nav">\
                     <button class="button button-link pull-right close-picker">确定</button>\
