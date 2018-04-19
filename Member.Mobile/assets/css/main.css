@@ -1248,3 +1248,64 @@ padding-top: 1.3rem;
 .s_shop_list li .text .text-r {
   float: right;
 }
+.select_city{
+  margin-top:5rem;
+  font-size:1.7rem;
+  font-family: PingFangSC-Regular;
+  margin-bottom:0!important;
+}
+.select_city .select_main{
+  background:#fafafa;
+}
+.select_city .now_city,.select_city .poi_city{
+  padding:0 1.5rem;
+}
+.select_city .now_city{
+  height: 5rem;
+  background:#fff;
+}
+.select_city .now_city >p{
+  height: 5rem;
+  line-height:5rem;
+}
+.select_city .poi_city > section >p{
+  color:#888888;
+  font-size:1.6rem;
+  margin:1rem 0;
+}
+.select_city .poi_city .position > div{
+  height: 4.5rem;
+  width:10rem;
+  border-radius:3px;
+  text-align:center;
+  line-height:4.3rem;
+  background:#fff;
+  border:1px solid #eeeeee;
+  font-size:1.6rem;
+  color:#ff6f3d;
+}
+.select_city .poi_city .position > div >img{
+  height:1.5rem;
+  vertical-align: middle;
+  margin-top:-4px;
+}
+.select_city .poi_city .opencity div img{
+  height: 16rem;
+  width: 100%;
+}
+.select_city .poi_city .opencity div{
+  position: relative;
+  margin:6px 0;
+}
+.select_city .poi_city .opencity div p{
+  color:#fff;
+  font-size: 2rem;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+.select_city .poi_city .opencity > .clock_height{
+  height:calc(100vh - 25rem);
+  overflow-y:scroll;
+}
