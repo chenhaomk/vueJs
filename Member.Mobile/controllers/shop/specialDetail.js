@@ -4,6 +4,7 @@ require(['config'], function () {
     var specialId = window.location.search.split('=')[1] //专题id
     var lng = ygg.getCookie('lng')
     var lat = ygg.getCookie('lat')
+    var area_id = ygg.getCookie('area_id')
     var vm = new Vue({
       el: "#app",
       data: {
@@ -27,12 +28,13 @@ require(['config'], function () {
       }
     })
 
-    getSpecialDetil(specialId,lat,lng)
-    function getSpecialDetil(id,lat,lng) {
+    getSpecialDetil(specialId,lat,lng,area_id)
+    function getSpecialDetil(id,lat,lng,area_id) {
       ygg.ajax('/home/getSpecialSubjectDetail', {
         special_subject_id:id,
         longitude:lng,
-        latitude:lat
+        latitude:lat,
+        area_id:area_id
       },function (data) {
         ygg.loading(false);
         if(data.code == 200 ) {

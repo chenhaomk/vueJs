@@ -23,8 +23,8 @@ require(['config'], function () {
         main.setSession("a_n", main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n"));
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
 
-        var baseURL = "http://119.23.10.30:9000/v1.2/"//测试
-        // var baseURL = "https://paytest.yingougou.com/v1.1/"
+        // var baseURL = "http://119.23.10.30:9000/v1.2/"//测试
+        var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
         //判断是否在微信浏览器
         function browserType() {
             var ua = window.navigator.userAgent.toLowerCase();
@@ -359,8 +359,15 @@ require(['config'], function () {
                             data.coupon_activity_id = main.getSession("c_a_id");
                     }
                     if(this.total > 0) {
-                        console.log(data)
-                        payFn(browserType,data,baseURL,ck)
+                        if(bty == "weixin") {
+                            if(location.href.indexOf("code") == -1) {//微信用户拒绝授权,跳往失败引导页面
+                                location.href = "../../views/newDrainage/payDefeat.html" 
+                            }else {
+                                payFn(browserType,data,baseURL,ck)
+                            }
+                        }else {
+                            payFn(browserType,data,baseURL,ck)
+                        }
                     }else {
                         main.prompt("请先输入有效金额");
                     }

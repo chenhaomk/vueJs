@@ -1707,7 +1707,22 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             }
         }
     });
-
+    ygg.getSession = function (key) {
+        if (key == null || key == "") {
+            ygg.prompt("请求超时！");
+            return;
+        }
+        return sessionStorage.getItem(key);
+    };
+    ygg.clearSessionItem = function (key) {
+        if (key == null || key == "")
+            return;
+        sessionStorage.removeItem(key);
+    };
+    ygg.clearSession = function () {
+        if (sessionStorage != null)
+            sessionStorage.clear();
+    };
     //弹窗提示
     ygg.template.getVercode = Vue.extend({
         props: {
