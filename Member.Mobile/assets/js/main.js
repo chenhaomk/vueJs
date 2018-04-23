@@ -24,8 +24,8 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             docEl.style.fontSize = size + 'px';
         }
     }, 1);
-    // axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
-    axio.defaults.baseURL = 'http://192.168.0.11:8082/v1.2/'; //开发地址
+    axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
+    // axio.defaults.baseURL = 'http://192.168.0.11:8082/v1.2/'; //开发地址
     // axio.defaults.baseURL = 'https://api.yingougou.com/v1.1';//生成地址   
     var ygg = {};
     ygg.maxImgSize = 10485760;
@@ -1707,7 +1707,22 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             }
         }
     });
-
+    ygg.getSession = function (key) {
+        if (key == null || key == "") {
+            ygg.prompt("请求超时！");
+            return;
+        }
+        return sessionStorage.getItem(key);
+    };
+    ygg.clearSessionItem = function (key) {
+        if (key == null || key == "")
+            return;
+        sessionStorage.removeItem(key);
+    };
+    ygg.clearSession = function () {
+        if (sessionStorage != null)
+            sessionStorage.clear();
+    };
     //弹窗提示
     ygg.template.getVercode = Vue.extend({
         props: {

@@ -155,7 +155,6 @@ require(['config'], function () {
                         this.$set(this, "searchVal", bname);
                         ygg.loading(true);
                         ygg.ajax('/home/getSearchResult', searchData, function (data) {
-
                             ygg.loading(false);
                             data = data.data;
                             vm.$set(vm, "isSS", false);
@@ -232,9 +231,11 @@ require(['config'], function () {
                     });
                 }
             });
-            filterData.area_id =510100 result.adcode;
-            searchData.area_id = result.adcode;*/
+            filterData.area_id =510100 result.adcode;*/
+            searchData.area_id = result.adcode;
             filterData.area_id = result.adcode;
+            filterData.lng = result.rectangle.split(';')[0].split(',')[0]
+            filterData.lat = result.rectangle.split(';')[0].split(',')[1]
             ygg.setCookie('area_id', filterData.area_id);
             if(result.rectangle) {
                 ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
@@ -244,9 +245,7 @@ require(['config'], function () {
                 ygg.ajax('/member/getPersonCenterInfo', {
                     member_id: filterData.member_id
                 }, function (data) {
-
                     data = data.data;
-
                     getTopData(data.business_id);
                     getFilter();
                     getCoupons(function (d) {
@@ -313,6 +312,8 @@ require(['config'], function () {
         function getTopData(bid) {
             ygg.ajax('/home/getHomeTop', {
                 area_id: filterData.area_id,
+                longitude:filterData.lng,
+                latitude:filterData.lat,
                 business_id: bid
             }, function (data) {
                 data = data.data;
@@ -366,7 +367,9 @@ require(['config'], function () {
             },function (data) {
                 if(data.code == 200 ) {
                     vm.$set(vm, "recommendArr", data.data.special_subjects);
-                    vm.recommend_today = data.data.recommend_today[0]
+                    if(data.data.recommend_today[0]) {
+                        vm.recommend_today = data.data.recommend_today[0]
+                    }
                 }
             })
         }

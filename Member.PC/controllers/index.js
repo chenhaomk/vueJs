@@ -116,8 +116,10 @@ require(['config'],function(){
 	                business_id : $("#userinfo").attr("data-bid")
 	            },
 	            result : function(data){
-	            	data = data.data;
-
+					data = data.data;
+					if(!data) {
+						return
+					}
 	                for(var i=0;i<data.adverts.length;i++){
 	                	$("#banner .list").append('<img src="'+data.adverts[i].img_path+'">');
 	                }

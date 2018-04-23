@@ -30,7 +30,7 @@
                 <input type="text" v-if="isAndroid" ref="inputO" placeholder="请询问收银员后输入" v-model="picked" v-on:input="disBefore">
                 <input type="number" v-else placeholder="请询问收银员后输入" ref="inputO" v-model="picked" v-on:input="disBefore">
             </div>
-            <div class="checkWarp" >
+            <div class="checkWarp" v-show="payType == 'nothing'?false:true " >
                 <div>
                     <img src="../../assets/images/newDarinage/ic_select1@3x.png" ref="ck" alt="" v-on:click="checkPrice">
                     <span>输入不参与优惠金额</span>
