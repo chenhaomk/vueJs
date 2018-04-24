@@ -239,7 +239,7 @@ require(['config'], function () {
             });
             filterData.area_id =510100 result.adcode;
             searchData.area_id = result.adcode;*/
-            if(window.location.href.indexOf("?")!=-1){
+            if(window.location.href.indexOf("?")!=-1 && window.location.href.indexOf("area_id")!=-1){
                 filterData.area_id=window.location.href.split("?")[1].split("&")[0].split("=")[1]
                 vm.city=decodeURIComponent(window.location.href.split("?")[1].split("&")[1].split("=")[1])
             }else{
