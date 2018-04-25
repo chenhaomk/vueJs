@@ -7,7 +7,11 @@
     <title></title>
 
     <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
-
+    <style>
+        .nobor a{
+            right:18px!important;
+        }
+    </style>
 </head>
 
 <body class="bg">
@@ -193,9 +197,15 @@
                             <input v-model='pwd' type="password" v-on:blur="blurTip(pwd,'pwd')" name="pwd" placeholder="请输入密码">
                         </p>
                     </section>
-                    <section class="form_group nobor">
+                    <section class="form_group ">
                         <p>
                             <input v-model='rpwd' type="password" v-on:blur="blurTip(rpwd,'dpwd',pwd)" placeholder="请输入确认密码">
+                        </p>
+                    </section>
+                    <section class="form_group nobor">
+                        <p class="vercode">
+                            <input v-model="vercode" type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="user.mobile" :sms_type="'0017'"></get-vercode>
                         </p>
                     </section>
                     <section class="form_group">
@@ -203,6 +213,7 @@
                             <input type="submit" @click="updatePwd($event)" value="确认修改">
                         </p>
                     </section>
+                    
                 </form>
             </section>
         </section>

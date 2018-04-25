@@ -140,7 +140,7 @@ require(['config'], function () {
 
 						ygg.ajax('/member/updatePwd', {
 							member_id: member_id,
-							password: that.pwd
+							login_password: that.pwd
 						}, function (data) {
 							ygg.loading(false);
 							if (data.status == "success") {

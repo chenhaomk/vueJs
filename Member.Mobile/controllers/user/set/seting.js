@@ -54,6 +54,7 @@ require(['config'], function () {
 					rpwd: "",
 					newVercode: "",
 					vercode: "",
+					isOk: false,
                     isBindWx: '绑定',
 					isBindZfb: '绑定',
 					isBindPhone: '绑定',
@@ -157,6 +158,7 @@ require(['config'], function () {
 					},
 					updatePwd: function (e) {
 						e.preventDefault();
+						
 						var that = this;
 
 						if (this.pwd.length == 0 || this.rpwd.length == 0) {
@@ -176,7 +178,9 @@ require(['config'], function () {
 
 						ygg.ajax('/member/updatePwd', {
 							member_id: member_id,
-							password: that.pwd
+							login_password: that.pwd,
+							mobile:that.user.mobile,
+							verification_code:that.vercode
 						}, function (data) {
 							ygg.loading(false);
 							if (data.status == "success") {
@@ -264,7 +268,8 @@ require(['config'], function () {
                 components: {
                     popup: ygg.template.popup,
                     uploader: ygg.template.uploader2,
-                    feedback: ygg.template.feedback
+					feedback: ygg.template.feedback,
+					getVercode: ygg.template.getVercode
                 }
             }),
         auth_code = ygg.getQueryString("auth_code")
