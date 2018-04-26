@@ -9,7 +9,9 @@ require(['config'], function () {
         }
         var share_mid = main.getQueryString("m_id")?main.getQueryString("m_id"):main.getSession('share_mid');//分享用户id
         // var baseURL = "https://api.yingougou.com/v1.1/"
-        var baseURL = "http://119.23.10.30:9000/v1.2/"
+        var baseURL = "https://paytest.yingougou.com/v1.2/" //测试回调
+        // var baseURL = "http://119.23.10.30:9000/v1.2/" //
+        
         var amount
         //判断浏览器
         function browserType() {
@@ -117,7 +119,8 @@ require(['config'], function () {
                     main.setSession("all", vm.all );
                     if(bty == 'weixin') {
                         if(location.href.indexOf("code") == -1) {
-                            location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; 
+                            location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";//测试
+                            // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //正式 
                         }else {//授权登录
                             var code = main.getQueryString("code");
                             main.post("passport/getWxUnionId", {//获取微信unionId
@@ -158,7 +161,8 @@ require(['config'], function () {
                         }
                     }else if(bty == 'alipay') {
                         if(location.href.indexOf("auth_code") == -1) {
-                            location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid 
+                            // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid //正式
+                            location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid //测试
                         }else {
                             var code = main.getQueryString("auth_code");
                             main.post("pay/getBuyerId", {

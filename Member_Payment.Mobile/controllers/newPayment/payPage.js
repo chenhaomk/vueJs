@@ -27,32 +27,10 @@
   }
   var userId, bty, weixin_openid, wx_unionid, nick_name, zfb_openid, isAndroid
   var busDteObj = {} //ch-use:获取商家详情请求参数
-  //---------------------ajax header设置----------开始----
-  var tk
-  var appid = '100'
-  if (location.search.indexOf("userId") != -1) {
-    tk = location.search.split("&")[2].split("=")[1]
-  }
-  var token = getSession("token") ? getSession("token") : getCookie("token");
-  if (tk != null || tk != undefined) {
-    token = tk
-  }
-  var timestamp = (new Date()).valueOf();
-  var sign = getMd5(appid + timestamp);
-  if (token != null) {
-    sign = getMd5(appid + timestamp + token);
-  }
-  var headers = {
-    appid: appid,
-    sign: sign,
-    timestamp: timestamp,
-    token: token,
-    member_id:getCookie('member_id')
-  }
-  //---------------------ajax header设置----------结束----
   var bty = browserType()
   var hrefStr = location.href
-  var b_id = getQueryString("b_id") == null ? getSession("b_id") : getQueryString("b_id")
+  var b_id = getQueryString("b_id")
+  // var b_id = getQueryString("b_id") == null ? getSession("b_id") : getQueryString("b_id")
   if (getSession("b_id") && getSession("b_id") != "null") { //ch-use:扫码支付时从index.js获取session
     b_id = getSession("b_id")
   } else if (getQueryString("id") && getQueryString("id") != "null") {
@@ -69,7 +47,7 @@
       var code = getQueryString("code");
       $.ajax({
         type: 'POST',
-        headers: headers,
+        headers: setHeader(),
         url: baseURL + 'pay/getOpenId',
         data: JSON.stringify({
           code: code
@@ -98,7 +76,7 @@
               wx_unionid:wx_unionid,
               nick_name:nick_name
             }),
-            headers: headers,
+            headers: setHeader(),
             dataType: 'json',
             contentType: 'application/json;charset=UTF-8',
             success:function (data) {
@@ -115,7 +93,7 @@
                 if(data.data.business_id == '' || data.data.business_id == undefined) {
                   $.ajax({
                     type: 'POST',
-                    headers: headers,
+                    headers: setHeader(),
                     url: baseURL+'member/bindBusiness',
                     data:JSON.stringify({
                       member_id:member_id,
@@ -124,7 +102,7 @@
                     dataType: 'json',
                     contentType: 'application/json;charset=UTF-8',
                     success:function (data) {
-
+                      
                     }
                   })
                 }
@@ -143,7 +121,7 @@
       var code = getQueryString("auth_code");
       $.ajax({
         type: 'POST',
-        headers: headers,
+        headers: setHeader(),
         url: baseURL + 'pay/getBuyerId',
         data: JSON.stringify({
           code: code
@@ -158,7 +136,7 @@
           zfb_openid = res.data
           $.ajax({
             type: 'POST',
-            headers: headers,
+            headers: setHeader(),
             url: baseURL + 'passport/zfbRegister',
             data: JSON.stringify({
               zfb_openid:zfb_openid,
@@ -179,7 +157,7 @@
                 if(data.data.business_id == '' || data.data.business_id == undefined) {
                   $.ajax({
                     type: 'POST',
-                    headers: headers,
+                    headers: setHeader(),
                     url: baseURL+'member/bindBusiness',
                     data:JSON.stringify({
                       member_id:member_id,
@@ -219,16 +197,16 @@
     busDteObj.member_id = userId
   }
   if (isAndroid) {
-    $('.ios_input').addClass('hide')
+    $('.ad_input').removeClass('hide')
   } else {
-    $('.ad_input').addClass('hide')
+    $('.ios_input').removeClass('hide')
   }
   getBusDetail(busDteObj)
 
   function getBusDetail(obj) {
     $.ajax({
       type: 'POST',
-      headers: headers,
+      headers: setHeader(),
       url: baseURL + 'business/getBusinessDetails',
       data: JSON.stringify(obj),
       dataType: 'json',
@@ -540,7 +518,7 @@
       loading(true)
       $.ajax({
         type: 'POST',
-        headers: headers,
+        headers: setHeader(),
         url: baseURL+'pay/create_pay',
         data:JSON.stringify(weixin_pay_data),
         dataType: 'json',
@@ -574,7 +552,7 @@
                 }else {
                   $.ajax({//获取复购券详情，判断店铺是否有复购券
                     type: 'POST',
-                    headers: headers,
+                    headers: setHeader(),
                     url: baseURL+'common/getRebuyCoupon',
                     data:JSON.stringify({
                       order_id:orderId,
@@ -609,7 +587,7 @@
                           setSession("all",rule );
                           $.ajax({//领取复购券
                             type: 'POST',
-                            headers: headers,
+                            headers: setHeader(),
                             url: baseURL+'common/receiveRebuyCoupon',
                             data:JSON.stringify({
                               member_id:getCookie('member_id'),
@@ -644,7 +622,7 @@
       data.pay_way ='alipay_csb'
       $.ajax({
         type: 'POST',
-        headers: headers,
+        headers: setHeader(),
         url: baseURL+'pay/create_pay',
         data:JSON.stringify(data),
         dataType: 'json',
@@ -666,7 +644,7 @@
                 }else {
                   $.ajax({//获取复购券详情，判断店铺是否有复购券
                     type: 'POST',
-                    headers: headers,
+                    headers: setHeader(),
                     url: baseURL+'common/getRebuyCoupon',
                     data:JSON.stringify({
                       order_id:orderId,
@@ -701,7 +679,7 @@
                           setSession("all",rule );
                           $.ajax({//领取复购券
                             type: 'POST',
-                            headers: headers,
+                            headers: setHeader(),
                             url: baseURL+'common/receiveRebuyCoupon',
                             data:JSON.stringify({
                               member_id:getCookie('member_id'),
@@ -1069,6 +1047,32 @@
       return str;
     }
 
+  }
+  function setHeader () {
+      //---------------------ajax header设置----------开始----
+    var tk
+    var appid = '100'
+    if (location.search.indexOf("userId") != -1) {
+      tk = location.search.split("&")[2].split("=")[1]
+    }
+    var token = getCookie("token") ? getCookie("token"): getSession("token") ;
+    if (tk != null || tk != undefined) {
+      token = tk
+    }
+    var timestamp = (new Date()).valueOf();
+    var sign = getMd5(appid + timestamp);
+    if (token != null) {
+      sign = getMd5(appid + timestamp + token);
+    }
+    var headers = {
+      appid: appid,
+      sign: sign,
+      timestamp: timestamp,
+      token: token,
+      member_id:getCookie('member_id')
+    }
+    //---------------------ajax header设置----------结束----
+    return headers
   }
   //-----------------------工具类函数------------结束
   window.addEventListener('load', function () {

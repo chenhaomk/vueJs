@@ -64,7 +64,7 @@ define([
     axios.defaults.headers.appid = appid;
     axios.defaults.headers.sign = sign;
     axios.defaults.headers.timestamp = timestamp;
-
+    axios.defaults.headers.member_id = this.getCookie("member_id");
     axios.post(url, data)
       .then(function (res) {
         if (sucBack != null) {
