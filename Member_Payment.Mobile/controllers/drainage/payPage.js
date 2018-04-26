@@ -1,5 +1,5 @@
 require(['config'], function () {
-    require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+    require(['axio', 'vue','main'], function (ajax, vue, main) {
         var b_id = location.search.split("&")[0].split("=")[1]
         var userId,bty,weixin_openid,wx_unionid,nick_name,zfb_openid
 
