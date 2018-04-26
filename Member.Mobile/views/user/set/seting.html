@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title></title>
 
     <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
-
+    <style>
+        .nobor a{
+            right:18px!important;
+        }
+    </style>
 </head>
 
 <body class="bg">
@@ -31,16 +35,17 @@
                     </p>
                 </a>
             </section>
+            
             <section class="group">
                 <a v-on:click="setpwd" >
                     <label>设置密码</label>
                 </a>
             </section>
-            <section class="group">
+            <!-- <section class="group">
                 <a v-on:click="setpwd" >
                     <label>提现密码</label>
                 </a>
-            </section>
+            </section> -->
 
             <section class="group">
                 <a @click="disShow='show'">
@@ -61,6 +66,155 @@
                 <a @click="aboutusShow='show'">
                     <label>关于我们</label>
                 </a>
+            </section>
+        </section>
+        <section class="update_nk ut_st hasnum" :class="hasTelShow">
+            <section class="head">
+                <a class="back" @click="hasTelShow = ''"></a>
+                <p>账号管理</p>
+            </section>
+            <!--<section class="form">-->
+                <!--<form>-->
+                    <!--<section class="phone_number">-->
+                        <!--<section class="icon"></section>-->
+                        <!--<p class="num">{{user.mobile}}</p>-->
+                        <!--<p class="tip">您已绑定以上手机号</p>-->
+                    <!--</section>-->
+                    <!--<section class="form_group">-->
+                        <!--<p class="submit">-->
+                            <!--<input type="submit" @click="$event.preventDefault();telShow='show'" value="更换">-->
+                        <!--</p>-->
+                    <!--</section>-->
+                <!--</form>-->
+            <!--</section>-->
+            <section class="accountInfo" >
+                <section class="group">
+                    <a >
+                        <img  v-bind:src='wxImg'  />
+                        <label>微信</label>
+                        <p v-on:click='bindwx'>{{isBindWx}}</p>
+                    </a>
+                </section>
+                <section class="group">
+                    <a >
+                        <img  v-bind:src='zfbImg'  />
+                        <label>支付宝</label>
+                        <p  v-on:click='bindzfb'>{{isBindZfb}}</p>
+                    </a>
+                </section>
+                <section class="group">
+                    <a >
+                        <img  v-bind:src='phImg'  />
+                        <label>手机号</label>
+                        <p v-on:click='bindph' >{{isBindPhone}}</p>
+                    </a>
+                </section>
+            </section>
+        </section>
+        <!--绑定-->
+        <section class="update_nk update_tel updatephone" :class="bindPhone">
+            <section class="head">
+                <a class="back" @click="bindPhone = ''"></a>
+                <p>绑定手机号</p>
+            </section>
+
+            <section class="form">
+                <form>
+                    <section class="form_group">
+                        <p>
+                            <input v-model='bdphone' type="number" placeholder="请输入手机号">
+                        </p>
+                    </section>
+                    <section class="form_group nobor">
+                        <p class="vercode">
+                            <input v-model='bindVercode' type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="bdphone" :sms_type="'0008'"></get-vercode>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p class="submit">
+                            <input type="submit" @click="bpCommit($event)" value="提交">
+                        </p>
+                    </section>
+                </form>
+            </section>
+        </section>
+
+        <section class="update_nk update_tel updatephone" :class="telShow">
+            <section class="head">
+                <a class="back" @click="telShow = ''"></a>
+                <p>更换手机号</p>
+            </section>
+
+            <section class="form">
+                <form>
+                    <section class="form_group">
+                        <p>
+                            <input :value="user.mobile" readonly>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p class="vercode">
+                            <input v-model='vercode' type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="user.mobile" :sms_type="'0004'"></get-vercode>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p>
+                            <input v-model='phone' type="number" placeholder="请输入新的手机号">
+                        </p>
+                    </section>
+                    <section class="form_group nobor">
+                        <p class="vercode">
+                            <input v-model='newVercode' type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="phone" :sms_type="'0004'"></get-vercode>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p class="submit">
+                            <input type="submit" @click="updatePhone($event)" value="确认修改">
+                        </p>
+                    </section>
+                </form>
+            </section>
+        </section>
+        <!--修改密码-->
+        <section class="update_nk update_pwd updatephone" :class="pwdShow">
+            <section class="head">
+                <a class="back" @click="pwdShow = ''"></a>
+                <p>修改密码</p>
+            </section>
+
+            <section class="form">
+                <form>
+                    <section class="form_group">
+                        <p>
+                            用户名：<input :value="user.mobile" readonly class="nowid">
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p>
+                            <input v-model='pwd' type="password" v-on:blur="blurTip(pwd,'pwd')" name="pwd" placeholder="请输入密码">
+                        </p>
+                    </section>
+                    <section class="form_group ">
+                        <p>
+                            <input v-model='rpwd' type="password" v-on:blur="blurTip(rpwd,'dpwd',pwd)" placeholder="请输入确认密码">
+                        </p>
+                    </section>
+                    <section class="form_group nobor">
+                        <p class="vercode">
+                            <input v-model="vercode" type="number" placeholder="请输入验证码">
+                            <get-vercode :mobile="user.mobile" :sms_type="'0017'"></get-vercode>
+                        </p>
+                    </section>
+                    <section class="form_group">
+                        <p class="submit">
+                            <input type="submit" @click="updatePwd($event)" value="确认修改">
+                        </p>
+                    </section>
+                    
+                </form>
             </section>
         </section>
 
@@ -330,4 +484,6 @@
 </body>
 <script data-main="/config" src="/plugins/require/require.js"></script>
 <script src="/controllers/user/set/seting.js"></script>
+
+
 <html>
