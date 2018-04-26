@@ -28,6 +28,10 @@ require(['config'],function(){
         citysearch.getLocalCity(function (status, result) {
             vm.position=result.city
             vm.position_id=result.adcode
+            if(result.rectangle) {
+                ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
+                ygg.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
+            }
             console.log(result)
         })
     });

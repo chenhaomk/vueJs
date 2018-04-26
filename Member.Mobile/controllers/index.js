@@ -246,9 +246,14 @@ require(['config'], function () {
             }
             console.log(filterData.area_id)
             ygg.setCookie('area_id', filterData.area_id);
-            if(result.rectangle) {
+            if(ygg.getCookie('lng') && ygg.getCookie('lat')){
+                filterData.lng=ygg.getCookie('lng');
+                filterData.lat=ygg.getCookie('lat');
+            }else if(result.rectangle) {
                 ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
                 ygg.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
+                filterData.lng=ygg.getCookie('lng');
+                filterData.lat=ygg.getCookie('lat');
             }
             if (filterData.member_id) {
                 ygg.ajax('/member/getPersonCenterInfo', {
