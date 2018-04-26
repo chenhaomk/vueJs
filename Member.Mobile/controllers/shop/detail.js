@@ -52,7 +52,7 @@ require(['config'],function(){
                                 ygg.setCookie("mobile",data.data.mobile);
                                 ygg.setCookie("token",data.data.token);
                                 if(data.data.business_id == '' || data.data.business_id == undefined) {
-                                    ygg.ajax(baseURL + "member/bindBusiness",{//绑定该商户原缀会员
+                                    ygg.ajax("member/bindBusiness",{//绑定该商户原缀会员
                                         member_id:member_id,
                                         business_id:b_id
                                     },function (data) {
@@ -66,7 +66,7 @@ require(['config'],function(){
             }
         }else if(bty == 'alipay') {
             if(location.href.indexOf("auth_code") == -1) {
-                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid 
+                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/views/shop/detail.html?returnUrl=/*id="+bid
             }else {
                 var code = ygg.getQueryString("auth_code");
                 ygg.ajax("pay/getBuyerId", {
