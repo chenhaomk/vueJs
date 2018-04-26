@@ -37,6 +37,9 @@
         .ishide {
             display: none;
         }
+        .ads{
+            margin-top:2.5rem;
+        }
     </style>
 </head>
 
@@ -53,16 +56,7 @@
             </section>
             <a class='user' v-on:click='openMenu()'></a>
         </section>
-        <!-- <section class="banner swiper-container">
-            <section class="swiper-wrapper">
-                <section class="swiper-slide" v-clock v-for='a of banner'>
-                    <a href="#">
-                        <img :src='a.img_path'>
-                    </a>
-                </section>
-            </section>
-            <section class="swiper-pagination"></section>
-        </section> -->
+        
         <section class='main new_banner'  >
             <section class="shop" v-show="business.business_id?true:false">
                 <section class="hot" id="thot">
@@ -162,20 +156,18 @@
                 </section>
             </section>
         </section>
-        <!--今日推荐1.6.0-->
-        <section class='main' v-show='recommend_today.img_path?true:false' >
-            <section class="title">
-                今日推荐
-                <span  class="more">更多</span>
+        <!-- 推荐广告1.6.0 -->
+        <section class="banner swiper-container ads">
+            <section class="swiper-wrapper">
+                <section class="swiper-slide" v-clock v-for='a of banner'>
+                    <a href="#">
+                        <img :src='a.img_path'>
+                    </a>
+                </section>
             </section>
-            <div class="today_rec" >
-                <a v-if='recommend_today.business_id?true:false' :href="'/views/shop/detail.html?id='+recommend_today.business_id+'&returnUrl=index'">
-                    <img :src="recommend_today.img_path" alt="">
-                </a>
-                <img v-else :src="recommend_today.img_path" alt="">
-            </div>
+            <section class="swiper-pagination"></section>
         </section>
-
+        
 
         <section class='main'v-show="shop.length > 0" >
             <section class="title">
@@ -204,6 +196,20 @@
                 </section>
             </section>
         </section>
+        <!--今日推荐1.6.0-->
+        <section class='main' v-show='recommend_today.img_path?true:false' >
+            <section class="title">
+                今日推荐
+                <span  class="more">更多</span>
+            </section>
+            <div class="today_rec" >
+                <a v-if='recommend_today.business_id?true:false' :href="'/views/shop/detail.html?id='+recommend_today.business_id+'&returnUrl=index'">
+                    <img :src="recommend_today.img_path" alt="">
+                </a>
+                <img v-else :src="recommend_today.img_path" alt="">
+            </div>
+        </section>
+
         <!--专题推荐-->
         <section class='main'>
             <div v-for="a of recommendArr">

@@ -41,7 +41,7 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
         axio.defaults.headers.sign = sign;
         axio.defaults.headers.timestamp = timestamp;
         axio.defaults.headers.token = token;
-        axio.defaults.headers.member_id = ygg.getCookie('member_id')
+        axio.defaults.headers.member_id = ygg.getCookie("member_id");
         return axio.post(url, data).then(function (res) {
             if (res.data.status == "error" && res.data.code == "3001") {
                 ygg.delCookie("member_id");
