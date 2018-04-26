@@ -40,6 +40,10 @@
         .ads{
             margin-top:2.5rem;
         }
+        .adsImg,.adsImg img{
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -157,7 +161,7 @@
             </section>
         </section>
         <!-- 推荐广告1.6.0 -->
-        <section class="banner swiper-container ads">
+        <!-- <section class="banner swiper-container ads">
             <section class="swiper-wrapper">
                 <section class="swiper-slide" v-clock v-for='a of banner'>
                     <a href="#">
@@ -166,6 +170,14 @@
                 </section>
             </section>
             <section class="swiper-pagination"></section>
+        </section> -->
+        <section class="ads">
+            <section class="adsImg" v-clock >
+                <a v-if='banner.business_id?true:false' :href="'/views/shop/detail.html?id='+banner.business_id+'&returnUrl=index'">
+                    <img :src="banner.img_path" alt="">
+                </a>
+                <img :src="banner.img_path" alt="">
+            </section>
         </section>
         
 

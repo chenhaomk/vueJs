@@ -1,6 +1,5 @@
 require(['config'], function () {
     require(['vue', 'main'], function (Vue, ygg) {
-        var baseUrl = "http://api.yingougou.com/v1.0/"
         var vm = new Vue({
                 el: "#app",
                 data: {
