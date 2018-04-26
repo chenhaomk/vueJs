@@ -280,11 +280,11 @@ require(['config'], function () {
                 getCoupons(function (data) {
                     vm.$set(vm, "discount", data);
                 });
-                getSpecialList()
             }
-
+            getSpecialList()
         });
-
+       
+        
         function getCoupons(cb, data) {
             var sdata = data || filterData;
             var sdd = data;
@@ -334,7 +334,7 @@ require(['config'], function () {
                 if(!data) {
                     return
                 }
-                vm.$set(vm, "banner", data.adverts);
+                vm.$set(vm, "banner", data.adverts[0]);
                 setTimeout(function () {
                     new Swiper('.banner', {
                         pagination: '.swiper-pagination',
