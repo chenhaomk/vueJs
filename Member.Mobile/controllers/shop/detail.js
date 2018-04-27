@@ -21,32 +21,72 @@ require(['config'],function(){
             }
         }
         var bty = browserType()
-        if(bty == 'weixin') {
-            if(location.href.indexOf("code") == -1) {
-                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/views/shop/detail.html?returnUrl=/*id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; 
-            }else {//授权登录
-                var code = ygg.getQueryString("code");
-                ygg.ajax("passport/getWxUnionId", {//获取微信unionId
-                    code: code,
-                    wx_type:0,//0是公众号,1是开放平台
-                },function (data) {
-                    // data = data.data
-                    console.log(data)
-                    if(data.status == 'error') {
-                        ygg.prompt(data.msg);
-                    }else if(data.status == 'success') {
-                        var obj = {
-                            wx_unionid:data.data.unionid,
-                            nick_name : data.data.nick_name,
-                            openid : data.data.openid
-                        }
-                        ygg.ajax('passport/thirdWxLogin',obj,function(data){//登录
-                            // data = data.data
-                            console.log(data)
-                            if(data.status == "error"){
-                                ygg.prompt(data.msg)
-                            }else if(data.status == "success") {
+        if(ygg.getSession('snsapi')) {//引流过来才授权
+            if(bty == 'weixin') {
+                if(location.href.indexOf("code") == -1) {
+                    location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/views/shop/detail.html?returnUrl=/*id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; 
+                }else {//授权登录
+                    var code = ygg.getQueryString("code");
+                    ygg.ajax("passport/getWxUnionId", {//获取微信unionId
+                        code: code,
+                        wx_type:0,//0是公众号,1是开放平台
+                    },function (data) {
+                        // data = data.data
+                        console.log(data)
+                        if(data.status == 'error') {
+                            ygg.prompt(data.msg);
+                        }else if(data.status == 'success') {
+                            var obj = {
+                                wx_unionid:data.data.unionid,
+                                nick_name : data.data.nick_name,
+                                openid : data.data.openid
+                            }
+                            ygg.ajax('passport/thirdWxLogin',obj,function(data){//登录
+                                // data = data.data
+                                console.log(data)
+                                if(data.status == "error"){
+                                    ygg.prompt(data.msg)
+                                }else if(data.status == "success") {
 
+                                    var member_id = data.data.member_id
+                                    ygg.setCookie("member_id",data.data.member_id);
+                                    ygg.setCookie("mobile",data.data.mobile);
+                                    ygg.setCookie("token",data.data.token);
+                                    if(data.data.business_id == '' || data.data.business_id == undefined) {
+                                        ygg.ajax("member/bindBusiness",{//绑定该商户原缀会员
+                                            member_id:member_id,
+                                            business_id:b_id
+                                        },function (data) {
+                                            console.log('绑定原缀')
+                                        })
+                                    }
+                                }
+                            })
+                        }
+                    })
+                }
+            }else if(bty == 'alipay') {
+                if(location.href.indexOf("auth_code") == -1) {
+                    location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/views/shop/detail.html?returnUrl=/*id="+bid
+                }else {
+                    var code = ygg.getQueryString("auth_code");
+                    ygg.ajax("pay/getBuyerId", {
+                        code: code
+                    }, function (res) {
+                        if (res.data.code != 200) {
+                            ygg.prompt(res.msg);
+                            return;
+                        }
+                        zfb_openid = res.data.data
+                        ygg.ajax( "passport/zfbRegister",{
+                            zfb_openid:zfb_openid,
+                            nick_name:''
+                        } , function (data) {//如果该用户没注册就注册，注册过就返回用户详情
+                            data = data.data
+                            if(data.status == "error") {
+                                ygg.prompt(data.msg)
+                            }else {
+                                //保存用户登录信息
                                 var member_id = data.data.member_id
                                 ygg.setCookie("member_id",data.data.member_id);
                                 ygg.setCookie("mobile",data.data.mobile);
@@ -54,53 +94,15 @@ require(['config'],function(){
                                 if(data.data.business_id == '' || data.data.business_id == undefined) {
                                     ygg.ajax("member/bindBusiness",{//绑定该商户原缀会员
                                         member_id:member_id,
-                                        business_id:b_id
+                                        business_id:bid
                                     },function (data) {
                                         console.log('绑定原缀')
                                     })
                                 }
                             }
-                        })
-                    }
-                })
-            }
-        }else if(bty == 'alipay') {
-            if(location.href.indexOf("auth_code") == -1) {
-                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/views/shop/detail.html?returnUrl=/*id="+bid
-            }else {
-                var code = ygg.getQueryString("auth_code");
-                ygg.ajax("pay/getBuyerId", {
-                    code: code
-                }, function (res) {
-                    if (res.data.code != 200) {
-                        ygg.prompt(res.msg);
-                        return;
-                    }
-                    zfb_openid = res.data.data
-                    ygg.ajax( "passport/zfbRegister",{
-                        zfb_openid:zfb_openid,
-                        nick_name:''
-                    } , function (data) {//如果该用户没注册就注册，注册过就返回用户详情
-                        data = data.data
-                        if(data.status == "error") {
-                            ygg.prompt(data.msg)
-                        }else {
-                            //保存用户登录信息
-                            var member_id = data.data.member_id
-                            ygg.setCookie("member_id",data.data.member_id);
-                            ygg.setCookie("mobile",data.data.mobile);
-                            ygg.setCookie("token",data.data.token);
-                            if(data.data.business_id == '' || data.data.business_id == undefined) {
-                                ygg.ajax("member/bindBusiness",{//绑定该商户原缀会员
-                                    member_id:member_id,
-                                    business_id:bid
-                                },function (data) {
-                                    console.log('绑定原缀')
-                                })
-                            }
-                        }
-                    })    
-                })
+                        })    
+                    })
+                }
             }
         }
         /*

@@ -26,6 +26,7 @@ require(['config'], function () {
         }
         var bty = browserType()
         if(bty != 'weixin' && bty != 'alipay') {
+            main.setSession('snsapi','snsapi')
             window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
         }
         // window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
@@ -202,7 +203,8 @@ require(['config'], function () {
                     getBusinessDetil();
                     
                 }else {
-                    window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
+                    main.setSession('snsapi','snsapi')
+                    window.location.href = ''+main.calllBcakUrl+'/views/shop/detail.html?returnUrl=/&id='+bid
                 }
             }
         })

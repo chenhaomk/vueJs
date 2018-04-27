@@ -2,6 +2,8 @@
   $('body').addClass('show')
   var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
   // var baseURL = "https://api.yingougou.com/v1.1/" //正式
+  var calllBcakUrl = 'http://119.23.10.30:8002'
+  //var calllBcakUrl = 'https://m.yingougou.com' //
   var u = navigator.userAgent;
   var vm = {
     isActive: false,
@@ -502,7 +504,7 @@
     }
     function ck() {
       // location.href = "../../views/newDrainage/freeCoupons.html"+window.location.search;
-      location.href ='https://m.yingougou.com/views/my/purHistory.html' //用户登录过h5，支付成功后就跳往消费记录页面
+      location.href =''+calllBcakUrl+'/views/my/purHistory.html' //用户登录过h5，支付成功后就跳往消费记录页面
     }
   })
   /**
@@ -605,7 +607,7 @@
                             }
                           })  
                         }else {
-                          location.href ='https://m.yingougou.com/views/my/purHistory.html' //没有就跳转h5的消费记录页
+                          location.href =''+calllBcakUrl+'/views/my/purHistory.html' //没有就跳转h5的消费记录页
                         }
                       }
                     }
@@ -697,7 +699,7 @@
                             }
                           })  
                         }else {
-                          location.href ='https://m.yingougou.com/views/my/purHistory.html' //没有就跳转h5的消费记录页
+                          location.href =''+calllBcakUrl+'/views/my/purHistory.html' //没有就跳转h5的消费记录页
                         }
                       }
                     }

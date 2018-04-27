@@ -10,10 +10,13 @@ require(['config'],function(){
             },
             methods : {
                 change_city:function(list){
-                    console.log(list)
+                    ygg.setCookie('location_act','true')
+                    ygg.setCookie('city_name', list.name);
                     window.location.href="/index.html?area_id="+list.area_id+"&name="+encodeURIComponent(list.name);
                 },
                 position_city:function(){
+                    ygg.setCookie('location_act','false')
+                    ygg.setCookie('city_name', this.position);
                     window.location.href="/index.html?area_id="+this.position_id+"&name="+encodeURIComponent(this.position);
                 }
             }
@@ -32,7 +35,7 @@ require(['config'],function(){
                 ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
                 ygg.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
             }
-            console.log(result)
+            ygg.setCookie('area_id', result.adcode);
         })
     });
 });

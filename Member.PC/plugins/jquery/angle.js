@@ -20,9 +20,9 @@
 }(function ($) {
 
     window.ie8 = navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE8.0";
-    // window.local = "https://api.yingougou.com/v1.0";
+    window.local = "https://api.yingougou.com/v1.2";
     // window.local = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
-     window.local = "http://119.23.10.30:9000/v1.2";
+    //  window.local = "http://119.23.10.30:9000/v1.2";
     if (!+'\v1' && !'1' [0]) {
 
     }
@@ -85,7 +85,8 @@
                 appid = "100",
                 timestamp = (new Date()).valueOf(),
                 token = $.fn.getCookie('token') || "",
-                sign;
+                sign,
+                member_id = $.fn.getCookie('member_id')
 
             if (token) {
                 sign = $.fn.getMd5(appid + timestamp + token);
@@ -97,7 +98,8 @@
                 appid: appid,
                 sign: sign,
                 timestamp: timestamp,
-                token: token
+                token: token,
+                member_id:member_id
             }
             if (admin_id != undefined) {
                 headerObj.admin_id = admin_id
