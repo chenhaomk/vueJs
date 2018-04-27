@@ -171,12 +171,15 @@
             </section>
             <section class="swiper-pagination"></section>
         </section> -->
-        <section class="ads" v-if="banner">
+        <section class="ads">
             <section class="adsImg" v-clock >
                 <a v-if='banner.business_id?true:false' :href="'/views/shop/detail.html?id='+banner.business_id+'&returnUrl=index'">
                     <img :src="banner.img_path" alt="">
                 </a>
-                <img :src="banner.img_path" alt="">
+                <a v-else-if='!banner.business_id && banner.url?true:false' :href="banner.url">
+                    <img :src="banner.img_path" alt="">
+                </a>
+                <img v-else :src="banner.img_path" alt="">
             </section>
         </section>
         
@@ -218,9 +221,13 @@
                 <a v-if='recommend_today.business_id?true:false' :href="'/views/shop/detail.html?id='+recommend_today.business_id+'&returnUrl=index'">
                     <img :src="recommend_today.img_path" alt="">
                 </a>
+                <a v-else-if='!recommend_today.business_id && recommend_today.url?true:false' :href="recommend_today.url">
+                    <img :src="recommend_today.img_path" alt="">
+                </a>
                 <img v-else :src="recommend_today.img_path" alt="">
             </div>
         </section>
+
         <!--专题推荐-->
         <section class='main'>
             <div v-for="a of recommendArr">
