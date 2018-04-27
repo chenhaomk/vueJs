@@ -242,9 +242,14 @@ require(['config'], function () {
                 filterData.area_id=window.location.href.split("?")[1].split("&")[0].split("=")[1]
                 vm.city=decodeURIComponent(window.location.href.split("?")[1].split("&")[1].split("=")[1])
             }else{
-                filterData.area_id = result.adcode;
+                if(ygg.getCookie('location_act')) {
+                    filterData.area_id = ygg.getCookie('area_id')
+                    vm.city =  ygg.getCookie('city_name')
+                }else {
+                    filterData.area_id = result.adcode;
+                }
+                
             }
-            console.log(filterData.area_id)
             ygg.setCookie('area_id', filterData.area_id);
             if(ygg.getCookie('lng') && ygg.getCookie('lat')){
                 filterData.lng=ygg.getCookie('lng');
@@ -302,14 +307,14 @@ require(['config'], function () {
                 flag;
                 if (data.coupons.length == 0) {
                     $(".home .main .discount .list").addClass('none');
-                    getCoupons(function (data) {
-                        vm.$set(vm, "discount", data);
-                    }, {
-                        member_id: ygg.getCookie('member_id'),
-                        page: 1,
-                        area_id: filterData.area_id,
-                        size: 10
-                    });
+                    // getCoupons(function (data) {
+                    //     vm.$set(vm, "discount", data);
+                    // }, {
+                    //     member_id: ygg.getCookie('member_id'),
+                    //     page: 1,
+                    //     area_id: filterData.area_id,
+                    //     size: 10
+                    // });
                     defaultCoupons = true;
                 } else {
                     if (!sdata) $(".home .main .discount .list").removeClass('none');
@@ -391,7 +396,7 @@ require(['config'], function () {
             })
         }
         function getFilter() {
-            ygg.ajax('/home/getHomeCenter', {
+            ygg.ajax('/home/getAreaAndCircleAndMore', {
                 area_id: filterData.area_id
             }, function (data) {
                 data = data.data;

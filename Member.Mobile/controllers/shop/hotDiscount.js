@@ -1,5 +1,6 @@
 require(['config'], function () {
   require(['vue', 'main', 'swiper', 'axio'], function (Vue, ygg, Swiper, axio) {
+    
       var vm = new Vue({
               el: "#app",
               data: {
@@ -147,7 +148,6 @@ require(['config'], function () {
               size: 10
           },
           defaultCoupons = false;
-
       if (ygg.getCookie('member_id')) vm.$set(vm, "isLogin", true);
 
       document.addEventListener('touchmove', function (e) {}, false);
@@ -158,70 +158,98 @@ require(['config'], function () {
           document.documentElement.style.overflow = 'hidden';
       }
 
-      var citysearch = new AMap.CitySearch();
-      citysearch.getLocalCity(function (status, result) {
-          vm.city = (result.city).replace("市", "");
-          $("#city-picker").val("成都市");
-          //$("#city-picker").val(result.province+" "+result.city);
-          /*$("#city-picker").cityPicker({
-              toolbarTemplate: '<header class="bar bar-nav">\
-              <button class="button button-link pull-right close-picker">确定</button>\
-              <h1 class="title">选择地址</h1>\
-              </header>',
-              onOpen : function(p){
-                  vm.openShadow = "show";
-                  if(firstOpen){
+    //   var citysearch = new AMap.CitySearch();
+    //   citysearch.getLocalCity(function (status, result) {
+    //       vm.city = (result.city).replace("市", "");
+    //       $("#city-picker").val("成都市");
+    //       //$("#city-picker").val(result.province+" "+result.city);
+    //       /*$("#city-picker").cityPicker({
+    //           toolbarTemplate: '<header class="bar bar-nav">\
+    //           <button class="button button-link pull-right close-picker">确定</button>\
+    //           <h1 class="title">选择地址</h1>\
+    //           </header>',
+    //           onOpen : function(p){
+    //               vm.openShadow = "show";
+    //               if(firstOpen){
                       
-                      firstOpen = false;
-                  }
-              },
-              onClose : function(p){
-                  vm.openShadow = "";
-                  $(".header .text-sl").text((p.cols[1].value).replace("市",""));
-                  filterData.area_id = getCityId(p.cols[0].value,p.cols[1].value);
-                  searchData.area_id = filterData.area_id;
-                  ygg.setCookie('area_id',filterData.area_id);
-                  filterData.page = 1;
-                  getTopData();
-                  getCoupons(function(data){
-                      vm.$set(vm,"discount",data);
-                  });
-              }
-          });
-          filterData.area_id = result.adcode;
-          searchData.area_id = result.adcode;*/
-          filterData.area_id = "510100";
-          searchData.area_id = "510100";
-          ygg.setCookie('area_id', filterData.area_id);
+    //                   firstOpen = false;
+    //               }
+    //           },
+    //           onClose : function(p){
+    //               vm.openShadow = "";
+    //               $(".header .text-sl").text((p.cols[1].value).replace("市",""));
+    //               filterData.area_id = getCityId(p.cols[0].value,p.cols[1].value);
+    //               searchData.area_id = filterData.area_id;
+    //               ygg.setCookie('area_id',filterData.area_id);
+    //               filterData.page = 1;
+    //               getTopData();
+    //               getCoupons(function(data){
+    //                   vm.$set(vm,"discount",data);
+    //               });
+    //           }
+    //       });
+    //       filterData.area_id = result.adcode;
+    //       searchData.area_id = result.adcode;*/
+    //       filterData.area_id = ygg.getCookie('area_id');
+    //       searchData.area_id =  ygg.getCookie('area_id');
+    //     //   ygg.setCookie('area_id', filterData.area_id);
 
-          if (filterData.member_id) {
-              ygg.ajax('/member/getPersonCenterInfo', {
-                  member_id: filterData.member_id
-              }, function (data) {
+    //       if (filterData.member_id) {
+    //           ygg.ajax('/member/getPersonCenterInfo', {
+    //               member_id: filterData.member_id
+    //           }, function (data) {
 
-                  data = data.data;
-                  getFilter();
-                  getCoupons(function (d) {
-                      vm.$set(vm, "discount", d);
-                  });
+    //               data = data.data;
+    //               getFilter();
+    //               getCoupons(function (d) {
+    //                   vm.$set(vm, "discount", d);
+    //               });
 
-                  vm.$set(vm.user, "photo", data.head_portrait);
-                  vm.$set(vm.user, "nickName", data.nick_name);
-                  vm.$set(vm.user, "coupon_total", data.coupon_total);
-                  vm.$set(vm.user, "is_expand", data.is_expand);
+    //               vm.$set(vm.user, "photo", data.head_portrait);
+    //               vm.$set(vm.user, "nickName", data.nick_name);
+    //               vm.$set(vm.user, "coupon_total", data.coupon_total);
+    //               vm.$set(vm.user, "is_expand", data.is_expand);
 
-                  ygg.setCookie("select_setting", data.select_setting);
+    //               ygg.setCookie("select_setting", data.select_setting);
 
-              });
-          } else {
-              getFilter();
-              getCoupons(function (data) {
-                  vm.$set(vm, "discount", data);
-              });
-          }
+    //           });
+    //       } else {
+    //           getFilter();
+    //           getCoupons(function (data) {
+    //               vm.$set(vm, "discount", data);
+    //           });
+    //       }
 
-      });
+    //   });
+    filterData.area_id = ygg.getCookie('area_id');
+    searchData.area_id =  ygg.getCookie('area_id');
+  //   ygg.setCookie('area_id', filterData.area_id);
 
+    if (filterData.member_id) {
+        ygg.ajax('/member/getPersonCenterInfo', {
+            member_id: filterData.member_id
+        }, function (data) {
+
+            data = data.data;
+            getFilter();
+            getCoupons(function (d) {
+                vm.$set(vm, "discount", d);
+            });
+
+            vm.$set(vm.user, "photo", data.head_portrait);
+            vm.$set(vm.user, "nickName", data.nick_name);
+            vm.$set(vm.user, "coupon_total", data.coupon_total);
+            vm.$set(vm.user, "is_expand", data.is_expand);
+
+            ygg.setCookie("select_setting", data.select_setting);
+
+        });
+    } else {
+        getFilter();
+        getCoupons(function (data) {
+            vm.$set(vm, "discount", data);
+        });
+    }
       function getCoupons(cb, data) {
           var sdata = data || filterData;
           var sdd = data;
@@ -239,14 +267,14 @@ require(['config'], function () {
               flag;
               if (data.coupons.length == 0) {
                   $(".home .main .discount .list").addClass('none');
-                  getCoupons(function (data) {
-                      vm.$set(vm, "discount", data);
-                  }, {
-                      member_id: ygg.getCookie('member_id'),
-                      page: 1,
-                      area_id: "510100",
-                      size: 10
-                  });
+                //   getCoupons(function (data) {
+                //       vm.$set(vm, "discount", data);
+                //   }, {
+                //       member_id: ygg.getCookie('member_id'),
+                //       page: 1,
+                //       area_id: ygg.getCookie('area_id'),
+                //       size: 10
+                //   });
                   defaultCoupons = true;
               } else {
                   if (!sdata) $(".home .main .discount .list").removeClass('none');
@@ -275,7 +303,7 @@ require(['config'], function () {
       }
 
       function getFilter() {
-          ygg.ajax('/home/getHomeCenter', {
+          ygg.ajax('/home/getAreaAndCircleAndMore', {
               area_id: filterData.area_id
           }, function (data) {
               data = data.data;

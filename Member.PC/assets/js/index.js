@@ -14,6 +14,8 @@ require(['config'],function(){
         citysearch.getLocalCity(function(status, result) {
             $(".head .cen .address").text(result.city);
             area_id = result.adcode;
+            $.fn.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
+            $.fn.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
             if(member_id){
                 $.fn.getData({
                     url : "/member/getPersonCenterInfo",

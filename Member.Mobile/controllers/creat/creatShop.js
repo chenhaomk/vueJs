@@ -473,7 +473,7 @@ require(['config'], function () {
         var iscl = false;
 
         function getFilter() {
-            ygg.ajax('/home/getHomeCenter', {
+            ygg.ajax('/home/getAreaAndCircleAndMore', {
                 area_id: filterData.area_id
             }, function (data) {
                 data = data.data;

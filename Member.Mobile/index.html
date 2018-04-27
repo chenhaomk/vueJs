@@ -171,7 +171,7 @@
             </section>
             <section class="swiper-pagination"></section>
         </section> -->
-        <section class="ads">
+        <section class="ads" v-if="banner">
             <section class="adsImg" v-clock >
                 <a v-if='banner.business_id?true:false' :href="'/views/shop/detail.html?id='+banner.business_id+'&returnUrl=index'">
                     <img :src="banner.img_path" alt="">
@@ -212,7 +212,7 @@
         <section class='main' v-show='recommend_today.img_path?true:false' >
             <section class="title">
                 今日推荐
-                <span  class="more">更多</span>
+                <!-- <span  class="more">更多</span> -->
             </section>
             <div class="today_rec" >
                 <a v-if='recommend_today.business_id?true:false' :href="'/views/shop/detail.html?id='+recommend_today.business_id+'&returnUrl=index'">
@@ -221,7 +221,6 @@
                 <img v-else :src="recommend_today.img_path" alt="">
             </div>
         </section>
-
         <!--专题推荐-->
         <section class='main'>
             <div v-for="a of recommendArr">
