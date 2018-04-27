@@ -17,7 +17,7 @@ require(['config'],function(){
 	            industry_id : industry_id
 	        };
 
-	        getFilter();
+	        // getFilter();
 
 	        getc();
 

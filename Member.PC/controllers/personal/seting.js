@@ -6,8 +6,7 @@ require(['config'],function(){
         if(!$.fn.getCookie("member_id")){
             window.open('http://'+window.location.host,"_self");
         }
-
-        $("#getYzm").getYzm({
+        $("#getYzm1").getYzm({
             valDom : $("#oldPhone"),
             sms_type : "0004",
             errorDom : $("#prompt2")
@@ -16,8 +15,12 @@ require(['config'],function(){
             valDom : $("#newPhone"),
             sms_type : "0004",
             errorDom : $("#prompt2")
+        }); 
+        $("#getYzm3").getYzm({
+            valDom : $("#oldPhone"),
+            sms_type : "0017",
+            errorDom : $("#prompt3")
         });
-
         $("#updatePhone").click(function(event) {
             event.preventDefault(); 
             window.event.returnValue = false;
@@ -54,7 +57,7 @@ require(['config'],function(){
             event.preventDefault(); 
             window.event.returnValue = false;
 
-            if($("#pwd").val().length == 0 || $("#rpwd").val().length == 0){
+            if($("#pwd").val().length == 0 || $("#rpwd").val().length == 0|| $("#yzm3").val().length == 0){
                 $("#prompt3").text("密码和确认密码不能为空！");
                 return;
             }
@@ -73,7 +76,9 @@ require(['config'],function(){
                 url : "/member/updatePwd",
                 data : {
                     member_id : $.fn.getCookie("member_id"),
-                    password : $("#pwd").val()
+                    login_password : $("#pwd").val(),
+                    mobile : $("#userinfo").attr("data-tel"),
+                    verification_code : $("#yzm3").val()
                 },
                 result : function(data){
                     if(data.status == "error"){
@@ -115,13 +120,12 @@ require(['config'],function(){
                 }
             });
         });
-
         $.fn.loadHeadFooter(function(){
             $(".nav>a:eq(0)").addClass('active');
             $(".sidebar").load("sidebar.html");
             $("#userPhoto").attr("src",$("#userinfo .info img").attr("src"));
             var phone = $("#userinfo").attr("data-tel");
-            $("#oldPhone").text($("#userinfo").attr("data-tel"));
+            $("#oldPhone").val($("#userinfo").attr("data-tel"));
             phone = phone.substring(0,3) + "****" + phone.substring(7);
             $("#phone").val(phone);
             if($("#userinfo").attr("data-ss") == 0){
@@ -129,7 +133,6 @@ require(['config'],function(){
             }else{
                 $("#r2").prop("checked",true);
             }
-
             $("#nickName").val($("#userinfo").attr("data-nk"));
             $.fn.getClient(OSS);
 
@@ -220,7 +223,6 @@ require(['config'],function(){
                 return true;
             });
         });
-
         $(".tab").tab();
 
         $("#update_phone").click(function(event) {
@@ -234,6 +236,6 @@ require(['config'],function(){
         $(".return,.return_set").click(function(event) {
             $(".cont").show().siblings('.update_pwd').hide().siblings('.update_phone').hide();
         });
-
     });
+    
 });
