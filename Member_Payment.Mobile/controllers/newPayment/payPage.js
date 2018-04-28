@@ -1,9 +1,9 @@
 (function () {
   $('body').addClass('show')
-  var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
-  // var baseURL = "https://api.yingougou.com/v1.1/" //正式
-  var calllBcakUrl = 'http://119.23.10.30:8002'
-  //var calllBcakUrl = 'https://m.yingougou.com' //
+  // var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
+  var baseURL = "https://api.yingougou.com/v1.2/" //正式
+  // var calllBcakUrl = 'http://119.23.10.30:8002'
+  var calllBcakUrl = 'https://m.yingougou.com' //
   var u = navigator.userAgent;
   var vm = {
     isActive: false,
@@ -32,18 +32,21 @@
   var bty = browserType()
   var hrefStr = location.href
   var b_id = getQueryString("b_id")
-  // var b_id = getQueryString("b_id") == null ? getSession("b_id") : getQueryString("b_id")
-  if (getSession("b_id") && getSession("b_id") != "null") { //ch-use:扫码支付时从index.js获取session
-    b_id = getSession("b_id")
-  } else if (getQueryString("id") && getQueryString("id") != "null") {
-    b_id = getQueryString("id")
-  } else if (getCookie('business_id') && getCookie('business_id') != "null") { //ch-use:从商店详情去买单时获取cookie
-    b_id = getCookie('business_id')
+  if(!b_id) {
+    if (getSession("b_id") && getSession("b_id") != "null") { //ch-use:扫码支付时从index.js获取session
+      b_id = getSession("b_id")
+    } else if (getQueryString("id") && getQueryString("id") != "null") {
+      b_id = getQueryString("id")
+    } else if (getCookie('business_id') && getCookie('business_id') != "null") { //ch-use:从商店详情去买单时获取cookie
+      b_id = getCookie('business_id')
+    }
   }
+  // var b_id = getQueryString("b_id") == null ? getSession("b_id") : getQueryString("b_id")
   if (bty == 'weixin') {
     if (hrefStr.indexOf('code') == -1) {
-      location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
+      // location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
       // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
+      location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/paytest/views/newDrainage/test.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
       return        
     } else {
       var code = getQueryString("code");
@@ -116,8 +119,9 @@
     }
   }else if( bty== "alipay") {
     if(hrefStr.indexOf('auth_code') == -1) {
-      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
+      // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
       // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
+      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/paytest/views/newDrainage/test.html?b_id="+b_id //正式
       return
     }else {
       var code = getQueryString("auth_code");
@@ -187,10 +191,12 @@
   }
   if (userId != "null" && userId != undefined && userId != "undefined") { //ch-use;判断用户是否登录过
     // vm.showYhq = true
+    $('.yhq').removeClass('hide')
     $('.back').on('click',function () {
       window.history.go(-1);
     })
   } else {
+    $('.yhq').addClass('hide')
     // vm.showYhq = false
     $('.back').addClass('hide')
   }
@@ -279,16 +285,16 @@
     e.preventDefault();
     var dom = this
     action_yh (dom,'yhq_show_con','yhq')
-    if(vm.picked > 0 ) {
-      setSession("parOrderTotal", vm.picked);
-      if(vm.deDisPr >= 0 ) {
-        setSession("deDisPr", vm.deDisPr);//用于选券页面计算优惠金额，不参与优惠金额
-      }
-      var str = window.location.search
-      window.location.href = "../../views/newDrainage/payChangeTic.html"+str;
-    }else {
-      prompt("请先输入有效金额");
-    }
+    // if(vm.picked > 0 ) {
+    //   setSession("parOrderTotal", vm.picked);
+    //   if(vm.deDisPr >= 0 ) {
+    //     setSession("deDisPr", vm.deDisPr);//用于选券页面计算优惠金额，不参与优惠金额
+    //   }
+    //   // var str = window.location.search
+    //   // window.location.href = "../../views/newDrainage/payChangeTic.html"+str;
+    // }else {
+    //   prompt("请先输入有效金额");
+    // }
   })
   if (getSession("parOrderTotal")) {
     vm.picked = getSession("parOrderTotal")
@@ -552,6 +558,7 @@
                 if(vm.payType == 'yhq') {//用户登录过，执行回调跳转到消费记录页面
                   callBack()
                 }else {
+                  loading(true)
                   $.ajax({//获取复购券详情，判断店铺是否有复购券
                     type: 'POST',
                     headers: setHeader(),
@@ -564,10 +571,12 @@
                     contentType: 'application/json;charset=UTF-8',
                     success:function (data) {
                       if(data.status == "error") {
+                        loading(false)
                         prompt(data.msg)
                         return
                       }else {
-                        if(data.coupon  ) {//有复购券
+                        data = data.data
+                        if(data.coupon ) {//有复购券
                           var amount,rule
                           var coupon_activity_id = data.coupon.coupon_id  //复购券id
                           if (data.coupon.type == 0) {
@@ -598,6 +607,7 @@
                             dataType: 'json',
                             contentType: 'application/json;charset=UTF-8',
                             success:function (data) {
+                              loading(false)
                               if(data.code == 200) {
                                 location.href = "../../views/newDrainage/couponsSuccess.html";
                               }else {
@@ -607,6 +617,7 @@
                             }
                           })  
                         }else {
+                          loading(false)
                           location.href =''+calllBcakUrl+'/views/my/purHistory.html' //没有就跳转h5的消费记录页
                         }
                       }
@@ -644,6 +655,7 @@
                 if(vm.payType == 'yhq') {
                   callBack()
                 }else {
+                  loading(true)
                   $.ajax({//获取复购券详情，判断店铺是否有复购券
                     type: 'POST',
                     headers: setHeader(),
@@ -656,10 +668,12 @@
                     contentType: 'application/json;charset=UTF-8',
                     success:function (data) {
                       if(data.status == "error") {
+                        loading(false)
                         prompt(data.msg)
                         return
                       }else {
-                        if(data.coupon  ) {//有复购券
+                        data = data.data
+                        if(data.coupon ) {//有复购券
                           var amount,rule
                           var coupon_activity_id = data.coupon.coupon_id  //复购券id
                           if (data.coupon.type == 0) {
@@ -690,6 +704,7 @@
                             dataType: 'json',
                             contentType: 'application/json;charset=UTF-8',
                             success:function (data) {
+                              loading(false)
                               if(data.code == 200) {
                                 location.href = "../../views/newDrainage/couponsSuccess.html";
                               }else {
@@ -699,6 +714,7 @@
                             }
                           })  
                         }else {
+                          loading(false)
                           location.href =''+calllBcakUrl+'/views/my/purHistory.html' //没有就跳转h5的消费记录页
                         }
                       }

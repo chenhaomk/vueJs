@@ -1,9 +1,9 @@
 require(['config'], function () {
-    require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+    require(['axio', 'vue',  'main'], function (ajax, vue, main) {
     	// var baseURL = 'http://119.23.10.30:9000/v1.0/'; //本机测试地址
         // var baseURL = "https://api.yingougou.com/v1.0/"
         // main.post.
-        var baseURL = "https://api.yingougou.com/v1.1/"
+        var baseURL = "https://api.yingougou.com/v1.2/"
         // var baseURL = "http://apis.yingegou.com/v1.0/"//测试服
     	var vm = new vue({
     		el:"#app",
@@ -85,8 +85,10 @@ require(['config'], function () {
         getUserTicInfo()//获取用户在该商店已领优惠券列表
         function getUserTicInfo() {//获取用户优惠券详情
             main.post(baseURL+'member/getCanUseCoupon', {
-                member_id:window.location.search.split("&")[1].split("=")[1],
-                business_id:window.location.search.split("&")[0].split("=")[1],
+                // member_id:window.location.search.split("&")[1].split("=")[1],
+                // business_id:window.location.search.split("&")[0].split("=")[1],
+                member_id:main.getCookie('member_id'),
+                business_id:main.getQueryString('b_id'),
                 price:Number(main.getSession("parOrderTotal")),
                 no_sale_price:main.getSession("deDisPr")?Number(main.getSession("deDisPr")):0,
             }, function (res) {

@@ -139,7 +139,7 @@ require(['config'], function () {
                         if (this.hotSearch.length == 0) {
                             ygg.ajax('/home/getHistoryAndHotSearch', {
                                 member_id: filterData.member_id,
-                                area_id: filterData.area_id
+                                area_id: filterData.area_id,
                             }, function (data) {
 
                                 data = data.data;
@@ -157,9 +157,12 @@ require(['config'], function () {
                     },
                     hots: function (bname) {
                         searchData.business_name = bname;
+                        var obj = searchData
+                        obj.longitude = filterData.lng
+                        obj.latitude = filterData.lat
                         this.$set(this, "searchVal", bname);
                         ygg.loading(true);
-                        ygg.ajax('/home/getSearchResult', searchData, function (data) {
+                        ygg.ajax('/home/getSearchResult', obj, function (data) {
                             ygg.loading(false);
                             data = data.data;
                             vm.$set(vm, "isSS", false);
@@ -244,9 +247,11 @@ require(['config'], function () {
             }else{
                 if(ygg.getCookie('location_act')) {
                     filterData.area_id = ygg.getCookie('area_id')
+                    searchData.area_id = ygg.getCookie('area_id')
                     vm.city =  ygg.getCookie('city_name')
                 }else {
                     filterData.area_id = result.adcode;
+                    searchData.area_id = result.adcode
                 }
                 
             }
@@ -611,17 +616,24 @@ require(['config'], function () {
          * 1.5.2 版本第三方登录，微信支付默认授权回调域名为首页
          * 所以在此添加判断函数，获取首页url参数，调登录接口获取用户信息
          */
-        thirdLogin()
+        if(!ygg.getCookie('member_id')) {
+            thirdLogin()
+        }
         function thirdLogin() {
             var url = location.search
             if (url.indexOf('auth_code') != -1) { //通过支付宝授权
                 ygg.loading(true);
                 var app_id =  url.split('&')[0].split('=')[1]
                 var auth_code = url.split('&')[3].split('=')[1]
+                alert(JSON.stringify({
+                    app_id: app_id,
+                    auth_code:auth_code
+                }))
                 ygg.ajax('/passport/thirdZfbLogin', {
                     app_id: app_id,
                     auth_code:auth_code
                 }, function (data) {
+                    alert(JSON.stringify(data))
                     if (data.status == "error") {
                         ygg.loading(false);
                         ygg.prompt('发生系统错误，请返回登录页重新登录！');
