@@ -33,10 +33,10 @@ define([
     return Promise.reject(err);
   });
   var main = {};
-  // main.baseUrl = "https://api.yingougou.com/v1.1/";
-  main.baseUrl = "http://119.23.10.30:9000/v1.2/";
-  // main.calllBcakUrl = 'https://m.yingougou.com' //
-  main.calllBcakUrl = 'http://119.23.10.30:8002'
+  main.baseUrl = "https://api.yingougou.com/v1.2/";
+  // main.baseUrl = "http://119.23.10.30:9000/v1.2/";
+  main.calllBcakUrl = 'https://m.yingougou.com' //
+  // main.calllBcakUrl = 'http://119.23.10.30:8002'
   main.post = function (url, data, sucBack, errBack) {
     var error = {},
       appid = "100";
@@ -58,9 +58,9 @@ define([
       sign = main.getMd5(appid + timestamp + token);
       axios.defaults.headers.token = token;
     }
-    // axios.defaults.baseURL = "https://api.yingougou.com/v1.1/";
+    axios.defaults.baseURL = "https://api.yingougou.com/v1.2/";
     // axios.defaults.baseURL = "http://119.23.10.30:9000/v1.2/";
-    axios.defaults.baseURL = "https://paytest.yingougou.com/v1.2/"; //测试服测试支付，避免跨域
+    // axios.defaults.baseURL = "https://paytest.yingougou.com/v1.2/"; //测试服测试支付，避免跨域
     // axios.defaults.baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
 
     axios.defaults.headers.appid = appid;

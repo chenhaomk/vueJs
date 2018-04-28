@@ -1,15 +1,16 @@
 require(['config'], function () {
-    require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+    require(['axio', 'vue',  'main'], function (ajax, vue, main) {
         var bid = main.getQueryString("b_id") == null ? main.getSession("b_id") :main.getQueryString("b_id")
-        
+        var wx_openid ,
+        zfb_openid 
         if(location.href.indexOf("m_id") != -1 && location.href.indexOf("b_id") != -1 ) {
             main.setSession('share_mid',main.getQueryString("m_id"));
             main.setSession('b_id',main.getQueryString("b_id"));
             main.setSession('b_n',main.getQueryString("b_n"));
         }
         var share_mid = main.getQueryString("m_id")?main.getQueryString("m_id"):main.getSession('share_mid');//分享用户id
-        // var baseURL = "https://api.yingougou.com/v1.1/"
-        var baseURL = "https://paytest.yingougou.com/v1.2/" //测试回调
+        var baseURL = "https://api.yingougou.com/v1.2/"
+        // var baseURL = "https://paytest.yingougou.com/v1.2/" //测试回调
         // var baseURL = "http://119.23.10.30:9000/v1.2/" //
         
         var amount
@@ -63,11 +64,22 @@ require(['config'], function () {
                     }else {
                         login_type = 3
                     }
-                    main.post(baseURL + "common/shareTicket",{ //领引流券
-                        member_id:share_mid,//分享用户id
-                        business_id:bid,
-                        login_type:login_type
-                    } , function (data) {
+                    var obj 
+                    if(share_mid) {
+                        obj = {
+                            member_id:share_mid,//分享用户id
+                            business_id:bid,
+                            login_type:login_type,
+                            other_member:main.getCookie("member_id"),
+                        }
+                    }else {
+                        obj = {
+                            business_id:bid,
+                            login_type:login_type,
+                            other_member:main.getCookie("member_id"),
+                        }
+                    }
+                    main.post(baseURL + "common/shareTicket",obj , function (data) {
                         data = data.data
                         if(data.code != 200 || data == null) {
                             // main.prompt(data.msg);
@@ -120,8 +132,8 @@ require(['config'], function () {
                     main.setSession("all", vm.all );
                     if(bty == 'weixin') {
                         if(location.href.indexOf("code") == -1) {
-                            location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";//测试
-                            // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //正式 
+                            // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";//测试
+                            location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //正式 
                         }else {//授权登录
                             var code = main.getQueryString("code");
                             main.post("passport/getWxUnionId", {//获取微信unionId
@@ -137,6 +149,7 @@ require(['config'], function () {
                                         nick_name : data.data.nick_name,
                                         openid : data.data.openid
                                     }
+                                    wx_openid = data.data.unionid
                                     main.post('passport/thirdWxLogin',obj,function(data){//登录
                                         data = data.data
                                         if(data.status == "error"){
@@ -162,8 +175,8 @@ require(['config'], function () {
                         }
                     }else if(bty == 'alipay') {
                         if(location.href.indexOf("auth_code") == -1) {
-                            // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid //正式
-                            location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid //测试
+                            location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid //正式
+                            // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid //测试
                         }else {
                             var code = main.getQueryString("auth_code");
                             main.post("pay/getBuyerId", {
@@ -174,6 +187,7 @@ require(['config'], function () {
                                     return;
                                 }
                                 zfb_openid = res.data.data
+                                // wx_openid = data.data.unionid
                                 main.post( "passport/zfbRegister",{
                                     zfb_openid:zfb_openid,
                                     nick_name:''
