@@ -24,9 +24,9 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             docEl.style.fontSize = size + 'px';
         }
     }, 1);
-    axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
+    // axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
     // axio.defaults.baseURL = 'http://192.168.0.11:8082/v1.2/'; //开发地址
-    // axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生成地址   
+    axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生成地址   
     var ygg = {};
     ygg.maxImgSize = 10485760;
     ygg.ajax = function (url, data, callback) {
@@ -898,7 +898,7 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             '</section>' +
             '</a>' +
             '<section class="status">' +
-            '<a v-if="isMy" :class="{nohx:isMy}">' +
+            '<a v-if="isMy" @click="alert" :class="{nohx:isMy}">' +
             '<p>立即</br>使用</p>' +
             '</a>' +
             '<a v-else-if="lqcg || a.already_get" class="nohx">' +
@@ -941,9 +941,99 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             },
             msg: function () {
                 ygg.prompt("暂时不支持该功能,请在APP上购买!");
+            },
+            /**
+             * use：屏蔽支付页面选取优惠券功能，并在H5用户登录后查看券包提示用户在APP上使用优惠券支付
+             * 2018-5-3 陈浩
+             */
+            alert:function () {
+                ygg.coupon(this.callback)
+            },
+            callback:function () {
+                // var ua = navigator.userAgent.toLowerCase();
+                // var isWeixin =''
+                // if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                //     isWeixin = true;
+                // } else {
+                //     isWeixin =  false;
+                // }
+                // if (isWeixin) {
+                //     (document.getElementsByTagName("body")[0]).setAttribute("class", "isWx");
+                // } else 
+                if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+                    var loadDateTime = new Date();
+                    window.setTimeout(function () {
+                            var timeOutDateTime = new Date();
+                            if (timeOutDateTime - loadDateTime < 5000) {
+                                window.location = "https://itunes.apple.com/cn/app/id1273704196";
+                            } else {
+                                window.close();
+                            }
+                        },
+                        25);
+                    window.location = "YPB://";
+                } else if (navigator.userAgent.match(/android/i)) {
+                    var state = null;
+                    try {
+                        state = window.open("YPB://");
+                        window.close();
+                    } catch (e) {}
+                    if (!state) {
+
+                        window.location = "YPB://";
+                        return;
+                    } else {
+                        window.location = "https://dl.yingougou.com/Android/app-release.apk";
+                        return;
+                    }
+                }
             }
         }
     });
+        /**
+     * 
+     * @param {*} callback 点击事件回调函数
+     *  use:用户券包页 点击立即使用弹框
+     * 2018-5-3 陈浩 add 
+     */
+    ygg.coupon = function (callback) {
+        var dom = document.getElementById("prompt");
+        // var body = document.getElementsByTagName('body')[0]
+        // body.style.cssText = 'overflow-y: hidden'
+        if (!dom) {
+            var prompt = document.createElement("section"),
+                shadow_b = document.createElement("section"),
+                text = document.createElement("section"),
+                div = document.createElement("div"),
+                span = document.createElement("span");
+            div.setAttribute("class", "c_div");
+            div.innerHTML = '<img class="close_img" src="/assets/images/index/icon_close.png"><img class="c_img" src="/assets/images/index/icon_quan.png"><span class="index_span" >请前往“银个购APP”使</br>用优惠券</span><div class="btn" >前往APP</div>'
+            prompt.setAttribute("id", "prompt");
+            prompt.setAttribute("class", "prompt");
+            shadow_b.setAttribute("class", "shadow_b");
+            text.setAttribute("class", "text1");
+            prompt.appendChild(shadow_b);
+            prompt.appendChild(text);
+            text.appendChild(div);
+            document.getElementsByTagName("body")[0].appendChild(prompt);
+            dom = document.getElementById("prompt");
+        } else {
+            // dom.childNodes[1].childNodes[0].childNodes[0].innerText = t;
+        }
+        var btn = document.getElementsByClassName('btn')[0]
+        var close_img = document.getElementsByClassName('close_img')[0]
+        btn.onclick = function () {
+            dom.setAttribute("class", "prompt hide")
+            callback()
+        }
+        close_img.onclick = function () {
+            dom.setAttribute("class", "prompt hide")
+        }
+        dom.setAttribute("class", "prompt show");
+        // setTimeout(function () {
+        //     dom.setAttribute("class", "prompt hide")
+        // }, 2000);
+    }
     //首页调用
     ygg.template.discountHomePage = Vue.extend({
         props: {
@@ -1561,8 +1651,6 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             }
         }
     });
-
-
     //商铺列表
     ygg.template.shopList = Vue.extend({
         props: {

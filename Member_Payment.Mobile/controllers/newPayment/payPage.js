@@ -47,7 +47,7 @@
       // location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
       // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
       location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/paytest/views/newDrainage/test.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
-      return        
+      // return        
     } else {
       var code = getQueryString("code");
       $.ajax({
@@ -256,9 +256,9 @@
             $('.max_mj').removeClass('hide').html('(最高减'+vm.most_reduce+'元)')
             $('.max_mj_yh').html(vm.subMon)
           }
-          $('.mj_img').on('click',function(e) {//选择满减
+          $('.mj_div').on('click',function(e) {//选择满减
             e.preventDefault();
-            var dom = this
+            var dom = $(this).find('.mj_img')[0]
             action_yh (dom,'mj_show_con','mj')
             countFn()
           })
@@ -270,9 +270,9 @@
             $('.max_dz').removeClass('hide').html('(最高减'+vm.most_discount+'元)')
             $('.max_dz_yh').html(vm.subMon)
           }
-          $('.dz_img').on('click',function (e) {
+          $('.dz_div').on('click',function (e) {
             e.preventDefault()
-            var dom = this
+            var dom = $(this).find('.dz_img')[0]
             action_yh (dom,'dz_show_con','dz')
             countFn()
           })
@@ -281,9 +281,9 @@
     })
   }
   //------------------当用户登录H5，并且选择优惠券支付时------开始
-  $('.yhq_img').on('click',function (e) {
+  $('.yhq_div').on('click',function (e) {
     e.preventDefault();
-    var dom = this
+    var dom = $(this).find('.yhq_img')[0]
     action_yh (dom,'yhq_show_con','yhq')
     // if(vm.picked > 0 ) {
     //   setSession("parOrderTotal", vm.picked);
@@ -390,11 +390,11 @@
       } else {
         vm.subMon = 0
       }
-    } else { //有不参与优惠金额时
-      vm.deDisPr = charAtNum(vm.deDisPr)
+    } else { //有不参与优惠金额时      
       if (vm.payType == "dz") { //打折优惠
         if (vm.deDisPr >= vm.picked) { //不参与优惠大于总消费时，该情况可能是用户误输入,则按不参与消费金额为0处理
-          vm.subMon = (vm.picked * (1 - vm.discountS)).toFixed(2)
+          // vm.subMon = (vm.picked * (1 - vm.discountS)).toFixed(2)
+          vm.subMon = 0
           if (vm.most_discount < vm.subMon) { //是否超过最高优惠
             vm.subMon = vm.most_discount
           }
@@ -429,7 +429,6 @@
     $('.show_limit').html(vm.subMon)
     return 
   }
-
   /**
    * dom当前点击图标
    * action_img显示金额
@@ -470,6 +469,9 @@
   //确认买单
   $('.checkPay').on('click',function (e) {
     e.preventDefault();
+    if(location.href.indexOf("code") == -1) {//微信用户拒绝授权,跳往失败引导页面
+      location.href = "../../views/newDrainage/payDefeat.html" 
+    }
     var data = {}
     if(bty == 'weixin') {
       data = weixin_pay_data

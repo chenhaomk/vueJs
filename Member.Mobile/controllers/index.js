@@ -640,6 +640,7 @@ require(['config'], function () {
                     } else if (data.status == "success") {
                         data = data.data;
                         var member_id = data.member_id
+                        vm.$set(vm, "isLogin", true);
                         ygg.setCookie("member_id", data.member_id);
                         ygg.setCookie("mobile", data.mobile);
                         ygg.setCookie("token", data.token);
@@ -698,6 +699,7 @@ require(['config'], function () {
                                     ygg.setCookie("member_id",data.data.member_id);
                                     ygg.setCookie("mobile",data.data.mobile);
                                     ygg.setCookie("token",data.data.token);
+                                    vm.$set(vm, "isLogin", true);
                                     if (data.data.mobile != null) { //判读用户是否绑定手机号
                                         // window.open("/index.html", "_self");
                                     } else {
