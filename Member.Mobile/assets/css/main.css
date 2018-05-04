@@ -743,6 +743,11 @@ a.checkbox.none:before{ background: #fff}
 .prompt .text1 .index_div .index_span {display: block;color: #1c1c1c;font-size: 1.6rem;padding: 0 6rem;}
 .prompt .text1 .index_div .btn {width: 23.5rem;height: 4.4rem;display: inline-block;font-size:1.6rem;color: #ffffff;background-color: #ff6f3d;border-radius: .5rem;line-height: 4.4rem;margin-top: 2.2rem;}
 
+.prompt .text1 .c_div { display: inline-block; background: white; border-radius: .5rem; line-height: 2.5rem; padding:2.65rem 0 2.3rem; font-size: 0;width: 24rem;position: relative;}
+.prompt .text1 .c_div .c_img {width: 7.85rem;height: 6.9rem;}
+.prompt .text1 .c_div .index_span {display: block;color: #1c1c1c;font-size: 1.6rem;width: 15.95rem;margin: 0 auto;font-family: PingFangSC-Regular;}
+.prompt .text1 .c_div .btn {width:17rem;height: 4rem;display: inline-block;font-size:1.6rem;color: #ffffff;background-color: #ff6f3d;border-radius: 3.35rem;line-height: 4rem;margin-top: 2.2rem;}
+.prompt .text1 .c_div .close_img {position: absolute;right: 0;top: -3.75rem;width: 2.5rem;height: 2.5rem;}
 
 .score_star{ line-height: 1.5rem; font-size: 1.2rem; color: #888 }
 .score_star a{ width: 1.5rem; height: 1.5rem; float: left; margin-right: 5px; background: url(../images/discount/ic_bg_gstar_xxh.png); background-size: 100% 100% }
