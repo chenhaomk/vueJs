@@ -25,7 +25,7 @@ function start() {
             var options = {
                 host: apiUrl,
                 port: 80,
-                path: '/v1.0/open/urlParsing',
+                path: '/v1.2/open/urlParsing',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

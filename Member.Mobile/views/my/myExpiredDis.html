@@ -20,7 +20,7 @@
         </section>
         
         <section class="dis_list expired" :class="isNo">
-            <dis v-for='a of discount' :is-gq="'true'" :a='a'></dis>
+            <dis v-for='a of discount' :is-gq="'true'" :a='a' :return-url="'/views/my/myExpiredDis.html'"></dis>
             <section v-show="scrollIsShow" class="infinite-scroll-preloader">
                <section class="preloader"></section>
             </section>

@@ -1,15 +1,18 @@
 require(['config'], function () {
-    require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+    require(['axio', 'vue',  'main'], function (ajax, vue, main) {
         var bid = main.getQueryString("b_id") == null ? main.getSession("b_id") :main.getQueryString("b_id")
-        
+        var wx_openid ,
+        zfb_openid 
         if(location.href.indexOf("m_id") != -1 && location.href.indexOf("b_id") != -1 ) {
             main.setSession('share_mid',main.getQueryString("m_id"));
             main.setSession('b_id',main.getQueryString("b_id"));
             main.setSession('b_n',main.getQueryString("b_n"));
         }
-        
         var share_mid = main.getQueryString("m_id")?main.getQueryString("m_id"):main.getSession('share_mid');//分享用户id
-        var baseURL = "https://api.yingougou.com/v1.1/"
+        var baseURL = "https://api.yingougou.com/v1.2/"
+        // var baseURL = "https://paytest.yingougou.com/v1.2/" //测试回调
+        // var baseURL = "http://119.23.10.30:9000/v1.2/" //
+        
         var amount
         //判断浏览器
         function browserType() {
@@ -23,86 +26,8 @@ require(['config'], function () {
             }
         }
         var bty = browserType()
-        if(bty == 'weixin') {
-            if(location.href.indexOf("code") == -1) {
-                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; 
-            }else {//授权登录
-                var code = main.getQueryString("code");
-                main.post("passport/getWxUnionId", {//获取微信unionId
-                    code: code,
-                    wx_type:0,//0是公众号,1是开放平台
-                },function (data) {
-                    data = data.data
-                    if(data.status == 'error') {
-                        main.prompt(data.msg);
-                    }else if(data.status == 'success') {
-                        var obj = {
-                            wx_unionid:data.data.unionid,
-                            nick_name : data.data.nick_name,
-                            openid : data.data.openid
-                        }
-                        main.post('passport/thirdWxLogin',obj,function(data){//登录
-                            data = data.data
-                            if(data.status == "error"){
-                                main.prompt(data.msg)
-                            }else if(data.status == "success") {
-                                
-                                var member_id = data.data.member_id
-                                main.setCookie("member_id",data.data.member_id);
-                                main.setCookie("mobile",data.data.mobile);
-                                main.setCookie("token",data.data.token);
-                                if(data.data.business_id == '' || data.data.business_id == undefined) {
-                                    main.post(baseURL + "member/bindBusiness",{//绑定该商户原缀会员
-                                        member_id:member_id,
-                                        business_id:b_id
-                                    },function (data) {
-                                        console.log('绑定原缀')
-                                    })
-                                }
-                            }
-                        })
-                    }
-                })
-            }
-        }else if(bty == 'alipay') {
-            if(location.href.indexOf("auth_code") == -1) {
-                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid 
-            }else {
-                var code = main.getQueryString("auth_code");
-                main.post("pay/getBuyerId", {
-                    code: code
-                }, function (res) {
-                    if (res.data.code != 200) {
-                        main.prompt(res.msg);
-                        return;
-                    }
-                    zfb_openid = res.data.data
-                    main.post( "passport/zfbRegister",{
-                        zfb_openid:zfb_openid,
-                        nick_name:''
-                    } , function (data) {//如果该用户没注册就注册，注册过就返回用户详情
-                        data = data.data
-                        if(data.status == "error") {
-                            main.prompt(data.msg)
-                        }else {
-                            //保存用户登录信息
-                            var member_id = data.data.member_id
-                            main.setCookie("member_id",data.data.member_id);
-                            main.setCookie("mobile",data.data.mobile);
-                            main.setCookie("token",data.data.token);
-                            if(data.data.business_id == '' || data.data.business_id == undefined) {
-                                main.post("member/bindBusiness",{//绑定该商户原缀会员
-                                    member_id:member_id,
-                                    business_id:bid
-                                },function (data) {
-                                    console.log('绑定原缀')
-                                })
-                            }
-                        }
-                    })    
-                })
-            }
-        }else {
+        if(bty != 'weixin' && bty != 'alipay') {
+            main.setSession('snsapi','snsapi')
             window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
         }
         // window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
@@ -127,6 +52,10 @@ require(['config'], function () {
             },
     		methods:{
                 freeCouponBtn:function() {
+                    if(bty == "weixin" && location.href.indexOf("code") == -1) { //微信用户拒绝授权
+                        location.href = "../../views/newDrainage/freeCouponsDefeat.html" 
+                        return
+                    }
                     var login_type
                     if(bty == 'weixin') {
                         login_type = 1
@@ -135,19 +64,36 @@ require(['config'], function () {
                     }else {
                         login_type = 3
                     }
-                    main.post(baseURL + "common/shareTicket",{ //领引流券
-                        member_id:share_mid,//分享用户id
-                        business_id:bid,
-                        login_type:login_type
-                    } , function (data) {
+                    var obj 
+                    if(share_mid) {
+                        obj = {
+                            member_id:share_mid,//分享用户id
+                            business_id:bid,
+                            login_type:login_type,
+                            other_member:main.getCookie("member_id"),
+                        }
+                    }else {
+                        obj = {
+                            business_id:bid,
+                            login_type:login_type,
+                            other_member:main.getCookie("member_id"),
+                        }
+                    }
+                    main.post(baseURL + "common/shareTicket",obj , function (data) {
                         data = data.data
-                        if(data.data[1001]) {
-                            main.prompt(data.data[1001]);
+                        if(data.code != 200 || data == null) {
+                            // main.prompt(data.msg);
+                            location.href = "../../views/newDrainage/couponsFail.html";
                             return
-                        }else if(data.data[9009] != null || data.data[9013] != null || data.data[9015] != null ||data.data[9012] != null || data.data[9016] != null || data.data[9017] != null) {
-                            location.href = "../../views/newDrainage/couponsFail.html"; // 领取过
                         }else {
-                            location.href = "../../views/newDrainage/couponsSuccess.html?amount="+this.how+"";
+                            if(data.data[1001]) {
+                                main.prompt(data.data[1001]);
+                                return
+                            }else if(data.data[9009] != null || data.data[9013] != null || data.data[9015] != null ||data.data[9012] != null || data.data[9016] != null || data.data[9017] != null) {
+                                location.href = "../../views/newDrainage/couponsFail.html"; // 领取过
+                            }else {
+                                location.href = "../../views/newDrainage/couponsSuccess.html?amount="+this.how+"";
+                            }
                         }
                     })
 
@@ -184,10 +130,95 @@ require(['config'], function () {
                     }
                     main.setSession("how", vm.how );
                     main.setSession("all", vm.all );
+                    if(bty == 'weixin') {
+                        if(location.href.indexOf("code") == -1) {
+                            // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";//测试
+                            location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //正式 
+                        }else {//授权登录
+                            var code = main.getQueryString("code");
+                            main.post("passport/getWxUnionId", {//获取微信unionId
+                                code: code,
+                                wx_type:0,//0是公众号,1是开放平台
+                            },function (data) {
+                                data = data.data
+                                if(data.status == 'error') {
+                                    main.prompt(data.msg);
+                                }else if(data.status == 'success') {
+                                    var obj = {
+                                        wx_unionid:data.data.unionid,
+                                        nick_name : data.data.nick_name,
+                                        openid : data.data.openid
+                                    }
+                                    wx_openid = data.data.unionid
+                                    main.post('passport/thirdWxLogin',obj,function(data){//登录
+                                        data = data.data
+                                        if(data.status == "error"){
+                                            main.prompt(data.msg)
+                                        }else if(data.status == "success") {
+                                            
+                                            var member_id = data.data.member_id
+                                            main.setCookie("member_id",data.data.member_id);
+                                            main.setCookie("mobile",data.data.mobile);
+                                            main.setCookie("token",data.data.token);
+                                            if(data.data.business_id == '' || data.data.business_id == undefined) {
+                                                main.post(baseURL + "member/bindBusiness",{//绑定该商户原缀会员
+                                                    member_id:member_id,
+                                                    business_id:b_id
+                                                },function (data) {
+                                                    console.log('绑定原缀')
+                                                })
+                                            }
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    }else if(bty == 'alipay') {
+                        if(location.href.indexOf("auth_code") == -1) {
+                            location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid //正式
+                            // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid //测试
+                        }else {
+                            var code = main.getQueryString("auth_code");
+                            main.post("pay/getBuyerId", {
+                                code: code
+                            }, function (res) {
+                                if (res.data.code != 200) {
+                                    main.prompt(res.msg);
+                                    return;
+                                }
+                                zfb_openid = res.data.data
+                                // wx_openid = data.data.unionid
+                                main.post( "passport/zfbRegister",{
+                                    zfb_openid:zfb_openid,
+                                    nick_name:''
+                                } , function (data) {//如果该用户没注册就注册，注册过就返回用户详情
+                                    data = data.data
+                                    if(data.status == "error") {
+                                        main.prompt(data.msg)
+                                    }else {
+                                        //保存用户登录信息
+                                        var member_id = data.data.member_id
+                                        main.setCookie("member_id",data.data.member_id);
+                                        main.setCookie("mobile",data.data.mobile);
+                                        main.setCookie("token",data.data.token);
+                                        if(data.data.business_id == '' || data.data.business_id == undefined) {
+                                            main.post("member/bindBusiness",{//绑定该商户原缀会员
+                                                member_id:member_id,
+                                                business_id:bid
+                                            },function (data) {
+                                                console.log('绑定原缀')
+                                            })
+                                        }
+                                    }
+                                })    
+                            })
+                        }
+                    }
                     getBusinessDetil();
                     
                 }else {
-                    window.location.href = 'https://m.yingougou.com/views/shop/detail.html?returnUrl=/&id='+bid
+                    main.setSession('snsapi','snsapi')
+                    window.location.href = ''+main.calllBcakUrl+'/views/shop/detail.html?returnUrl=/&id='+bid
                 }
             }
         })
@@ -225,9 +256,11 @@ require(['config'], function () {
                             if (result && result.city && result.bounds) {
                                 var cityinfo = result.city;
                                 var citybounds = result.bounds;
-                                main.post('/home/getHomeTop', {
+                                main.post('/home/getCouponHomeScreen', {
                                     area_id: result.adcode,
-                                    business_id: bid
+                                    member_id: '',
+                                    page:1,
+                                    size:10
                                 }, function (data) {
                                     data = data.data.data
                                     vm.hotBus = true
