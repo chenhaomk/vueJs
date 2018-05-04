@@ -36,6 +36,9 @@ require(['config'], function () {
                 data: {
                     banner: [],
                     shop: [],
+                    recommendArr:[],//专题推荐
+                    recommend_today:{},//今日推荐
+                    advertising:'',//广告
                     discount: [],
                     user: {
                         photo: "/assets/images/index/ic_bg_user_xxh.png"
@@ -69,6 +72,11 @@ require(['config'], function () {
                     list: ygg.template.shopList
                 },
                 methods: {
+                    
+                    selectCity: function(){
+                       window.location.href="/views/creat/selectCity.html?city="+encodeURIComponent(this.city);
+                    },
+
                     closeDownLoad: function () {
                         if (this.showDown)
                             this.showDown = false;
@@ -131,7 +139,7 @@ require(['config'], function () {
                         if (this.hotSearch.length == 0) {
                             ygg.ajax('/home/getHistoryAndHotSearch', {
                                 member_id: filterData.member_id,
-                                area_id: filterData.area_id
+                                area_id: filterData.area_id,
                             }, function (data) {
 
                                 data = data.data;
@@ -149,10 +157,12 @@ require(['config'], function () {
                     },
                     hots: function (bname) {
                         searchData.business_name = bname;
+                        var obj = searchData
+                        obj.longitude = filterData.lng
+                        obj.latitude = filterData.lat
                         this.$set(this, "searchVal", bname);
                         ygg.loading(true);
-                        ygg.ajax('/home/getSearchResult', searchData, function (data) {
-
+                        ygg.ajax('/home/getSearchResult', obj, function (data) {
                             ygg.loading(false);
                             data = data.data;
                             vm.$set(vm, "isSS", false);
@@ -162,6 +172,13 @@ require(['config'], function () {
                                 vm.$set(vm, "isSS", true);
                             }
                         });
+                    },
+                    use_item:function (value) {
+                        ygg.indexPrompt('1111')
+                    },
+                    filter_item:function (val) {
+                        ygg.setCookie("filter_item",val)
+                        window.location.href = '/views/shop/index.html'
                     }
                 }
             }),
@@ -193,8 +210,9 @@ require(['config'], function () {
 
         var citysearch = new AMap.CitySearch();
         citysearch.getLocalCity(function (status, result) {
-            vm.city = (result.city).replace("市", "");
-            $("#city-picker").val("成都市");
+            console.log(result)
+            vm.city = result.city;
+            $("#city-picker").val(vm.city);
             //$("#city-picker").val(result.province+" "+result.city);
             /*$("#city-picker").cityPicker({
                 toolbarTemplate: '<header class="bar bar-nav">\
@@ -221,19 +239,37 @@ require(['config'], function () {
                     });
                 }
             });
-            filterData.area_id = result.adcode;
+            filterData.area_id =510100 result.adcode;
             searchData.area_id = result.adcode;*/
-            filterData.area_id = "510100";
-            searchData.area_id = "510100";
+            if(window.location.href.indexOf("?")!=-1 && window.location.href.indexOf("area_id")!=-1){
+                filterData.area_id=window.location.href.split("?")[1].split("&")[0].split("=")[1]
+                vm.city=decodeURIComponent(window.location.href.split("?")[1].split("&")[1].split("=")[1])
+            }else{
+                if(ygg.getCookie('location_act')) {
+                    filterData.area_id = ygg.getCookie('area_id')
+                    searchData.area_id = ygg.getCookie('area_id')
+                    vm.city =  ygg.getCookie('city_name')
+                }else {
+                    filterData.area_id = result.adcode;
+                    searchData.area_id = result.adcode
+                }
+                
+            }
             ygg.setCookie('area_id', filterData.area_id);
-
+            if(ygg.getCookie('lng') && ygg.getCookie('lat')){
+                filterData.lng=ygg.getCookie('lng');
+                filterData.lat=ygg.getCookie('lat');
+            }else if(result.rectangle) {
+                ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
+                ygg.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
+                filterData.lng=ygg.getCookie('lng');
+                filterData.lat=ygg.getCookie('lat');
+            }
             if (filterData.member_id) {
                 ygg.ajax('/member/getPersonCenterInfo', {
                     member_id: filterData.member_id
                 }, function (data) {
-
                     data = data.data;
-
                     getTopData(data.business_id);
                     getFilter();
                     getCoupons(function (d) {
@@ -255,9 +291,10 @@ require(['config'], function () {
                     vm.$set(vm, "discount", data);
                 });
             }
-
+            getSpecialList()
         });
-
+       
+        
         function getCoupons(cb, data) {
             var sdata = data || filterData;
             var sdd = data;
@@ -275,14 +312,14 @@ require(['config'], function () {
                 flag;
                 if (data.coupons.length == 0) {
                     $(".home .main .discount .list").addClass('none');
-                    getCoupons(function (data) {
-                        vm.$set(vm, "discount", data);
-                    }, {
-                        member_id: ygg.getCookie('member_id'),
-                        page: 1,
-                        area_id: "510100",
-                        size: 10
-                    });
+                    // getCoupons(function (data) {
+                    //     vm.$set(vm, "discount", data);
+                    // }, {
+                    //     member_id: ygg.getCookie('member_id'),
+                    //     page: 1,
+                    //     area_id: filterData.area_id,
+                    //     size: 10
+                    // });
                     defaultCoupons = true;
                 } else {
                     if (!sdata) $(".home .main .discount .list").removeClass('none');
@@ -299,10 +336,15 @@ require(['config'], function () {
         function getTopData(bid) {
             ygg.ajax('/home/getHomeTop', {
                 area_id: filterData.area_id,
+                longitude:filterData.lng,
+                latitude:filterData.lat,
                 business_id: bid
             }, function (data) {
                 data = data.data;
-                vm.$set(vm, "banner", data.adverts);
+                if(!data) {
+                    return
+                }
+                vm.$set(vm, "banner", data.adverts[0]);
                 setTimeout(function () {
                     new Swiper('.banner', {
                         pagination: '.swiper-pagination',
@@ -313,7 +355,6 @@ require(['config'], function () {
                         loop: true
                     });
                 }, 1);
-
                 vm.$set(vm, "shop", data.hot_business);
                 setTimeout(function () {
                     new Swiper('.swiper-shop', {
@@ -333,7 +374,6 @@ require(['config'], function () {
                 }
             });
         }
-
         var height = document.getElementsByClassName('height')[0].clientHeight,
             flag = true;
         window.onscroll = function (e) {
@@ -347,13 +387,27 @@ require(['config'], function () {
                 });
             }
         }
-
+        
+        function getSpecialList () {
+            ygg.ajax('/home/getHomeBottom', {
+                area_id:filterData.area_id
+            },function (data) {
+                if(data.code == 200 ) {
+                    vm.$set(vm, "recommendArr", data.data.special_subjects);
+                    if(data.data.recommend_today[0]) {
+                        vm.recommend_today = data.data.recommend_today[0]
+                    }
+                }
+            })
+        }
         function getFilter() {
-            ygg.ajax('/home/getHomeCenter', {
+            ygg.ajax('/home/getAreaAndCircleAndMore', {
                 area_id: filterData.area_id
             }, function (data) {
                 data = data.data;
-
+                if(!data) {
+                    return
+                }
                 $("#filter_type").picker({
                     toolbarTemplate: '<header class="bar bar-nav">\
                     <button class="button button-link pull-right close-picker">确定</button>\
@@ -562,23 +616,31 @@ require(['config'], function () {
          * 1.5.2 版本第三方登录，微信支付默认授权回调域名为首页
          * 所以在此添加判断函数，获取首页url参数，调登录接口获取用户信息
          */
-        thirdLogin()
+        if(!ygg.getCookie('member_id')) {
+            thirdLogin()
+        }
         function thirdLogin() {
             var url = location.search
             if (url.indexOf('auth_code') != -1) { //通过支付宝授权
                 ygg.loading(true);
                 var app_id =  url.split('&')[0].split('=')[1]
                 var auth_code = url.split('&')[3].split('=')[1]
+                alert(JSON.stringify({
+                    app_id: app_id,
+                    auth_code:auth_code
+                }))
                 ygg.ajax('/passport/thirdZfbLogin', {
                     app_id: app_id,
                     auth_code:auth_code
                 }, function (data) {
+                    alert(JSON.stringify(data))
                     if (data.status == "error") {
                         ygg.loading(false);
                         ygg.prompt('发生系统错误，请返回登录页重新登录！');
                     } else if (data.status == "success") {
                         data = data.data;
                         var member_id = data.member_id
+                        vm.$set(vm, "isLogin", true);
                         ygg.setCookie("member_id", data.member_id);
                         ygg.setCookie("mobile", data.mobile);
                         ygg.setCookie("token", data.token);
@@ -637,6 +699,7 @@ require(['config'], function () {
                                     ygg.setCookie("member_id",data.data.member_id);
                                     ygg.setCookie("mobile",data.data.mobile);
                                     ygg.setCookie("token",data.data.token);
+                                    vm.$set(vm, "isLogin", true);
                                     if (data.data.mobile != null) { //判读用户是否绑定手机号
                                         // window.open("/index.html", "_self");
                                     } else {

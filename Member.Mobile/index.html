@@ -18,7 +18,7 @@
             background: url(/assets/images/download/isWx.png) no-repeat;
             background-size: 100% auto;
             position: fixed;
-            top:0;
+            top: 0;
             width: 100%;
             height: 100%;
             z-index: 99;
@@ -33,186 +33,264 @@
             height: 100%;
             z-index: 98;
         }
-        .ishide{
+
+        .ishide {
             display: none;
+        }
+        .ads{
+            margin-top:2.5rem;
+        }
+        .adsImg,.adsImg img{
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 
 <body>
-<section class="height" ></section>
-<section id='app' class='home'>
-    <section class="header">
-        <section class="address">
-            <input value="四川省 成都市 锦江区" id="city-picker">
-            <p class="text-sl">{{city}}</p>
+    <section class="height"></section>
+    <section id='app' class='home'>
+        <section class="header">
+            <section class="address"  @click="selectCity">
+                <input value="四川省 成都市 锦江区" id="city-picker">
+                <p class="text-sl">{{city}}</p>
+            </section>
+            <section class="search">
+                <input placeholder="请输入商家名称" readonly @click="showSearch">
+            </section>
+            <a class='user' v-on:click='openMenu()'></a>
         </section>
-        <section class="search">
-            <input placeholder="请输入商家名称" readonly @click="showSearch">
-        </section>
-        <a class='user' v-on:click='openMenu()'></a>
-    </section>
-    <section class="banner swiper-container">
-        <section class="swiper-wrapper">
-            <section class="swiper-slide" v-clock v-for='a of banner'>
-                <a href="#">
-                    <img :src='a.img_path'>
-                </a>
+        
+        <section class='main new_banner'  >
+            <section class="shop" v-show="business.business_id?true:false">
+                <section class="hot" id="thot">
+                    <a :href="'/views/shop/detail.html?id='+business.business_id+'&returnUrl=index'">
+                        <img :src="business.inner_imgs">
+                        <section class="text">
+                            <img :src="business.logo">
+                            <p class="text-sl">{{business.name}}</p>
+                        </section>
+                    </a>
+                </section>
             </section>
         </section>
-        <section class="swiper-pagination"></section>
-    </section>
-
-    <section class='main'>
-        <section class="title">
-            热门商户
-            <a href="/views/shop/index.html" class="more">更多</a>
+        <section class='main'>
+            <div class="filter">
+                <div class="filter_item">
+                    <img @click="filter_item(0)" src="./assets/images/index/ic_l1_xxh.png" alt="">
+                    <span>美食</span>
+                </div>
+                <div class="filter_item">
+                    <img @click="filter_item(1)" src="./assets/images/index/ic_l2_xxh.png" alt="">
+                    <span>美容</span>
+                </div>
+                <div class="filter_item">
+                    <img @click="filter_item(2)" src="./assets/images/index/ic_l3_xxh.png" alt="">
+                    <span>娱乐</span>
+                </div>
+                <div class="filter_item">
+                    <img @click="filter_item(3)" src="./assets/images/index/ic_l4@3x.png" alt="">
+                    <span>购物</span>
+                </div>
+                <div class="filter_item">
+                    <img @click="filter_item(4)" src="./assets/images/index/ic_l5_xxh.png" alt="">
+                    <span>生活</span>
+                </div>
+            </div>
+            <div class="use_type">
+                <div class="use_item">
+                    <img @click="use_item" src="./assets/images/index/ic_l21_xxh.png" alt="">
+                    <p>点餐</p>
+                </div>
+                <div class="use_item">
+                    <img @click="use_item" src="./assets/images/index/ic_l22_xxh.png" alt="">
+                    <p>拼团</p>
+                </div>
+                <div class="use_item">
+                    <img @click="use_item" src="./assets/images/index/ic_l23_xxh.png" alt="">
+                    <p>精选</p>
+                </div>
+                <div class="use_item">
+                    <img @click="use_item" src="./assets/images/index/ic_l24_xxh.png" alt="">
+                    <p>理财</p>
+                </div>
+                <div class="use_item">
+                    <img @click="use_item" src="./assets/images/index/ic_l25_xxh.png" alt="">
+                    <p>便民</p>
+                </div>
+            </div>
         </section>
-        <section class="shop" v-clock>
-            <section class="hot" id="thot">
-                <a :href="'/views/shop/detail.html?id='+business.business_id+'&returnUrl=index'">
-                    <img :src="business.inner_imgs">
-                    <section class="text">
-                        <img :src="business.logo">
-                        <p class="text-sl">{{business.name}}</p>
+        <section class="main ">
+            <section class="title hot_title">
+                热门优惠
+                <a href="/views/shop/hotDiscount.html" class="more">更多</a>
+            </section>
+            <section class="discount" v-clock>
+                <!-- <section class="filter">
+                    <section class="filter_group">
+                        <p>
+                            <span>{{filterType}}</span>
+                        </p>
+                        <input type="text" readonly :value="filterType" id="filter_type">
                     </section>
-                </a>
+                    <section class="filter_group">
+                        <p>
+                            <span>{{filterShop}}</span>
+                        </p>
+                        <input type="text" readonly :value="filterShop" id="filter_shop">
+                    </section>
+                    <section class="filter_group">
+                        <p>
+                            <span>{{filterAddress}}</span>
+                        </p>
+                        <input type="text" readonly :value="filterAddress" id="filter_address">
+                    </section>
+                    <section class="filter_group">
+                        <p>
+                            <span>{{filterSort}}</span>
+                        </p>
+                        <input type="text" readonly :value="filterSort" id="filter_sort">
+                    </section>
+                </section> -->
+                <section class="list">
+                    <dis v-for='(a,index) of discount' :return-url="'/'" :a='a' v-show="index < 2" ></dis>
+                    <!-- <section class="infinite-scroll-preloader" v-show="scrollIsShow">
+                        <section class="preloader"></section>
+                    </section> -->
+                </section>
             </section>
-            <section class="swiper-shop">
-                <section class="swiper-wrapper">
-                    <section class="swiper-slide shop_list" v-for="a of shop">
-                        <a :href="'/views/shop/detail.html?id='+a.business_id+'&returnUrl=index'">
-                            <img :src="a.inner_imgs">
-                            <p class="text-sl">{{a.name}}</p>
+        </section>
+        <!-- 推荐广告1.6.0 -->
+        <!-- <section class="banner swiper-container ads">
+            <section class="swiper-wrapper">
+                <section class="swiper-slide" v-clock v-for='a of banner'>
+                    <a href="#">
+                        <img :src='a.img_path'>
+                    </a>
+                </section>
+            </section>
+            <section class="swiper-pagination"></section>
+        </section> -->
+        <section class="ads">
+            <section class="adsImg" v-clock >
+                <a v-if='banner.business_id?true:false' :href="'/views/shop/detail.html?id='+banner.business_id+'&returnUrl=index'">
+                    <img :src="banner.img_path" alt="">
+                </a>
+                <a v-else-if='!banner.business_id && banner.url?true:false' :href="banner.url">
+                    <img :src="banner.img_path" alt="">
+                </a>
+                <img v-else :src="banner.img_path" alt="">
+            </section>
+        </section>
+        
+
+        <section class='main'v-show="shop.length > 0" >
+            <section class="title">
+                人气商家
+                <a href="/views/shop/index.html" class="more">更多</a>
+            </section>
+            <section class="shop" v-clock>
+                <!-- <section class="hot" id="thot">
+                    <a :href="'/views/shop/detail.html?id='+business.business_id+'&returnUrl=index'">
+                        <img :src="business.inner_imgs">
+                        <section class="text">
+                            <img :src="business.logo">
+                            <p class="text-sl">{{business.name}}</p>
+                        </section>
+                    </a>
+                </section> -->
+                <section class="swiper-shop">
+                    <section class="swiper-wrapper">
+                        <section class="swiper-slide shop_list" v-for="a of shop">
+                            <a :href="'/views/shop/detail.html?id='+a.business_id+'&returnUrl=index'">
+                                <img :src="a.inner_imgs">
+                                <p class="text-sl">{{a.name}}</p>
+                            </a>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <!--今日推荐1.6.0-->
+        <section class='main' v-show='recommend_today.img_path?true:false' >
+            <section class="title">
+                今日推荐
+                <!-- <span  class="more">更多</span> -->
+            </section>
+            <div class="today_rec" >
+                <a v-if='recommend_today.business_id?true:false' :href="'/views/shop/detail.html?id='+recommend_today.business_id+'&returnUrl=index'">
+                    <img :src="recommend_today.img_path" alt="">
+                </a>
+                <a v-else-if='!recommend_today.business_id && recommend_today.url?true:false' :href="recommend_today.url">
+                    <img :src="recommend_today.img_path" alt="">
+                </a>
+                <img v-else :src="recommend_today.img_path" alt="">
+            </div>
+        </section>
+
+        <!--专题推荐-->
+        <section class='main'>
+            <div v-for="a of recommendArr">
+                <section class="title  title_border">
+                    <span>{{a.special_subject_name}}</span>
+                    <a :href="'/views/shop/specialDetail.html?id='+a.special_subject_id" class="more">更多</a>
+                </section>
+                <section class="shop" v-clock>
+                    <section class="special" id="thot" v-for="(item,i) of a.businesses">
+                        <a :href="'/views/shop/detail.html?id='+item.business_id+'&returnUrl=index'" v-show="i < 4">
+                            <img :src="item.business_img">
+                            <p class="text_special">{{item.business_name}}</p>
                         </a>
                     </section>
                 </section>
+            </div>
+        </section>
+
+        <section class="shadow" :class='openShadow' v-on:click="closeMeun()"></section>
+        <my :user='user' :is-login="isLogin" :class='openUser'></my>
+        <section class="search_p" :class="searchShow">
+            <section class="top">
+                <a class="reback" @click="returni"></a>
+                <a class="delete" @click="clearVal"></a>
+                <input type="text" v-model="searchVal" placeholder="请输入商家名称">
+                <a class="canle" @click="hots(searchVal)">搜索</a>
             </section>
-        </section>
-    </section>
-
-    <!--今日推荐1.6.0-->
-    <section class='main'>
-        <section class="title">
-            今日推荐
-            <a href="/views/shop/index.html" class="more">更多</a>
-        </section>
-        <section class="shop" v-clock>
-            <section class="hot" id="thot">
-                <a :href="'/views/shop/detail.html?id='+business.business_id+'&returnUrl=index'">
-                    <img :src="business.inner_imgs">
-                    <section class="text">
-                        <img :src="business.logo">
-                        <p class="text-sl">{{business.name}}</p>
-                    </section>
-                </a>
-            </section>
-
-        </section>
-    </section>
-
-    <!--专题推荐-->
-    <section class='main'>
-        <section class="title">
-            <span>专题推荐</span>
-            <a href="/views/shop/specialDetail.html" class="more">更多</a>
-        </section>
-        <section class="shop" v-clock>
-            <section class="special" id="thot" v-for="a of shop">
-                <a :href="'/views/shop/detail.html?id='+a.business_id+'&returnUrl=index'">
-                    <img :src="a.inner_imgs">
-                    <p class="text_special">{{a.name}}</p>
-                </a>
-            </section>
-        </section>
-    </section>
-
-    <section class="main bor-fg">
-        <section class="title">
-            热门优惠
-        </section>
-        <section class="discount" v-clock>
-            <section class="filter">
-                <section class="filter_group">
-                    <p>
-                        <span>{{filterType}}</span>
-                    </p>
-                    <input type="text" readonly :value="filterType" id="filter_type">
+            <section class="tags">
+                <h3 v-show="isSS">热门搜索</h3>
+                <section v-show="isSS" class="hot">
+                    <a v-for="a of hotSearch" @click="hots(a.hot_business_name)">{{a.hot_business_name}}</a>
                 </section>
-                <section class="filter_group">
-                    <p>
-                        <span>{{filterShop}}</span>
-                    </p>
-                    <input type="text" readonly :value="filterShop" id="filter_shop">
+                <h3 v-show="hisSearch.length != 0 && isSS">历史搜索
+                    <a class="delete"></a>
+                </h3>
+                <section class="history" v-show="isSS">
+                    <a v-for="a of hisSearch" @click="hots(a)">{{a}}</a>
                 </section>
-                <section class="filter_group">
-                    <p>
-                        <span>{{filterAddress}}</span>
-                    </p>
-                    <input type="text" readonly :value="filterAddress" id="filter_address">
-                </section>
-                <section class="filter_group">
-                    <p>
-                        <span>{{filterSort}}</span>
-                    </p>
-                    <input type="text" readonly :value="filterSort" id="filter_sort">
-                </section>
-            </section>
-            <section class="list">
-                <dis v-for='a of discount' :return-url="'/'" :a='a'></dis>
-
-                <section class="infinite-scroll-preloader" v-show="scrollIsShow">
-                    <section class="preloader"></section>
-                </section>
-            </section>
-        </section>
-    </section>
-
-    <section class="shadow" :class='openShadow' v-on:click="closeMeun()"></section>
-    <my :user='user' :is-login="isLogin" :class='openUser'></my>
-    <section class="search_p" :class="searchShow">
-        <section class="top">
-            <a class="reback" @click="returni"></a>
-            <a class="delete" @click="clearVal"></a>
-            <input type="text" v-model="searchVal" placeholder="请输入商家名称">
-            <a class="canle" @click="hots(searchVal)">搜索</a>
-        </section>
-        <section class="tags">
-            <h3 v-show="isSS">热门搜索</h3>
-            <section v-show="isSS" class="hot">
-                <a v-for="a of hotSearch" @click="hots(a.hot_business_name)">{{a.hot_business_name}}</a>
-            </section>
-            <h3 v-show="hisSearch.length != 0 && isSS">历史搜索
-                <a class="delete"></a>
-            </h3>
-            <section class="history" v-show="isSS">
-                <a v-for="a of hisSearch" @click="hots(a)">{{a}}</a>
-            </section>
-            <section class="shop_index" v-show="!isSS" :class="isEmpty">
-                <section class="shop_list">
-                    <ul>
-                        <list v-for='a of shopList' return-url="/" :a='a'></list>
-                    </ul>
-                    <section v-show="scrollIsShow2" class="infinite-scroll-preloader">
-                        <section class="preloader"></section>
+                <section class="shop_index" v-show="!isSS" :class="isEmpty">
+                    <section class="shop_list">
+                        <ul>
+                            <list v-for='a of shopList' return-url="/" :a='a'></list>
+                        </ul>
+                        <section v-show="scrollIsShow2" class="infinite-scroll-preloader">
+                            <section class="preloader"></section>
+                        </section>
                     </section>
                 </section>
             </section>
         </section>
-    </section>
 
-    <section class="download" v-show="showDown">
-        <!-- 底下悬浮窗 -->
-        <div class="close" v-on:click="closeDownLoad"></div>
-        <div class="log"></div>
-        <div class="font_logo">银个购
-            <div class="font_text">想你所购，购你所想</div>
-        </div>
-        <div class="downbtn" v-on:click="downApp">
-            <p v-text="downLoadType"></p>
-        </div>
+        <section class="download" v-show="showDown">
+            <!-- 底下悬浮窗 -->
+            <div class="close" v-on:click="closeDownLoad"></div>
+            <div class="log"></div>
+            <div class="font_logo">银个购
+                <div class="font_text">想你所购，购你所想</div>
+            </div>
+            <div class="downbtn" v-on:click="downApp">
+                <p v-text="downLoadType"></p>
+            </div>
+        </section>
     </section>
-</section>
 
     <script>
         var _mtac = {};
@@ -233,4 +311,5 @@
 <script src="/plugins/sui/city-picker.js"></script>
 <script src="https://webapi.amap.com/maps?v=1.3&key=a9506f1b1e66b4e85d7e15c8461ca4d4&plugin=AMap.CitySearch"></script>
 <script src="controllers/index.js"></script>
-</html>
+
+</html> 

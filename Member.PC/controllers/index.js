@@ -10,7 +10,9 @@ require(['config'],function(){
 	            page:1,
 	            area_id : $.fn.getCookie("area_id"),
 	            size:10,
-	            member_id : $.fn.getCookie("member_id")
+				member_id : $.fn.getCookie("member_id"),
+				lng:$.fn.getCookie("lng"),
+				lat:$.fn.getCookie("lat")
 	        };
             getTopData();
 
@@ -113,11 +115,15 @@ require(['config'],function(){
         		url : '/home/getHomeTop',
         		data : {
 	                area_id : filterData.area_id,
-	                business_id : $("#userinfo").attr("data-bid")
+					business_id : $("#userinfo").attr("data-bid"),
+					longitude:filterData.lng,
+					latitude:filterData.lat,
 	            },
 	            result : function(data){
-	            	data = data.data;
-
+					data = data.data;
+					if(!data) {
+						return
+					}
 	                for(var i=0;i<data.adverts.length;i++){
 	                	$("#banner .list").append('<img src="'+data.adverts[i].img_path+'">');
 	                }

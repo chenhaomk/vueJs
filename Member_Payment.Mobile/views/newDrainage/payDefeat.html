@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>银个购</title>
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <script src="../../assets/js/autosize.js "></script>
+    <link rel="stylesheet" href="../../theme/newDrainage/payDefeat.css">
+</head>
+<body>
+    <div id="app" class="main" v-cloak>
+      <div class="hint_img1" >
+        <img src="../../assets/images/payment/ic_fail.png" alt="">
+      </div>
+      <div class="txt_p1" >支付失败</div>
+      <div class="txt_p2">为了给您更好的服务，请重新扫码并允许授权</div>
+      <div class="hint_img2">
+        <img src="../../assets/images/payment/pic.png" alt="">
+      </div>
+      <div class="btn" v-on:click="closePage" >
+        我知道了
+      </div>
+    </div>
+</body>
+<script type="text/javascript"  src="../../controllers/fastclick/fastclick.js" ></script>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/drainage/payDefeat.js"></script>
+</html>

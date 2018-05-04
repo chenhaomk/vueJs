@@ -1,5 +1,5 @@
 require(['config'], function () {
-    require(['axio', 'vue', 'mock', 'mockApi', 'main'], function (ajax, vue, mock, mockApi, main) {
+    require(['axio', 'vue','main'], function (ajax, vue, main) {
         var b_id = location.search.split("&")[0].split("=")[1]
         var userId,bty,weixin_openid,wx_unionid,nick_name,zfb_openid
 
@@ -23,8 +23,8 @@ require(['config'], function () {
         main.setSession("a_n", main.getQueryString("a_n") == null ? main.getSession("a_n") : main.getQueryString("a_n"));
         main.setSession("c_n", main.getQueryString("c_n") == null ? main.getSession("c_n") : main.getQueryString("c_n"));
 
-        // var baseURL = "https://api.yingougou.com/v1.1/"
-        var baseURL = "https://paytest.yingougou.com/v1.1/"//测试
+        // var baseURL = "http://119.23.10.30:9000/v1.2/"//测试
+        var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
         //判断是否在微信浏览器
         function browserType() {
             var ua = window.navigator.userAgent.toLowerCase();
@@ -41,8 +41,8 @@ require(['config'], function () {
             if (location.href.indexOf("code") == -1) { 
                 var b_id = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
                 // main.newPrompt("页面跳转中...",30000);
-                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";   //测试
-                // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式          
+                // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";   //测试
+                location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式          
             }else {//微信环境授权后，用户强制登录
                 var code = main.getQueryString("code");
                 main.post(baseURL + "pay/getOpenId", {
@@ -90,8 +90,8 @@ require(['config'], function () {
             if(location.href.indexOf("auth_code") == -1){
                 var b_id = main.getQueryString("b_id") == null ? main.getSession("b_id") : main.getQueryString("b_id")
                 // main.newPrompt("页面跳转中...",30000);
-                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/payPage.html?b_id="+b_id //测试
-                // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
+                // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/payPage.html?b_id="+b_id //测试
+                location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
             }else {//支付宝扫码，强制用户登录
                 var code = main.getQueryString("auth_code");
                 main.post(baseURL + "pay/getBuyerId", {
@@ -359,8 +359,15 @@ require(['config'], function () {
                             data.coupon_activity_id = main.getSession("c_a_id");
                     }
                     if(this.total > 0) {
-                        console.log(data)
-                        payFn(browserType,data,baseURL,ck)
+                        if(bty == "weixin") {
+                            if(location.href.indexOf("code") == -1) {//微信用户拒绝授权,跳往失败引导页面
+                                location.href = "../../views/newDrainage/payDefeat.html" 
+                            }else {
+                                payFn(browserType,data,baseURL,ck)
+                            }
+                        }else {
+                            payFn(browserType,data,baseURL,ck)
+                        }
                     }else {
                         main.prompt("请先输入有效金额");
                     }
