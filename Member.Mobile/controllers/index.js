@@ -689,7 +689,7 @@ require(['config'], function () {
                             var obj = {
                                 wx_unionid:data.data.unionid,
                                 nick_name : data.data.nick_name,
-                                openid : data.data.openid
+                                wx_web_openid : data.data.openid
                             }
                             ygg.ajax('passport/thirdWxLogin',obj,function(data){
                                 if(data.status == "error"){
