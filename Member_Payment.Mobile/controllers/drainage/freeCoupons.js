@@ -132,8 +132,8 @@ require(['config'], function () {
                     main.setSession("all", vm.all );
                     if(bty == 'weixin') {
                         if(location.href.indexOf("code") == -1) {
-                            // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";//测试
-                            location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //正式 
+                            location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";//测试
+                            // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //正式 
                         }else {//授权登录
                             var code = main.getQueryString("code");
                             main.post("passport/getWxUnionId", {//获取微信unionId
@@ -147,7 +147,7 @@ require(['config'], function () {
                                     var obj = {
                                         wx_unionid:data.data.unionid,
                                         nick_name : data.data.nick_name,
-                                        openid : data.data.openid
+                                        wx_web_openid : data.data.openid
                                     }
                                     wx_openid = data.data.unionid
                                     main.post('passport/thirdWxLogin',obj,function(data){//登录
@@ -175,8 +175,8 @@ require(['config'], function () {
                         }
                     }else if(bty == 'alipay') {
                         if(location.href.indexOf("auth_code") == -1) {
-                            location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid //正式
-                            // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid //测试
+                            // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/share/views/newDrainage/freeCoupons.html?b_id="+bid //正式
+                            location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/ShareTest/views/newDrainage/freeCoupons.html?b_id="+bid //测试
                         }else {
                             var code = main.getQueryString("auth_code");
                             main.post("pay/getBuyerId", {
