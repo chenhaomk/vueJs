@@ -1,7 +1,7 @@
 (function () {
   $('body').addClass('show')
-  // var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
-  var baseURL = "https://api.yingougou.com/v1.2/" //正式
+  var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
+  // var baseURL = "https://api.yingougou.com/v1.2/" //正式
   // var calllBcakUrl = 'http://119.23.10.30:8002'
   var calllBcakUrl = 'https://m.yingougou.com' //
   var u = navigator.userAgent;
@@ -32,6 +32,23 @@
   var bty = browserType()
   var hrefStr = location.href
   var b_id = getQueryString("b_id")
+  var recordTimeObj = {
+    userId:'',
+    openId:'',
+    api:[]
+  }
+  var op = {
+    path:'pay/getOpenId'
+  }
+  var lg = {
+    path:'passport/thirdWxLogin'
+  }
+  var create_pay = {
+    path:'pay/create_pay'
+  }
+  var wxready = {
+    path:'wxready'
+  }
   if(!b_id) {
     if (getSession("b_id") && getSession("b_id") != "null") { //ch-use:扫码支付时从index.js获取session
       b_id = getSession("b_id")
@@ -44,11 +61,13 @@
   // var b_id = getQueryString("b_id") == null ? getSession("b_id") : getQueryString("b_id")
   if (bty == 'weixin') {
     if (hrefStr.indexOf('code') == -1) {
-      // location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
+      location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
       // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
-      location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/paytest/views/newDrainage/test.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
+      // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
       // return        
     } else {
+
+      op.bgTime = getTimer()
       var code = getQueryString("code");
       $.ajax({
         type: 'POST',
@@ -59,8 +78,9 @@
         }),
         dataType: 'json',
         contentType: 'application/json;charset=UTF-8',
-        success: function (res) {
-          console.log(res)
+        success: function (res) { 
+          op.endTime = getTimer()
+          lg.bgTime = getTimer()
           if(res.code != 200) {
             prompt('扫码出现异常!')
             return
@@ -77,6 +97,7 @@
             type: 'POST',
             url: baseURL+'passport/thirdWxLogin',
             data:JSON.stringify({
+              // wx_web_openid:weixin_openid,
               wx_openid:weixin_openid,
               wx_unionid:wx_unionid,
               nick_name:nick_name
@@ -85,6 +106,7 @@
             dataType: 'json',
             contentType: 'application/json;charset=UTF-8',
             success:function (data) {
+              lg.endTime = getTimer()
               console.log(data)
               // data = data.data
               if(data.status == "error") {
@@ -119,9 +141,9 @@
     }
   }else if( bty== "alipay") {
     if(hrefStr.indexOf('auth_code') == -1) {
-      // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
+      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
       // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
-      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/paytest/views/newDrainage/test.html?b_id="+b_id //正式
+      // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
       return
     }else {
       var code = getQueryString("auth_code");
@@ -221,7 +243,6 @@
       contentType: 'application/json;charset=UTF-8',
       success: function (data) {
         loading(false)
-        console.log(data)
         if (data.code != 200) {
           prompt('请求错误!')
           return
@@ -526,6 +547,7 @@
   function payFn(browserType,data,baseURL,callBack) {
     if(browserType =="weixin") {//微信浏览器内
       loading(true)
+      create_pay.bgTime = getTimer()
       $.ajax({
         type: 'POST',
         headers: setHeader(),
@@ -534,6 +556,8 @@
         dataType: 'json',
         contentType: 'application/json;charset=UTF-8',
         success:function (res) {
+          create_pay.endTime = getTimer()
+          wxready.bgTime = getTimer()
           if(res.code == 200) {
             var orderId = res.data.order_id//获取店铺id，用来获取获取店铺复购券信息
             //调用官方公众号接口
@@ -547,87 +571,105 @@
             }
             wx.config(configObj);
             wx.ready(function () {
-              console.log("微信js接口已准备")
-            })
-            loading(false)
-            wx.chooseWXPay({
-              timestamp:res.data.timeStamp,
-              nonceStr:res.data.nonceStr,
-              package:res.data.package,
-              signType:res.data.signType,
-              paySign:res.data.paySign,
-              success:function (res) {
-                if(vm.payType == 'yhq') {//用户登录过，执行回调跳转到消费记录页面
-                  callBack()
-                }else {
-                  loading(true)
+              wxready.endTime = getTimer()
+              wx.chooseWXPay({
+                timestamp:res.data.timeStamp,
+                nonceStr:res.data.nonceStr,
+                package:res.data.package,
+                signType:res.data.signType,
+                paySign:res.data.paySign,
+                success:function (res) {
+                  recordTimeObj.api.push(op)
+                  recordTimeObj.api.push(lg)
+                  recordTimeObj.api.push(create_pay)
+                  recordTimeObj.api.push(wxready)
+                  recordTimeObj.userId = getCookie("member_id");
+                  recordTimeObj.openId = weixin_openid
+                  // alert(JSON.stringify(recordTimeObj))
                   $.ajax({//获取复购券详情，判断店铺是否有复购券
                     type: 'POST',
-                    headers: setHeader(),
-                    url: baseURL+'common/getRebuyCoupon',
-                    data:JSON.stringify({
-                      order_id:orderId,
-                      business_id:b_id
-                    }),
+                    // headers: setHeader(),
+                    url: 'https://www.sdfgod.com/api/ygg',
+                    data:recordTimeObj,
                     dataType: 'json',
-                    contentType: 'application/json;charset=UTF-8',
+                    // contentType: 'application/json;charset=UTF-8',
                     success:function (data) {
-                      if(data.status == "error") {
-                        loading(false)
-                        prompt(data.msg)
-                        return
-                      }else {
-                        data = data.data
-                        if(data.coupon ) {//有复购券
-                          var amount,rule
-                          var coupon_activity_id = data.coupon.coupon_id  //复购券id
-                          if (data.coupon.type == 0) {
-                            amount =  data.coupon.discount+"";
-                            if(amount.indexOf(".") == -1) {
-                              amount =  data.coupon.discount+".00";
-                            }else {
-                              amount =  data.coupon.discount;
-                            }
-                          }else if (data.coupon.type == 1) {
-                              amount = data.coupon.rate * 10 + "折";
-                          }
-                          if((data.coupon.min_price+"").indexOf(".") ==-1) {
-                            rule = "满" +data.coupon.min_price+ ".00可用";
-                          }else {
-                            rule = "满" +data.coupon.min_price+ "可用";
-                          }
-                          setSession("how", amount );
-                          setSession("all",rule );
-                          $.ajax({//领取复购券
-                            type: 'POST',
-                            headers: setHeader(),
-                            url: baseURL+'common/receiveRebuyCoupon',
-                            data:JSON.stringify({
-                              member_id:getCookie('member_id'),
-                              coupon_activity_id:coupon_activity_id
-                            }),
-                            dataType: 'json',
-                            contentType: 'application/json;charset=UTF-8',
-                            success:function (data) {
-                              loading(false)
-                              if(data.code == 200) {
-                                location.href = "../../views/newDrainage/couponsSuccess.html";
-                              }else {
-                                prompt(data.msg)
-                                return
-                              }
-                            }
-                          })  
-                        }else {
+                      // alert(JSON.stringify(data))
+                    }
+                  })
+                  if(vm.payType == 'yhq') {//用户登录过，执行回调跳转到消费记录页面
+                    callBack()
+                  }else {
+                    loading(true)
+                    $.ajax({//获取复购券详情，判断店铺是否有复购券
+                      type: 'POST',
+                      headers: setHeader(),
+                      url: baseURL+'common/getRebuyCoupon',
+                      data:JSON.stringify({
+                        order_id:orderId,
+                        business_id:b_id
+                      }),
+                      dataType: 'json',
+                      contentType: 'application/json;charset=UTF-8',
+                      success:function (data) {
+                        if(data.status == "error") {
                           loading(false)
-                          location.href =''+calllBcakUrl+'/views/my/purHistory.html' //没有就跳转h5的消费记录页
+                          prompt(data.msg)
+                          return
+                        }else {
+                          data = data.data
+                          if(data.coupon ) {//有复购券
+                            var amount,rule
+                            var coupon_activity_id = data.coupon.coupon_id  //复购券id
+                            if (data.coupon.type == 0) {
+                              amount =  data.coupon.discount+"";
+                              if(amount.indexOf(".") == -1) {
+                                amount =  data.coupon.discount+".00";
+                              }else {
+                                amount =  data.coupon.discount;
+                              }
+                            }else if (data.coupon.type == 1) {
+                                amount = data.coupon.rate * 10 + "折";
+                            }
+                            if((data.coupon.min_price+"").indexOf(".") ==-1) {
+                              rule = "满" +data.coupon.min_price+ ".00可用";
+                            }else {
+                              rule = "满" +data.coupon.min_price+ "可用";
+                            }
+                            setSession("how", amount );
+                            setSession("all",rule );
+                            $.ajax({//领取复购券
+                              type: 'POST',
+                              headers: setHeader(),
+                              url: baseURL+'common/receiveRebuyCoupon',
+                              data:JSON.stringify({
+                                member_id:getCookie('member_id'),
+                                coupon_activity_id:coupon_activity_id
+                              }),
+                              dataType: 'json',
+                              contentType: 'application/json;charset=UTF-8',
+                              success:function (data) {
+                                loading(false)
+                                if(data.code == 200) {
+                                  location.href = "../../views/newDrainage/couponsSuccess.html";
+                                }else {
+                                  prompt(data.msg)
+                                  return
+                                }
+                              }
+                            })  
+                          }else {
+                            loading(false)
+                            location.href =''+calllBcakUrl+'/views/my/purHistory.html' //没有就跳转h5的消费记录页
+                          }
                         }
                       }
-                    }
-                  })  
+                    })  
+                  }
                 }
-              }
-            })  
+              })  
+            })
+            loading(false)
           }
         }
       })
@@ -736,6 +778,9 @@
 }
 
   //----------------------工具类函数--------开始------------
+  function getTimer() {
+    return (new Date()).valueOf()
+  }
   function charAtNum(num) { //ch-use:限制输入框输入类型
     num = num + ""
     num = num.replace(/[^\d.]/g, "")
@@ -850,11 +895,15 @@
   };
   //loading
   function loading(con) {
-    var body = $($('body')[0])
+    // var body = $($('body')[0])
     if (con) {
-      body.addClass('loading')
+      // body.addClass('loading')
+      $('.load').removeClass('hide')
+      $('.loading').addClass('play').removeClass('pause')
     } else {
-      body.removeClass('loading')
+      // body.removeClass('loading')
+      $('.load').addClass('hide')
+      $('.loading').removeClass('play').addClass('pause')
     }
   }
   //md5
@@ -1097,5 +1146,17 @@
   //-----------------------工具类函数------------结束
   window.addEventListener('load', function () {
     FastClick.attach(document.body);
+        var ga = document.createElement('script'); 
+    ga.type = 'text/javascript'; 
+    ga.async = true; 
+    if(bty == 'weixin') {
+      ga.src = 'https://res.wx.qq.com/open/js/jweixin-1.0.0.js' 
+    }else if (bty== "alipay") {
+      ga.src = '../../antbridge.min.js'
+    }
+    
+    var s = document.getElementsByTagName('script')[0]; 
+    s.parentNode.insertBefore(ga, s);
   }, false);
+
 })()
