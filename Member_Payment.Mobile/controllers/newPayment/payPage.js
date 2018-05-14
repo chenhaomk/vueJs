@@ -1,7 +1,7 @@
 (function () {
   $('body').addClass('show')
-  var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
-  // var baseURL = "https://api.yingougou.com/v1.2/" //正式
+  // var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
+  var baseURL = "https://api.yingougou.com/v1.2/" //正式
   // var calllBcakUrl = 'http://119.23.10.30:8002'
   var calllBcakUrl = 'https://m.yingougou.com' //
   var u = navigator.userAgent;
@@ -61,9 +61,9 @@
   // var b_id = getQueryString("b_id") == null ? getSession("b_id") : getQueryString("b_id")
   if (bty == 'weixin') {
     if (hrefStr.indexOf('code') == -1) {
-      location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
+      // location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
       // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
-      // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
+      location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
       // return        
     } else {
 
@@ -141,9 +141,9 @@
     }
   }else if( bty== "alipay") {
     if(hrefStr.indexOf('auth_code') == -1) {
-      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
+      // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
       // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
-      // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
+      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
       return
     }else {
       var code = getQueryString("auth_code");
