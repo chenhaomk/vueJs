@@ -351,18 +351,18 @@
     }
   })
   //------------------当用户登录H5，并且选择优惠券支付时------结束
-  $('.checkPrice').on('click', function (e) { //ch-use:是否有不参与优惠的金额
-    var dom = this
+  $('.checkWarp div').on('click', function (e) { //ch-use:是否有不参与优惠的金额
+    var dom = $(this).find('.chPc')
     e.preventDefault();
-    if (dom.src.indexOf('ic_select1') != -1) { //未选中
-      dom.src = '../../assets/images/newDarinage/ic_selected1_xxh.png'
+    if (dom.hasClass('checkPrice')) { //未选中
+      dom.removeClass('checkPrice').addClass('checkPrice_s')
       vm.isDis = true;
       domAction('checkInput', true)
     } else {
       vm.isDis = false;
       vm.deDisPr = 0
       $(".cut_after").val()
-      dom.src = '../../assets/images/newDarinage/ic_select1@3x.png'
+      dom.removeClass('checkPrice_s').addClass('checkPrice')
       domAction('checkInput', false)
     }
     countFn()
@@ -457,9 +457,10 @@
    */
   
   function action_yh(dom,action_img,payType) {
+    dom = $(dom)
     $('.rad').map(function(index,item) {
-      if(index != $('.rad').index($(dom))) {
-        $(item).attr('src','../../assets/images/newDarinage/ic_select@3x.png')
+      if(index != $('.rad').index(dom)) {
+        $(item).removeClass('rad_s')
       }
     })
     $('.limit').map(function (index,item) {
@@ -467,25 +468,48 @@
         $(item).addClass('hide')
       }
     })
-    if(dom.src.indexOf('ic_select@3x') != -1) {
-      vm.payType = payType
-      $('.rad').map(function (index,item) {
-        $(item).src = '../../assets/images/newDarinage/ic_select@3x.png'
-      })
-      dom.src = '../../assets/images/newDarinage/ic_selected@3x.png'
-      $('.'+action_img).removeClass('hide')
-      $('.checkWarp').removeClass('hide')
-      if($('.checkPrice').attr('src').indexOf('ic_select1') == -1) {
-        domAction('checkInput', true)
-      }
-    }else {
+    // console.log(dom)
+    if(dom.hasClass('rad_s')) {
       vm.total =  vm.picked
       vm.payType = 'nothing'
-      dom.src = '../../assets/images/newDarinage/ic_select@3x.png'
+      dom.removeClass('rad_s')
       $('.'+action_img).addClass('hide')
       $('.checkWarp').addClass('hide')
       domAction('checkInput', false)
+    }else {
+      vm.payType = payType
+      $('.rad').map(function (index,item) {
+        $(item).removeClass('rad_s')
+      })
+      dom.addClass('rad_s')
+      $('.'+action_img).removeClass('hide')
+      $('.checkWarp').removeClass('hide')
+      if($('.chPc').hasClass('checkPrice_s')) {
+        domAction('checkInput', true)
+      }
+      // if($('.checkPrice').attr('src').indexOf('ic_select1') == -1) {
+      //   domAction('checkInput', true)
+      // }
     }
+    // if(dom.src.indexOf('ic_select@3x') != -1) {
+    //   vm.payType = payType
+    //   $('.rad').map(function (index,item) {
+    //     $(item).src = '../../assets/images/newDarinage/ic_select@3x.png'
+    //   })
+    //   dom.src = '../../assets/images/newDarinage/ic_selected@3x.png'
+    //   $('.'+action_img).removeClass('hide')
+    //   $('.checkWarp').removeClass('hide')
+    //   if($('.checkPrice').attr('src').indexOf('ic_select1') == -1) {
+    //     domAction('checkInput', true)
+    //   }
+    // }else {
+    //   vm.total =  vm.picked
+    //   vm.payType = 'nothing'
+    //   dom.src = '../../assets/images/newDarinage/ic_select@3x.png'
+    //   $('.'+action_img).addClass('hide')
+    //   $('.checkWarp').addClass('hide')
+    //   domAction('checkInput', false)
+    // }
   }
   //确认买单
   $('.checkPay').on('click',function (e) {
