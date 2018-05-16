@@ -8,6 +8,12 @@
     <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
 
 </head>
+<style>
+    .msgStyle{
+        float: left;
+        height: 45px;
+    }
+</style>
 <body>
     
     <section id='app' class='discount detail has_head'>
@@ -40,9 +46,13 @@
             <h3>使用规则</h3>
             <ul>
                 <li>使用时间：{{detail.stime}}</li>
-                <li>使用条件：满{{detail.min_price}}可用</li>
-                <li>代金券使用：本产品不可叠加使用</li>
+                <li>使用条件：满{{detail.min_price}}可用，仅限接受该共享券的商家</li>
+                <li>
+                    <span class="msgStyle">优惠券使用：</span>
+                     在银个购app选择商家进行"去买单"，系统自动读取商家已接收的可用共享券
+                </li>
                 <li>退换货支持：本产品不支持退换货</li>
+                <li>平台券不允许重复使用</li>
             </ul>
         </section>
 
