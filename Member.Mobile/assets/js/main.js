@@ -24,9 +24,9 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             docEl.style.fontSize = size + 'px';
         }
     }, 1);
-    // axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
+    axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
     // axio.defaults.baseURL = 'http://192.168.0.11:8082/v1.2/'; //开发地址
-    axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生成地址   
+    // axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生成地址   
     var ygg = {};
     ygg.maxImgSize = 10485760;
     ygg.ajax = function (url, data, callback) {
@@ -898,9 +898,16 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             '</section>' +
             '</a>' +
             '<section class="status">' +
-            '<a v-if="isMy" @click="alert" :class="{nohx:isMy}">' +
+            //<-- #64开发任务修改共享券只能查看详情  by：zz
+            '<div v-if="isMy">'+
+            '<a v-if="this.a.type!=0" @click="alert" >' +
             '<p>立即</br>使用</p>' +
             '</a>' +
+            '<a :href="urlp" v-if="this.a.type==0" >' +
+            '<p>查看</br>详情</p>' +
+            '</a>' +
+            '</div>'+
+            //-->
             '<a v-else-if="lqcg || a.already_get" class="nohx">' +
             '<p>已领取</p>' +
             '</a>' +
