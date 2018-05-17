@@ -26,7 +26,7 @@ require(['config'],function(){
                         return;   
                     }
 
-                    ygg.ajax('/member/forgotPassword',{
+                    ygg.ajax('/passport/forgotPassword',{
                         mobile : that.userId,
                         password : that.pwd,
                         verification_code : that.vercode
