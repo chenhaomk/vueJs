@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>我的收藏夹</title>
+    <link href="/assets/css/main.css" rel='stylesheet' type="text/css">
+</head>
+<body class="favorite">
+<section class="height"></section>
+<section id='app' class='shop_index'>
+
+    <section class="head">
+        <a class="back" href="/"></a>
+        <p>我的收藏夹</p>
+    </section>
+    <section class="explain">
+        <span class="explain_txt"><img src="../../assets/images/creat/ic_i@2x.png" class="explain_img" />你可以进入商家详情页，点击右上角收藏按钮，收藏成功后会在"我的收藏夹"生成一张商家名片，点击名片可以进入商家详情页</span>
+    </section>
+    <section class="shop_list favorite_list" :class="isKong">
+        <ul>
+            <list v-for='a of favoriteList' return-url="/views/shop/index.html" :a='a'></list>
+        </ul>
+    </section>
+</section>
+</body>
+<script data-main="/config" src="/plugins/require/require.js"></script>
+<script src="/controllers/creat/favorite.js"></script>
+<html>

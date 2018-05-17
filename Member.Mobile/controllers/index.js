@@ -36,7 +36,7 @@ require(['config'], function () {
                 data: {
                     banner: [],
                     shop: [],
-                    recommendArr:[],//专题推荐
+                    recommendArr:[],//
                     recommend_today:{},//今日推荐
                     advertising:'',//广告
                     discount: [],
