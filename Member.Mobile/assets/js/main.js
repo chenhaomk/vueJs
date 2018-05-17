@@ -24,9 +24,9 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             docEl.style.fontSize = size + 'px';
         }
     }, 1);
-    // axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
+    axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
     // axio.defaults.baseURL = 'http://192.168.0.11:8082/v1.2/'; //开发地址
-    axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生成地址   
+    // axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生成地址
     var ygg = {};
     ygg.maxImgSize = 10485760;
     ygg.ajax = function (url, data, callback) {
@@ -827,14 +827,15 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             '</section>' +
             '<section class="menu">' +
             '<a @click="noc($event)" :href="isLogin?purseUrl:loginUrl">钱包<span></span></a>' +
-            '<a :href="isLogin?couponUrl:loginUrl">优惠券<span>{{user.coupon_total}}</span></a>' +
+            '<a :href="isLogin?couponUrl:loginUrl">银享券<span>{{user.coupon_total}}</span></a>' +
             '<a :href="isLogin?orderUrl:loginUrl">订单<span></span></a>' +
             '<a href="" class="hide">虚拟账号<span>支付宝</span></a>' +
             '<a :href="isLogin?historyUrl:loginUrl">消费记录<span></span></a>' +
             '</section>' +
             '<section class="ot">' +
-            '<a href="/views/my/myCard.html" v-if="user.is_expand">邀请商家入驻</a>' +
-            '<a :href="aurl" v-else>申请为商户发展人</a>' +
+            // '<a href="/views/my/myCard.html" v-if="user.is_expand">邀请商家入驻</a>' +
+            // '<a :href="aurl" v-else>申请为商户发展人</a>' +
+            '<a href="/views/creat/favorite.html">我的收藏夹</a>' +
             '<a href="/views/creat/register.html">免费入驻为商家</a>' +
             '</section>' +
             '</section>',
@@ -1764,6 +1765,67 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
                       </section>\
                   </section>'
     });
+    //收藏列表
+    ygg.template.favoriteList = Vue.extend({
+        props: {
+            a: {
+                type: Object
+            },
+            returnUrl: ""
+        },
+        data: function () {
+            return {
+                url: "/views/shop/detail.html?returnUrl=" + this.returnUrl + "&id=",
+                defaultImg: ""
+            }
+        },
+        template: '<li><a :href="url+a.business_id">\
+                      <img :src="a.logo">\
+                      <section class="text">\
+                          <p class="title">{{a.name}}</p>\
+                          <score :score="a.star*10"></score>\
+                      </section>\
+                  </a></li>',
+        components: {
+            score: ygg.template.star
+        }
+    });
+    //弹窗提示
+    ygg.template.share_txt = Vue.extend({
+        props: {
+            a: {
+                type: Object,
+                default: {
+                    double: false,
+                    isShow: false,
+                    canle: "确定",
+                    confi: ""
+                }
+            }
+        },
+        template: '<section id="popup" :class="{popup:true,double:a.double}" v-show="a.isShow"">\
+                      <p>{{a.content}}</p>\
+                      <section class="btns">\
+                          <a @click="canleCb">{{a.canle}}</a>\
+                          <a @click="confiCb">{{a.confi}}</a>\
+                      </section>\
+                  </section>',
+        methods: {
+            handleClick() {
+                alert(111)
+            },
+            canleCb: function () {
+                this.a.isShow = false;
+                this.a.canleCb();
+            },
+            confiCb: function () {
+                this.a.isShow = false;
+                this.a.confiCb();
+            }
+        }
+    });
+
+
 
     //弹窗提示
     ygg.template.popup = Vue.extend({

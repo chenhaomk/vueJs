@@ -9,18 +9,14 @@
 
 </head>
 <body>
-    
     <section id='app' class='discount shop has_head'>
-
         <section class="head" v-clock>
             <a :href="returnUrl" class="back"></a>
-            <p>{{shop.name}}</p>
+            <p>{{shop.name}} <span class="collection" @click="getCollection"><img :src="changeImg"/></span></p>
         </section>
-
         <section class="header" v-clock>
             <img :src="shop.inner_imgs">
         </section>
-        
         <section class="con shop_info" v-clock>
             <p class="shop_name text-sl">{{shop.name}}</p>
             <a class="phone" :href="'tel:'+shop.phone"></a>

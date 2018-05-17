@@ -4,7 +4,7 @@ require(['config'],function(){
         *1.6引流（改）---开始
         * */
         //判断浏览器
-        var bid 
+        var bid
         if(location.href.indexOf("code") == -1 && location.href.indexOf("auth_code") == -1) {
             bid = ygg.getQueryString("id") == null ? ygg.getSession("b_id") :ygg.getQueryString("id")
         }else {
@@ -108,6 +108,7 @@ require(['config'],function(){
         /*
         *1.6引流（改）---结束
         * */
+
         Vue.component('anchored-heading', {
             template: '<>',
             props: {
@@ -140,7 +141,9 @@ require(['config'],function(){
                 most_discount:"",
                 full_rule:"",
                 full_reduce:"",
-                most_reduce :""
+                most_reduce :"",
+                followed: true,
+                changeImg:"../../assets/images/shop/ic_collect_xxh.png",
 
             },
             components : {
@@ -150,6 +153,20 @@ require(['config'],function(){
                 comment : ygg.template.comment
             },
             methods : {
+                // 点击收藏1.6.2
+                getCollection: function () {
+                    // ygg.loading(true);
+                    ygg.ajax('/member/collectBusiness', {
+                        business_id:business_id,
+                        member_id: ygg.getCookie("member_id")
+                    }, function (data) {
+                        if (data.data.is_collectable) {
+                            vm.$set(vm,"changeImg","../../assets/images/shop/ic_collect_pre_xxh.png");
+                        } else {
+                            vm.$set(vm,"changeImg","../../assets/images/shop/ic_collect_xxh.png");
+                        }
+                    });
+                },
                 viewMore1 : function(){
                     if(this.disIsShow1 >= this.coupons.length){
                         this.disIsShow1 = this.coupons.length;
@@ -227,6 +244,11 @@ require(['config'],function(){
             member_id : ygg.getCookie('member_id')
         },function(data){
             data = data.data;
+            if(data.is_collectable){
+                vm.$set(vm,"changeImg","../../assets/images/shop/ic_collect_pre_xxh.png");
+            }else{
+                vm.$set(vm,"changeImg","../../assets/images/shop/ic_collect_xxh.png");
+            }
             vm.$set(vm,"shop",data.business_details);
             data.coupons.map(function (item,index) {
                 if(item.type == 3) { //团购

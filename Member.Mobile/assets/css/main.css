@@ -116,7 +116,7 @@ body.loading:before{ content: ""; position: fixed; top: 0; left: 0; width: 100%;
 .home .my .menu a:nth-child(5){ background-image:url(../images/index/index_m_icon5.png) }
 .home .my .menu a span{ float: right; color: #888 }
 .home .my .ot{ position: absolute; bottom: .5rem; width: 100% }
-.home .my .ot a{ display: block; margin:0 1.5rem 1.5rem; border: 1px solid #ff6f3d; border-radius: .5rem; height: 4.5rem; line-height: 4.5rem; text-indent: 4.5rem; font-size: 1.4rem; color: #1c1c1c; background: url(../images/index/index_m_icon6.png) 1.5rem center no-repeat; background-size: 1.8rem auto; position: relative; }
+.home .my .ot a{ display: block; margin:0 1.5rem 1.5rem; border: 1px solid #ff6f3d; border-radius: .5rem; height: 4.5rem; line-height: 4.5rem; text-indent: 4.5rem; font-size: 1.4rem; color: #1c1c1c; background: url(../images/index/ic_bg_card@2x.png) 1.5rem center no-repeat; background-size: 1.8rem auto; position: relative; }
 .home .my .ot a:after{ content: ""; border: .3rem solid transparent; border-left: .55rem solid #ff6f3d; position: absolute; right: 1.5rem; top: 50%; margin-top: -.3rem }
 .home .my .ot a:last-child{ background-image:url(../images/index/index_m_icon7.png)}
 
@@ -1251,6 +1251,7 @@ padding-top: 1.3rem;
   font-size: 1.2rem;
 }
 .s_shop_list li .text .text-r {
+    display: inline-block;
   float: right;
 }
 .select_city{
@@ -1313,4 +1314,53 @@ padding-top: 1.3rem;
 .select_city .poi_city .opencity > .clock_height{
   height:calc(100vh - 25rem);
   overflow-y:scroll;
+}
+/*1.6.2我的收藏夹*/
+.collection{
+    display: inline-block;
+    vertical-align: middle;
+}
+.collection img{
+    width: 2rem;
+    height: 2rem;
+    /*padding-left: 2.4rem;*/
+    top: 1.3rem;
+    position: absolute;
+    right: 2rem;
+}
+.favorite{
+    background-color: #faf8f8;
+}
+.share{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 1.2rem;
+    overflow: hidden;
+}
+.share .share_txt{
+    float: right;
+}
+.explain{
+    margin-top: 6.5rem;
+    padding: 0 1.5rem;
+    color: #5d5d5d;
+    font-size: 1.3rem;
+}
+.explain_img{
+    width: 1.8rem;
+    height: 1.8rem;
+    display:inline-block;
+    vertical-align: middle;
+    padding-right: .7rem;
+}
+.favorite_list{
+    padding-top: 0!important;
+}
+.favorite_list li{
+    margin: 1.5rem;
+    background: #fff;
+    box-shadow: 0 .2rem 10rem 0
+    rgba(242, 172, 148, 0.17);
+    border-radius: .5rem;
 }
