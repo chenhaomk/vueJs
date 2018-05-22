@@ -156,6 +156,7 @@ require(['config'],function(){
                 // 点击收藏1.6.2
                 getCollection: function () {
                     // ygg.loading(true);
+                    if (!ygg.getCookie("member_id")) window.open("/views/user/login.html", "_self");
                     ygg.ajax('/member/collectBusiness', {
                         business_id:business_id,
                         member_id: ygg.getCookie("member_id")
