@@ -1,8 +1,6 @@
 # ide
 .idea/*
 .vscode/*
-/Member.MapUrl/package-lock.json
-/Member.Mobile/package-lock.json
 
 # Mac General
 .DS_Store
