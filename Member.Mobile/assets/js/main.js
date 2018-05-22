@@ -1797,41 +1797,6 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             score: ygg.template.star
         }
     });
-    //弹窗提示
-    ygg.template.share_txt = Vue.extend({
-        props: {
-            a: {
-                type: Object,
-                default: {
-                    double: false,
-                    isShow: false,
-                    canle: "确定",
-                    confi: ""
-                }
-            }
-        },
-        template: '<section id="popup" :class="{popup:true,double:a.double}" v-show="a.isShow"">\
-                      <p>{{a.content}}</p>\
-                      <section class="btns">\
-                          <a @click="canleCb">{{a.canle}}</a>\
-                          <a @click="confiCb">{{a.confi}}</a>\
-                      </section>\
-                  </section>',
-        methods: {
-            handleClick() {
-                alert(111)
-            },
-            canleCb: function () {
-                this.a.isShow = false;
-                this.a.canleCb();
-            },
-            confiCb: function () {
-                this.a.isShow = false;
-                this.a.confiCb();
-            }
-        }
-    });
-
 
 
     //弹窗提示
