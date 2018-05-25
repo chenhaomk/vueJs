@@ -12,6 +12,8 @@ require(['config'],function(){
                 change_city:function(list){
                     ygg.setCookie('location_act','true')
                     ygg.setCookie('city_name', list.name);
+                    ygg.setCookie('lng', list.area_lng);
+                    ygg.setCookie('lat', list.area_lat);
                     window.location.href="/index.html?area_id="+list.area_id+"&name="+encodeURIComponent(list.name);
                 },
                 position_city:function(){
