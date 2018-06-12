@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>竹牛惠生活</title>
+<!--     <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <link rel="stylesheet" href="../../theme/payment/payment.css"> -->
+    <link href="../../assets/css/main.css" rel='stylesheet' type="text/css">
+    <script src="../../assets/js/autosize.js "></script>
+    <link rel="stylesheet" href="../../theme/znPay/index.css">
+</head>
+<body>
+    <div id="app" class="main" v-cloak>
+        <div class="header">
+            <div class="back" v-on:click="back" v-show="showYhq">
+                <img src="../../assets/images/newDarinage/ic_bg_back_xxh.png" alt="">
+            </div>
+            <span>{{merchant_name}}</span>
+           
+        </div>
+        <div class="content">
+            <div class="titel">
+                <div>
+                    消费金额
+                </div>
+                <div v-on:click='login' >
+                    {{loginTxt}}
+                </div>
+            </div>
+            <div class="piircWarp" id="piircWarp">
+                <p><img src="../../assets/images/newDarinage/fotbg.png" alt=""></p>
+                <input type="text" v-if="isAndroid" ref="inputO" placeholder="请询问收银员后输入" v-model="picked" v-on:input="disBefore">
+                <input type="number" v-else placeholder="请询问收银员后输入" ref="inputO" v-model="picked" v-on:input="disBefore">
+            </div>
+            <div class="checkWarp" v-show="showD">
+                <div>
+                    <img src="../../assets/images/newDarinage/ic_select1@3x.png" ref="ck" alt="" v-on:click="checkPrice">
+                    <span>输入不参与优惠金额</span>
+                </div>
+                <!-- <p>酒水除外</p> -->
+            </div>
+            <div class="checkInput" v-show="isDis">
+                <p>
+                    <img src="../../assets/images/newDarinage/fotbg.png" alt="">
+                </p>
+                <input type="text" v-on:input="noDis" ref="inputT" v-if="isAndroid" v-model="deDisPr"  placeholder="请询问收银员后输入">
+                <input type="number" v-on:input="noDis" ref="inputT" v-else v-model="deDisPr"  placeholder="请询问收银员后输入">
+            </div>
+        </div>
+        <div class="zhekou">
+            <div class="mj" v-show="full_reduceShow">
+                <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="mj" v-on:click="mj">
+                <span>每满{{full_rule}}减{{full_reduce}}元</span><span v-show="most_reduce <10000000">(最高减{{most_reduce}}元)</span>
+                <div v-show="payType =='mj' ">
+                    <span><span class="d">-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt="">{{subMon}}</span>
+                </div>
+            </div>
+            <div class="dz" v-show="discountShow">
+                <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="dz" v-on:click="dz">
+                    <span>{{discount}}折</span><span v-show="most_discount <10000000">(最高减{{most_discount}}元)</span>   
+                
+                <div v-show="payType =='dz' ">
+                    <span><span>-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt="">{{subMon}}</span>
+                </div>
+            </div>
+            <div class="yhq" v-show="showYhq">
+                <!-- <img src="../../assets/images/newDarinage/ic_select@3x.png" alt="" ref="yhq" > -->
+                <span>可用优惠券</span>
+                <div >
+                    <span v-show="payType =='yhq' "><span>-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt="">{{subMon}}</span>
+                    <!-- <img src="../../assets/images/newDarinage/ic_arrow@3x.png" alt="" v-on:click="changeTic"> -->
+                </div>
+            </div>
+            <!-- v-if='!a.is_from_business' -->
+            <div class="dis_list" v-show="showYhq" ref="dis_list">
+                <div v-for='a of discountLsit' class="dis_list_li" ref="dis_li" >
+                    <img src="../../assets/images/newDarinage/ic_select@3x.png" ref="wrap" v-on:click="yhq(event,a)">
+                    <span class="dis_name">{{a.name}}</span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="realityPrice">
+                实际金额
+                <span class="tt" v-show=" total != null"><img src="../../assets/images/newDarinage/fotbg.png" alt=""><sapn>{{total}}</sapn></span>
+            </div>
+            <div class="btn" v-on:click="checkPay">
+                <img src="../../assets/images/newDarinage/fontBg3.png" alt=""><span v-show=" total != null">{{total}}确认买单</span>
+            </div>
+            <p>优惠买单仅限于到店消费，请确认金额后提交</p>
+        </div>
+        <div class="payGroupTic" v-show="groupWarp">
+            团购
+        </div>
+<!--         <div class="disTic" v-show="disTicWarp">
+            优惠券
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript"  src="../../controllers/fastclick/fastclick.js" ></script>
+<script type="text/javascript" src="../../antbridge.min.js" ></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script data-main=" ../../config" src="../../plugins/require/require.js "></script>
+<script src="../../controllers/znPay/index.js?t=333"></script>
+</html>

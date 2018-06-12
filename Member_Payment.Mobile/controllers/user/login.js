@@ -1,7 +1,7 @@
 require(['config'], function () {
     require(['axio', 'vue', 'main'], function (axio, Vue, main) {
-        // var baseUrl = "https://api.yingegou.com/v1.0/";
-        var baseUrl = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
+        var baseUrl = "https://api.yingegou.com/v1.2/";
+        // var baseUrl = "http://119.23.10.30:9000/v1.2/";
         var docEl = document.documentElement,
             body = document.getElementsByTagName("body")[0],
             width = docEl.clientWidth,
@@ -50,13 +50,13 @@ require(['config'], function () {
                             main.prompt(data.msg);
                         } else if (data.data.status == "success") {
                             data = data.data.data;
-                            main.setSession("m_id", data.member_id);
+                            main.setSession("member_id", data.member_id);
                             main.setSession("m_n", data.mobile);
                             main.setSession("phone", data.mobile);
                             main.setSession("token", data.token);
                             main.setSession("h_t", data.head_portrait);
                             var str = window.location.search
-                            location.href = "../../views/newDrainage/payGroupTic.html"+str;
+                            location.href = "../../views/znPay/index.html";
                             
                             // main.post(main.baseUrl+'member/getPersonCenterInfo', {
                             //     member_id: main.getSession("m_id")
@@ -93,15 +93,15 @@ require(['config'], function () {
                             }
                         } else if (data.data.status != "error") {
                             data = data.data;
-                            main.setSession("m_id", data.data.member_id);
+                            main.setSession("member_id", data.data.member_id);
                             main.setSession("m_n", data.data.mobile);
                             main.setSession("phone", data.data.mobile);
                             main.setSession("token", data.data.token);
                             main.setSession("h_t", data.data.head_portrait);
-                                                       var str = window.location.search
-                            location.href = "../../views/newDrainage/payGroupTic.html"+str;
+                            var str = window.location.search
+                            location.href = "../../views/znPay/index.html";
                             // main.post(main.baseUrl+'member/getPersonCenterInfo', {
-                            //     member_id: main.getSession("m_id")
+                            //     member_id: main.getSession("member_id")
                             // }, function (data) {
                             //     data = data.data;
                             //     if (data.status == "error") {

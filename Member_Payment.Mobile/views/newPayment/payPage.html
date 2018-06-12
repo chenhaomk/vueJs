@@ -12,9 +12,9 @@
 <body>
     <div id="app" class="main" >
         <div class="header">
-            <div class="back">
+            <!-- <div class="back">
                 <img src="../../assets/images/newDarinage/ic_bg_back_xxh.png" alt="">
-            </div>
+            </div> -->
             <span class="merchant_name"></span>
         </div>
         <div class="content">
@@ -22,56 +22,60 @@
                 消费金额
             </div>
             <div class="piircWarp" id="piircWarp">
-                <p><img src="../../assets/images/newDarinage/fotbg.png" alt=""></p>
-                <input class="ad_input cut_before" type="text"  placeholder="请询问收银员后输入"  >
-                <input class="ios_input cut_before" type="number"placeholder="请询问收银员后输入"   >
+                <p>¥</p>
+                <input class="ad_input hide cut_before" type="text"  placeholder="请询问收银员后输入"  >
+                <input class="ios_input hide cut_before" type="number"placeholder="请询问收银员后输入"   >
             </div>
             <div class="checkWarp hide"  >
                 <div>
-                    <img class="checkPrice" src="../../assets/images/newDarinage/ic_select1@3x.png" ref="ck" alt="" >
+                    <!-- <img class="checkPrice" src="../../assets/images/newDarinage/ic_select1@3x.png" ref="ck" alt="" > -->
+                    <span class="chPc checkPrice"></span>
                     <span>输入不参与优惠金额</span>
                 </div>
             </div>
             <div class="checkInput hide" >
                 <p>
-                    <img src="../../assets/images/newDarinage/fotbg.png" alt="">
+                    <!-- <img src="../../assets/images/newDarinage/fotbg.png" alt=""> -->
                 </p>
-                <input class="ad_input cut_after" type="text"   placeholder="请询问收银员后输入">
-                <input class="ios_input cut_after" type="number"   placeholder="请询问收银员后输入">
+                <input class="ad_input hide cut_after" type="text"   placeholder="请询问收银员后输入">
+                <input class="ios_input hide cut_after" type="number"   placeholder="请询问收银员后输入">
             </div>
         </div>
         <div class="zhekou">
-            <div class="mj hide" >
-                <img class="rad mj_img" src="../../assets/images/newDarinage/ic_select@3x.png" alt="">
+            <div class="mj hide  mj_div" >
+                <!-- <img class="rad mj_img" src="../../assets/images/newDarinage/ic_select@3x.png" alt=""> -->
+                <span class="rad mj_img " ></span>
                 <span class="mj_txt" >每满100减10元</span><span class="max_mj hide">(最高减20元)</span>
                 <div class="mj_show_con hide limit" >
-                    <span><span class="d">-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt=""> <span class="max_mj_yh show_limit" >11</span> </span>
+                    <span><span class="d">-</span> <span class="fnImg">¥</span> <span class="max_mj_yh show_limit" >11</span> </span>
                 </div>
             </div>
-            <div class="dz hide">
-                <img class="rad dz_img" src="../../assets/images/newDarinage/ic_select@3x.png" alt="" >
+            <div class="dz hide dz_div">
+                <!-- <img class="rad dz_img" src="../../assets/images/newDarinage/ic_select@3x.png" alt="" > -->
+                <span class="rad dz_img " ></span>
                 <span class="dz_txt">8.8折</span>
                 <span class="max_dz hide" >(最高减40元)</span>   
                 <div class="dz_show_con hide limit">
-                    <span><span>-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt=""> <span class="max_dz_yh show_limit" >11</span> </span>
+                    <span><span>-</span> <span class="fnImg">¥</span> <span class="max_dz_yh show_limit" >11</span> </span>
                 </div>
             </div>
-            <div class="yhq hide" >
-                <img class="rad yhq_img" src="../../assets/images/newDarinage/ic_select@3x.png" alt="" >
+            <div class="yhq hide yhq_div" >
+                <!-- <img class="rad yhq_img" src="../../assets/images/newDarinage/ic_select@3x.png" alt="" > -->
+                <span class="rad yhq_img " ></span>
                 <span>可用优惠券</span>
                 <div class="yhq_show_con hide limit" >
-                    <span ><span>-</span><img class="fnImg" src="../../assets/images/newDarinage/fontBg2.png" alt=""><span class="max_yhq_yh show_limit" >11</span></span>
-                    <img class="changeTic" src="../../assets/images/newDarinage/ic_arrow@3x.png" alt="" >
+                    <span ><span>-</span> <span class="fnImg">¥</span><span class="max_yhq_yh show_limit" >11</span></span>
+                    <!-- <img class="changeTic" src="../../assets/images/newDarinage/ic_arrow@3x.png" alt="" > -->
                 </div>
             </div>
         </div>
         <div class="footer">
             <div class="realityPrice">
                 实际金额
-                <span class="tt" ><img src="../../assets/images/newDarinage/fotbg.png" alt=""><sapn class="sj_total" >0</sapn></span>
+                <span class="tt" >¥<sapn class="sj_total" >0</sapn></span>
             </div>
             <div class="btn checkPay">
-                <img src="../../assets/images/newDarinage/fontBg3.png" alt=""><span class="qr_total" >0确认买单</span>
+                ¥<span class="qr_total" >0确认买单</span>
             </div>
             <p>优惠买单仅限于到店消费，请确认金额后提交</p>
         </div>
@@ -81,6 +85,9 @@
 <!--         <div class="disTic" v-show="disTicWarp">
             优惠券
         </div> -->
+    </div>
+    <div class="load hide" >
+        <div class="loading"></div>
     </div>
 </body>
 <script type="text/javascript"  src="../../controllers/fastclick/fastclick.js" ></script>
