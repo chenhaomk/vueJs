@@ -751,9 +751,19 @@
                         span = '<span class="p">' + data[i].discount + '</span><span class="pt">元商家专属券</span>';
                     }
                     if (data[i].coupon_activity_id) {
-                        a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
+                        if (data[i].already_get) {
+                            a = "<a class='mfl buy_coupon lq_suc' data-id='" + data[i].coupon_activity_id + "'>已领取</a>";
+                        }else {
+                            a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
+                        }
+                        
                     } else {
-                        a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
+                        if (data[i].already_get) {
+                            a = "<a class='mfl buy_coupon lq_suc' data-id='" + data[i].coupon_id + "'>已领取</a>";
+                        }else {
+                            a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
+                        }
+                        
                     }
                 } else if (data[i].type == 1) {
                     if (data[i].is_share) {
@@ -762,9 +772,18 @@
                         span = '<span class="p">' + data[i].rate * 10 + '</span><span class="pt">折专属券</span>';
                     }
                     if (data[i].coupon_activity_id) {
-                        a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
+                        if (data[i].already_get) {
+                            a = "<a class='mfl buy_coupon lq_suc' data-id='" + data[i].coupon_activity_id + "'>已领取</a>";
+                        }else {
+                            a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_activity_id + "'>免费领取</a>";
+                        }
                     } else {
-                        a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
+                        if (data[i].already_get) {
+                            a = "<a class='mfl buy_coupon lq_suc' data-id='" + data[i].coupon_id + "'>已领取</a>";
+                        }else {
+                            a = "<a class='mfl buy_coupon' data-id='" + data[i].coupon_id + "'>免费领取</a>";
+                        }
+                        
                     }
                 } else {
                     if (data[i].is_share) {
@@ -820,8 +839,6 @@
                     </div>\
                 </div>\
             ');
-                //石迪飞
-                if (data[i].already_get) $(this).find(".buy_coupon").addClass('lq_suc').text('已领取');
                 if (data[i]) $(this).find("buy_coupon").addClass('triangle');
             }
         },
