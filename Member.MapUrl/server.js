@@ -40,9 +40,10 @@ function start() {
                     var data = JSON.parse(data);
                     if (data.status == "error") {
                         response.writeHead(200, {
-                            "Content-Type": "text/plain;charset=utf-8"
+                            "Content-Type": "text/html;charset=utf-8"
                         });
-                        response.write(data.msg);
+                        var resInfo=`<p style='text-align:center;font-size:36px;padding-top:40vh;'>${data.msg}</p>`;
+                        response.write(resInfo);//data.msg
                         response.end();
                         return;
                     }

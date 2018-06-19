@@ -6,6 +6,7 @@ require(['config'],function(){
                city:"",//当前城市
                position:"",//定位城市
                position_id:"",//高德定位area_id
+               open_province:[],//开通的省
                open_city:[]//开通的城市列表
             },
             methods : {
@@ -23,21 +24,28 @@ require(['config'],function(){
                 }
             }
         });
-        ygg.ajax('/common/getOpenCity', {},function (data) {
-            data = data.data;
-            vm.open_city = data.open_city_list
-            console.log(data)
+        ygg.ajax('/common/getOpenCityInProvince', {},function (data) {
+            data = data.data.open_city_array;
+            vm.open_city = data
+            console.log(vm.open_city)
         });
         vm.city=decodeURIComponent(window.location.href.split("?")[1].split("=")[1]);//获取当前城市
         var citysearch = new AMap.CitySearch();//高德定位当前城市
         citysearch.getLocalCity(function (status, result) {
             vm.position=result.city
             vm.position_id=result.adcode
-            if(result.rectangle) {
-                ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
-                ygg.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
-            }
             ygg.setCookie('area_id', result.adcode);
         })
+        var geolocation=new AMap.Geolocation({
+            enableHighAccuracy: true
+        });//精确定位
+        geolocation.getCurrentPosition(function(status,result){
+            if(result){
+                if(result.status===0)return
+                ygg.setCookie('lng', result.position.lng);
+                ygg.setCookie('lat', result.position.lat);
+            }
+        })
+        
     });
 });

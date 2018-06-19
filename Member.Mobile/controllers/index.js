@@ -40,6 +40,7 @@ require(['config'], function () {
                     recommend_today:{},//今日推荐
                     advertising:'',//广告
                     discount: [],
+                    hotDiscount:[],
                     user: {
                         photo: "/assets/images/index/ic_bg_user_xxh.png"
                     },
@@ -64,7 +65,7 @@ require(['config'], function () {
                     isSS: true,
                     isEmpty: "",
                     downLoadType: "",
-                    showDown: true
+                    showDown: true, 
                 },
                 components: {
                     my: ygg.template.my,
@@ -208,92 +209,100 @@ require(['config'], function () {
             document.documentElement.style.overflow = 'hidden';
         }
 
+        var geolocation=new AMap.Geolocation({
+            enableHighAccuracy: true
+        });//精确定位
+        geolocation.getCurrentPosition(function(status,result){
+            if(result){
+                if(result.status === 0)return //status=0说明调用精确定位失败
+                ygg.setCookie('lng', result.position.lng);
+                ygg.setCookie('lat', result.position.lat);
+            }
+        })
         var citysearch = new AMap.CitySearch();
-        citysearch.getLocalCity(function (status, result) {
-            console.log(result)
-            vm.city = result.city;
-            $("#city-picker").val(vm.city);
-            //$("#city-picker").val(result.province+" "+result.city);
-            /*$("#city-picker").cityPicker({
-                toolbarTemplate: '<header class="bar bar-nav">\
-                <button class="button button-link pull-right close-picker">确定</button>\
-                <h1 class="title">选择地址</h1>\
-                </header>',
-                onOpen : function(p){
-                    vm.openShadow = "show";
-                    if(firstOpen){
-                        
-                        firstOpen = false;
+        setTimeout(() =>{
+            
+            citysearch.getLocalCity(function (status, result) {
+                vm.city = result.city;
+                $("#city-picker").val(vm.city);
+                //$("#city-picker").val(result.province+" "+result.city);
+                /*$("#city-picker").cityPicker({
+                    toolbarTemplate: '<header class="bar bar-nav">\
+                    <button class="button button-link pull-right close-picker">确定</button>\
+                    <h1 class="title">选择地址</h1>\
+                    </header>',
+                    onOpen : function(p){
+                        vm.openShadow = "show";
+                        if(firstOpen){
+                            
+                            firstOpen = false;
+                        }
+                    },
+                    onClose : function(p){
+                        vm.openShadow = "";
+                        $(".header .text-sl").text((p.cols[1].value).replace("市",""));
+                        filterData.area_id = getCityId(p.cols[0].value,p.cols[1].value);
+                        searchData.area_id = filterData.area_id;
+                        ygg.setCookie('area_id',filterData.area_id);
+                        filterData.page = 1;
+                        getTopData();
+                        getCoupons(function(data){
+                            vm.$set(vm,"discount",data);
+                        });
                     }
-                },
-                onClose : function(p){
-                    vm.openShadow = "";
-                    $(".header .text-sl").text((p.cols[1].value).replace("市",""));
-                    filterData.area_id = getCityId(p.cols[0].value,p.cols[1].value);
-                    searchData.area_id = filterData.area_id;
-                    ygg.setCookie('area_id',filterData.area_id);
-                    filterData.page = 1;
+                });
+                filterData.area_id =510100 result.adcode;
+                searchData.area_id = result.adcode;*/
+                if(window.location.href.indexOf("?")!=-1 && window.location.href.indexOf("area_id")!=-1){
+                    filterData.area_id=window.location.href.split("?")[1].split("&")[0].split("=")[1]
+                    vm.city=decodeURIComponent(window.location.href.split("?")[1].split("&")[1].split("=")[1])
+                }else{
+                    if(ygg.getCookie('location_act')) {
+                        filterData.area_id = ygg.getCookie('area_id')
+                        searchData.area_id = ygg.getCookie('area_id')
+                        vm.city =  ygg.getCookie('city_name')
+                    }else {
+                        filterData.area_id = result.adcode;
+                        searchData.area_id = result.adcode
+                    }
+                    
+                }
+                ygg.setCookie('area_id', filterData.area_id);
+                if(ygg.getCookie('lng') && ygg.getCookie('lat')){
+                    filterData.lng=ygg.getCookie('lng');
+                    filterData.lat=ygg.getCookie('lat');
+                }
+                if (filterData.member_id) {
+                    ygg.ajax('/member/getPersonCenterInfo', {
+                        member_id: filterData.member_id
+                    }, function (data) {
+                        data = data.data;
+                        getTopData(data.business_id);
+                        getFilter();
+                        getCoupons(function (d) {
+                            vm.$set(vm, "discount", d);
+                        });
+    
+                        vm.$set(vm.user, "photo", data.head_portrait);
+                        vm.$set(vm.user, "nickName", data.nick_name);
+                        vm.$set(vm.user, "coupon_total", data.coupon_total);
+                        vm.$set(vm.user, "is_expand", data.is_expand);
+    
+                        ygg.setCookie("select_setting", data.select_setting);
+    
+                    });
+                } else {
                     getTopData();
-                    getCoupons(function(data){
-                        vm.$set(vm,"discount",data);
-                    });
-                }
-            });
-            filterData.area_id =510100 result.adcode;
-            searchData.area_id = result.adcode;*/
-            if(window.location.href.indexOf("?")!=-1 && window.location.href.indexOf("area_id")!=-1){
-                filterData.area_id=window.location.href.split("?")[1].split("&")[0].split("=")[1]
-                vm.city=decodeURIComponent(window.location.href.split("?")[1].split("&")[1].split("=")[1])
-            }else{
-                if(ygg.getCookie('location_act')) {
-                    filterData.area_id = ygg.getCookie('area_id')
-                    searchData.area_id = ygg.getCookie('area_id')
-                    vm.city =  ygg.getCookie('city_name')
-                }else {
-                    filterData.area_id = result.adcode;
-                    searchData.area_id = result.adcode
-                }
-                
-            }
-            ygg.setCookie('area_id', filterData.area_id);
-            if(ygg.getCookie('lng') && ygg.getCookie('lat')){
-                filterData.lng=ygg.getCookie('lng');
-                filterData.lat=ygg.getCookie('lat');
-            }else if(result.rectangle) {
-                ygg.setCookie('lng', result.rectangle.split(';')[0].split(',')[0]);
-                ygg.setCookie('lat', result.rectangle.split(';')[0].split(',')[1]);
-                filterData.lng=ygg.getCookie('lng');
-                filterData.lat=ygg.getCookie('lat');
-            }
-            if (filterData.member_id) {
-                ygg.ajax('/member/getPersonCenterInfo', {
-                    member_id: filterData.member_id
-                }, function (data) {
-                    data = data.data;
-                    getTopData(data.business_id);
                     getFilter();
-                    getCoupons(function (d) {
-                        vm.$set(vm, "discount", d);
+                    getCoupons(function (data) {
+                        vm.$set(vm, "discount", data);
                     });
-
-                    vm.$set(vm.user, "photo", data.head_portrait);
-                    vm.$set(vm.user, "nickName", data.nick_name);
-                    vm.$set(vm.user, "coupon_total", data.coupon_total);
-                    vm.$set(vm.user, "is_expand", data.is_expand);
-
-                    ygg.setCookie("select_setting", data.select_setting);
-
-                });
-            } else {
-                getTopData();
-                getFilter();
-                getCoupons(function (data) {
-                    vm.$set(vm, "discount", data);
-                });
-            }
-            getSpecialList()
-        });
-       
+                }
+                getSpecialList()
+            });
+           
+        },500)
+        
         
         function getCoupons(cb, data) {
             var sdata = data || filterData;
@@ -334,6 +343,7 @@ require(['config'], function () {
         }
 
         function getTopData(bid) {
+            console.log(filterData.lng,filterData.lat)
             ygg.ajax('/home/getHomeTop', {
                 area_id: filterData.area_id,
                 longitude:filterData.lng,
@@ -344,6 +354,7 @@ require(['config'], function () {
                 if(!data) {
                     return
                 }
+                vm.$set(vm, "discount", data.coupons);
                 vm.$set(vm, "banner", data.adverts[0]);
                 setTimeout(function () {
                     new Swiper('.banner', {

@@ -1276,18 +1276,19 @@ padding-top: 1.3rem;
 }
 .select_city .poi_city > section >p{
   color:#888888;
-  font-size:1.6rem;
-  margin:1rem 0;
+  font-size:1.4rem;
+  padding:1rem 0;
+  height: 2rem;
 }
 .select_city .poi_city .position > div{
-  height: 4.5rem;
+  height: 3.8rem;
   width:10rem;
   border-radius:3px;
   text-align:center;
-  line-height:4.3rem;
+  line-height:3.8rem;
   background:#fff;
   border:1px solid #eeeeee;
-  font-size:1.6rem;
+  font-size:1.5rem;
   color:#ff6f3d;
 }
 .select_city .poi_city .position > div >img{
@@ -1312,7 +1313,7 @@ padding-top: 1.3rem;
   transform: translate(-50%,-50%);
 }
 .select_city .poi_city .opencity > .clock_height{
-  height:calc(100vh - 25rem);
+  height:calc(100vh - 16.95rem);
   overflow-y:scroll;
 }
 /*1.6.2我的收藏夹*/
@@ -1364,3 +1365,26 @@ padding-top: 1.3rem;
     rgba(242, 172, 148, 0.17);
     border-radius: .5rem;
 }
+.provinceName{
+  color: #888888;
+  font-size: 1.4rem;
+  padding: 1rem 0 0 0;
+  height: 2rem;
+}
+.cityName{
+  height: 3.8rem;
+  width: 30%;
+  margin:0 1.6%;
+  float:left;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 3.8rem;
+  background: #fff;
+  border: 1px solid #eeeeee;
+  font-size: 1.5rem;
+}
+.cityBox{
+  
+  overflow: hidden;
+}
+

@@ -1129,7 +1129,6 @@
                 if ($("body>.ap_popup").length == 0) {
                     $("body").append('<div class="ap_popup popup">\
                         <a class="close"></a>\
-                        <p class="title">申请成为商家发展人</p>\
                         <p class="text">返佣类型选择</p>\
                         <div class="form">\
                             <div class="form_group">\
