@@ -26,7 +26,7 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
     }, 1);
     // axio.defaults.baseURL = 'http://119.23.10.30:9000/v1.2/'; //测试地址
     // axio.defaults.baseURL = 'http://192.168.0.11:8082/v1.2/'; //开发地址
-    axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生成地址   
+    axio.defaults.baseURL = 'https://api.yingougou.com/v1.2';//生产地址   
     var ygg = {};
     ygg.maxImgSize = 10485760;
     ygg.ajax = function (url, data, callback) {
@@ -836,13 +836,52 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             // '<a href="/views/my/myCard.html" v-if="user.is_expand">邀请商家入驻</a>' +
             // '<a :href="aurl" v-else>申请为商户发展人</a>' +
             '<a href="/views/creat/favorite.html">我的收藏夹</a>' +
-            '<a href="/views/creat/register.html">免费入驻为商家</a>' +
+            '<a @click="downApp" >免费入驻为商家</a>' +
             '</section>' +
             '</section>',
         methods: {
             noc: function (e) {
                 e.preventDefault();
                 ygg.prompt("该功能正在开发中，请下载APP查看");
+            },
+            isWeixin: function () { //判断是否是微信
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            downApp:function(){
+                if (this.isWeixin()) {
+                    (document.getElementsByTagName("body")[0]).setAttribute("class", "isWx");
+                } else if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+                    var loadDateTime = new Date();
+                    window.setTimeout(function () {
+                            var timeOutDateTime = new Date();
+                            if (timeOutDateTime - loadDateTime < 5000) {
+                                window.location = "https://itunes.apple.com/cn/app/id1273704196";
+                            } else {
+                                window.close();
+                            }
+                        },
+                        25);
+                    window.location = "YPB://";
+                } else if (navigator.userAgent.match(/android/i)) {
+                    var state = null;
+                    try {
+                        state = window.open("YPB://");
+                        window.close();
+                    } catch (e) {}
+                    if (!state) {
+
+                        window.location = "YPB://";
+                        return;
+                    } else {
+                        window.location = "https://dl.yingougou.com/Android/app-release.apk";
+                        return;
+                    }
+                }
             }
         }
     });
