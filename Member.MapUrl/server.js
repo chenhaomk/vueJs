@@ -58,7 +58,7 @@ function start() {
             response.writeHead(200, {
                 "Content-Type": "text/plain;charset=utf-8"
             });
-            response.write("非银个购二维码");
+            response.write("该二维码尚未绑定商家，请确认绑定后重试");
             response.end();
         }
     }
