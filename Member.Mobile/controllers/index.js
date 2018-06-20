@@ -72,6 +72,10 @@ require(['config'], function () {
                     dis: ygg.template.discountHomePage,
                     list: ygg.template.shopList
                 },
+                mounted(){
+                    
+        
+                },
                 methods: {
                     
                     selectCity: function(){
@@ -180,7 +184,8 @@ require(['config'], function () {
                     filter_item:function (val) {
                         ygg.setCookie("filter_item",val)
                         window.location.href = '/views/shop/index.html'
-                    }
+                    },
+                    
                 }
             }),
             firstOpen = true,
@@ -214,14 +219,20 @@ require(['config'], function () {
         });//精确定位
         geolocation.getCurrentPosition(function(status,result){
             if(result){
-                if(result.status === 0)return //status=0说明调用精确定位失败
+                if(result.status === 0){
+                    ygg.setCookie('lng', "104.065735");
+                    ygg.setCookie('lat', "30.659462");
+                    return
+                } //status=0说明调用精确定位失败 默认给个成都的
                 ygg.setCookie('lng', result.position.lng);
                 ygg.setCookie('lat', result.position.lat);
+            }else{
+                ygg.setCookie('lng', "104.065735");
+                ygg.setCookie('lat', "30.659462");
             }
         })
         var citysearch = new AMap.CitySearch();
         setTimeout(() =>{
-            
             citysearch.getLocalCity(function (status, result) {
                 vm.city = result.city;
                 $("#city-picker").val(vm.city);
@@ -301,7 +312,7 @@ require(['config'], function () {
                 getSpecialList()
             });
            
-        },500)
+        },1000)
         
         
         function getCoupons(cb, data) {
