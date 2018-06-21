@@ -2,8 +2,8 @@ var http = require("http");
 var url = require("url");
 var querystring = require('querystring');
 var mysql = require('mysql');
-var apiUrl="api.yingougou.com";
-// var apiUrl = "119.23.10.30";
+// var apiUrl="api.yingougou.com";
+var apiUrl = "119.23.10.30";
 
 function start() {
 

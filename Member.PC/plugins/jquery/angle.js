@@ -20,9 +20,9 @@
 }(function ($) {
 
     window.ie8 = navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE8.0";
-    window.local = "https://api.yingougou.com/v1.2";
+    // window.local = "https://api.yingougou.com/v1.2";
     // window.local = "http://119.23.10.30:9000/ygg_dev_201803081529_1.5.2/v1.0";
-    //  window.local = "http://119.23.10.30:9000/v1.2";
+     window.local = "http://119.23.10.30:9000/v1.2";
     if (!+'\v1' && !'1' [0]) {
 
     }

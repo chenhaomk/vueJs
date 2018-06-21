@@ -836,7 +836,7 @@ define(['axio', 'vue', 'croppie'], function (axio, Vue, croppie) {
             // '<a href="/views/my/myCard.html" v-if="user.is_expand">邀请商家入驻</a>' +
             // '<a :href="aurl" v-else>申请为商户发展人</a>' +
             '<a href="/views/creat/favorite.html">我的收藏夹</a>' +
-            '<a @click="downApp" >免费入驻为商家</a>' +
+            '<a href="/views/downloadB/index.html" >免费入驻为商家</a>' +
             '</section>' +
             '</section>',
         methods: {
