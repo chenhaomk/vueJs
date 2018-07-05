@@ -101,7 +101,7 @@ require(['config'],function(){
                 }
             }
         });
-    	
+
     	$(".se_btn").click(function(event) {
             var val = $("#name").val();
             if(val.length != 0){

@@ -16,6 +16,7 @@ require(['config'],function(){
                 },
                 result : function(data){
                     data = data.data;
+                    console.log(data)
                     $("#b_d,#fshop").attr("href","/views/shop/detail.html?id="+data.business_id).text(data.business_name);
                     $("#tImg").attr("src",data.img_path);
                     var tt = "专属";
@@ -23,6 +24,7 @@ require(['config'],function(){
                     if(data.type == 2){
                         $("#t .title").append('<span>'+data.discount+'元抵扣券</span>');
                         $("#t .old_price").html(data.discount+"<span>原价(元)</span>");
+                        // $("#t .bought").html(data.buy_count+"<span>已购</span>");
                         if((data.price+"").indexOf(".") != -1){
                             $("#t .buy").html("￥"+(data.price+"").split(".")[0]+".<span>"+(data.price+"").split(".")[1]+"</span> 立即抢购");
                         }else{
@@ -50,7 +52,12 @@ require(['config'],function(){
 
                     $("#stime").text($.fn.getd("Y.m.d",data.begin_date / 1000) + "-" + $.fn.getd("Y.m.d",data.end_date / 1000));
                     $("#tj2").text('满'+data.min_price+"可用");
-                    $("#introduction").text(data.introduction||"");
+                    // $("#introduction").text(data.introduction||"");
+                    if (data.introduction==null || data.introduction=='') {
+                        $("#introduction").text("无");
+                    } else {
+                        $("#introduction").text(data.introduction);
+                    }
                     $(".bot_rig h3").text(data.business_name);
                     $(".bot_rig .phone").text(data.business_phone);
                     $(".bot_rig .star").star(data.business_star);

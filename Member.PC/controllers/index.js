@@ -121,6 +121,7 @@ require(['config'],function(){
 	            },
 	            result : function(data){
 					data = data.data;
+					console.log(data)
 					if(!data) {
 						return
 					}
@@ -129,30 +130,45 @@ require(['config'],function(){
 	                }
 	                $("#banner").banner();
 
-	                if(data.from_business){
-	                    $("#fromBusiness").append('\
-	                    	<a href="/views/shop/detail.html?id='+data.from_business.business_id+'&returnUrl=index"><img src="'+data.from_business.inner_imgs+'" class="fn-left" alt=""></a>\
-			                <div class="info fn-left">\
-			                    <p class="logo">\
-			                        <img src="'+data.from_business.logo+'" alt="">\
-			                    </p>\
-			                    <p class="title_h">\
-			                        '+data.from_business.name+'\
-			                    </p>\
-			                </div>\
-	                    ');
-	                    //<p class="content">这里可以加上商户的一句话简介 地址或活动信息 四川电视台推荐鸡抓抓啥的 商家自己编</p>
-	                }else{
-	                    
-	                }
 
+                    // if(data.hot_business){
+                    //     $("#fromBusiness").append('\
+                    //     	<a href="/views/shop/detail.html?id='+data.from_business.business_id+'&returnUrl=index"><img src="'+data.from_business.inner_imgs+'" class="fn-left" alt=""></a>\
+                    //        <div class="info fn-left">\
+                    //            <p class="logo">\
+                    //            </p>\
+                    //            <p class="title_h">\
+                    //                '+data.from_business.name+'\
+                    //            </p>\
+                    //            <p class="content">'+data.from_business.address+'</p>\
+                    //        </div>\
+                    //     ');
+                    // }else{
+                    // }
+
+                    // 热门商家
 	                for(var i=0;i<data.hot_business.length;i++){
-	                	$("#hotBusiness").append('\
+                        if (i==0) {
+                            $("#fromBusiness").append('\
+								<a href="/views/shop/detail.html?id=' + data.hot_business[0].business_id + '&returnUrl=index"><img src="' + data.hot_business[0].inner_imgs + '" class="fn-left" alt=""></a>\
+							   <div class="info fn-left">\
+								   <p class="logo">\
+								   </p>\
+								   <p class="title_h">\
+									   ' + data.hot_business[0].name + '\
+								   </p>\
+								   <p class="content">' + data.hot_business[0].address + '</p>\
+							   </div>\
+							');
+                        }
+						if (i!==0) {
+                            $("#hotBusiness").append('\
 							<a href="/views/shop/detail.html?id='+data.hot_business[i].business_id+'&returnUrl=index"><div class="group">\
 	                            <img src="'+data.hot_business[i].inner_imgs+'" alt="">\
 	                            <p>'+data.hot_business[i].name+'</p>\
 	                        </div></a>\
 	                	');
+						}
 	                }
                 	$("#hotBusiness").cqh({
                 		leftBtn : $('.lbtn'),
@@ -161,9 +177,25 @@ require(['config'],function(){
 	                if(data.hot_business.length<=3){
 	                	$('.lbtn,.rbtn').hide();
 	                }
+
+                    // 行业分类
+                    for (var i=0; i<data.industry_list.length;i++){
+						$("#classify").append('\
+							<a href="/views/coupon/list.html?industry_id='+data.industry_list[i].industry_id+'">\
+								<span>'+data.industry_list[i].name+'</span>\
+							</a>\
+						');
+                    }
+                    // if (data.industry_list) {
+                    //     $("#classify").append('\
+                    //     	<a href="/views/coupon/list.html?industry_id='+data.industry_list[i].industry_id+'">\
+                    //     		<span>'+data.industry_list[i].name+'</span>\
+                    //     		 <img src="assets/images/index/1.png"/>\
+                    //     	</a>\
+                    //     ')
+                    // }
 	            }
         	});
-
         }
 
     });

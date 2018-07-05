@@ -27,11 +27,78 @@ html,body{ color:#1c1c1c; min-height:100%; width:100%; max-width:100%; left:0; r
 body{ background: #f8f9fc }
 
 /****************************************************************** 首页 ******************************************************************/
-
-.index .banner{ margin-left: 230px; height: 350px; overflow: hidden; position: relative; }
+/*优化dxf*/
+.fl{
+    float: left;
+}
+.classify{
+    width: 380px;
+    float: left;
+    position: relative;
+    z-index: 3;
+}
+.classify a{
+    width: 380px;
+    height: 155px;
+    position: relative;
+    cursor: pointer;
+}
+.classify a:nth-of-type(1){
+    display: inline-block;
+    margin-bottom: 16px;
+    background: url("../images/index/food.png") no-repeat;
+}
+.classify a:nth-of-type(2){
+    display: inline-block;
+    margin-bottom: 16px;
+    background: url("../images/index/beauty.png") no-repeat;
+}
+.classify a:nth-of-type(3){
+    display: inline-block;
+    background: url("../images/index/play.png") no-repeat;
+}
+.classify a:nth-of-type(4){
+    display: inline-block;
+    /*margin-top: 22px;*/
+    position: absolute;
+    top: 354px;
+    left: 400px;
+    background: url("../images/index/shop.png") no-repeat;
+}
+.classify a:nth-of-type(5){
+    display: inline-block;
+    position: absolute;
+    top: 354px;
+    left: 800px;
+    background: url("../images/index/life.png") no-repeat;
+}
+.classify a span{
+    position: absolute;
+    /*top: 18px;*/
+    bottom: 86px;
+    left: 43px;
+    font-size: 32px;
+    color: #fff;
+}
+.classify a img{
+    width: 380px;
+    height: 155px;
+    background-size: cover;
+}
+.classify_list{
+    width: 100%;
+}
+.classify_list a{
+    float: left;
+}
+.classify_list a:nth-of-type(2){
+    margin: 0 20px;
+}
+/*优化dxf*/
+.index .banner{ overflow: hidden; position: relative; margin-top: 20px;}
 .index .banner .list{ height: 350px }
-.index .banner .list img{ width: 950px; height: 100%; float: left; }
-.index .banner .pages{ position: absolute; height: 33px; bottom: 0; width: 100%; text-align: center; z-index: 2 }
+.index .banner .list img{ width: 780px; height: 330px; float: right; }
+.index .banner .pages{ position: absolute; height: 240px; bottom: 0; width: 100%; left: 65%; z-index: 2 }
 .index .banner .pages a{ display: inline-block; width: 12px; height: 12px; cursor:pointer; border-radius: 50%; opacity: .5; filter: alpha(opacity=50); margin:0 7.5px; background: white }
 .index .banner .pages a.active{ opacity: 1; filter: alpha(opacity=100) }
 .index .business .title,.index .discount_i .title{ margin-top: 20px; height: 84px; line-height: 84px; font-size: 28px; font-weight: bold; text-indent: 55px; background: url(../images/icon/icon_hot.png) left center no-repeat }
@@ -39,14 +106,17 @@ body{ background: #f8f9fc }
 .index .business .hot{ height: 350px }
 .index .business .hot img.fn-left{ width: 780px; height: 350px; margin-right: 35px }
 .index .business .hot .info{ width: 345px; position: relative; }
-.index .business .hot .info .logo{ height: 52px; width: 60px; background: #fff0eb; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; padding-top: 28px }
+/*.index .business .hot .info .logo{ height: 52px; width: 60px; background: #fff0eb; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; padding-top: 28px;  }*/
+/*.index .business .hot .info .logo .vip{display: inline-block; width: 52px; height: 52px; line-height: 52px; text-align: center; border-radius: 50%; background-color: #ff6f3d;color: #fff;font-size: 20px; margin-left: 4px;}*/
+.index .business .hot .info .logo{width: 60px; height: 80px; background: url("../images/index/hot.png") no-repeat; background-size: contain; margin-left: 285px;}
 .index .business .hot .info .logo img{ width: 52px; height: 52px; margin: auto; display: block; border-radius: 50% }
 .index .business .hot .info .title_h{ margin-top: 24px; font-size: 28px; font-weight: bold; line-height: 1.2 }
 .index .business .hot .info .content{ position: absolute; top: 243px; padding-top: 20px; color: #888; font-size: 16px }
 .index .business .hot .info .content:before{ content: ""; width: 46px; height: 5px; background: #ff6f3d; position: absolute; top: 0 }
 .index .business .list{ height: 275px; position: relative; margin-top: 20px }
-.index .business .list .btn{ width: 50px; height: 50px; position: absolute; top: 50%; margin-top: -25px; left: -70px; background: url(../images/icon/icon_btnl.png); cursor: pointer; }
-.index .business .list .rbtn{ background: url(../images/icon/icon_btnr.png); left: initial; right: -70px }
+.index .business .list .btn{ width: 17px; height: 23px; position: absolute; top: 50%; margin-top: -25px; left: -70px; background: url(../images/icon/arrowr.png); cursor: pointer; }
+.index .business .list .lbtn{transform:rotate(180deg);-ms-transform:rotate(180deg); -moz-transform:rotate(180deg); -webkit-transform:rotate(180deg)}
+.index .business .list .rbtn{ background: url(../images/icon/arrowr.png); left: initial; right: -70px }
 .index .business .list .list_g{ overflow: hidden; height: 100% }
 .index .business .list .list_g .list_gl{ min-width: 1200px }
 .index .business .list .list_g .group{ float: left; margin-right: 20px; width: 380px }
@@ -271,7 +341,8 @@ body{ background: #f8f9fc }
 .coupon_detail .main .top .text .explain{ font-size: 14px; line-height: 36px; height: 36px; clear: both }
 .coupon_detail .main .top .text .sd{ margin-top: 20px; height: 38px }
 .coupon_detail .main .top .text .sd p{ float: left; font-size: 16px; line-height: 1; height: 38px }
-.coupon_detail .main .top .text .sd p.old_price{ margin-right: 29px; padding-right: 29px}
+.coupon_detail .main .top .text .sd p.old_price{ margin-right: 30px; padding-right: 30px;}
+/*.coupon_detail .main .top .text .sd p.bought{border-left: solid 1px #e3e3e3;}*/
 .coupon_detail .main .top .text .sd p span{ display: block; font-size: 14px; color: #888; margin-top: 8px }
 .coupon_detail .main .top .text a{ display: block; margin-top: 30px; background: #ff6f3d; color: white; text-align: center; font-size: 20px; height: 45px; line-height: 45px; width: 200px; border-radius: 4px; cursor: pointer; }
 .coupon_detail .main .top .text a.ylql{ color: #ff6f3d; background: #ffe7df }
@@ -307,7 +378,15 @@ body{ background: #f8f9fc }
 
 /****************************************************************** 商户-详情 ******************************************************************/
 
-.shop_detail .top{ height: 485px; position: relative; }
+/*.shop_detail .top{ height: 485px; position: relative; }*/
+.shop_detail .top{ height: 245px; background-color: #fff;overflow: hidden; }
+.top_l{ float: left; margin: 39px 0 0 31px; font-size: 18px; color: #5b5b5b; }
+.top_l .title{color: #1c1c1c; font-size: 28px; }
+.top_l .star{margin: 16px 0 23px; }
+.top_l .address{text-indent: 24px; background: url(../images/icon/icon_address@2.png) 0 center no-repeat; margin-bottom: 16px;}
+.top_l .phone{text-indent: 24px; background: url(../images/icon/icon_phone@2.png) 0 center no-repeat;}
+.top_r{float: right; }
+.top_r img{width: 379px; height: 207px; margin:19px; }
 .shop_detail .top .all_pt{ position: absolute; right: -43px; bottom: 105px; width: 16px; text-align: center; height: 78px; background: url(../images/icon/icon_cjt.png) center 70px no-repeat #ff6f3d; color: white; padding: 10px 11px 0; border-bottom-left-radius: 7px; border-top-left-radius: 7px; line-height: 1.1 }
 .shop_detail .top .ban{ width: 100%; height: 100% }
 .shop_detail .top .info{ top: 285px; position: absolute; left: 115px; width: 950px; background: white; height: 315px; z-index: 2 }
@@ -332,7 +411,7 @@ body{ background: #f8f9fc }
 .shop_detail .top .info .share a.wechat{ background-position: 68px top }
 .shop_detail .top .info .share a.wei{ background-position: 102px top }
 .shop_detail .top .info .share a.weibo{ background-position: 136px top }
-.shop_detail .cen{ margin-top: 140px }
+.shop_detail .cen{ margin-top: 55px }
 .shop_detail .cen .t{ line-height: 80px; height: 80px; text-align: center; font-size: 24px }
 .shop_detail .bot{ margin-bottom: 20px }
 .shop_detail .bot .tab .tab_menu{ margin:55px 0 28px; font-size: 24px; height: 24px; line-height: 1; text-align: center; }
@@ -484,19 +563,19 @@ body{ background: #f8f9fc }
 .shop_listd.empty:after{ content: "抱歉！暂无相关商铺"; background-image: url(../images/icon/shop_icon.png); margin: 40px auto }
 .wallet .balance table.empty:after{ content: "抱歉！暂无相关明细"; background-image: url(../images/icon/mx_icon.png);}
 .cl_search.coupon_list.empty:after{ margin-top: 80px; margin-bottom: 80px }
-.coupon_list .group{ float: left; width: 540px; height: 140px; background: white; border-radius: 3px; padding: 30px 20px; margin-right: 20px; margin-bottom: 20px;position: relative }
-.coupon_list .group img{ float: left; width: 140px; height: 140px; border-radius: 50%; margin-right: 20px }
-.coupon_list .group .text{ float: left; width: 380px }
-.coupon_list .group .text .t{ height: 33px; line-height: 33px; font-size: 22px; color: #ff6f3d }
+.coupon_list .group{ float: left; width: 380px; height: 156px; background: white; border-radius: 3px;  margin: 0 20px 20px 0; position: relative }
+.coupon_list .group img{ float: left; width: 128px; height: 128px; border-radius: 50%; margin: 14px 11px 14px 14px; }
+.coupon_list .group .text{ float: left; width: 227px }
+.coupon_list .group .text .t{ height: 33px; line-height: 33px; font-size: 22px; color: #ff6f3d; margin-top: 22px; }
 .coupon_list .group .text .t span{ float: left; }
-.coupon_list .group .text .t .p{ font-size: 44px}
-.coupon_list .group .text .t .pt{ line-height: 22px; margin-top: 11px }
+/*.coupon_list .group .text .t .p{ font-size: 22px}*/
+.coupon_list .group .text .t .pt{ line-height: 22px; margin-top: 6px; font-size: 16px; }
 .coupon_list .group .text .t .type{ width: 70px; height: 28px; float: right; margin-top: 5px; text-align: center; line-height: 28px; font-size: 16px; background: #ffebfd; color: #ff3dea }
 .coupon_list .group .text .t .type.dk{ color: #2fc68f; background: #eaf9f4 }
 .coupon_list .group .text .t .type.dj{ color: #2db7ff; background: #eaf8ff }
-.coupon_list .group .text .cont{ font-size: 18px; line-height: 55px; height: 55px; white-space: pre }
-.coupon_list .group .text .btn{ height: 45px; line-height: 45px; margin-top: 7px; font-size: 18px; color: #888 }
-.coupon_list .group .text .btn a{ float: right; font-size: 20px; width: 120px; background: #ff6f3d; text-align: center; color: white; border-radius: 3px ; cursor: pointer;}
+.coupon_list .group .text .cont{ font-size: 14px; line-height: 22px; height: 22px; white-space: pre; color: #1c1c1c; }
+.coupon_list .group .text .btn{ height: 32px; line-height: 32px; margin-top: 31px; font-size: 12px; color: #888 }
+.coupon_list .group .text .btn a{ float: right; font-size: 15px; width: 80px;background: #ff6f3d; text-align: center; color: white; border-radius: 3px ; cursor: pointer; margin-right: 16px;}
 a.lq_suc{ cursor: default !important; background: #ffe7df !important; color: #ff6f3d !important }
 
 .paging{ padding: 70px 0; text-align: center; height: 40px; line-height: 40px; text-align: center; font-size: 20px }
@@ -575,24 +654,24 @@ a.lq_suc{ cursor: default !important; background: #ffe7df !important; color: #ff
 .head .cen{ height: 108px }
 .head .cen .con .ewm{ position: absolute; right: 0; top: -3px; border: none; padding: 0; margin: 0 }
 .head .cen .con .ewm span{ margin-top: 29px; text-align: center; width: 30px }
-.head .cen img{ display: inline-block; vertical-align: middle; }
-.head .cen .address{ display: inline-block; float: left; line-height: 108px; margin-left: 10px; font-size: 20px }
+.head .cen img{ display: inline-block; width: 110px; height: 36px; vertical-align: middle; margin-top: 22px; }
+.head .cen .address{ display: inline-block; float: left; margin: 22px 0 0 14px; font-size: 20px }
 .head .cen .search{ margin: auto; width: 645px; padding-top: 17px }
-.head .cen .search .search_p{ height: 40px; width: 643px; border: 2px solid #ff6f3d; background: #ff6f3d ; position: relative;}
+.head .cen .search .search_p{ height: 40px; width: 643px; border: 1px solid #ff6f3d; background: #ff6f3d ; position: relative;}
 .head .cen .search .search_p:before{ content: ""; position: absolute; height: 40px; width: 40px; background:url(../images/icon/search_icon.png) 14px center no-repeat white; z-index: 2 }
-.head .cen .search .search_p .inp{ width: 568px; text-indent: 45px; font-size: 16px; line-height: 40px; height: 40px }
+.head .cen .search .search_p .inp{ width: 568px; text-indent: 45px; font-size: 16px;  color: #1c1c1c; line-height: 40px; height: 40px }
 .head .cen .search .search_p .se_btn{ color: white; width: 75px; text-align: center; height: 40px; line-height: 40px; cursor: pointer; background: #ff6f3d }
-.head .cen .search .quick_btns{ width: 900px }
-.head .cen .search .quick_btns a{ float: left; margin-right: 38px; margin-top: 11px }
-.head .bot{ height: 50px; line-height: 50px; background: #ff6f3d }
+.head .cen .search .quick_btns{ width: 900px; }
+.head .cen .search .quick_btns a{ float: left; margin-right: 38px; margin-top: 11px; font-size: 12px; color: #888; }
+.head .bot{ height: 50px; line-height: 50px; border-bottom: 2px solid #ff6f3d; }
 .head .bot .nav{ font-size: 20px; text-align: center }
 .head .bot .nav .all_dis{ width: 230px}
 .head .bot .nav .all_dis p{ height: 50px; background:url(../images/icon/icon_menu.png) black; text-indent: 56px; color: white; text-align: left; }
 .head .bot .nav .all_dis .list{ height: 350px; background: white ; display: none; position: absolute; width: 230px}
 .head .bot .nav .all_dis .list.show,.head .bot .nav .all_dis:hover .list{ display: block; }
 .head .bot .nav .all_dis .list a{ display: block; height: 46px; line-height: 46px; border-bottom: 1px solid #ebebeb; font-size: 16px; text-align: left; margin: 0 20px }
-.head .bot .nav>a{ float: left; width: 138px; color: white; cursor: pointer;}
-.head .bot .nav>a.active,.head .bot .nav>a:hover{ background: #e8673a; color: white }
+.head .bot .nav>a{ float: left; width: 138px; cursor: pointer;}
+.head .bot .nav>a.active,.head .bot .nav>a:hover{ color: #e8673a }
 
 .footer{ height: 275px; background: white; border-top: 1px solid #e3e3e3;}
 .footer .foot{ width: 1028px; margin: auto; }
@@ -670,3 +749,6 @@ input:-webkit-autofill {
     color: #fff;
     transform:rotate(-44deg);
 }
+
+
+

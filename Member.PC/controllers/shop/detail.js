@@ -24,6 +24,7 @@ require(['config'],function(){
                 },
                 result : function(data){
                     data = data.data;
+                    // console.log(data)
 
                     $("#info .title").text(data.business_details.name);
                     $(".t_m").append('\
@@ -33,7 +34,7 @@ require(['config'],function(){
                     $("#info .phone").text(data.business_details.phone);
                     $("#info .b_logo").attr("src",data.business_details.logo);
                     $("#info .shop_star").star(data.business_details.star);
-                    $(".new_com").before("<img class='ban' src='"+data.business_details.inner_imgs+"'>");
+                    $(".new_com").before("<img src='"+data.business_details.inner_imgs+"'>");
 
                     if(data.coupons.length == 0){
                         $(".coupon_list").addClass('empty');
@@ -110,6 +111,7 @@ require(['config'],function(){
                 data : filterData,
                 result : function(data){
                     data = data.data;
+                    // console.log(data)
                     if(data.pages>=1 && cb)cb(data.pages);
                     $.fn.loading(false);
 
@@ -137,10 +139,12 @@ require(['config'],function(){
                             $(".comment ul li:last .star").star(data.comments[i].star);
                         }
                     }
+                    $("#cmp").text('评价('+data.comments.length+')');
 
                 }
             });
         }
+        getList();
 
     });
 });
