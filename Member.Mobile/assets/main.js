@@ -820,7 +820,7 @@ define(['axio', 'vue'], function (axio, Vue) {
             '</section>' +
             '<section class="menu">' +
             '<a @click="noc($event)" :href="isLogin?purseUrl:loginUrl">钱包<span></span></a>' +
-            '<a :href="isLogin?couponUrl:loginUrl">优惠券<span>{{user.coupon_total}}</span></a>' +
+            '<a :href="isLogin?couponUrl:loginUrl">券<span>{{user.coupon_total}}</span></a>' +
             '<a :href="isLogin?orderUrl:loginUrl">订单<span></span></a>' +
             '<a href="" class="hide">虚拟账号<span>支付宝</span></a>' +
             '<a :href="isLogin?historyUrl:loginUrl">消费记录<span></span></a>' +
