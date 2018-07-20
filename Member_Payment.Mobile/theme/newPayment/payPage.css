@@ -289,7 +289,7 @@ body .checkInput input,body .piircWarp input{
 	margin-top: .3rem;
 	overflow: hidden;
 }
-.realityPrice span {
+.realityPrice .tt {
 	
 	float: right;
 }
@@ -374,6 +374,9 @@ body .checkInput input,body .piircWarp input{
 }
 .pause {
 	animation-play-state: paused;
+}
+.ljBox{
+	color: #cccccc;
 }
 
 
