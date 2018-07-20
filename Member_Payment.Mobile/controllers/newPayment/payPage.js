@@ -1,9 +1,9 @@
 (function () {
   $('body').addClass('show')
-  // var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
-  var baseURL = "https://api.yingougou.com/v1.2/" //正式
-  // var calllBcakUrl = 'http://119.23.10.30:8002'
-  var calllBcakUrl = 'https://m.yingougou.com' //
+  var baseURL = "https://paytest.yingougou.com/v1.2/" //测试支付
+  // var baseURL = "https://api.yingougou.com/v1.2/" //正式
+  var calllBcakUrl = 'http://119.23.10.30:8002'
+  // var calllBcakUrl = 'https://m.yingougou.com' //
   var u = navigator.userAgent;
   var vm = {
     isActive: false,
@@ -22,6 +22,8 @@
     most_reduce: "60", //买单满减金额，每满100减10元最高40元，最高金额是40元
     picked: "",
     total: 0,
+    origin_amount:0,
+    payWay:"",//记录支付宝还是微信扫码
     subMon: 0, //计算后的优惠金额
     deDisPr: "", //为不参与折扣金额
     showYhq: false, //判断用户是否登录过，没有就不显示可用优惠券
@@ -60,10 +62,11 @@
   }
   // var b_id = getQueryString("b_id") == null ? getSession("b_id") : getQueryString("b_id")
   if (bty == 'weixin') {
+    vm.payWay="wechat_wap"
     if (hrefStr.indexOf('code') == -1) {
-      // location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
+      location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id=" + b_id + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"; //测试
       // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
-      location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
+      // location.href =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb483b5983575f0fc&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";  //正式  
       // return        
     } else {
 
@@ -93,6 +96,7 @@
           weixin_pay_data = res.data
           weixin_pay_data.open_id = weixin_openid
           weixin_pay_data.pay_way = 'wechat_csb' //支付方式
+          
           $.ajax({
             type: 'POST',
             url: baseURL+'passport/thirdWxLogin',
@@ -140,10 +144,11 @@
       })
     }
   }else if( bty== "alipay") {
+    vm.payWay="alipay_csb"
     if(hrefStr.indexOf('auth_code') == -1) {
-      // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
+      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/PaymentTest/views/newDrainage/newPayPage.html?b_id="+b_id //测试
       // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
-      location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
+      // location.href = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017083008466534&scope=auth_base&redirect_uri=https://m.yingougou.com/payment/views/newDrainage/payPage.html?b_id="+b_id //正式
       return
     }else {
       var code = getQueryString("auth_code");
@@ -443,12 +448,46 @@
       }
     }
     vm.total = (vm.picked - vm.subMon).toFixed(2)
-    if(vm.total >= 0) {
-      $('.sj_total').html(vm.total)
-      $('.qr_total').html(vm.total+'确认买单')
+    // alert(vm.total)
+    doReduce()
+    function doReduce(){
+      $.ajax({ //1.6.5立减功能
+        type: 'POST',
+        headers: setHeader(),
+        url: baseURL + 'member/getVerticalReductionAmount',
+        data:JSON.stringify({
+          member_id:getCookie("member_id"),
+          business_id:b_id,
+          origin_amount:vm.total,
+          pay_way:vm.payWay
+        }),
+        dataType: 'json',
+        contentType: 'application/json;charset=UTF-8',
+        success:function (data) {
+          if(data.code == 200){
+            vm.total=data.data.final_amount
+            vm.origin_amount=data.data.origin_amount
+            
+            $("#ljyh").html(data.data.vertical_reduction)
+            if(data.data.vertical_reduction>0){
+              $(".ljBox").removeClass("hide")
+            }
+            if(vm.total >= 0) {
+              $('.sj_total').html(vm.total)
+              $('.qr_total').html(vm.total+'确认买单')
+            }
+            $('.show_limit').html(vm.subMon)
+            return 
+          }else{
+            alert(data.code)
+          }
+        },
+        error:function(){
+          alert(data.code)
+        }
+      })
     }
-    $('.show_limit').html(vm.subMon)
-    return 
+    return
   }
   /**
    * dom当前点击图标
@@ -520,11 +559,12 @@
     var data = {}
     if(bty == 'weixin') {
       data = weixin_pay_data
+      weixin_pay_data.amount_before_vertically_reduce=vm.origin_amount //传回去立减之前的金额
       data.member_id = getCookie('member_id')
     }else if(bty = 'alipay') {
       data.member_id = getCookie('member_id')
     }
-    data.amount = vm.picked;
+    data.amount = vm.total;
     setSession("b_id",b_id)
     setSession("business_id",b_id);
     setSession("amount", vm.total);
@@ -701,6 +741,7 @@
       loading(true)
       data.buyer_id = zfb_openid
       data.pay_way ='alipay_csb'
+      data.amount_before_vertically_reduce=vm.origin_amount//传回去立减之前的金额
       $.ajax({
         type: 'POST',
         headers: setHeader(),
